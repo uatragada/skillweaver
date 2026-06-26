@@ -1,0 +1,123 @@
+# SkillWeaver Requirements
+
+SkillWeaver is a separate, lightweight sibling app inspired by MindWeaver, but purpose-built for navigating agentic Codex skills. It must not live inside the MindWeaver repository and must not edit MindWeaver source files.
+
+## Product Goal
+
+Make Codex skill discovery faster, more reliable, and less context-expensive by turning local `SKILL.md` files into an explorable skill map.
+
+The app is built for the agent using it as much as for the human operator. It should answer:
+
+- Which skill should I load for this task?
+- Which skills overlap or form a workflow?
+- What trigger language makes a skill relevant?
+- Where is the source `SKILL.md` on disk?
+- Which skill roots are indexed and which files failed to parse?
+
+## Explicit Scope
+
+- Create a new repo at `G:\Projects\SkillWeaver`.
+- Keep MindWeaver as read-only reference material only.
+- Build a local-first app with no hosted accounts, auth, extension, quiz loop, or long-term learning features.
+- Index existing Codex user skills under `C:\Users\Uday\.codex\skills`.
+- Allow additional skill roots through environment configuration.
+- Parse `SKILL.md` frontmatter and body enough to support search, relationships, and task routing.
+- Expose a simple web UI for discovery, filtering, skill inspection, and recommended workflow paths.
+- Include a subagent workflow that can be reused for future SkillWeaver audits and expansions.
+
+## Non-Goals
+
+- Do not copy MindWeaver code directly.
+- Do not create a browser extension.
+- Do not mutate or rewrite existing Codex skills during scanning.
+- Do not require OpenAI, Ollama, or any LLM to get a useful index.
+- Do not implement team collaboration, hosted persistence, backup/restore, spaced review, quizzes, or source ingestion queues.
+- Do not create a MindWeaver map as the primary data store.
+
+## Minimum Viable Product
+
+1. A scanner discovers skill folders by finding `SKILL.md`.
+2. The scanner parses:
+   - skill name,
+   - description,
+   - path,
+   - root,
+   - namespace or plugin prefix when inferable,
+   - body excerpt,
+   - referenced files,
+   - likely domains,
+   - trigger terms,
+   - tool or platform hints.
+3. The API serves:
+   - inventory summary,
+   - skill list,
+   - search results,
+   - individual skill details,
+   - generated relationship edges.
+4. The UI supports:
+   - search by task wording,
+   - filtering by domain/root/plugin,
+   - selected skill inspector,
+   - related skills,
+   - suggested multi-skill workflow for a query,
+   - copyable path/loading guidance.
+5. The repo includes requirements, architecture notes, subagent workflow notes, and a local run guide.
+
+## Data Model
+
+SkillWeaver uses a derived in-memory index. The filesystem remains authoritative.
+
+### Skill
+
+- `id`: stable normalized path-derived id.
+- `name`: frontmatter `name` or folder name fallback.
+- `description`: frontmatter `description`.
+- `path`: absolute path to `SKILL.md`.
+- `folder`: absolute skill folder path.
+- `root`: matched configured root.
+- `sourceType`: `user`, `system`, `plugin`, or `external`.
+- `namespace`: prefix before `:` in the name when present.
+- `body`: body text.
+- `excerpt`: compact body preview.
+- `references`: relative references mentioned by the skill.
+- `domains`: inferred domain tags.
+- `triggers`: searchable phrases from description and headings.
+- `tools`: tool or platform hints.
+- `warnings`: parse or quality warnings.
+
+### Edge
+
+- `sourceId`
+- `targetId`
+- `type`: `same_namespace`, `shared_domain`, `shared_tool`, `mentions`, or `workflow_neighbor`.
+- `label`
+- `weight`
+- `reason`
+
+## Search And Routing Requirements
+
+- Search must work without LLM calls.
+- Ranking should favor exact name matches, description matches, trigger matches, then body matches.
+- A task query should produce a short recommended workflow:
+  - primary skill,
+  - supporting skills,
+  - reason for each recommendation,
+  - source path for each recommendation.
+- Search should handle large local skill libraries without loading all skill bodies into the browser.
+
+## UI Requirements
+
+- First screen is the usable navigator, not a landing page.
+- The interface should feel like an internal command center: dense, calm, fast, and low-friction.
+- It should use real controls for search, filters, selection, relationship traversal, and copyable paths.
+- It should avoid decorative marketing sections.
+- It must remain readable on laptop and mobile widths.
+
+## Verification Requirements
+
+- Running `npm test` must exercise scanner parsing and ranking.
+- Running `npm run build` must build the web app.
+- Running the dev server must expose a usable UI.
+- The scanner must successfully index the current local Codex skill library.
+- MindWeaver `git status` must remain unchanged by SkillWeaver work.
+
