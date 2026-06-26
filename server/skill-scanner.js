@@ -8,6 +8,8 @@ import YAML from "yaml";
 const DEFAULT_SKILL_ROOTS = [
   "C:\\Users\\Uday\\.codex\\skills",
   "C:\\Users\\Uday\\.codex\\skills\\.system",
+  "C:\\Users\\Uday\\.agents\\skills",
+  "G:\\Projects\\Digital Marketing Super Skills",
   "C:\\Users\\Uday\\.codex\\plugins\\cache\\openai-bundled",
   "C:\\Users\\Uday\\.codex\\plugins\\cache\\openai-curated",
   "C:\\Users\\Uday\\.codex\\plugins\\cache\\openai-curated-remote",
@@ -168,9 +170,47 @@ function parseFrontmatter(content) {
       warnings
     };
   } catch (error) {
-    warnings.push(`frontmatter yaml parse failed: ${error.message}`);
-    return { frontmatter: {}, body, warnings };
+    return { frontmatter: parseLooseFrontmatter(rawFrontmatter), body, warnings };
   }
+}
+
+function parseLooseFrontmatter(rawFrontmatter) {
+  const output = {};
+  const lines = String(rawFrontmatter ?? "").replace(/\r\n?/g, "\n").split("\n");
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
+    if (!line.trim() || line.trim().startsWith("#")) continue;
+    const match = /^([A-Za-z0-9_-]+):\s*(.*)$/.exec(line);
+    if (!match) continue;
+
+    const [, key, rawValue] = match;
+    const value = rawValue.trim();
+    if (value === ">" || value === "|") {
+      const block = [];
+      while (index + 1 < lines.length && (/^\s+/.test(lines[index + 1]) || !lines[index + 1].trim())) {
+        index += 1;
+        block.push(lines[index].trim());
+      }
+      output[key] = value === ">" ? block.filter(Boolean).join(" ") : block.join("\n").trim();
+      continue;
+    }
+
+    output[key] = parseLooseScalar(value);
+  }
+
+  return output;
+}
+
+function parseLooseScalar(value) {
+  const trimmed = String(value ?? "").trim();
+  if (
+    (trimmed.startsWith("\"") && trimmed.endsWith("\""))
+    || (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1);
+  }
+  return trimmed;
 }
 
 function extractHeadings(body) {
@@ -496,14 +536,23 @@ function rankSkill(skill, query) {
   if (descriptionText.includes(normalizedQuery)) score += 70;
   if (triggerText.includes(normalizedQuery)) score += 55;
   if (domainText.includes(normalizedQuery)) score += 40;
-  if (bodyText.includes(normalizedQuery)) score += 25;
+  if (bodyText.includes(normalizedQuery)) score += 8;
 
   for (const term of terms) {
     if (nameText.includes(term)) score += 18;
     if (descriptionText.includes(term)) score += 12;
     if (triggerText.includes(term)) score += 10;
     if (domainText.includes(term)) score += 8;
-    if (bodyText.includes(term)) score += 3;
+    if (bodyText.includes(term)) score += 1;
+  }
+
+  const gatewayMatch = /^([a-z0-9]+(?:-[a-z0-9]+)*) use$/.exec(nameText);
+  if (gatewayMatch && normalizedQuery.includes(gatewayMatch[1])) {
+    score += normalizedQuery.includes(`use ${gatewayMatch[1]}`) ? 90 : 45;
+  }
+
+  if (nameText === "index" && !normalizedQuery.includes("index")) {
+    score -= 80;
   }
 
   if (skill.sourceType === "user") score += 2;

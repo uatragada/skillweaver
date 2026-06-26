@@ -19,6 +19,8 @@ By default SkillWeaver scans:
 
 - `C:\Users\Uday\.codex\skills`
 - `C:\Users\Uday\.codex\skills\.system`
+- `C:\Users\Uday\.agents\skills`
+- `G:\Projects\Digital Marketing Super Skills`
 - `C:\Users\Uday\.codex\plugins\cache\openai-bundled`
 - `C:\Users\Uday\.codex\plugins\cache\openai-curated`
 - `C:\Users\Uday\.codex\plugins\cache\openai-curated-remote`
@@ -49,4 +51,3 @@ npm start
 - Duplicate names, shared namespaces, shared domains, shared tools, and skill mentions.
 
 The filesystem stays authoritative. SkillWeaver does not rewrite existing skills.
-

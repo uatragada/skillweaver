@@ -31,6 +31,22 @@ Load this before Figma tool calls.
   assert.match(parsed.body, /Figma Use/);
 });
 
+test("falls back on frontmatter with unescaped Windows paths", () => {
+  const parsed = parseFrontmatter(`---
+name: framer
+description: >
+  Use when the user mentions Framer or website edits.
+allowed-tools: ["Read(C:\\Users\\Uday\\AppData\\Local\\Temp\\framer/*)"]
+---
+# Framer
+`);
+
+  assert.equal(parsed.frontmatter.name, "framer");
+  assert.match(parsed.frontmatter.description, /Framer/);
+  assert.equal(parsed.warnings.length, 0);
+});
+
+
 test("scans skill roots, resources, UI metadata, and duplicate-name edges", async () => {
   const root = await mkdtemp(join(tmpdir(), "skillweaver-"));
   const first = join(root, "skills", "skill-a");
@@ -127,3 +143,44 @@ test("ranks task wording and recommends a primary workflow skill", () => {
   assert.equal(workflow.steps[0].name, "gh-fix-ci");
 });
 
+test("boosts gateway use skills and avoids generic index primaries", () => {
+  const figmaUse = {
+    id: "figma-use",
+    name: "figma-use",
+    description: "Use before Figma tool calls.",
+    sourceType: "user",
+    domains: [],
+    triggers: [],
+    searchText: "figma tool calls design inspection"
+  };
+  const figmaImplement = {
+    id: "figma-implement-design",
+    name: "figma-implement-design",
+    description: "Implement a Figma design in code.",
+    sourceType: "user",
+    domains: [],
+    triggers: [],
+    searchText: "figma inspect design implement"
+  };
+  const genericIndex = {
+    id: "index",
+    name: "index",
+    description: "Use for all data analytics workflows, dashboard creation, KPI analysis, and reporting.",
+    sourceType: "plugin",
+    domains: ["data"],
+    triggers: [],
+    searchText: "data analytics dashboard kpi reporting"
+  };
+  const dashboard = {
+    id: "build-dashboard",
+    name: "build-dashboard",
+    description: "Build data analytics dashboards from KPI data.",
+    sourceType: "plugin",
+    domains: ["data"],
+    triggers: ["dashboard from KPI data"],
+    searchText: "build dashboard data analytics kpi"
+  };
+
+  assert.ok(rankSkill(figmaUse, "Use Figma to inspect a design") > rankSkill(figmaImplement, "Use Figma to inspect a design"));
+  assert.ok(rankSkill(dashboard, "Create a data analytics dashboard from KPI data") > rankSkill(genericIndex, "Create a data analytics dashboard from KPI data"));
+});

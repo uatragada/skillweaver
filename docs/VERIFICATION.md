@@ -8,9 +8,9 @@ npm run index:skills
 npm run build
 ```
 
-Expected index result on this machine after adding the local `$skillweaver` skill:
+Expected index result on this machine after adding the local `$skillweaver` skill and external skill roots:
 
-- 424 skills indexed.
+- 439 skills indexed.
 - 2,000 relationship edges generated.
 - 0 parser warnings.
 - domains include `ai`, `backend`, `frontend`, `github`, `operations`, `security`, and `data`.
