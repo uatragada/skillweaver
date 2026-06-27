@@ -19,6 +19,7 @@ SkillWeaver should keep V2 routing quality gains without becoming a heavy servic
 - Do not add a database, cache service, LLM reranker, background worker, or generated persisted graph for routing quality claims.
 - Do not add dependencies for benchmark reporting, statistics, CSV export, charting, or JSON validation unless the standard library path becomes impossible to maintain.
 - Domain and concept reporting must be post-processing over already-evaluated benchmark rows. It must not rerun `scanSkillRoots()`, `rankConceptWorkflowSkills()`, or `recommendWorkflow()` per slice.
+- Support-quality backlog and promotion reporting must stay documentation-only or O(case count) post-processing. It must not add product-route passes, scanner passes, persisted indexes, model calls, or new reporting dependencies.
 - Keep graph caps explicit: 2,000 skill relationship edges and 200 concept edges are responsiveness caps, not completeness claims.
 - Treat O(n^2) relationship generation as the main corpus-growth risk. Avoid widening `buildEdges()` unless a measured corpus-growth problem requires it.
 

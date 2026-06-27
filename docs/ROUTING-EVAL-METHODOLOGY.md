@@ -103,6 +103,14 @@ The slice tables are meant to expose breadth and thin spots:
 - A cross-domain claim should cite the slice table, not only the aggregate score.
 - Benchmark domains are stable evaluation labels; adding one should be rarer than adding a case to an existing domain.
 
+## Support-Quality Backlog
+
+Support misses are workflow-quality debt, not automatic routing failures. A support miss should enter the backlog when the missing helper would materially change what an agent loads, verifies, or hands off for the task.
+
+Backlog entries should record: source suite, case id or real task prompt, expected primary, missing support, observed top/workflow five, affected domain/concept slice, confusable rivals, and whether the miss is primary-critical, support-critical, or informational.
+
+Do not tune concept rules only to clear a support miss. First decide whether the expected support is load-bearing, whether the prompt comes from real usage or a frozen challenge case, and whether adding the helper would displace a more useful skill. Support precision@5 should be watched as a noise signal; support coverage gains are not meaningful if the workflow five becomes a bag of plausible but nonessential helpers.
+
 ## Acceptance Bar
 
 For V2 to count as a real improvement on the active acceptance suite:
@@ -115,7 +123,9 @@ For V2 to count as a real improvement on the active acceptance suite:
 - The route must be product-real: `/api/workflow` should use the same V2 helper as the benchmark.
 - Any benchmark case validation issue should fail the run before quality metrics are trusted.
 
-The post-tuning challenge suite is reported with the same metrics, freshness metadata, and case validation, but it does not gate acceptance. Challenge misses should become a backlog until they recur in real task logs or are explicitly promoted into the active suite.
+The post-tuning challenge suite is reported with the same metrics, freshness metadata, and case validation, but it does not gate acceptance. Challenge misses become backlog evidence only. They may be promoted into the active suite when they recur in real task logs, represent a high-impact workflow miss, or protect a confusable rival that has already failed once.
+
+Promotion requires: a failure-atlas entry, a frozen prompt before tuning, narrow `expectedPrimary`, load-bearing `expectedSupport`, a named confusable rival when applicable, and a documented reason why the case belongs in acceptance rather than challenge. A promoted case must not be used both as the tuning prompt and as proof of generalization for the same change.
 
 ## Report Freshness Contract
 

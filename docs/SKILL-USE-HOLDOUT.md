@@ -1,9 +1,9 @@
 # SkillWeaver V2 Post-Tuning Challenge Benchmark
 
-Generated: 2026-06-27T12:09:44.493Z
+Generated: 2026-06-27T12:17:30.870Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782562184493,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"ae0ae9380ea5f549a0fdc4d71e21ad6c09680720","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:d174b9eff6aaefcea64a3e6aa14f876c86969354d9b0b3a348bdf2b09a01e502","benchmarkScript":"sha256:b262b17d1926cfc84f73a46f44d04c0ff1e011e9f28adb27959bbaaf333c6876","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:300d33f846264c07ffbbf4182f952b7dc6e74e76b0978f12085ea0051a096eff"}
+{"generatedAt":1782562650870,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"727686bea74360cc70784b7e9ad6f307553aeb4c","dirty":true,"dirtyPaths":["docs/PERFORMANCE-EVAL.md","docs/ROUTING-EVAL-METHODOLOGY.md","docs/ROUTING-FAILURE-ATLAS.md","scripts/benchmark-skill-routing.mjs"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:d174b9eff6aaefcea64a3e6aa14f876c86969354d9b0b3a348bdf2b09a01e502","benchmarkScript":"sha256:a4eb4c21cd5b0559e8d170c3df2085961ebf303a59980934991499c84558cfca","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:fbf30a11f2c747c9d49568fe3182734ca7281d1a34930068bb768d5f5470ac71"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:holdout`
 - Suite: Post-Tuning Challenge
 - Acceptance gate: no
-- Git commit at generation: `ae0ae9380ea5f549a0fdc4d71e21ad6c09680720`
-- Git dirty: no
-- Invalidating dirty paths: none
+- Git commit at generation: `727686bea74360cc70784b7e9ad6f307553aeb4c`
+- Git dirty: yes
+- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`
 - Case hash: `sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6`
 - Scanner hash: `sha256:d174b9eff6aaefcea64a3e6aa14f876c86969354d9b0b3a348bdf2b09a01e502`
-- Benchmark script hash: `sha256:b262b17d1926cfc84f73a46f44d04c0ff1e011e9f28adb27959bbaaf333c6876`
+- Benchmark script hash: `sha256:a4eb4c21cd5b0559e8d170c3df2085961ebf303a59980934991499c84558cfca`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:300d33f846264c07ffbbf4182f952b7dc6e74e76b0978f12085ea0051a096eff`
+- Snapshot fingerprint: `sha256:fbf30a11f2c747c9d49568fe3182734ca7281d1a34930068bb768d5f5470ac71`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -125,7 +125,7 @@ Challenge quality is intentionally reported rather than accepted or failed; the 
 
 ## V2 Support Misses
 
-These rows have a correct expected primary somewhere in V2's workflow, but not every expected support skill appears in the top/workflow five.
+This table is a support-quality backlog source, not an acceptance failure list. A row should drive tuning only after promotion rules are met: the missing support is load-bearing, the prompt is frozen before tuning, and the change can improve support without regressing primary selection or increasing workflow noise.
 
 | Case | Missing expected support | V2 top/workflow 5 |
 | --- | --- | --- |

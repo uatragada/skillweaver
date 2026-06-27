@@ -137,6 +137,25 @@ The benchmark now has 78 cases. The June 27, 2026 breadth and challenge passes a
 
 These are fixed enough for routing evaluation, but still thin enough to revisit when real task logs reveal a miss.
 
+### Support-Quality Backlog
+
+The current support backlog comes from correct-primary challenge cases where V2 misses at least one expected helper in the top/workflow five. These are not failed routing claims, but they identify where future workflow recommendations can compound.
+
+Backlog rules:
+
+- Promote support-only cases only when the missing helper is load-bearing for the workflow.
+- Prefer real task-log recurrence over synthetic paraphrases.
+- Tune one support pattern at a time, then check primary hit@1, forbidden primary rate, support coverage@5, and support precision@5.
+- Keep cases in backlog when the missing support is merely nice-to-have or when adding it would crowd out a more task-specific skill.
+
+Current priority slices:
+
+- Security/release support: `vercel-firewall-rules`, `nextjs-auth-implementation`.
+- Product/research support: `market-sizing-research`, `ab-test-design`, `product-business-retention`.
+- Platform delivery support: `netlify-frontend-deploy`, `render-python-api-deploy`.
+- Agent/app documentation support: `chatgpt-app-mcp-widget`, `vercel-ai-gateway-routing`.
+- Game/frontend support: `game-studio-prototype-plan`, `core-web-vitals-audit`.
+
 ### Coverage Backlog
 
 Independent review found useful future cases. Several are now covered by the 22-case post-tuning challenge suite: ChatGPT Apps, ASP.NET, Java/.NET, Netlify, Render, screenshot-to-code, React Three Fiber, game-studio planning, Notion meeting workflows, Vercel AI Gateway/Cron/Auth/Firewall, web performance, market sizing, metric diagnostics, experiment design, product-business analysis, code explanation, system-design interview prep, API docs, and visualization accessibility.
@@ -157,3 +176,6 @@ These should become fresh holdout cases before any routing boost is tuned for th
 - Prefer narrow intent boosts over new concepts when the concept is already correct.
 - Add a benchmark case before tuning a new domain.
 - Keep every fix deterministic and inspectable.
+- Do not tune directly from a challenge support miss until it is promoted or recurs in real task logs.
+- Treat support precision drops as workflow noise, even when support coverage improves.
+- Retire backlog entries when the corpus changes and the missing support is no longer load-bearing.

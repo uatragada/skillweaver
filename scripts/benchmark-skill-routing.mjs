@@ -768,7 +768,9 @@ function buildMarkdown({
     "## V2 Support Misses",
     "",
     supportMissRows.length
-      ? "These rows have a correct expected primary somewhere in V2's workflow, but not every expected support skill appears in the top/workflow five."
+      ? SUITE.gatesAcceptance
+        ? "These rows have a correct expected primary somewhere in V2's workflow, but not every expected support skill appears in the top/workflow five."
+        : "This table is a support-quality backlog source, not an acceptance failure list. A row should drive tuning only after promotion rules are met: the missing support is load-bearing, the prompt is frozen before tuning, and the change can improve support without regressing primary selection or increasing workflow noise."
       : "No expected support misses in the current V2 workflow.",
     ""
   );
