@@ -1,9 +1,9 @@
 # SkillWeaver V2 Active Acceptance Benchmark
 
-Generated: 2026-06-27T12:47:43.891Z
+Generated: 2026-06-27T19:57:02.779Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782564463891,"command":"npm run benchmark:skills","suite":{"id":"acceptance","label":"Active Acceptance","gatesAcceptance":true},"git":{"commit":"ee7937fed9329b044177c7b62160753add3f7c68","dirty":true,"dirtyPaths":["docs/SKILL-USE-FRESH.md","docs/SKILL-USE-HOLDOUT.md"]},"invalidatingDirtyPaths":[],"cases":{"count":78,"sha256":"sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354","scanner":"sha256:9fe40c232a8a1d94d8df5f0b53184b708b8c81e54aec7e6f5ce4bb03aa3aa135","benchmarkScript":"sha256:ccc98013381e60ed63e62939e8ce17921518cce645c85003e454018551736829","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:f35f0399ab366f0c864253605e52631b0451169ae9fd594e05781d37e54eabfc"}
+{"generatedAt":1782590222779,"command":"npm run benchmark:skills","suite":{"id":"acceptance","label":"Active Acceptance","gatesAcceptance":true},"git":{"commit":"ca848afb4105ce2fa09ae9d1d342ee304309b786","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":78,"sha256":"sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354","scanner":"sha256:9fe40c232a8a1d94d8df5f0b53184b708b8c81e54aec7e6f5ce4bb03aa3aa135","benchmarkScript":"sha256:87ba653f6982312617076c98b9b40595fe32addc551f2f595d1de86808b21434","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:063593f502b1f624573ac79f34b1aa496fb99a660dba1bc96a65162b66f73acf"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills`
 - Suite: Active Acceptance
 - Acceptance gate: yes
-- Git commit at generation: `ee7937fed9329b044177c7b62160753add3f7c68`
-- Git dirty: yes
+- Git commit at generation: `ca848afb4105ce2fa09ae9d1d342ee304309b786`
+- Git dirty: no
 - Invalidating dirty paths: none
 - Case hash: `sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354`
 - Scanner hash: `sha256:9fe40c232a8a1d94d8df5f0b53184b708b8c81e54aec7e6f5ce4bb03aa3aa135`
-- Benchmark script hash: `sha256:ccc98013381e60ed63e62939e8ce17921518cce645c85003e454018551736829`
+- Benchmark script hash: `sha256:87ba653f6982312617076c98b9b40595fe32addc551f2f595d1de86808b21434`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:f35f0399ab366f0c864253605e52631b0451169ae9fd594e05781d37e54eabfc`
+- Snapshot fingerprint: `sha256:063593f502b1f624573ac79f34b1aa496fb99a660dba1bc96a65162b66f73acf`
 - Acceptance: pass
 
 ## Corpus
