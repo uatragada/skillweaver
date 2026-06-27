@@ -412,6 +412,11 @@ test("concept workflow respects negated dashboard and scan intents", () => {
     "Build a React dashboard UI shell, not a data analytics report"
   );
   assert.equal(dashboardWorkflow.primary.name, "frontend-app-builder");
+  const dashboardInsteadWorkflow = recommendConceptWorkflow(
+    dashboardIndex,
+    "Build a React dashboard UI shell instead of a data analytics report"
+  );
+  assert.equal(dashboardInsteadWorkflow.primary.name, "frontend-app-builder");
 
   const securityIndex = makeConceptIndex([
     makeSkill({
@@ -445,6 +450,11 @@ test("concept workflow respects negated dashboard and scan intents", () => {
     "Create a threat model without running a vulnerability scan"
   );
   assert.equal(securityWorkflow.primary.name, "security-threat-model");
+  const securityDontWorkflow = recommendConceptWorkflow(
+    securityIndex,
+    "Create a threat model, don't run a vulnerability scan"
+  );
+  assert.equal(securityDontWorkflow.primary.name, "security-threat-model");
 });
 
 test("concept workflow routes thin-domain aliases without new concept bloat", () => {
@@ -615,4 +625,85 @@ test("summarizeIndex exposes graph cap metadata", () => {
   assert.equal(summary.conceptEdgeDroppedCount, 1);
   assert.deepEqual(summary.conceptEdgeDroppedTypeCounts, { shared_concept_evidence: 1 });
   assert.equal(summary.conceptEdgeTruncated, true);
+});
+
+test("concept workflow separates Figma gateway and implementation intent", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "figma-use",
+      name: "figma-use",
+      description: "Use Figma to inspect files and design context before work.",
+      domains: ["frontend", "product"],
+      tools: ["Figma"],
+      triggers: ["use figma inspect design"]
+    }),
+    makeSkill({
+      id: "figma-implement-design",
+      name: "figma-implement-design",
+      description: "Implement Figma designs in frontend code.",
+      domains: ["frontend"],
+      tools: ["Figma", "Node"],
+      triggers: ["implement figma design"]
+    }),
+    makeSkill({
+      id: "dev-frontend-react-next",
+      name: "dev-frontend-react-next",
+      description: "Build React and Next.js implementation code.",
+      domains: ["frontend"],
+      tools: ["Node"],
+      triggers: ["react code"]
+    })
+  ]);
+
+  assert.equal(
+    recommendConceptWorkflow(index, "Use Figma to inspect a design and implement it").primary.name,
+    "figma-use"
+  );
+  const implementation = rankConceptWorkflowSkills(index, "Implement a Figma design in React code").slice(0, 5).map((skill) => skill.name);
+  assert.equal(implementation[0], "figma-implement-design");
+  assert.ok(implementation.includes("dev-frontend-react-next"));
+});
+
+test("concept workflow keeps SkillWeaver routing reviews out of generic performance review", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "skillweaver",
+      name: "skillweaver",
+      description: "Inspect SkillWeaver skill routing and benchmark recommendations.",
+      domains: ["ai", "documents"],
+      tools: ["Node"],
+      triggers: ["skillweaver skill routing benchmark"]
+    }),
+    makeSkill({
+      id: "code-review-checklist",
+      name: "code-review-checklist",
+      description: "Review code and identify implementation risks.",
+      domains: ["operations", "github"],
+      tools: ["GitHub"],
+      triggers: ["code review"]
+    }),
+    makeSkill({
+      id: "dev-performance-engineering",
+      name: "dev-performance-engineering",
+      description: "Performance engineering for latency, throughput, and robustness.",
+      domains: ["operations", "backend"],
+      tools: ["Node"],
+      triggers: ["performance robustness"]
+    }),
+    makeSkill({
+      id: "performance-review",
+      name: "performance-review",
+      description: "Write a person performance review.",
+      domains: ["product"],
+      tools: [],
+      triggers: ["performance review"]
+    })
+  ]);
+
+  const topFive = rankConceptWorkflowSkills(index, "Read-only performance and robustness review of SkillWeaver V2 routing")
+    .slice(0, 5)
+    .map((skill) => skill.name);
+  assert.equal(topFive[0], "skillweaver");
+  assert.ok(topFive.includes("dev-performance-engineering"));
+  assert.notEqual(topFive[0], "performance-review");
 });

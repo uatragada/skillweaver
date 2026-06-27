@@ -230,7 +230,7 @@
   {
     "id": "repo-dependency-audit",
     "query": "Audit repository dependencies and technical debt while preserving unrelated worktree changes",
-    "expectedPrimary": ["dependency-audit", "technical-debt-register", "conservative-repo-operations"],
+    "expectedPrimary": ["dependency-audit", "technical-debt-register"],
     "expectedSupport": ["code-review-checklist", "dev-dependency-maintenance"]
   },
   {
@@ -282,14 +282,189 @@
     "expectedSupport": ["racingsim-game-dev"]
   },
   {
+    "id": "design-accessibility-audit",
+    "query": "Audit a frontend page for accessibility, motion, and design QA issues",
+    "expectedPrimary": ["design-audit", "dev-frontend-accessibility-css"],
+    "expectedSupport": ["dev-frontend-accessibility-css", "motion-qa"]
+  },
+  {
+    "id": "url-to-code",
+    "query": "Turn a live URL into frontend code and compare screenshots",
+    "expectedPrimary": ["design-url-to-code", "url-to-code"],
+    "expectedSupport": ["frontend-testing-debugging"]
+  },
+  {
+    "id": "plugin-create",
+    "query": "Create a Codex plugin with skills, MCP tools, and validation docs",
+    "expectedPrimary": ["plugin-creator"],
+    "expectedSupport": ["skill-security-auditor", "dev-documentation-systems"]
+  },
+  {
+    "id": "cli-create",
+    "query": "Design a command line tool with help text, arguments, and release packaging",
+    "expectedPrimary": ["cli-creator"],
+    "expectedSupport": ["dev-release-productization"]
+  },
+  {
+    "id": "changelog-release",
+    "query": "Generate a changelog and release notes from recent commits",
+    "expectedPrimary": ["changelog-generator"],
+    "expectedSupport": ["dev-release-productization"]
+  },
+  {
+    "id": "developer-onboarding",
+    "query": "Write a developer onboarding guide for a new service repository",
+    "expectedPrimary": ["developer-onboarding-doc"],
+    "expectedSupport": ["dev-documentation-systems"]
+  },
+  {
+    "id": "resume-cover-letter",
+    "query": "Tailor a resume and cover letter for a specific job posting",
+    "expectedPrimary": ["resume-cover-letter-tailor"],
+    "expectedSupport": ["huggingface-jobs"]
+  },
+  {
+    "id": "performance-load-test",
+    "query": "Plan load testing and a performance budget for a backend API",
+    "expectedPrimary": ["load-testing-plan"],
+    "expectedSupport": ["performance-budget", "dev-performance-engineering"]
+  },
+  {
+    "id": "feature-flag-rollout",
+    "query": "Design a feature flag rollout and rollback guide for a risky launch",
+    "expectedPrimary": ["feature-flag-guide"],
+    "expectedSupport": ["launch-readiness", "dev-release-productization"]
+  },
+  {
+    "id": "disaster-recovery",
+    "query": "Write a disaster recovery plan with backup, restore, and incident ownership",
+    "expectedPrimary": ["disaster-recovery-plan"],
+    "expectedSupport": ["incident-postmortem", "monitoring-setup-guide"]
+  },
+  {
+    "id": "sentry-setup",
+    "query": "Set up Sentry error monitoring and triage noisy production exceptions",
+    "expectedPrimary": ["sentry"],
+    "expectedSupport": ["monitoring-setup-guide", "dev-observability-sre"]
+  },
+  {
+    "id": "supabase-postgres",
+    "query": "Design Supabase Postgres schema policies and migration safety checks",
+    "expectedPrimary": ["supabase-postgres-best-practices", "dev-database-postgres"],
+    "expectedSupport": ["database-schema-design", "database-migration-plan"]
+  },
+  {
+    "id": "stripe-integration",
+    "query": "Implement Stripe billing with webhook handling and subscription lifecycle checks",
+    "expectedPrimary": ["stripe-best-practices"],
+    "expectedSupport": ["dev-backend-api-design", "dev-node-typescript-services"]
+  },
+  {
+    "id": "cloudflare-durable-objects",
+    "query": "Build a Cloudflare Durable Object service with Wrangler deployment",
+    "expectedPrimary": ["durable-objects"],
+    "expectedSupport": ["wrangler", "workers-best-practices"]
+  },
+  {
+    "id": "hf-vision-trainer",
+    "query": "Train a Hugging Face vision model and publish evaluation results",
+    "expectedPrimary": ["huggingface-vision-trainer"],
+    "expectedSupport": ["huggingface-community-evals", "huggingface-paper-publisher"]
+  },
+  {
+    "id": "hf-gradio-space",
+    "query": "Create a Hugging Face Gradio demo Space for a model",
+    "expectedPrimary": ["huggingface-gradio"],
+    "expectedSupport": ["hf-cli", "huggingface-community-evals"]
+  },
+  {
+    "id": "prd-feature-prioritization",
+    "query": "Write a PRD and prioritize product features from user research",
+    "expectedPrimary": ["prd-template", "feature-prioritisation"],
+    "expectedSupport": ["user-research-synthesis", "ux-research-plan"]
+  },
+  {
+    "id": "user-research-synthesis",
+    "query": "Synthesize user interviews into themes, opportunities, and product decisions",
+    "expectedPrimary": ["user-research-synthesis"],
+    "expectedSupport": ["design-research", "ux-research-plan"]
+  },
+  {
+    "id": "dependency-conflict",
+    "query": "Resolve dependency conflicts after an npm upgrade",
+    "expectedPrimary": ["dependency-conflict-resolver"],
+    "expectedSupport": ["dev-dependency-maintenance"]
+  },
+  {
+    "id": "debugging-log-analysis",
+    "query": "Analyze logs and decode a production error stack trace",
+    "expectedPrimary": ["error-decoder", "debugging-log-analyser"],
+    "expectedSupport": ["dev-observability-sre", "sentry"]
+  },
+  {
+    "id": "monorepo-build",
+    "query": "Fix a monorepo build system and Turborepo pipeline issue",
+    "expectedPrimary": ["dev-monorepo-build-systems", "turborepo"],
+    "expectedSupport": ["dev-git-github-collaboration"]
+  },
+  {
+    "id": "security-finding-triage",
+    "query": "Triage security findings, validate exploitability, and track remediation",
+    "expectedPrimary": ["triage-finding", "track-findings"],
+    "expectedSupport": ["validation", "security-diff-scan"]
+  },
+  {
+    "id": "risk-register",
+    "query": "Create a risk register for a launch readiness review",
+    "expectedPrimary": ["risk-register"],
+    "expectedSupport": ["launch-readiness"]
+  },
+  {
+    "id": "capacity-planning",
+    "query": "Forecast capacity and scaling needs for a traffic spike",
+    "expectedPrimary": ["capacity-planning"],
+    "expectedSupport": ["dev-performance-engineering", "dev-containers-kubernetes"]
+  },
+  {
+    "id": "copilot-sdk",
+    "query": "Build a Copilot SDK integration for an app assistant",
+    "expectedPrimary": ["copilot-sdk"],
+    "expectedSupport": ["agents-sdk", "openai-agents-js"]
+  },
+  {
+    "id": "skillweaver-routing-review",
+    "query": "Read-only performance and robustness review of SkillWeaver V2 routing",
+    "expectedPrimary": ["skillweaver", "code-review-checklist"],
+    "expectedSupport": ["dev-performance-engineering"],
+    "mustNotPrimary": ["racingsim-game-dev", "racingsim-ai-ml", "game-playtest", "performance-review"]
+  },
+  {
+    "id": "figma-implement-not-use",
+    "query": "Implement a Figma design in React code",
+    "expectedPrimary": ["figma-implement-design"],
+    "expectedSupport": ["figma-use", "dev-frontend-react-next"]
+  },
+  {
     "id": "frontend-dashboard-not-analytics",
     "query": "Build a React dashboard UI shell, not a data analytics report",
     "expectedPrimary": ["frontend-app-builder", "dev-frontend-react-next"],
     "mustNotPrimary": ["build-dashboard", "visualize-data", "data-visualization", "build-report"]
   },
   {
+    "id": "frontend-dashboard-instead-analytics",
+    "query": "Build a React dashboard UI shell instead of a data analytics report",
+    "expectedPrimary": ["frontend-app-builder", "dev-frontend-react-next"],
+    "mustNotPrimary": ["build-dashboard", "visualize-data", "data-visualization", "build-report"]
+  },
+  {
     "id": "threat-model-no-scan",
     "query": "Create a threat model without running a vulnerability scan",
+    "expectedPrimary": ["security-threat-model", "threat-model"],
+    "mustNotPrimary": ["security-scan", "deep-security-scan"]
+  },
+  {
+    "id": "threat-model-dont-scan",
+    "query": "Create a threat model, don't run a vulnerability scan",
     "expectedPrimary": ["security-threat-model", "threat-model"],
     "mustNotPrimary": ["security-scan", "deep-security-scan"]
   }

@@ -1,22 +1,22 @@
 # SkillWeaver V2 Benchmark
 
-Generated: 2026-06-27T11:16:26.923Z
+Generated: 2026-06-27T11:30:49.253Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782558986923,"command":"npm run benchmark:skills","git":{"commit":"f3071ba3990669c0c23753f0b5a9581580a798e8","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":49,"sha256":"sha256:27b8afb4b4074404cc1d2ea44da9a1ec4a5f14ceeab79de1b9c37ad41104c439"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:27b8afb4b4074404cc1d2ea44da9a1ec4a5f14ceeab79de1b9c37ad41104c439","scanner":"sha256:2c619aaab51037057265405a2038937d71eba9bf13aad5ed494f124d24bf0556","benchmarkScript":"sha256:75ce9ce3eb9371a66f56003b351498f6c8a32e6ec2225a7577723b83a2e8e79d","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:7fb1225aea428413196f4e9eba6a9ddfebb78b3925fa7e714841aecf8cfeae4b"}
+{"generatedAt":1782559849253,"command":"npm run benchmark:skills","git":{"commit":"e01e4549701c8a7ff0d79240437051d8e8a9f240","dirty":true,"dirtyPaths":["benchmarks/skill-routing-cases.json","docs/CORPUS-SNAPSHOT.md","docs/ROUTING-EVAL-METHODOLOGY.md","docs/ROUTING-FAILURE-ATLAS.md","docs/SKILL-USE-GAINS.md","docs/V2-EXPERIMENT-LOG.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["benchmarks/skill-routing-cases.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":78,"sha256":"sha256:a985788631cdb72de1d472d6d02b6849f319f8f02fb1c498850b458612b88d1e"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:a985788631cdb72de1d472d6d02b6849f319f8f02fb1c498850b458612b88d1e","scanner":"sha256:8666350017444209e985daca4aa92c60f149634397bec3d264da83e79548796c","benchmarkScript":"sha256:f8cf58d074ae3576b71fd815e963580eb749e65478fdfada6156ca53cc5cd321","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:6b1a6c4548be1d06ffa2b4f98c1ae2aed101d5afb2171f2ad6f754df03d1f4a4"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
 
 - Command: `npm run benchmark:skills`
-- Git commit at generation: `f3071ba3990669c0c23753f0b5a9581580a798e8`
-- Git dirty: no
-- Invalidating dirty paths: none
-- Case hash: `sha256:27b8afb4b4074404cc1d2ea44da9a1ec4a5f14ceeab79de1b9c37ad41104c439`
-- Scanner hash: `sha256:2c619aaab51037057265405a2038937d71eba9bf13aad5ed494f124d24bf0556`
-- Benchmark script hash: `sha256:75ce9ce3eb9371a66f56003b351498f6c8a32e6ec2225a7577723b83a2e8e79d`
+- Git commit at generation: `e01e4549701c8a7ff0d79240437051d8e8a9f240`
+- Git dirty: yes
+- Invalidating dirty paths: `benchmarks/skill-routing-cases.json`, `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
+- Case hash: `sha256:a985788631cdb72de1d472d6d02b6849f319f8f02fb1c498850b458612b88d1e`
+- Scanner hash: `sha256:8666350017444209e985daca4aa92c60f149634397bec3d264da83e79548796c`
+- Benchmark script hash: `sha256:f8cf58d074ae3576b71fd815e963580eb749e65478fdfada6156ca53cc5cd321`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:7fb1225aea428413196f4e9eba6a9ddfebb78b3925fa7e714841aecf8cfeae4b`
+- Snapshot fingerprint: `sha256:6b1a6c4548be1d06ffa2b4f98c1ae2aed101d5afb2171f2ad6f754df03d1f4a4`
 - Acceptance: pass
 
 ## Corpus
@@ -26,7 +26,7 @@ skillweaver-benchmark-metadata -->
 - Concept nodes: 22
 - Concept edges: 200
 - Skill roots: 8
-- Benchmark cases: 49
+- Benchmark cases: 78
 
 ## Compared Systems
 
@@ -38,15 +38,17 @@ skillweaver-benchmark-metadata -->
 
 | Metric | No SkillWeaver | Skill-Level Baseline | SkillWeaver V2 | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Output quality score (0-100) | 77.4 | 80.1 | 100.0 | +22.6 pts | +19.9 pts |
-| Primary hit@1 | 77.6% | 81.6% | 100.0% | +22.4 pp | +18.4 pp |
-| Expected skill in top/workflow 5 | 95.9% | 95.9% | 100.0% | +4.1 pp | +4.1 pp |
-| Mean reciprocal rank | 0.851 | 0.888 | 1.000 | +0.149 | +0.112 |
-| Support-skill coverage@5 | 50.7% | 52.4% | 100.0% | +49.3 pp | +47.6 pp |
-| Forbidden primary rate, lower is better | 2.0% | 0.0% | 0.0% | -2.0 pp better | 0.0 pp |
-| Mean candidates to expected skill, lower is better | 1.8 | 1.9 | 1.0 | -0.8 candidates better | -0.9 candidates better |
+| Output quality score (0-100) | 75.3 | 77.2 | 100.0 | +24.7 pts | +22.8 pts |
+| Primary hit@1 | 74.4% | 76.9% | 100.0% | +25.6 pp | +23.1 pp |
+| Expected skill in top/workflow 5 | 94.9% | 93.6% | 100.0% | +5.1 pp | +6.4 pp |
+| Mean reciprocal rank | 0.826 | 0.856 | 1.000 | +0.174 | +0.144 |
+| Support-skill coverage@5 | 50.4% | 52.8% | 100.0% | +49.6 pp | +47.2 pp |
+| Support precision@5, exploratory | 18.6% | 21.1% | 40.9% | +22.3 pp | +19.8 pp |
+| Forbidden primary rate, lower is better | 3.8% | 2.6% | 0.0% | -3.8 pp better | -2.6 pp better |
+| Mean candidates to expected skill, lower is better | 2.2 | 1.9 | 1.0 | -1.2 candidates better | -0.9 candidates better |
 
 Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from 442 skills to 5 candidates, a 98.9% candidate reduction per task.
+Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.
 
 ## Per-Case Results
 
@@ -70,15 +72,15 @@ Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set,
 | pdf-extract | pdf | pdf / 1 | pdf / 1 | pdf / 1 | Documents and PDFs | pdf -> reports-pdfs-and-slide-automation -> resume-cover-letter-tailor -> documents -> latex-doctor |
 | spreadsheet-analysis | Spreadsheets | analyze-data-quality / 2 | Spreadsheets / 1 | Spreadsheets / 1 | Data dashboards and reports | Spreadsheets -> data-analysis-standard -> analyze-data-quality -> chart-data-extractor -> data-pipeline-spec |
 | presentation-deck | Presentations, roadmap-presentation | roadmap-presentation / 1 | roadmap-presentation / 1 | roadmap-presentation / 1 | Presentations | roadmap-presentation -> roadmap-narrative -> Presentations -> template-creator -> reports-pdfs-and-slide-automation |
-| hf-train | huggingface-llm-trainer, huggingface-datasets | huggingface-llm-trainer / 1 | huggingface-llm-trainer / 1 | huggingface-llm-trainer / 1 | Hugging Face ML | huggingface-llm-trainer -> huggingface-vision-trainer -> huggingface-papers -> huggingface-paper-publisher -> huggingface-community-evals |
-| hf-dataset | huggingface-datasets | huggingface-datasets / 1 | huggingface-datasets / 1 | huggingface-datasets / 1 | Hugging Face ML | huggingface-datasets -> huggingface-papers -> huggingface-paper-publisher -> huggingface-llm-trainer -> huggingface-vision-trainer |
+| hf-train | huggingface-llm-trainer, huggingface-datasets | huggingface-llm-trainer / 1 | huggingface-llm-trainer / 1 | huggingface-llm-trainer / 1 | Hugging Face ML | huggingface-llm-trainer -> huggingface-datasets -> huggingface-community-evals -> huggingface-vision-trainer -> huggingface-papers |
+| hf-dataset | huggingface-datasets | huggingface-datasets / 1 | huggingface-datasets / 1 | huggingface-datasets / 1 | Hugging Face ML | huggingface-datasets -> huggingface-papers -> huggingface-community-evals -> huggingface-paper-publisher -> huggingface-llm-trainer |
 | gmail-triage | gmail, gmail-inbox-triage | gmail-inbox-triage / 1 | gmail / 1 | gmail / 1 | Email triage | gmail -> gmail-inbox-triage -> email-triage -> triage-finding -> investigation-mode |
 | phaser-game | phaser-2d-game | phaser-2d-game / 1 | phaser-2d-game / 1 | phaser-2d-game / 1 | Game development | phaser-2d-game -> game-playtest -> game-studio -> three-webgl-game -> web-game-foundations |
 | three-game | three-webgl-game | three-webgl-game / 1 | three-webgl-game / 1 | three-webgl-game / 1 | Game development | three-webgl-game -> web-3d-asset-pipeline -> game-playtest -> react-three-fiber-game -> phaser-2d-game |
 | adr | architecture-decision-record | architecture-decision-record / 1 | architecture-decision-record / 1 | architecture-decision-record / 1 | Repository operations | architecture-decision-record -> uml-and-software-architecture-visualization -> dev-architecture-review -> security-threat-model -> dev-backend-api-design |
 | cro-reporting | analytics-cro-and-reporting | analytics-cro-and-reporting / 1 | analytics-cro-and-reporting / 1 | analytics-cro-and-reporting / 1 | Marketing growth | analytics-cro-and-reporting -> marketing-strategy-and-growth -> kpi-reporting -> industry-playbooks -> scrollytelling-and-parallax-data-visualization |
 | linear-planning | linear | linear / 1 | linear / 1 | linear / 1 | Product planning | linear -> roadmap-narrative -> ux-research-plan -> product-launch-checklist -> notion-spec-to-implementation |
-| openai-docs | openai-docs | openai-docs / 1 | openai-docs / 1 | openai-docs / 1 | Agent and LLM apps | openai-docs -> openai-agents-js -> chatgpt-apps -> api-docs-writer -> dev-ai-llm-apps |
+| openai-docs | openai-docs | openai-docs / 1 | openai-docs / 1 | openai-docs / 1 | Agent and LLM apps | openai-docs -> openai-agents-js -> chatgpt-apps -> dev-ai-llm-apps -> api-docs-writer |
 | openai-agents | openai-agents-js | openai-agents-js / 1 | openai-agents-js / 1 | openai-agents-js / 1 | Agent and LLM apps | openai-agents-js -> dev-ai-llm-apps -> openai-docs -> agents-sdk -> chatgpt-apps |
 | browser-qa | playwright, frontend-testing-debugging | control-in-app-browser / 3 | control-in-app-browser / 3 | frontend-testing-debugging / 1 | Browser verification | frontend-testing-debugging -> control-in-app-browser -> playwright -> playwright-interactive -> agent-browser |
 | chrome-control | control-chrome, chrome:control-chrome | control-chrome / 1 | control-in-app-browser / 2 | control-chrome / 1 | Browser verification | control-chrome -> playwright-interactive -> control-in-app-browser -> url-to-code -> design-url-to-code |
@@ -89,8 +91,8 @@ Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set,
 | observability-slo | slo-error-budget, dev-observability-sre | slo-error-budget / 1 | slo-error-budget / 1 | slo-error-budget / 1 | Observability and reliability | slo-error-budget -> monitoring-setup-guide -> performance-budget -> feature-flag-guide -> dev-observability-sre |
 | incident-postmortem | incident-postmortem | incident-postmortem / 1 | incident-postmortem / 1 | incident-postmortem / 1 | Observability and reliability | incident-postmortem -> dev-observability-sre -> slo-error-budget -> monitoring-setup-guide -> disaster-recovery-plan |
 | infra-terraform | dev-infra-terraform-cloud, infra-as-code-review | dev-infra-terraform-cloud / 1 | dev-infra-terraform-cloud / 1 | dev-infra-terraform-cloud / 1 | Infrastructure and platforms | dev-infra-terraform-cloud -> infra-as-code-review -> cloudflare -> security-best-practices -> cloudflare-deploy |
-| containers-kubernetes | dev-containers-kubernetes | dev-containers-kubernetes / 1 | dev-containers-kubernetes / 1 | dev-containers-kubernetes / 1 | Infrastructure and platforms | dev-containers-kubernetes -> dev-infra-terraform-cloud -> monitoring-setup-guide -> dev-devops-ci-cd -> feature-flag-guide |
-| repo-dependency-audit | dependency-audit, technical-debt-register, conservative-repo-operations | technical-debt-register / 1 | technical-debt-register / 1 | technical-debt-register / 1 | Repository operations | technical-debt-register -> dependency-audit -> dev-git-github-collaboration -> code-review-checklist -> dev-dependency-maintenance |
+| containers-kubernetes | dev-containers-kubernetes | dev-containers-kubernetes / 1 | dev-containers-kubernetes / 1 | dev-containers-kubernetes / 1 | Infrastructure and platforms | dev-containers-kubernetes -> dev-infra-terraform-cloud -> capacity-planning -> dev-devops-ci-cd -> monitoring-setup-guide |
+| repo-dependency-audit | dependency-audit, technical-debt-register | technical-debt-register / 1 | technical-debt-register / 1 | technical-debt-register / 1 | Repository operations | technical-debt-register -> dependency-audit -> dev-git-github-collaboration -> code-review-checklist -> dev-dependency-maintenance |
 | seo-organic-growth | seo-and-organic-growth | seo-and-organic-growth / 1 | seo-and-organic-growth / 1 | seo-and-organic-growth / 1 | Marketing growth | seo-and-organic-growth -> marketing-strategy-and-growth -> last-30-days-research -> agent-operating-system -> industry-playbooks |
 | creative-ad-offer-production | creative-ads-explorer, creative-production | creative-production / 1 | creative-production / 1 | creative-production / 1 | Marketing growth | creative-production -> creative-shot -> creative-ads-explorer -> creative-offer -> creative-positioning |
 | competitive-intelligence-monitor | competitive-intelligence-monitor | competitive-intelligence-monitor / 1 | competitive-intelligence-monitor / 1 | competitive-intelligence-monitor / 1 | Marketing growth | competitive-intelligence-monitor -> creative-positioning -> creative-production -> business-strategy-and-research -> creative-ads-explorer |
@@ -99,8 +101,37 @@ Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set,
 | mobile-desktop-packaging | dev-mobile-desktop | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | Frontend implementation | dev-mobile-desktop -> winui-app -> launch-readiness -> dev-release-productization -> dev-frontend-react-next |
 | speech-local-ai-loop | transformers-js, transcribe, speech | control-in-app-browser / 2 | speech / 1 | transcribe / 1 | Agent and LLM apps | transcribe -> speech -> transformers-js -> ai-sdk -> agent-browser |
 | racingsim-ppo-progress | racingsim-ai-ml | racingsim-ai-ml / 1 | racingsim-ai-ml / 1 | racingsim-ai-ml / 1 | Game development | racingsim-ai-ml -> racingsim-game-dev -> game-playtest -> design-research -> imagegen |
+| design-accessibility-audit | design-audit, dev-frontend-accessibility-css | design-audit / 1 | design-system-audit / 2 | design-audit / 1 | Browser verification | design-audit -> motion-qa -> dev-frontend-accessibility-css -> design-url-to-code -> figma-component-audit |
+| url-to-code | design-url-to-code, url-to-code | design-url-to-code / 1 | design-url-to-code / 1 | design-url-to-code / 1 | Browser verification | design-url-to-code -> url-to-code -> design-image-to-code -> dev-frontend-react-next -> frontend-testing-debugging |
+| plugin-create | plugin-creator | openai-docs / 4 | openai-docs / 8 | plugin-creator / 1 | Skill authoring | plugin-creator -> dev-documentation-systems -> skill-security-auditor -> openai-docs -> project-derived-skills |
+| cli-create | cli-creator | design-get-context / 20 | design-qa / 3 | cli-creator / 1 | Skill authoring | cli-creator -> dev-release-productization -> launch-readiness -> design-qa -> design-handoff-brief |
+| changelog-release | changelog-generator | changelog-generator / 1 | changelog-generator / 1 | changelog-generator / 1 | GitHub PR repair | changelog-generator -> dev-release-productization -> dev-git-github-collaboration -> dev-devops-ci-cd -> code-review-checklist |
+| developer-onboarding | developer-onboarding-doc | developer-onboarding-doc / 1 | developer-onboarding-doc / 1 | developer-onboarding-doc / 1 | Documents and PDFs | developer-onboarding-doc -> api-docs-writer -> dev-documentation-systems -> load-testing-plan -> monitoring-setup-guide |
+| resume-cover-letter | resume-cover-letter-tailor | resume-cover-letter-tailor / 1 | resume-cover-letter-tailor / 1 | resume-cover-letter-tailor / 1 | Documents and PDFs | resume-cover-letter-tailor -> huggingface-jobs -> huggingface-llm-trainer -> monitoring-setup-guide -> huggingface-vision-trainer |
+| performance-load-test | load-testing-plan | load-testing-plan / 1 | load-testing-plan / 1 | load-testing-plan / 1 | Backend APIs and services | load-testing-plan -> performance-budget -> dev-performance-engineering -> dev-backend-api-design -> api-docs-writer |
+| feature-flag-rollout | feature-flag-guide | feature-flag-guide / 1 | feature-flag-guide / 1 | feature-flag-guide / 1 | Observability and reliability | feature-flag-guide -> launch-readiness -> product-launch-checklist -> dev-release-productization -> ux-research-plan |
+| disaster-recovery | disaster-recovery-plan | disaster-recovery-plan / 1 | disaster-recovery-plan / 1 | disaster-recovery-plan / 1 | Observability and reliability | disaster-recovery-plan -> incident-postmortem -> load-testing-plan -> monitoring-setup-guide -> feature-flag-guide |
+| sentry-setup | sentry | monitoring-setup-guide / 2 | sentry / 1 | sentry / 1 | Observability and reliability | sentry -> monitoring-setup-guide -> dev-observability-sre -> slo-error-budget -> load-testing-plan |
+| supabase-postgres | supabase-postgres-best-practices, dev-database-postgres | supabase-postgres-best-practices / 1 | supabase-postgres-best-practices / 1 | dev-database-postgres / 1 | Databases and data engineering | dev-database-postgres -> supabase-postgres-best-practices -> database-schema-design -> database-migration-plan -> dev-architecture-review |
+| stripe-integration | stripe-best-practices | payments / 2 | payments / 2 | stripe-best-practices / 1 | Backend APIs and services | stripe-best-practices -> dev-node-typescript-services -> dev-backend-api-design -> payments -> dev-java-dotnet-services |
+| cloudflare-durable-objects | durable-objects | durable-objects / 1 | durable-objects / 1 | durable-objects / 1 | Cloudflare workers | durable-objects -> wrangler -> workers-best-practices -> cloudflare-deploy -> agents-sdk |
+| hf-vision-trainer | huggingface-vision-trainer | huggingface-vision-trainer / 1 | huggingface-vision-trainer / 1 | huggingface-vision-trainer / 1 | Hugging Face ML | huggingface-vision-trainer -> huggingface-llm-trainer -> huggingface-paper-publisher -> huggingface-community-evals -> huggingface-papers |
+| hf-gradio-space | huggingface-gradio | huggingface-gradio / 1 | huggingface-papers / 2 | huggingface-gradio / 1 | Hugging Face ML | huggingface-gradio -> hf-cli -> huggingface-community-evals -> huggingface-paper-publisher -> huggingface-datasets |
+| prd-feature-prioritization | prd-template, feature-prioritisation | prd-template / 1 | prd-template / 1 | prd-template / 1 | Product planning | prd-template -> ux-research-plan -> user-research-synthesis -> feature-prioritisation -> figma-design-brief |
+| user-research-synthesis | user-research-synthesis | creative-production / 3 | user-research-synthesis / 1 | user-research-synthesis / 1 | Product planning | user-research-synthesis -> ux-research-plan -> design-research -> prd-template -> figma-design-brief |
+| dependency-conflict | dependency-conflict-resolver | dependency-conflict-resolver / 1 | dependency-conflict-resolver / 1 | dependency-conflict-resolver / 1 | Repository operations | dependency-conflict-resolver -> dev-dependency-maintenance -> dev-monorepo-build-systems -> dev-git-github-collaboration -> dev-security-engineering |
+| debugging-log-analysis | error-decoder, debugging-log-analyser | error-decoder / 1 | error-decoder / 1 | error-decoder / 1 | Repository operations | error-decoder -> debugging-log-analyser -> dev-observability-sre -> sentry -> observability |
+| monorepo-build | dev-monorepo-build-systems, turborepo | dev-monorepo-build-systems / 1 | dev-monorepo-build-systems / 1 | dev-monorepo-build-systems / 1 | Repository operations | dev-monorepo-build-systems -> turborepo -> dev-git-github-collaboration -> dependency-audit -> code-review |
+| security-finding-triage | triage-finding, track-findings | track-findings / 1 | track-findings / 1 | track-findings / 1 | Security review | track-findings -> triage-finding -> validation -> security-diff-scan -> dev-security-engineering |
+| risk-register | risk-register | launch-readiness / 2 | launch-readiness / 2 | risk-register / 1 | Product planning | risk-register -> launch-readiness -> product-launch-checklist -> technical-debt-register -> prd-template |
+| capacity-planning | capacity-planning | capacity-planning / 1 | capacity-planning / 1 | capacity-planning / 1 | Infrastructure and platforms | capacity-planning -> dev-containers-kubernetes -> dev-performance-engineering -> infra-as-code-review -> dev-infra-terraform-cloud |
+| copilot-sdk | copilot-sdk | copilot-sdk / 1 | copilot-sdk / 1 | copilot-sdk / 1 | Agent and LLM apps | copilot-sdk -> agents-sdk -> openai-agents-js -> chatgpt-apps -> ai-sdk |
+| skillweaver-routing-review | skillweaver, code-review-checklist | performance-review !performance-review / 4 | performance-review !performance-review / 6 | skillweaver / 1 | Skill authoring | skillweaver -> dev-performance-engineering -> slo-error-budget -> incident-postmortem -> dev-observability-sre |
+| figma-implement-not-use | figma-implement-design | figma-implement-motion / 4 | figma-implement-design / 1 | figma-implement-design / 1 | Figma design handoff | figma-implement-design -> dev-frontend-react-next -> figma-use -> figma-implement-motion -> figma |
 | frontend-dashboard-not-analytics | frontend-app-builder, dev-frontend-react-next | build-dashboard !build-dashboard / 19 | analytics-cro-and-reporting / 9 | frontend-app-builder / 1 | Frontend implementation | frontend-app-builder -> dev-frontend-react-next -> analytics-cro-and-reporting -> data-visualization -> dev-data-engineering |
+| frontend-dashboard-instead-analytics | frontend-app-builder, dev-frontend-react-next | build-dashboard !build-dashboard / 18 | analytics-cro-and-reporting / 10 | frontend-app-builder / 1 | Frontend implementation | frontend-app-builder -> dev-frontend-react-next -> analytics-cro-and-reporting -> data-visualization -> dev-data-engineering |
 | threat-model-no-scan | security-threat-model, threat-model | threat-model / 1 | threat-model / 1 | threat-model / 1 | Security review | threat-model -> security-threat-model -> dev-security-engineering -> triage-finding -> security-best-practices |
+| threat-model-dont-scan | security-threat-model, threat-model | threat-model / 1 | deep-security-scan !security-scan / 2 | threat-model / 1 | Security review | threat-model -> security-threat-model -> dev-security-engineering -> triage-finding -> skill-security-auditor |
 
 ## V2 Support Misses
 
@@ -109,7 +140,7 @@ No expected support misses in the current V2 workflow.
 
 ## Interpretation
 
-SkillWeaver V2 changes the composite output-quality score by +22.6 points versus no SkillWeaver and +19.9 points versus the skill-level baseline.
-V2 changes primary selection by +22.4 percentage points versus no SkillWeaver and +18.4 percentage points versus the skill-level baseline.
-V2 changes expected-skill top/workflow-5 retrieval by +4.1 percentage points versus no SkillWeaver and +4.1 percentage points versus the skill-level baseline.
+SkillWeaver V2 changes the composite output-quality score by +24.7 points versus no SkillWeaver and +22.8 points versus the skill-level baseline.
+V2 changes primary selection by +25.6 percentage points versus no SkillWeaver and +23.1 percentage points versus the skill-level baseline.
+V2 changes expected-skill top/workflow-5 retrieval by +5.1 percentage points versus no SkillWeaver and +6.4 percentage points versus the skill-level baseline.
 The V2 score reflects a concept-aided skill-loading experience, not an LLM reranker; it is fully deterministic and derived from the local skill corpus.

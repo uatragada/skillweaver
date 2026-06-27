@@ -77,24 +77,38 @@ Use this shape for new entries:
 
 ### No Open Benchmark Misses
 
-The current 49-case benchmark has:
+The current 78-case benchmark has:
 
 - 100.0% V2 primary hit@1.
 - 100.0% V2 expected primary top/workflow-5 retrieval.
 - 100.0% V2 support coverage@5.
+- 40.9% V2 support precision@5 as an exploratory noise metric.
 - 0.0% V2 forbidden primary rate.
 
 Current status: fixed for the benchmark, fragile outside the covered query set.
 
 ### Benchmark Breadth And Overfit Risk
 
-The benchmark now covers 49 cases across frontend, browser QA, GitHub, Figma, data, security, deployment, documents, Hugging Face, email, games, repo operations, marketing, product, agent apps, backend, database/data engineering, observability, infrastructure, and thin-domain aliases.
+The benchmark now covers 78 cases across frontend, browser QA, GitHub, Figma, data, security, deployment, documents, Hugging Face, email, games, repo operations, marketing, product, agent apps, backend, database/data engineering, observability, infrastructure, and thin-domain aliases.
 
 Likely next fix type: add holdout cases from future real task logs before tuning more boosts.
 
+### Recently Covered Robustness Traps
+
+The June 27, 2026 challenge expansion added guards for:
+
+- `instead of`, `rather than`, `avoid`, and `don't` negation variants.
+- SkillWeaver self-review wording, which should choose `skillweaver` rather than generic performance-review or dashboard skills.
+- Figma implementation versus Figma gateway use.
+- Dashboard wording that should route to frontend implementation instead of data analytics.
+- Threat-model wording that should not become a vulnerability scan.
+- Sibling-skill confusion in Stripe, Cloudflare Durable Objects, Hugging Face Gradio and vision training, dependency conflicts, monorepo builds, and security triage.
+
+These are fixed in the active benchmark, but they should be treated as stress coverage rather than proof that all paraphrases are solved.
+
 ### Recently Covered Thin Domains
 
-The benchmark now has 49 cases. The June 27, 2026 breadth pass added coverage for:
+The benchmark now has 78 cases. The June 27, 2026 breadth and challenge passes added coverage for:
 
 - SEO and organic growth.
 - Creative ad/offer production.
@@ -104,8 +118,31 @@ The benchmark now has 49 cases. The June 27, 2026 breadth pass added coverage fo
 - Mobile/desktop app packaging.
 - Speech/local AI.
 - Project-derived skills such as RacingSim PPO workflows.
+- Accessibility design QA.
+- URL-to-code and screenshot-adjacent frontend implementation.
+- Plugin and CLI creation.
+- Changelog, onboarding, resume, and API documentation workflows.
+- Load testing, capacity planning, Sentry, disaster recovery, feature flags, and risk registers.
+- Supabase, Stripe, Cloudflare Durable Objects, Hugging Face Gradio, and Hugging Face vision training.
+- PRDs, feature prioritization, user research, and product/business analysis-adjacent planning.
+- Dependency conflicts, debugging logs, monorepo builds, security triage, and Copilot SDK work.
 
 These are fixed enough for routing evaluation, but still thin enough to revisit when real task logs reveal a miss.
+
+### Coverage Backlog
+
+Independent review found useful future cases that are not yet in the benchmark:
+
+- ChatGPT Apps and broader MCP server creation.
+- ASP.NET and Java/.NET service work.
+- Netlify and Render deployment variants.
+- Screenshot-to-code, React Three Fiber, and deeper game-studio variants.
+- Notion meeting workflows.
+- Vercel AI Gateway, Cron, Auth, Firewall, and web performance cases.
+- Market sizing, metric diagnostics, experiment design, and product-business analysis.
+- Code explanation, system-design interview prep, API docs, and visualization accessibility.
+
+These should become holdout or challenge cases before any routing boost is tuned for them.
 
 ## Tuning Rules
 

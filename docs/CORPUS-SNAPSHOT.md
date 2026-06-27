@@ -92,28 +92,28 @@ All 37 curated concept links are preserved before shared-evidence edges are capp
 
 | Concept | Skill refs | Benchmark cases | Roles |
 | --- | ---: | ---: | --- |
-| `agent-llm-apps` | 18 | 3 | primary:7, supporting:11 |
-| `backend-services` | 18 | 2 | primary:5, verification:3, supporting:10 |
-| `browser-verification` | 18 | 2 | gateway:2, primary:3, supporting:13 |
-| `cloudflare-workers` | 18 | 1 | primary:5, supporting:13 |
+| `agent-llm-apps` | 18 | 4 | primary:7, supporting:11 |
+| `backend-services` | 18 | 4 | primary:6, verification:3, supporting:9 |
+| `browser-verification` | 18 | 4 | gateway:2, primary:3, supporting:13 |
+| `cloudflare-workers` | 18 | 2 | primary:5, supporting:13 |
 | `data-dashboarding` | 18 | 4 | primary:3, supporting:15 |
-| `database-data-engineering` | 18 | 2 | primary:5, verification:2, supporting:11 |
+| `database-data-engineering` | 18 | 3 | primary:5, verification:2, supporting:11 |
 | `deployment-release` | 18 | 1 | primary:6, verification:1, supporting:11 |
-| `documents-pdf` | 18 | 2 | primary:6, supporting:12 |
+| `documents-pdf` | 18 | 4 | primary:6, supporting:12 |
 | `email-triage` | 18 | 1 | primary:3, supporting:5, reference:10 |
-| `figma-handoff` | 18 | 2 | gateway:1, primary:4, verification:2, supporting:11 |
-| `frontend-implementation` | 18 | 4 | gateway:1, primary:2, verification:3, supporting:12 |
+| `figma-handoff` | 18 | 3 | gateway:1, primary:4, verification:2, supporting:11 |
+| `frontend-implementation` | 18 | 5 | gateway:1, primary:2, verification:3, supporting:12 |
 | `game-development` | 18 | 3 | primary:6, verification:1, supporting:11 |
-| `github-pr-repair` | 18 | 2 | primary:2, verification:1, supporting:15 |
-| `huggingface-ml` | 18 | 2 | primary:5, supporting:13 |
-| `infrastructure-platforms` | 18 | 2 | primary:4, verification:2, supporting:12 |
+| `github-pr-repair` | 18 | 3 | primary:2, verification:1, supporting:15 |
+| `huggingface-ml` | 18 | 4 | primary:6, supporting:12 |
+| `infrastructure-platforms` | 18 | 3 | primary:5, verification:2, supporting:11 |
 | `marketing-growth` | 18 | 4 | primary:7, supporting:11 |
-| `observability-reliability` | 18 | 2 | primary:5, verification:2, supporting:11 |
+| `observability-reliability` | 18 | 5 | primary:5, verification:2, supporting:11 |
 | `presentations` | 18 | 1 | primary:2, supporting:5, reference:11 |
-| `product-planning` | 18 | 2 | primary:10, supporting:8 |
-| `repo-operations` | 18 | 2 | primary:4, supporting:14 |
-| `security-review` | 18 | 3 | primary:5, verification:2, supporting:11 |
-| `skill-authoring` | 18 | 2 | gateway:1, primary:3, verification:1, supporting:13 |
+| `product-planning` | 18 | 5 | primary:11, supporting:7 |
+| `repo-operations` | 18 | 5 | primary:5, supporting:13 |
+| `security-review` | 18 | 5 | primary:5, verification:2, supporting:11 |
+| `skill-authoring` | 18 | 5 | gateway:1, primary:4, verification:1, supporting:12 |
 
 ## Corpus Quality Checklist
 
@@ -130,3 +130,4 @@ All 37 curated concept links are preserved before shared-evidence edges are capp
 Older docs referenced 439 skills and 18 concepts. Current V2 work indexes 442 skills and 22 concepts after adding backend, database/data engineering, observability/reliability, and infrastructure/platform concepts.
 The June 27, 2026 breadth pass kept 22 concepts but expanded coverage from 39 to 49 benchmark cases and added live-name aliases for LaTeX, Notion, mobile/desktop, speech, competitive intelligence, and RacingSim skills.
 The June 27, 2026 support-precision pass kept the same 22 concepts and 49 cases, but raised V2 primary hit@1 and support coverage to 100.0% on the benchmark by tuning concept role membership and narrow intent guards.
+The June 27, 2026 challenge expansion kept 22 concepts but expanded coverage from 49 to 78 benchmark cases. It also added support precision@5, benchmark case validation, wider domain guards, negation-variant tests, and SkillWeaver self-review routing coverage.

@@ -63,12 +63,12 @@ const CONCEPT_RULES = [
     id: "browser-verification",
     label: "Browser verification",
     description: "Exercise live browser behavior, inspect screenshots, and verify UI changes against the running app.",
-    triggers: ["browser qa", "playwright screenshot", "verify live app", "control chrome", "inspect page"],
+    triggers: ["browser qa", "playwright screenshot", "verify live app", "control chrome", "inspect page", "motion qa"],
     domains: ["frontend"],
     tools: ["Playwright", "Node"],
     gatewaySkillNames: ["browser:control-in-app-browser", "control-in-app-browser", "chrome:control-chrome", "control-chrome"],
     primarySkillNames: ["playwright", "playwright-interactive", "build-web-apps:frontend-testing-debugging", "frontend-testing-debugging"],
-    supportingSkillNames: ["screenshot"],
+    supportingSkillNames: ["screenshot", "motion-qa"],
     verificationSkillNames: ["vercel:agent-browser-verify"],
     relatedConceptIds: ["frontend-implementation", "deployment-release"]
   },
@@ -138,12 +138,12 @@ const CONCEPT_RULES = [
     id: "skill-authoring",
     label: "Skill authoring",
     description: "Create, install, evaluate, and maintain Codex skills and plugin bundles.",
-    triggers: ["create a skill", "install skill", "skill navigator", "plugin creator", "skill routing"],
+    triggers: ["create a skill", "install skill", "skill navigator", "plugin creator", "skill routing", "command line tool", "cli"],
     domains: ["ai", "documents"],
     tools: ["OpenAI", "GitHub", "Node"],
     gatewaySkillNames: ["skillweaver"],
-    primarySkillNames: ["skill-creator", "skill-installer", "plugin-creator"],
-    supportingSkillNames: ["template-creator:template-creator", "dev-documentation-systems"],
+    primarySkillNames: ["skill-creator", "skill-installer", "plugin-creator", "cli-creator"],
+    supportingSkillNames: ["template-creator:template-creator", "dev-documentation-systems", "dev-release-productization"],
     verificationSkillNames: ["skill-security-auditor"],
     relatedConceptIds: ["agent-llm-apps", "repo-operations"]
   },
@@ -207,11 +207,11 @@ const CONCEPT_RULES = [
     id: "product-planning",
     label: "Product planning",
     description: "Turn goals, research, roadmaps, and issue trackers into actionable product or implementation plans.",
-    triggers: ["prd", "roadmap", "linear", "user research", "feature priority", "launch checklist", "notion", "workspace knowledge", "knowledge capture", "decision log", "meeting intelligence", "notion spec"],
+    triggers: ["prd", "roadmap", "linear", "user research", "feature priority", "launch checklist", "risk register", "notion", "workspace knowledge", "knowledge capture", "decision log", "meeting intelligence", "notion spec"],
     domains: ["product", "documents"],
     tools: ["Linear"],
-    primarySkillNames: ["linear", "linear:linear", "prd-template", "roadmap-narrative", "feature-prioritisation", "ux-research-plan", "user-research-synthesis", "notion-knowledge-capture", "notion-research-documentation", "notion-meeting-intelligence", "notion-spec-to-implementation"],
-    supportingSkillNames: ["product-launch-checklist", "product-design:index", "onboarding-plan"],
+    primarySkillNames: ["linear", "linear:linear", "prd-template", "roadmap-narrative", "feature-prioritisation", "ux-research-plan", "user-research-synthesis", "risk-register", "notion-knowledge-capture", "notion-research-documentation", "notion-meeting-intelligence", "notion-spec-to-implementation"],
+    supportingSkillNames: ["product-launch-checklist", "product-design:index", "onboarding-plan", "launch-readiness"],
     relatedConceptIds: ["presentations", "data-dashboarding", "github-pr-repair"]
   },
   {
@@ -232,7 +232,7 @@ const CONCEPT_RULES = [
     triggers: ["hugging face", "dataset", "model training", "gradio", "papers", "spaces"],
     domains: ["ai", "data"],
     tools: ["Python"],
-    primarySkillNames: ["hugging-face:hf-cli", "hf-cli", "hugging-face:huggingface-datasets", "huggingface-datasets", "hugging-face:huggingface-llm-trainer", "huggingface-llm-trainer", "hugging-face:huggingface-vision-trainer", "huggingface-vision-trainer", "hugging-face:huggingface-papers", "huggingface-papers"],
+    primarySkillNames: ["hugging-face:hf-cli", "hf-cli", "hugging-face:huggingface-datasets", "huggingface-datasets", "hugging-face:huggingface-llm-trainer", "huggingface-llm-trainer", "hugging-face:huggingface-vision-trainer", "huggingface-vision-trainer", "hugging-face:huggingface-papers", "huggingface-papers", "hugging-face:huggingface-gradio", "huggingface-gradio"],
     supportingSkillNames: ["hugging-face:huggingface-community-evals", "huggingface-community-evals", "hugging-face:huggingface-gradio", "huggingface-gradio", "hugging-face:huggingface-jobs", "huggingface-jobs", "hugging-face:transformers-js", "transformers-js"],
     relatedConceptIds: ["agent-llm-apps", "data-dashboarding"]
   },
@@ -251,10 +251,10 @@ const CONCEPT_RULES = [
     id: "backend-services",
     label: "Backend APIs and services",
     description: "Design, implement, document, and verify backend APIs, service boundaries, and server runtimes.",
-    triggers: ["backend api", "node service", "python service", "dotnet service", "api versioning", "server endpoint"],
+    triggers: ["backend api", "node service", "python service", "dotnet service", "api versioning", "server endpoint", "stripe billing", "webhook"],
     domains: ["backend", "operations", "documents"],
     tools: ["Node", "Python", "OpenAI"],
-    primarySkillNames: ["dev-backend-api-design", "dev-node-typescript-services", "dev-python-services", "dev-java-dotnet-services", "aspnet-core"],
+    primarySkillNames: ["dev-backend-api-design", "dev-node-typescript-services", "dev-python-services", "dev-java-dotnet-services", "aspnet-core", "stripe-best-practices"],
     supportingSkillNames: ["api-versioning-strategy", "api-docs-writer", "technical-spec-template", "system-design-interview", "monitoring-setup-guide"],
     verificationSkillNames: ["dev-testing-qa", "load-testing-plan", "monitoring-setup-guide"],
     relatedConceptIds: ["database-data-engineering", "observability-reliability", "repo-operations"]
@@ -290,8 +290,8 @@ const CONCEPT_RULES = [
     triggers: ["terraform", "infrastructure as code", "kubernetes", "container", "cloud platform", "devops"],
     domains: ["operations", "backend", "security"],
     tools: ["Cloudflare", "GitHub", "Node"],
-    primarySkillNames: ["dev-infra-terraform-cloud", "infra-as-code-review", "dev-containers-kubernetes", "dev-devops-ci-cd"],
-    supportingSkillNames: ["cicd-playbook", "cloudflare:cloudflare", "cloudflare", "deployment-release"],
+    primarySkillNames: ["dev-infra-terraform-cloud", "infra-as-code-review", "dev-containers-kubernetes", "dev-devops-ci-cd", "capacity-planning"],
+    supportingSkillNames: ["cicd-playbook", "cloudflare:cloudflare", "cloudflare", "deployment-release", "dev-performance-engineering"],
     verificationSkillNames: ["security-best-practices", "codex-security:security-diff-scan", "security-diff-scan"],
     relatedConceptIds: ["cloudflare-workers", "deployment-release", "observability-reliability"]
   },
@@ -299,10 +299,10 @@ const CONCEPT_RULES = [
     id: "repo-operations",
     label: "Repository operations",
     description: "Inspect repos, preserve worktree state, review dependencies, document architecture, and keep implementation changes scoped.",
-    triggers: ["repo audit", "code review", "dependency audit", "technical debt", "architecture review", "monorepo"],
+    triggers: ["repo audit", "code review", "dependency audit", "technical debt", "architecture review", "monorepo", "dependency conflict"],
     domains: ["backend", "operations", "github", "security"],
     tools: ["GitHub", "Node", "Python"],
-    primarySkillNames: ["conservative-repo-operations", "code-review-checklist", "dependency-audit", "dev-architecture-review", "technical-debt-register"],
+    primarySkillNames: ["conservative-repo-operations", "code-review-checklist", "dependency-audit", "dependency-conflict-resolver", "dev-architecture-review", "technical-debt-register"],
     supportingSkillNames: ["dev-monorepo-build-systems", "dev-dependency-maintenance", "error-decoder", "debugging-log-analyser"],
     verificationSkillNames: ["codex-security:security-diff-scan"],
     relatedConceptIds: ["github-pr-repair", "security-review", "deployment-release"]
@@ -1232,8 +1232,15 @@ function hasNegatedIntent(normalizedQuery, terms, windowSize = 8) {
   const words = normalizedQuery.split(/\s+/).filter(Boolean);
   const normalizedTerms = terms.map((term) => normalizeSearchText(term)).filter(Boolean);
   for (let index = 0; index < words.length; index += 1) {
-    if (!["no", "not", "without"].includes(words[index])) continue;
-    const window = words.slice(index + 1, index + 1 + windowSize).join(" ");
+    const word = words[index];
+    let start = null;
+    if (["no", "not", "without", "avoid"].includes(word)) start = index + 1;
+    if (word === "instead" && words[index + 1] === "of") start = index + 2;
+    if (word === "rather" && words[index + 1] === "than") start = index + 2;
+    if (word === "do" && words[index + 1] === "not") start = index + 2;
+    if ((word === "don" && words[index + 1] === "t") || word === "dont") start = index + 2;
+    if (start === null) continue;
+    const window = words.slice(start, start + windowSize).join(" ");
     if (normalizedTerms.some((term) => window.includes(term))) return true;
   }
   return false;
@@ -1399,8 +1406,22 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (["dev testing qa", "game playtest", "playwright", "frontend testing debugging"].some((term) => name.includes(term))) boost += 150;
   }
 
+  if (/\baccessibility\b|\bmotion\b|\bdesign qa\b|\bdesign audit\b/.test(normalizedQuery)) {
+    if (name.includes("design audit")) boost += 360;
+    if (name.includes("dev frontend accessibility css")) boost += 340;
+    if (name.includes("motion qa")) boost += 520;
+    if (name.includes("design system audit") && !/\bdesign system\b/.test(normalizedQuery)) boost -= 220;
+  }
+
   if (/\bmonitoring\b|\boperational\b|\breadiness\b|\bslo\b/.test(normalizedQuery)) {
     if (["monitoring setup guide", "dev observability sre", "slo error budget"].some((term) => name.includes(term))) boost += 180;
+  }
+
+  if (/\bsentry\b/.test(normalizedQuery)) {
+    if (name === "sentry") boost += 860;
+    if (["monitoring setup guide", "dev observability sre"].some((term) => name.includes(term))) boost += 260;
+    if (name.includes("slo error budget") && !/\bslo\b|\berror budget\b/.test(normalizedQuery)) boost -= 180;
+    if (name.includes("huggingface")) boost -= 520;
   }
 
   if (/\bcanvas\b|\bwebgl\b|\basset\b|\brender/.test(normalizedQuery)) {
@@ -1412,6 +1433,12 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   if (/\bkubernetes\b|\bcontainer\b|\bdevops\b/.test(normalizedQuery)) {
     if (["dev containers kubernetes", "dev devops ci cd", "monitoring setup guide"].some((term) => name.includes(term))) boost += 100;
     if (name.includes("capacity planning") && !/\bcapacity\b|\bload\b|\bscale\b|\bforecast\b/.test(normalizedQuery)) boost -= 220;
+  }
+
+  if (/\bcapacity\b|\bscal(?:e|ing)\b|\btraffic spike\b|\bforecast\b/.test(normalizedQuery)) {
+    if (name.includes("capacity planning")) boost += 620;
+    if (["dev performance engineering", "dev containers kubernetes"].some((term) => name.includes(term))) boost += 420;
+    if (name.includes("gantt chart")) boost -= 260;
   }
 
   if (/\bnotion\b|\bworkspace knowledge\b|\bknowledge base\b|\bdecision log\b/.test(normalizedQuery)) {
@@ -1449,8 +1476,28 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("competitive intelligence monitor")) boost += 420;
   }
 
+  if (/\bcodex plugin\b|\bplugin\b.*\bskills?\b|\bmcp tools?\b/.test(normalizedQuery)) {
+    if (name.includes("plugin creator")) boost += 1240;
+    if (["skill security auditor", "dev documentation systems"].some((term) => name.includes(term))) boost += 640;
+    if (["openai docs", "chatgpt apps", "copilot sdk", "openai agents js", "migrate to codex"].some((term) => name.includes(term))) boost -= 240;
+  }
+
+  if (/\bcommand line\b|\bcli\b|\barguments?\b|\bhelp text\b/.test(normalizedQuery)) {
+    if (name.includes("cli creator")) boost += 1280;
+    if (name.includes("dev release productization")) boost += 420;
+    if (["dev mobile desktop", "figma", "design image to code", "design url to code"].some((term) => name.includes(term))) boost -= 260;
+  }
+
   if (/\bconsole errors?\b|\bresponsive\b|\bui regression\b|\bdebug\b/.test(normalizedQuery)) {
     if (["playwright", "playwright interactive", "frontend testing debugging"].some((term) => name.includes(term))) boost += 140;
+  }
+
+  if (/\bskillweaver\b|\bskill routing\b|\brouting review\b|\brouting benchmark\b/.test(normalizedQuery)) {
+    if (name.includes("skillweaver")) boost += 1800;
+    if (name.includes("code review checklist")) boost += 980;
+    if (name.includes("dev performance engineering")) boost += 860;
+    if (["performance review", "build dashboard", "sentry", "launch readiness", "performance budget"].some((term) => name.includes(term))) boost -= 620;
+    if (name.includes("racingsim")) boost -= 900;
   }
 
   if (/\bgithub actions?\b|\bci\b|\bpull request\b|\bpr\b|\bbranch\b|\breview comments?\b/.test(normalizedQuery)) {
@@ -1459,8 +1506,20 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (/\btests?\b|\bci\b|\bgithub actions?\b/.test(normalizedQuery) && name.includes("dev testing qa")) boost += 180;
   }
 
+  if (/\bchangelog\b|\brelease notes?\b/.test(normalizedQuery)) {
+    if (name.includes("changelog generator")) boost += 520;
+    if (name.includes("dev release productization")) boost += 260;
+  }
+
   if (/\bfigma\b/.test(normalizedQuery)) {
-    if (name.includes("figma use")) boost += 180;
+    const figmaGatewayIntent = /\buse figma\b|\binspect\b|\bfigma context\b|\bhandoff\b/.test(normalizedQuery);
+    const figmaImplementationIntent = /\bimplement\b|\breact\b|\bcode\b/.test(normalizedQuery);
+    if (name.includes("figma use")) boost += figmaGatewayIntent ? 860 : 180;
+    if (figmaImplementationIntent) {
+      if (name.includes("figma implement design")) boost += figmaGatewayIntent ? 120 : 900;
+      if (name.includes("dev frontend react next")) boost += 1120;
+      if (name.includes("frontend app builder")) boost += 220;
+    }
   }
 
   if (/\bdata quality\b|\bquality checks?\b|\bsuspicious\b|\bmissing\b|\bspreadsheet\b|\bexcel\b|\bworkbook\b|\bdata pipeline\b|\bownership\b/.test(normalizedQuery)) {
@@ -1473,6 +1532,12 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("security best practices")) boost += /\brisks?\b|\bterraform\b|\binfrastructure\b/.test(normalizedQuery) ? 260 : 140;
   }
 
+  if (/\bsecurity findings?\b|\bvalidate exploitability\b|\btrack remediation\b/.test(normalizedQuery)) {
+    if (["triage finding", "track findings"].some((term) => name.includes(term))) boost += 520;
+    if (["validation", "security diff scan"].some((term) => name === term || name.includes(term))) boost += 620;
+    if (name.includes("security best practices")) boost -= 160;
+  }
+
   if (/\bvercel\b|\bdeploy\b|\bbuild logs?\b|\benv\b|\benvironment\b/.test(normalizedQuery)) {
     if (["agent browser verify", "env vars"].some((term) => name.includes(term))) boost += 260;
     if (/\bvercel\b/.test(normalizedQuery) && /\bdeploy\b|\bbuild logs?\b/.test(normalizedQuery)
@@ -1483,10 +1548,23 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
       && ["vercel cli", "vercel services"].some((term) => name.includes(term))) boost -= 160;
   }
 
-  if (/\bcloudflare worker\b|\bwrangler\b/.test(normalizedQuery)) {
-    if (name.includes("wrangler")) boost += 560;
-    if (name.includes("workers best practices")) boost += 420;
+  if (/\bcloudflare worker\b|\bdurable object\b|\bwrangler\b/.test(normalizedQuery)) {
+    if (/\bdurable object\b/.test(normalizedQuery) && name.includes("durable objects")) boost += 980;
+    if (name.includes("wrangler")) boost += /\bdurable object\b/.test(normalizedQuery) ? 360 : 560;
+    if (name.includes("workers best practices")) boost += /\bdurable object\b/.test(normalizedQuery) ? 340 : 420;
     if (/\bmcp\b|\bagent\b/.test(name) && !/\bmcp\b|\bagent\b/.test(normalizedQuery)) boost -= 260;
+  }
+
+  if (/\bstripe\b|\bbilling\b|\bsubscriptions?\b|\bwebhooks?\b|\bpayment\b/.test(normalizedQuery)) {
+    if (name.includes("stripe best practices")) boost += 1480;
+    if (["dev backend api design", "dev node typescript services"].some((term) => name.includes(term))) boost += 460;
+    if (["gh fix ci", "dev security engineering", "code review"].some((term) => name.includes(term))) boost -= 320;
+  }
+
+  if (/\bload testing\b|\bperformance budget\b|\bthroughput\b|\blatency\b/.test(normalizedQuery)) {
+    if (name.includes("load testing plan")) boost += 620;
+    if (name.includes("performance budget")) boost += 380;
+    if (name.includes("dev performance engineering")) boost += 560;
   }
 
   if (/\bplaytest|\bplaytesting\b|\bbrowser game\b|\bphaser\b/.test(normalizedQuery)) {
@@ -1505,8 +1583,36 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("roadmap narrative")) boost += 220;
   }
 
+  if (/\brisk register\b|\brisk matrix\b/.test(normalizedQuery)) {
+    if (name.includes("risk register")) boost += 1180;
+    if (name.includes("launch readiness")) boost += 360;
+    if (["slo error budget", "dev observability sre", "dev security engineering"].some((term) => name.includes(term))) boost -= 180;
+  }
+
+  if (/\bprd\b|\bfeature priorit|user research\b/.test(normalizedQuery)) {
+    if (name.includes("prd template")) boost += 360;
+    if (name.includes("feature prioritisation")) boost += 340;
+    if (["user research synthesis", "ux research plan"].some((term) => name.includes(term))) boost += 260;
+  }
+
+  if (/\buser interviews?\b|\bsynthesize\b|\bsynthesise\b|\bthemes?\b|\bopportunities\b/.test(normalizedQuery)) {
+    if (name.includes("user research synthesis")) boost += 520;
+    if (["design research", "ux research plan"].some((term) => name.includes(term))) boost += 260;
+  }
+
   if (/\bopenai\b|\bapi docs?\b|\bproduct feature\b/.test(normalizedQuery)) {
     if (name.includes("dev ai llm apps")) boost += 180;
+  }
+
+  if (/\bhugging face\b|\bgradio\b|\bspace\b|\bdemo\b|\bvision model\b/.test(normalizedQuery)) {
+    if (/\bgradio\b|\bspace\b|\bdemo\b/.test(normalizedQuery) && name.includes("huggingface gradio")) boost += 1260;
+    if (/\bvision\b/.test(normalizedQuery) && name.includes("huggingface vision trainer")) boost += 620;
+    if (/\btrain\b|\bmodel training\b/.test(normalizedQuery) && name.includes("huggingface llm trainer")) boost += 620;
+    if (/\bdatasets?\b|\bdataset metadata\b/.test(normalizedQuery) && name.includes("huggingface datasets")) boost += 680;
+    if (name.includes("huggingface community evals")) boost += 240;
+    if ((/\bhf cli\b|\bspace\b|\bgradio\b/.test(normalizedQuery)) && name.includes("hf cli")) boost += 260;
+    if ((/\bpublish\b|\bpapers?\b|\bevaluation results?\b/.test(normalizedQuery)) && name.includes("huggingface paper publisher")) boost += 340;
+    if (/\bgradio\b|\bspace\b|\bdemo\b/.test(normalizedQuery) && ["huggingface papers", "huggingface llm trainer", "huggingface vision trainer"].some((term) => name.includes(term))) boost -= 260;
   }
 
   if (/\bapi\b|\bendpoints?\b|\bdocument\b|\bversioned\b/.test(normalizedQuery)) {
@@ -1524,6 +1630,18 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
 
   if (/\bdependency audit\b|\btechnical debt\b|\brepo audit\b|\bcode review\b/.test(normalizedQuery)) {
     if (name.includes("code review checklist")) boost += 180;
+  }
+
+  if (/\bdependency conflicts?\b|\bversion conflicts?\b|\bnpm upgrade\b|\bpeer dependenc/.test(normalizedQuery)) {
+    if (name.includes("dependency conflict resolver")) boost += 980;
+    if (name.includes("dev dependency maintenance")) boost += 360;
+    if (name.includes("dependency audit") && !/\baudit\b|\bvulnerability\b/.test(normalizedQuery)) boost -= 180;
+  }
+
+  if (/\bmonorepo\b|\bturborepo\b|\bbuild system\b|\bpipeline issue\b/.test(normalizedQuery)) {
+    if (["dev monorepo build systems", "turborepo"].some((term) => name.includes(term))) boost += 520;
+    if (name.includes("dev git github collaboration")) boost += 460;
+    if (name.includes("dev security engineering") && !/\bsecurity\b/.test(normalizedQuery)) boost -= 260;
   }
 
   if (role === "primary" && /\b(create|build|implement|deploy|compile|train|debug|audit|review|plan|design)\b/.test(normalizedQuery)) {

@@ -232,8 +232,41 @@ function supportCoverage(names, expectedSupport) {
   return hitCount / expectedSupport.length;
 }
 
+function supportPrecision(names, expectedSupport) {
+  if (!expectedSupport?.length) return 1;
+  const hitCount = expectedSupport.filter((expected) => names.some((name) => matchesExpected(name, [expected]))).length;
+  return hitCount / Math.max(1, names.length - 1);
+}
+
 function missingSupport(names, expectedSupport) {
   return (expectedSupport ?? []).filter((expected) => !names.some((name) => matchesExpected(name, [expected])));
+}
+
+function validateCases(cases, index) {
+  const issues = [];
+  const ids = new Set();
+  const skillNames = index.skills.map((skill) => skill.name);
+  for (const testCase of cases) {
+    if (!testCase.id) issues.push("case missing id");
+    if (ids.has(testCase.id)) issues.push(`duplicate case id: ${testCase.id}`);
+    ids.add(testCase.id);
+    if (!testCase.query) issues.push(`${testCase.id}: missing query`);
+    if (!Array.isArray(testCase.expectedPrimary) || !testCase.expectedPrimary.length) {
+      issues.push(`${testCase.id}: expectedPrimary must be a non-empty array`);
+    }
+
+    for (const field of ["expectedPrimary", "expectedSupport", "mustNotPrimary"]) {
+      for (const expected of testCase[field] ?? []) {
+        if (!skillNames.some((name) => matchesExpected(name, [expected]))) {
+          issues.push(`${testCase.id}: ${field} fragment does not match an indexed skill: ${expected}`);
+        }
+      }
+    }
+  }
+  return {
+    ok: issues.length === 0,
+    issues
+  };
 }
 
 function reciprocalRank(rank) {
@@ -259,6 +292,7 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
   const primaryHit = Boolean(primary && !forbiddenPrimary && matchesExpected(primary, testCase.expectedPrimary));
   const hitAt5 = visibleNames.some((name) => matchesExpected(name, testCase.expectedPrimary));
   const coverage = supportCoverage(visibleNames, testCase.expectedSupport ?? []);
+  const precision = supportPrecision(visibleNames, testCase.expectedSupport ?? []);
   const supportMisses = missingSupport(visibleNames, testCase.expectedSupport ?? []);
   const rr = reciprocalRank(rank);
 
@@ -274,6 +308,8 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
     supportMisses,
     reciprocalRank: rr,
     supportCoverage: coverage,
+    supportPrecision: precision,
+    supportExpectedCount: testCase.expectedSupport?.length ?? 0,
     candidatesReviewedToExpected: rank ?? index.skills.length,
     qualityScore: outputQualityScore({
       primaryHit,
@@ -286,6 +322,8 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
 
 function summarize(evaluations) {
   const total = evaluations.length || 1;
+  const supportEvaluations = evaluations.filter((entry) => entry.supportExpectedCount > 0);
+  const supportTotal = supportEvaluations.length || 1;
   const ranks = evaluations.map((entry) => entry.rank ?? Infinity).filter(Number.isFinite).sort((left, right) => left - right);
   const reviewed = evaluations.map((entry) => entry.candidatesReviewedToExpected).sort((left, right) => left - right);
   return {
@@ -294,6 +332,7 @@ function summarize(evaluations) {
     hitAt5: evaluations.filter((entry) => entry.hitAt5).length / total,
     mrr: evaluations.reduce((sum, entry) => sum + entry.reciprocalRank, 0) / total,
     supportCoverage: evaluations.reduce((sum, entry) => sum + entry.supportCoverage, 0) / total,
+    supportPrecisionAt5: supportEvaluations.reduce((sum, entry) => sum + entry.supportPrecision, 0) / supportTotal,
     forbiddenPrimaryRate: evaluations.filter((entry) => entry.forbiddenPrimary).length / total,
     outputQualityScore: evaluations.reduce((sum, entry) => sum + entry.qualityScore, 0) / total,
     meanCandidatesToExpected: evaluations.reduce((sum, entry) => sum + entry.candidatesReviewedToExpected, 0) / total,
@@ -420,6 +459,14 @@ function buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary }) {
       v2VsV1: formatDelta((v2Summary.supportCoverage - v1Summary.supportCoverage) * 100, " pp")
     },
     {
+      metric: "Support precision@5, exploratory",
+      no: formatPercent(noSkillWeaverSummary.supportPrecisionAt5),
+      v1: formatPercent(v1Summary.supportPrecisionAt5),
+      v2: formatPercent(v2Summary.supportPrecisionAt5),
+      v2VsNo: formatDelta((v2Summary.supportPrecisionAt5 - noSkillWeaverSummary.supportPrecisionAt5) * 100, " pp"),
+      v2VsV1: formatDelta((v2Summary.supportPrecisionAt5 - v1Summary.supportPrecisionAt5) * 100, " pp")
+    },
+    {
       metric: "Forbidden primary rate, lower is better",
       no: formatPercent(noSkillWeaverSummary.forbiddenPrimaryRate),
       v1: formatPercent(v1Summary.forbiddenPrimaryRate),
@@ -495,6 +542,7 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
   lines.push(
     "",
     `Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from ${index.skills.length} skills to 5 candidates, a ${(candidateReduction * 100).toFixed(1)}% candidate reduction per task.`,
+    "Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.",
     "",
     "## Per-Case Results",
     "",
@@ -545,6 +593,11 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
 async function main() {
   const cases = JSON.parse(await readFile(CASES_PATH, "utf8"));
   const index = await scanSkillRoots();
+  const caseValidation = validateCases(cases, index);
+  if (!caseValidation.ok) {
+    console.error(`Benchmark case validation failed:\n${caseValidation.issues.map((issue) => `- ${issue}`).join("\n")}`);
+    process.exit(1);
+  }
   const rows = [];
 
   for (const testCase of cases) {
