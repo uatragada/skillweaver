@@ -12,7 +12,9 @@
     "test": "node --test",
     "index:skills": "node scripts/index-skills.mjs",
     "benchmark:skills": "node scripts/benchmark-skill-routing.mjs",
-    "benchmark:skills:check": "node scripts/benchmark-skill-routing.mjs --check"
+    "benchmark:skills:check": "node scripts/benchmark-skill-routing.mjs --check",
+    "benchmark:skills:holdout": "node scripts/benchmark-skill-routing.mjs --holdout",
+    "benchmark:skills:holdout:check": "node scripts/benchmark-skill-routing.mjs --holdout --check"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.2",

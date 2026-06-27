@@ -707,3 +707,89 @@ test("concept workflow keeps SkillWeaver routing reviews out of generic performa
   assert.ok(topFive.includes("dev-performance-engineering"));
   assert.notEqual(topFive[0], "performance-review");
 });
+
+test("concept workflow anchors directly named specialist skills", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "ai-gateway",
+      name: "ai-gateway",
+      description: "Configure Vercel AI Gateway model routing and provider failover.",
+      domains: ["ai", "operations"],
+      tools: ["Vercel"],
+      triggers: ["ai gateway model routing"]
+    }),
+    makeSkill({
+      id: "ai-sdk",
+      name: "ai-sdk",
+      description: "Build AI SDK application flows.",
+      domains: ["ai"],
+      tools: ["Vercel"],
+      triggers: ["ai sdk"]
+    }),
+    makeSkill({
+      id: "metric-diagnostics",
+      name: "metric-diagnostics",
+      description: "Diagnose metric changes, cohorts, and product behavior shifts.",
+      domains: ["data", "product"],
+      tools: ["Python"],
+      triggers: ["metric diagnostics"]
+    }),
+    makeSkill({
+      id: "build-dashboard",
+      name: "build-dashboard",
+      description: "Build analytics dashboards.",
+      domains: ["data"],
+      tools: ["Node"],
+      triggers: ["dashboard"]
+    }),
+    makeSkill({
+      id: "code-explainer",
+      name: "code-explainer",
+      description: "Explain unfamiliar code paths in plain English.",
+      domains: ["backend", "operations"],
+      tools: ["GitHub"],
+      triggers: ["explain code path"]
+    }),
+    makeSkill({
+      id: "code-review-checklist",
+      name: "code-review-checklist",
+      description: "Review code and identify risks.",
+      domains: ["operations", "github"],
+      tools: ["GitHub"],
+      triggers: ["code review"]
+    }),
+    makeSkill({
+      id: "accessibility-and-inclusive-visualization",
+      name: "accessibility-and-inclusive-visualization",
+      description: "Audit data visualizations for accessibility and inclusive design.",
+      domains: ["data", "frontend"],
+      tools: ["Node"],
+      triggers: ["visualization accessibility"]
+    }),
+    makeSkill({
+      id: "data-visualization",
+      name: "data-visualization",
+      description: "Create data visualizations.",
+      domains: ["data"],
+      tools: ["Node"],
+      triggers: ["data visualization"]
+    })
+  ]);
+
+  assert.equal(
+    recommendConceptWorkflow(index, "Route model calls through Vercel AI Gateway with fallback providers").primary.name,
+    "ai-gateway"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Diagnose why a product metric changed across cohorts").primary.name,
+    "metric-diagnostics"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Explain an unfamiliar code path without doing a code review").primary.name,
+    "code-explainer"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Audit a data visualization for contrast, alt text, and keyboard access").primary.name,
+    "accessibility-and-inclusive-visualization"
+  );
+});

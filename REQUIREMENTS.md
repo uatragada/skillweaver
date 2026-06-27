@@ -149,6 +149,9 @@ Concepts are derived from deterministic rules and current skill metadata. They a
 
 - Running `npm test` must exercise scanner parsing and ranking.
 - Running `npm run build` must build the web app.
+- Running `npm run benchmark:skills:check` must verify that the active acceptance report is fresh and passing.
+- Running `npm run benchmark:skills:holdout:check` must verify that the non-gating holdout/challenge report is fresh.
 - Running the dev server must expose a usable UI.
 - The scanner must successfully index the current local Codex skill library.
+- Holdout/challenge misses should be documented or promoted deliberately; they must not silently weaken the active acceptance result.
 - MindWeaver `git status` must remain unchanged by SkillWeaver work.

@@ -9,12 +9,35 @@ import {
   scanSkillRoots
 } from "../server/skill-scanner.js";
 
-const CASES_PATH = resolve("benchmarks/skill-routing-cases.json");
-const REPORT_PATH = resolve("docs/SKILL-USE-GAINS.md");
 const PRE_CONCEPT_COMMIT = "80d31f1";
 const CHECK_MODE = process.argv.includes("--check");
+const HOLDOUT_MODE = process.argv.includes("--holdout");
+const SUITE = HOLDOUT_MODE
+  ? {
+      id: "holdout",
+      label: "Frozen Holdout",
+      reportTitle: "Frozen Holdout Benchmark",
+      casesPath: resolve("benchmarks/skill-routing-holdout.json"),
+      casesRelativePath: "benchmarks/skill-routing-holdout.json",
+      reportPath: resolve("docs/SKILL-USE-HOLDOUT.md"),
+      command: CHECK_MODE ? "npm run benchmark:skills:holdout:check" : "npm run benchmark:skills:holdout",
+      gatesAcceptance: false
+    }
+  : {
+      id: "acceptance",
+      label: "Active Acceptance",
+      reportTitle: "Active Acceptance Benchmark",
+      casesPath: resolve("benchmarks/skill-routing-cases.json"),
+      casesRelativePath: "benchmarks/skill-routing-cases.json",
+      reportPath: resolve("docs/SKILL-USE-GAINS.md"),
+      command: CHECK_MODE ? "npm run benchmark:skills:check" : "npm run benchmark:skills",
+      gatesAcceptance: true
+    };
+const CASES_PATH = SUITE.casesPath;
+const REPORT_PATH = SUITE.reportPath;
 const INVALIDATING_PATHS = [
-  "benchmarks/skill-routing-cases.json",
+  SUITE.casesRelativePath,
+  "package.json",
   "server/skill-scanner.js",
   "scripts/benchmark-skill-routing.mjs"
 ];
@@ -108,10 +131,22 @@ async function buildFreshness({ index, cases, rows, summaries, generatedAt }) {
   const invalidatingDirtyPaths = git.dirtyPaths.filter((path) =>
     INVALIDATING_PATHS.includes(path.replace(/\\/g, "/"))
   );
-  const acceptance = evaluateAcceptance(summaries);
+  const qualityGate = evaluateAcceptance(summaries);
+  const acceptance = SUITE.gatesAcceptance
+    ? qualityGate
+    : {
+        ok: true,
+        nongating: true,
+        qualityGate
+      };
   const snapshot = {
     generatedAt,
-    command: CHECK_MODE ? "npm run benchmark:skills:check" : "npm run benchmark:skills",
+    command: SUITE.command,
+    suite: {
+      id: SUITE.id,
+      label: SUITE.label,
+      gatesAcceptance: SUITE.gatesAcceptance
+    },
     git,
     invalidatingDirtyPaths,
     cases: {
@@ -130,6 +165,7 @@ async function buildFreshness({ index, cases, rows, summaries, generatedAt }) {
     acceptance
   };
   snapshot.snapshotFingerprint = sha256(stableJson({
+    suite: snapshot.suite,
     cases: snapshot.cases,
     corpus: snapshot.corpus,
     inputs: snapshot.inputs,
@@ -490,10 +526,12 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
   const candidateReduction = 1 - (5 / index.skills.length);
   const qualityVsNo = v2Summary.outputQualityScore - noSkillWeaverSummary.outputQualityScore;
   const qualityVsV1 = v2Summary.outputQualityScore - v1Summary.outputQualityScore;
-  const strongClaimPrefix = freshness.acceptance.ok ? "SkillWeaver V2 changes" : "SkillWeaver V2 currently reports";
+  const strongClaimPrefix = SUITE.gatesAcceptance
+    ? freshness.acceptance.ok ? "SkillWeaver V2 changes" : "SkillWeaver V2 currently reports"
+    : "On the frozen holdout, SkillWeaver V2 changes";
 
   const lines = [
-    "# SkillWeaver V2 Benchmark",
+    `# SkillWeaver V2 ${SUITE.reportTitle}`,
     "",
     `Generated: ${new Date(generatedAt).toISOString()}`,
     "",
@@ -504,6 +542,8 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
     "## Freshness",
     "",
     `- Command: \`${freshness.command}\``,
+    `- Suite: ${freshness.suite.label}`,
+    `- Acceptance gate: ${freshness.suite.gatesAcceptance ? "yes" : "no"}`,
     `- Git commit at generation: \`${freshness.git.commit ?? "unknown"}\``,
     `- Git dirty: ${freshness.git.dirty ? "yes" : "no"}`,
     `- Invalidating dirty paths: ${freshness.invalidatingDirtyPaths.length ? freshness.invalidatingDirtyPaths.map((path) => `\`${path}\``).join(", ") : "none"}`,
@@ -512,7 +552,12 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
     `- Benchmark script hash: \`${freshness.inputs.benchmarkScript}\``,
     `- Corpus hash: \`${freshness.corpus.sha256}\``,
     `- Snapshot fingerprint: \`${freshness.snapshotFingerprint}\``,
-    `- Acceptance: ${freshness.acceptance.ok ? "pass" : `fail: ${freshness.acceptance.failures.join("; ")}`}`,
+    ...(SUITE.gatesAcceptance
+      ? [`- Acceptance: ${freshness.acceptance.ok ? "pass" : `fail: ${freshness.acceptance.failures.join("; ")}`}`]
+      : [
+          "- Freshness check: pass",
+          `- Quality gate, reported only: ${freshness.acceptance.qualityGate.ok ? "pass" : `fail: ${freshness.acceptance.qualityGate.failures.join("; ")}`}`
+        ]),
     "",
     "## Corpus",
     "",
@@ -523,6 +568,14 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
     `- Skill roots: ${index.roots.length}`,
     `- Benchmark cases: ${cases.length}`,
     "",
+    ...(SUITE.gatesAcceptance
+      ? []
+      : [
+          "## Suite Role",
+          "",
+          "This is a frozen, non-gating holdout suite. It is meant to measure generalization after the active acceptance benchmark is already green. Do not tune concept rules directly from this report; promote misses into the active benchmark only after they recur in real task logs or are explicitly accepted as challenge coverage.",
+          ""
+        ]),
     "## Compared Systems",
     "",
     "- `no-skillweaver`: flat metadata search over name, description, namespace, domains, and tool hints. It does not use triggers, body text, resources, relationship edges, workflow recommendations, or concept nodes.",
@@ -539,10 +592,20 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
     lines.push(`| ${row.metric} | ${row.no} | ${row.v1} | ${row.v2} | ${row.v2VsNo} | ${row.v2VsV1} |`);
   }
 
+  const v2PrimaryHits = rows.filter((row) => row.v2.primaryHit).length;
+  const v2TopHits = rows.filter((row) => row.v2.hitAt5).length;
+  const v2Forbidden = rows.filter((row) => row.v2.forbiddenPrimary).length;
+  const v2SupportMissCases = rows.filter((row) => row.v2.supportMisses.length).length;
+
   lines.push(
+    "",
+    `V2 raw counts: primary hit@1 ${v2PrimaryHits}/${cases.length}; expected primary top/workflow-five ${v2TopHits}/${cases.length}; forbidden primary ${v2Forbidden}/${cases.length}; support-miss cases ${v2SupportMissCases}/${cases.length}.`,
     "",
     `Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from ${index.skills.length} skills to 5 candidates, a ${(candidateReduction * 100).toFixed(1)}% candidate reduction per task.`,
     "Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.",
+    ...(SUITE.gatesAcceptance
+      ? []
+      : ["Holdout quality is intentionally reported rather than accepted or failed; the freshness check only proves that the report matches the current code, corpus, and holdout cases."]),
     "",
     "## Per-Case Results",
     "",
@@ -684,7 +747,7 @@ async function main() {
       if (freshness.invalidatingDirtyPaths.length) mismatches.push("dirty_inputs");
       reportFresh = mismatches.length === 0;
       if (!reportFresh) {
-        console.error(`Benchmark report is stale (${mismatches.join(", ")}). Run \`npm run benchmark:skills\` to regenerate docs/SKILL-USE-GAINS.md.`);
+        console.error(`Benchmark report is stale (${mismatches.join(", ")}). Run \`${SUITE.command.replace(":check", "")}\` to regenerate ${SUITE.reportPath}.`);
         process.exitCode = 1;
       }
     }
@@ -724,6 +787,7 @@ async function main() {
       }
     },
     reportPath: REPORT_PATH,
+    suite: freshness.suite,
     checkMode: CHECK_MODE,
     status: CHECK_MODE ? reportFresh ? "fresh" : "stale" : "written",
     ok: CHECK_MODE ? Boolean(reportFresh) : freshness.acceptance.ok,

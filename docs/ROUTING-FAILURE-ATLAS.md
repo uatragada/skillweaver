@@ -91,7 +91,15 @@ Current status: fixed for the benchmark, fragile outside the covered query set.
 
 The benchmark now covers 78 cases across frontend, browser QA, GitHub, Figma, data, security, deployment, documents, Hugging Face, email, games, repo operations, marketing, product, agent apps, backend, database/data engineering, observability, infrastructure, and thin-domain aliases.
 
-Likely next fix type: add holdout cases from future real task logs before tuning more boosts.
+The 22-case holdout/challenge suite now reports:
+
+- 100.0% V2 primary hit@1.
+- 100.0% V2 expected primary top/workflow-5 retrieval.
+- 63.6% V2 support coverage@5.
+- 31.8% V2 support precision@5 as an exploratory noise metric.
+- 0.0% V2 forbidden primary rate.
+
+Because the pilot misses informed the current fix, this suite is challenge evidence from this commit forward. The next true holdout should come from future real task logs before additional tuning.
 
 ### Recently Covered Robustness Traps
 
@@ -131,18 +139,17 @@ These are fixed enough for routing evaluation, but still thin enough to revisit 
 
 ### Coverage Backlog
 
-Independent review found useful future cases that are not yet in the benchmark:
+Independent review found useful future cases. Several are now covered by the 22-case holdout/challenge suite: ChatGPT Apps, ASP.NET, Java/.NET, Netlify, Render, screenshot-to-code, React Three Fiber, game-studio planning, Notion meeting workflows, Vercel AI Gateway/Cron/Auth/Firewall, web performance, market sizing, metric diagnostics, experiment design, product-business analysis, code explanation, system-design interview prep, API docs, and visualization accessibility.
 
-- ChatGPT Apps and broader MCP server creation.
-- ASP.NET and Java/.NET service work.
-- Netlify and Render deployment variants.
-- Screenshot-to-code, React Three Fiber, and deeper game-studio variants.
-- Notion meeting workflows.
-- Vercel AI Gateway, Cron, Auth, Firewall, and web performance cases.
-- Market sizing, metric diagnostics, experiment design, and product-business analysis.
-- Code explanation, system-design interview prep, API docs, and visualization accessibility.
+Remaining useful future cases:
 
-These should become holdout or challenge cases before any routing boost is tuned for them.
+- Broader MCP server creation outside ChatGPT or Cloudflare wording.
+- Deeper game-studio variants across planning, assets, UI, and playtest.
+- Notion meeting-to-email workflows where the primary action is ambiguous.
+- Additional Vercel Auth, Firewall, AI Gateway, and Cron paraphrases from real usage.
+- Visualization QA and accessibility prompts that distinguish chart creation, chart review, and frontend accessibility.
+
+These should become fresh holdout cases before any routing boost is tuned for them.
 
 ## Tuning Rules
 

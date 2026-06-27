@@ -212,10 +212,66 @@ No benchmark metric regressed in the measured suite. The main remaining risk is 
 
 No new dependencies, persistence, model calls, or background jobs were added. The changes remain static concept membership, deterministic intent guards, and benchmark/report validation.
 
+## 2026-06-27: Holdout Pilot And Specialist Anchors
+
+### Hypothesis
+
+The active 78-case suite was too easy to overfit once every case was an acceptance target. A separate holdout/challenge report should expose whether V2 generalizes to specialist domains without adding runtime bloat.
+
+### Change
+
+- Added `benchmarks/skill-routing-holdout.json` with 22 cross-domain specialist prompts from the subagent coverage audits.
+- Added `npm run benchmark:skills:holdout` and `npm run benchmark:skills:holdout:check`, reusing the same evaluator, metadata, hashes, case validation, and stale-report checks as the active suite.
+- Kept holdout/challenge quality non-gating while still reporting the same metrics.
+- Added high-confidence skill-level anchors so V2 cannot bury directly named specialist skills behind broad concept refs.
+- Tightened existing concept membership for provider deploys, Vercel Cron, Auth, screenshot-to-code, React Three Fiber, game planning, metric diagnostics, experiment design, code explanation, visualization accessibility, and spreadsheets without adding new concept nodes.
+- Added a regression test for directly named specialist-skill anchors.
+
+### Result
+
+The first untouched holdout pilot exposed a real gap: V2 output quality was 48.4, primary hit@1 was 40.9%, top/workflow-5 retrieval was 54.5%, and forbidden primary rate was 4.5%.
+
+After the general anchor and concept-membership fixes, on the 22-case holdout/challenge suite:
+
+| Metric | No SkillWeaver | Skill-Level Baseline | V2 |
+| --- | ---: | ---: | ---: |
+| Output quality score | 70.1 | 77.0 | 92.7 |
+| Primary hit@1 | 68.2% | 77.3% | 100.0% |
+| Expected skill top/workflow 5 | 100.0% | 100.0% | 100.0% |
+| Mean reciprocal rank | 0.801 | 0.850 | 1.000 |
+| Support coverage@5 | 34.1% | 45.5% | 63.6% |
+| Support precision@5 | 18.2% | 25.4% | 31.8% |
+| Forbidden primary rate | 0.0% | 0.0% | 0.0% |
+| Mean candidates to expected skill | 1.6 | 1.5 | 1.0 |
+
+V2 gain:
+
+- +22.6 output-quality points over no SkillWeaver.
+- +15.7 output-quality points over the skill-level baseline.
+- +31.8 percentage points primary hit@1 over no SkillWeaver.
+- +22.7 percentage points primary hit@1 over the skill-level baseline.
+- +29.5 percentage points support coverage over no SkillWeaver.
+- +18.2 percentage points support coverage over the skill-level baseline.
+
+### What Improved
+
+- V2 now keeps direct specialist matches such as `ai-gateway`, `auth`, `metric-diagnostics`, `code-explainer`, and `accessibility-and-inclusive-visualization` ahead of broad concept candidates.
+- Provider-specific deployment prompts now keep `netlify-deploy`, `render-deploy`, and Vercel Cron skills visible.
+- The active acceptance suite stayed at 100.0 output quality after the holdout-driven fixes.
+- The report machinery now separates active acceptance from non-gating holdout/challenge evidence.
+
+### What Got Worse
+
+This 22-case file is no longer pristine untouched holdout evidence because the pilot misses informed the fix. It is now a frozen challenge suite. Future generalization claims should use fresh prompts gathered after this commit.
+
+### Runtime Impact
+
+No new dependencies, persistence, model calls, background jobs, or larger graph caps were added. Benchmark runtime increases only when the explicit holdout command is run.
+
 ## Next Experiments
 
-- Add a small frozen holdout set from real future task logs before tuning more boosts.
-- Work through the coverage backlog from the independent audit: ChatGPT Apps, ASP.NET, Java/.NET, Netlify, Render, screenshot-to-code, React Three Fiber, game-studio variants, Notion meeting workflows, Vercel AI Gateway/Cron/Auth/Firewall, web performance, market sizing, metric diagnostics, experiment design, product-business analysis, code explanation, system-design interview prep, API docs, and visualization accessibility.
+- Add a fresh frozen holdout set from future real task logs before tuning more boosts.
+- Work through the remaining coverage backlog from the independent audit, especially broader MCP server creation, deeper game-studio variants, Notion meeting-to-email ambiguity, Vercel Auth/Firewall variants, and visualization QA/accessibility variants.
 - Decide whether support precision@5 should become an acceptance gate after expected-support lists are reviewed for completeness.
 - Add an end-to-end graph-cap survival test if the corpus grows or cap behavior changes.
 - Track latency over repeated scans if the indexed skill corpus grows past 1,000 skills.
