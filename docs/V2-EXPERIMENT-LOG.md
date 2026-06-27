@@ -401,12 +401,12 @@ The frozen holdout failures are narrow routing-boundary problems, not proof that
 
 | Suite | Cases | V2 quality | V2 hit@1 | V2 support coverage@5 | V2 forbidden primary | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Active acceptance | 78 | 100.0 | 100.0% | 100.0% | 0.0% | +24.7 pts | +22.8 pts |
-| Post-tuning challenge | 22 | 91.4 | 95.5% | 68.2% | 0.0% | +21.3 pts | +14.4 pts |
-| Fresh-probe regression | 18 | 94.6 | 94.4% | 88.0% | 0.0% | +24.4 pts | +20.3 pts |
-| Frozen holdout regression | 12 | 95.6 | 100.0% | 77.8% | 0.0% | +24.9 pts | +25.7 pts |
+| Active acceptance | 78 | 99.9 | 100.0% | 99.4% | 0.0% | +24.6 pts | +22.7 pts |
+| Post-tuning challenge | 22 | 91.8 | 95.5% | 70.5% | 0.0% | +21.7 pts | +14.8 pts |
+| Fresh-probe regression | 18 | 95.4 | 94.4% | 90.7% | 0.0% | +25.2 pts | +21.0 pts |
+| Frozen holdout regression | 12 | 95.3 | 100.0% | 76.4% | 0.0% | +24.6 pts | +25.4 pts |
 
-The frozen prompt set moved from V2 trailing both baselines to V2 leading both baselines: output quality rose from 59.1 to 95.6, primary hit@1 from 41.7% to 100.0%, and forbidden primary rate from 33.3% to 0.0%. This is strong regression evidence for those prompts, not clean-split generalization proof.
+The frozen prompt set moved from V2 trailing both baselines to V2 leading both baselines: output quality rose from 59.1 to 95.3, primary hit@1 from 41.7% to 100.0%, and forbidden primary rate from 33.3% to 0.0%. This is strong regression evidence for those prompts, not clean-split generalization proof.
 
 ### Runtime Impact
 
@@ -468,9 +468,9 @@ Question: after preserving the clean V2 baseline at `fb1b4cb`, can narrow concep
 | --- | ---: | ---: | ---: | ---: | ---: |
 | No SkillWeaver | 68.3 | 71.4% | 92.9% | 26.2% | 7.1% |
 | Skill-level baseline | 79.0 | 85.7% | 100.0% | 33.3% | 7.1% |
-| SkillWeaver V2 | 90.5 | 100.0% | 100.0% | 52.4% | 0.0% |
+| SkillWeaver V2 | 92.9 | 100.0% | 100.0% | 64.3% | 0.0% |
 
-V2 moved from -7.0 quality points versus no SkillWeaver and -17.7 versus the skill-level baseline to +22.2 and +11.5 respectively on this promoted regression suite. Primary hit@1 improved from 57.1% to 100.0%, and forbidden-primary rate improved from 35.7% to 0.0%.
+V2 moved from -7.0 quality points versus no SkillWeaver and -17.7 versus the skill-level baseline to +24.6 and +13.8 respectively on this promoted regression suite. Primary hit@1 improved from 57.1% to 100.0%, and forbidden-primary rate improved from 35.7% to 0.0%.
 
 ### Runtime Impact
 
@@ -565,3 +565,36 @@ V2 moved from trailing both baselines to leading both baselines on the V4 prompt
 Implementation stayed lightweight: no new dependencies, no persisted graph, no LLM reranker, no background job, and no graph-cap widening. The fix was limited to home-directory portable root defaults, `.env.local` root configuration, concept role membership for durable specialist skills, and narrow intent guards for provider-specific, project-specific, and phase-specific routing boundaries.
 
 This is strong regression evidence, not renewed clean-split proof. The next clean generalization claim requires a new untouched prompt set captured after this V4 tuning commit.
+
+## Clean Holdout V5 Baseline And Regression Tuning
+
+Question: after preserving the clean V4 regression fixes at `c090354`, does V2 stay strong on another untouched prompt set spanning AI UI, Cloudflare agents, screenshot evidence, Figma annotation, data quality, Hugging Face jobs, TTS, games, templates, technical debt, and Notion research?
+
+Setup:
+
+- Added `npm run benchmark:skills:clean-v5` and `npm run benchmark:skills:clean-v5:check`.
+- Captured 17 provenance-backed V5 prompts after `c090354`.
+- Preserved the pre-tuning V5 baseline at `38e4c6d` before using any V5 miss for routing work.
+- Relabeled the current V5 report as regression evidence after tuning from those misses.
+
+Pre-tuning V5 baseline:
+
+| System | Quality | Hit@1 | Top/workflow 5 | Support coverage@5 | Support precision@5 | Forbidden primary |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| No SkillWeaver | 59.3 | 52.9% | 94.1% | 27.5% | 20.6% | 29.4% |
+| Skill-level baseline | 55.1 | 41.2% | 94.1% | 35.3% | 26.5% | 47.1% |
+| SkillWeaver V2 | 42.8 | 23.5% | 82.4% | 37.3% | 27.9% | 58.8% |
+
+Post-tuning V5 regression:
+
+| System | Quality | Hit@1 | Top/workflow 5 | Support coverage@5 | Support precision@5 | Forbidden primary |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| No SkillWeaver | 59.3 | 52.9% | 94.1% | 27.5% | 20.6% | 29.4% |
+| Skill-level baseline | 55.1 | 41.2% | 94.1% | 35.3% | 26.5% | 47.1% |
+| SkillWeaver V2 | 95.3 | 100.0% | 100.0% | 76.5% | 55.9% | 0.0% |
+
+V2 moved from trailing both baselines to leading both baselines on the V5 prompt set: output quality improved from 42.8 to 95.3, primary hit@1 from 23.5% to 100.0%, top/workflow-five retrieval from 82.4% to 100.0%, and forbidden-primary rate from 58.8% to 0.0%.
+
+Implementation stayed lightweight: no new dependencies, no persisted graph, no LLM reranker, no background job, and no graph-cap widening. The fix stayed inside portable root configuration, concept role membership for specialist skills, narrow negative-intent guards, and focused regression tests.
+
+This is strong regression evidence, not renewed clean-split proof. The next clean generalization claim requires a new untouched prompt set captured after this V5 tuning commit.

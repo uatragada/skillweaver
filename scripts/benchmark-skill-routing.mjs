@@ -102,14 +102,14 @@ const SUITES = {
   },
   cleanHoldoutV5: {
     id: "clean-holdout-v5",
-    label: "Clean Holdout V5",
-    reportTitle: "Clean Holdout V5 Benchmark",
+    label: "Clean Holdout V5 Regression",
+    reportTitle: "Clean Holdout V5 Regression Benchmark",
     casesPath: resolve("benchmarks/skill-routing-clean-holdout-v5.json"),
     casesRelativePath: "benchmarks/skill-routing-clean-holdout-v5.json",
     reportPath: resolve("docs/SKILL-USE-CLEAN-HOLDOUT-V5.md"),
     command: CHECK_MODE ? "npm run benchmark:skills:clean-v5:check" : "npm run benchmark:skills:clean-v5",
     gatesAcceptance: false,
-    role: "untouched-holdout"
+    role: "clean-v5-regression"
   }
 };
 const SUITE = CLEAN_HOLDOUT_V5_MODE
@@ -846,6 +846,14 @@ function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2Suppo
     ];
   }
 
+  if (SUITE.role === "clean-v5-regression") {
+    return [
+      "## Claim Scope",
+      "",
+      `This report measures the current route against the clean holdout V5 prompt set after misses from that suite informed routing fixes. Current results are regression evidence for those prompts, not clean-split generalization proof: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, support coverage@5 ${formatPercent(v2Summary.supportCoverage)}, support precision@5 ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} support-miss cases. The pre-tuning clean V5 baseline is preserved in git history at \`38e4c6d\`; a new clean generalization claim requires another untouched prompt set captured after these routing changes.`
+    ];
+  }
+
   return [
     "## Claim Scope",
     "",
@@ -1093,6 +1101,14 @@ function buildSuiteRoleSection() {
       "## Suite Role",
       "",
       "This suite began as the clean holdout V4 baseline, then its misses informed this routing pass. Treat the current checked-in report as non-gating regression evidence for that prompt set. The pre-tuning V4 baseline remains preserved in git history at `77d4c73`; a new clean holdout claim requires a fresh prompt set captured after these routing changes and reported before tuning from it.",
+      ""
+    ];
+  }
+  if (SUITE.role === "clean-v5-regression") {
+    return [
+      "## Suite Role",
+      "",
+      "This suite began as the clean holdout V5 baseline, then its misses informed this routing pass. Treat the current checked-in report as non-gating regression evidence for that prompt set. The pre-tuning V5 baseline remains preserved in git history at `38e4c6d`; a new clean holdout claim requires a fresh prompt set captured after these routing changes and reported before tuning from it.",
       ""
     ];
   }

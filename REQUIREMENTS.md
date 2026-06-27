@@ -156,6 +156,7 @@ Concepts are derived from deterministic rules and current skill metadata. They a
 - Running `npm run benchmark:skills:clean-v2-regression:check` must verify that the non-gating clean holdout V2 regression report is fresh; it is regression evidence, not current clean generalization proof.
 - Running `npm run benchmark:skills:clean-v3:check` must verify that the non-gating clean holdout V3 regression report is fresh; its pre-tuning baseline is preserved at `00ad343`, and the current report is not clean generalization proof.
 - Running `npm run benchmark:skills:clean-v4:check` must verify that the non-gating clean holdout V4 regression report is fresh; its pre-tuning baseline is preserved at `77d4c73`, and the current report is not clean generalization proof.
+- Running `npm run benchmark:skills:clean-v5:check` must verify that the non-gating clean holdout V5 regression report is fresh; its pre-tuning baseline is preserved at `38e4c6d`, and the current report is not clean generalization proof.
 - Running the dev server must expose a usable UI.
 - The scanner must successfully index the current local Codex skill library.
 - Post-tuning challenge misses should be documented or promoted deliberately; they must not silently weaken the active acceptance result.

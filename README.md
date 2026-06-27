@@ -32,6 +32,8 @@ $env:SKILLWEAVER_SKILL_ROOTS="$HOME\.codex\skills;C:\path\to\your\skills"
 npm run dev
 ```
 
+Keep machine-local skill roots in `.env.local`, not in committed code or benchmark cases. A fresh clone works with the default home-directory Codex paths, and users with additional skill libraries can add their own roots without editing the repo.
+
 ## Commands
 
 ```powershell
@@ -51,6 +53,8 @@ npm run benchmark:skills:clean-v3
 npm run benchmark:skills:clean-v3:check
 npm run benchmark:skills:clean-v4
 npm run benchmark:skills:clean-v4:check
+npm run benchmark:skills:clean-v5
+npm run benchmark:skills:clean-v5:check
 npm run build
 npm start
 ```
@@ -91,6 +95,7 @@ By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Us
 - [Clean holdout V2 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V2.md)
 - [Clean holdout V3 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md)
 - [Clean holdout V4 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V4.md)
+- [Clean holdout V5 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V5.md)
 - [Support quality roadmap](docs/SUPPORT-QUALITY-ROADMAP.md)
 - [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
 - [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
@@ -155,3 +160,11 @@ npm run benchmark:skills:clean-v4
 ```
 
 Use `npm run benchmark:skills:clean-v4:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V4.md](docs/SKILL-USE-CLEAN-HOLDOUT-V4.md). This suite began as the clean V4 holdout; the pre-tuning baseline is preserved at `77d4c73`, and the current checked-in report is regression evidence after V4 misses informed routing fixes.
+
+Run the non-gating clean holdout V5 regression suite with:
+
+```powershell
+npm run benchmark:skills:clean-v5
+```
+
+Use `npm run benchmark:skills:clean-v5:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V5.md](docs/SKILL-USE-CLEAN-HOLDOUT-V5.md). This suite began as the clean V5 holdout; the pre-tuning baseline is preserved at `38e4c6d`, and the current checked-in report is regression evidence after V5 misses informed routing fixes.

@@ -1,9 +1,9 @@
 # SkillWeaver V2 Post-Tuning Challenge Benchmark
 
-Generated: 2026-06-27T21:38:49.356Z
+Generated: 2026-06-27T22:04:37.233Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782596329356,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"77d4c733f3ba2cf937b5f967ffe44a2a28170fa0","dirty":true,"dirtyPaths":[".env.example","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a","benchmarkScript":"sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:11cb36500ccc4a96b62ab072f6adbf46d39b6e8544d88a91285fe31815291fae"}
+{"generatedAt":1782597877233,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"38e4c6df2a46acc4840560ad73a872ee61460c37","dirty":true,"dirtyPaths":["README.md","REQUIREMENTS.md","benchmarks/skill-routing-clean-holdout-v5.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","docs/SUPPORT-QUALITY-ROADMAP.md","docs/V2-EXPERIMENT-LOG.md","docs/VERIFICATION.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37","benchmarkScript":"sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:579832e10e7c3b07057655bf37027495f55fa771d1192acd459d038531eb8a6c"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:holdout`
 - Suite: Post-Tuning Challenge
 - Acceptance gate: no
-- Git commit at generation: `77d4c733f3ba2cf937b5f967ffe44a2a28170fa0`
+- Git commit at generation: `38e4c6df2a46acc4840560ad73a872ee61460c37`
 - Git dirty: yes
 - Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6`
-- Scanner hash: `sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a`
-- Benchmark script hash: `sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0`
+- Scanner hash: `sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37`
+- Benchmark script hash: `sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:11cb36500ccc4a96b62ab072f6adbf46d39b6e8544d88a91285fe31815291fae`
+- Snapshot fingerprint: `sha256:579832e10e7c3b07057655bf37027495f55fa771d1192acd459d038531eb8a6c`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -100,7 +100,7 @@ Post-Tuning Challenge quality is intentionally reported rather than accepted or 
 
 | Case | Domain | Expected concept | Expected primary | No primary / rank | Skill-level primary / rank | V2 primary / rank | V2 top concept | V2 top/workflow 5 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| chatgpt-app-mcp-widget | AI agent apps | Agent and LLM apps | chatgpt-apps | chatgpt-apps / 1 | chatgpt-apps / 1 | chatgpt-apps / 1 | Agent and LLM apps | chatgpt-apps -> building-mcp-server-on-cloudflare -> copilot-sdk -> openai-agents-js -> dev-ai-llm-apps |
+| chatgpt-app-mcp-widget | AI agent apps | Agent and LLM apps | chatgpt-apps | chatgpt-apps / 1 | chatgpt-apps / 1 | chatgpt-apps / 1 | Agent and LLM apps | chatgpt-apps -> building-mcp-server-on-cloudflare -> copilot-sdk -> openai-agents-js -> agents-sdk |
 | aspnet-minimal-api-review | Backend services | Backend APIs and services | aspnet-core | aspnet-core / 1 | aspnet-core / 1 | aspnet-core / 1 | Backend APIs and services | aspnet-core -> auth -> dev-backend-api-design -> dev-java-dotnet-services -> api-docs-writer |
 | java-dotnet-service-boundary | Backend services | Backend APIs and services | dev-java-dotnet-services | dev-java-dotnet-services / 1 | dev-java-dotnet-services / 1 | dev-java-dotnet-services / 1 | Backend APIs and services | dev-java-dotnet-services -> dev-backend-api-design -> api-docs-writer -> aspnet-core -> dev-testing-qa |
 | netlify-frontend-deploy | Platform delivery | Deployment and release | netlify-deploy | frontend-app-builder / 2 | netlify-deploy / 1 | netlify-deploy / 1 | Deployment and release | netlify-deploy -> dev-release-productization -> env-vars -> launch-readiness -> agent-browser-verify |
@@ -109,14 +109,14 @@ Post-Tuning Challenge quality is intentionally reported rather than accepted or 
 | react-three-fiber-scene | Games and simulation | Game development | react-three-fiber-game | react-three-fiber-game / 1 | react-three-fiber-game / 1 | react-three-fiber-game / 1 | Game development | react-three-fiber-game -> three-webgl-game -> web-3d-asset-pipeline -> game-playtest -> racingsim-game-dev |
 | game-studio-prototype-plan | Games and simulation | Game development | game-studio | web-3d-asset-pipeline / 4 | three-webgl-game / 3 | sprite-pipeline / 2 | Game development | sprite-pipeline -> game-studio -> game-playtest -> game-ui-frontend -> web-game-foundations |
 | notion-meeting-followups | Communications and knowledge | Product planning | notion-meeting-intelligence | notion-meeting-intelligence / 1 | notion-meeting-intelligence / 1 | notion-meeting-intelligence / 1 | Product planning | notion-meeting-intelligence -> notion-spec-to-implementation -> notion-knowledge-capture -> gmail -> notion-research-documentation |
-| vercel-ai-gateway-routing | AI agent apps | Agent and LLM apps | ai-gateway | ai-gateway / 1 | ai-gateway / 1 | ai-gateway / 1 | Skill ranking anchor | ai-gateway -> ai-sdk -> copilot-sdk -> agents-sdk -> openai-agents-js |
+| vercel-ai-gateway-routing | AI agent apps | Agent and LLM apps | ai-gateway | ai-gateway / 1 | ai-gateway / 1 | ai-gateway / 1 | Skill ranking anchor | ai-gateway -> ai-sdk -> agents-sdk -> copilot-sdk -> openai-agents-js |
 | vercel-cron-workflow | Platform delivery | Deployment and release | cron-jobs | vercel-functions / 3 | vercel-functions / 3 | cron-jobs / 1 | Deployment and release | cron-jobs -> vercel-functions -> vercel-queues -> workflow -> agent-browser-verify |
 | nextjs-auth-implementation | Backend services | Backend APIs and services | auth | auth / 1 | auth / 1 | auth / 1 | Backend APIs and services | auth -> sign-in-with-vercel -> dev-backend-api-design -> aspnet-core -> dev-java-dotnet-services |
 | vercel-firewall-rules | Security and risk | Security review | vercel-firewall | vercel-firewall / 1 | vercel-firewall / 1 | vercel-firewall / 1 | Skill ranking anchor | vercel-firewall -> vercel-deploy -> frontend-app-builder -> figma-implement-design -> env-vars |
 | core-web-vitals-audit | Frontend experience | Frontend implementation | web-perf | web-perf / 1 | web-perf / 1 | web-perf / 1 | Cloudflare workers | web-perf -> frontend-testing-debugging -> frontend-app-builder -> dev-frontend-accessibility-css -> dev-frontend-react-next |
 | market-sizing-research | Product, research, and planning | Product planning | market-sizing | market-sizing / 1 | market-sizing / 1 | market-sizing / 1 | Skill ranking anchor | market-sizing -> product-business-analysis -> build-report -> jupyter-notebooks -> experiment-designer |
 | metric-diagnostics-shift | Data analytics | Data dashboards and reports | metric-diagnostics | analyze-data-quality / 3 | metric-diagnostics / 1 | metric-diagnostics / 1 | Data dashboards and reports | metric-diagnostics -> data-analysis-standard -> product-business-analysis -> analyze-data-quality -> data-visualization |
-| ab-test-design | Product, research, and planning | Product planning | experiment-designer | design-kpis / 5 | design-kpis / 2 | experiment-designer / 1 | Product planning | experiment-designer -> design-kpis -> product-business-analysis -> metric-diagnostics -> ux-research-plan |
+| ab-test-design | Product, research, and planning | Product planning | experiment-designer | design-kpis / 5 | design-kpis / 2 | experiment-designer / 1 | Product planning | experiment-designer -> design-kpis -> product-business-analysis -> ux-research-plan -> metric-diagnostics |
 | product-business-retention | Product, research, and planning | Product planning | product-business-analysis | product-business-analysis / 1 | product-business-analysis / 1 | product-business-analysis / 1 | Product planning | product-business-analysis -> design-kpis -> risk-register -> user-research-synthesis -> build-dashboard |
 | code-path-explanation | Repo collaboration | Repository operations | code-explainer | code-explainer / 1 | code-explainer / 1 | code-explainer / 1 | Repository operations | code-explainer -> dev-architecture-review -> error-decoder -> dependency-conflict-resolver -> dev-dependency-maintenance |
 | system-design-interview-prep | Backend services | Backend APIs and services | system-design-interview | system-design-interview / 1 | system-design-interview / 1 | system-design-interview / 1 | Backend APIs and services | system-design-interview -> technical-spec-template -> dev-architecture-review -> database-schema-design -> dev-performance-engineering |
@@ -129,16 +129,16 @@ This table is a support-quality backlog source, not an acceptance failure list. 
 
 | Case | Missing expected support | V2 top/workflow 5 |
 | --- | --- | --- |
-| chatgpt-app-mcp-widget | openai-docs | chatgpt-apps -> building-mcp-server-on-cloudflare -> copilot-sdk -> openai-agents-js -> dev-ai-llm-apps |
+| chatgpt-app-mcp-widget | openai-docs | chatgpt-apps -> building-mcp-server-on-cloudflare -> copilot-sdk -> openai-agents-js -> agents-sdk |
 | netlify-frontend-deploy | frontend-testing-debugging | netlify-deploy -> dev-release-productization -> env-vars -> launch-readiness -> agent-browser-verify |
 | render-python-api-deploy | monitoring-setup-guide | render-deploy -> dev-python-services -> api-docs-writer -> aspnet-core -> api-versioning-strategy |
-| vercel-ai-gateway-routing | openai-docs | ai-gateway -> ai-sdk -> copilot-sdk -> agents-sdk -> openai-agents-js |
+| vercel-ai-gateway-routing | openai-docs | ai-gateway -> ai-sdk -> agents-sdk -> copilot-sdk -> openai-agents-js |
 | nextjs-auth-implementation | security-best-practices | auth -> sign-in-with-vercel -> dev-backend-api-design -> aspnet-core -> dev-java-dotnet-services |
 | vercel-firewall-rules | security-best-practices | vercel-firewall -> vercel-deploy -> frontend-app-builder -> figma-implement-design -> env-vars |
 | core-web-vitals-audit | performance-budget | web-perf -> frontend-testing-debugging -> frontend-app-builder -> dev-frontend-accessibility-css -> dev-frontend-react-next |
 | market-sizing-research | business-strategy-and-research, external-research-digests | market-sizing -> product-business-analysis -> build-report -> jupyter-notebooks -> experiment-designer |
 | metric-diagnostics-shift | validate-data | metric-diagnostics -> data-analysis-standard -> product-business-analysis -> analyze-data-quality -> data-visualization |
-| ab-test-design | kpi-reporting | experiment-designer -> design-kpis -> product-business-analysis -> metric-diagnostics -> ux-research-plan |
+| ab-test-design | kpi-reporting | experiment-designer -> design-kpis -> product-business-analysis -> ux-research-plan -> metric-diagnostics |
 | product-business-retention | metric-diagnostics | product-business-analysis -> design-kpis -> risk-register -> user-research-synthesis -> build-dashboard |
 | system-design-interview-prep | dev-backend-api-design | system-design-interview -> technical-spec-template -> dev-architecture-review -> database-schema-design -> dev-performance-engineering |
 

@@ -19,8 +19,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -43,8 +43,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -69,8 +69,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -93,8 +93,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -117,8 +117,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -141,8 +141,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -165,8 +165,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -189,8 +189,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -213,8 +213,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -237,8 +237,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -260,8 +260,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -284,8 +284,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -308,8 +308,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -332,8 +332,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -356,8 +356,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -379,8 +379,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -403,8 +403,8 @@
     "source": "subagent-audit",
     "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
     "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   }
 ]

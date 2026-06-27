@@ -1,9 +1,9 @@
 # SkillWeaver V2 Fresh-Probe Regression Benchmark
 
-Generated: 2026-06-27T21:38:49.152Z
+Generated: 2026-06-27T22:04:36.903Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782596329152,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"77d4c733f3ba2cf937b5f967ffe44a2a28170fa0","dirty":true,"dirtyPaths":[".env.example","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","scanner":"sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a","benchmarkScript":"sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:d27e7f06845a1a01d2e4cf1f7da3c66dd8357058063ac9336c699d7971e1a7df"}
+{"generatedAt":1782597876903,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"38e4c6df2a46acc4840560ad73a872ee61460c37","dirty":true,"dirtyPaths":["README.md","REQUIREMENTS.md","benchmarks/skill-routing-clean-holdout-v5.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","docs/SUPPORT-QUALITY-ROADMAP.md","docs/V2-EXPERIMENT-LOG.md","docs/VERIFICATION.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","scanner":"sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37","benchmarkScript":"sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:e80a2d5a20eaba8696d8754fa7e0f2f0d741cc486a2854aca2011005b4c0b887"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:fresh`
 - Suite: Fresh-Probe Regression
 - Acceptance gate: no
-- Git commit at generation: `77d4c733f3ba2cf937b5f967ffe44a2a28170fa0`
+- Git commit at generation: `38e4c6df2a46acc4840560ad73a872ee61460c37`
 - Git dirty: yes
 - Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea`
-- Scanner hash: `sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a`
-- Benchmark script hash: `sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0`
+- Scanner hash: `sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37`
+- Benchmark script hash: `sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:d27e7f06845a1a01d2e4cf1f7da3c66dd8357058063ac9336c699d7971e1a7df`
+- Snapshot fingerprint: `sha256:e80a2d5a20eaba8696d8754fa7e0f2f0d741cc486a2854aca2011005b4c0b887`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -117,7 +117,7 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 | postgres-migration-rollback-fresh | Database and data engineering | Databases and data engineering | database-migration-plan | database-migration-plan / 1 | database-migration-plan / 1 | database-migration-plan / 1 | Databases and data engineering | database-migration-plan -> database-schema-design -> dev-database-postgres -> data-quality-audit -> data-analysis-standard |
 | sentry-incident-slo-fresh | Observability and reliability | Observability and reliability | incident-postmortem | slo-error-budget / 2 | slo-error-budget / 2 | incident-postmortem / 1 | Observability and reliability | incident-postmortem -> sentry -> slo-error-budget -> dev-observability-sre -> monitoring-setup-guide |
 | dependency-conflict-monorepo-fresh | Repo collaboration | Repository operations | dependency-conflict-resolver | dependency-conflict-resolver / 1 | dependency-conflict-resolver / 1 | dependency-conflict-resolver / 1 | Repository operations | dependency-conflict-resolver -> dev-monorepo-build-systems -> dev-git-github-collaboration -> turborepo -> gh-fix-ci |
-| durable-object-agent-fresh | Infrastructure platforms | Cloudflare workers | durable-objects, building-ai-agent-on-cloudflare | building-ai-agent-on-cloudflare / 1 | durable-objects / 1 | durable-objects / 1 | Cloudflare workers | durable-objects -> sandbox-sdk -> workers-best-practices -> agents-sdk -> building-ai-agent-on-cloudflare |
+| durable-object-agent-fresh | Infrastructure platforms | Cloudflare workers | durable-objects, building-ai-agent-on-cloudflare | building-ai-agent-on-cloudflare / 1 | durable-objects / 1 | durable-objects / 1 | Cloudflare workers | durable-objects -> sandbox-sdk -> agents-sdk -> workers-best-practices -> building-ai-agent-on-cloudflare |
 | huggingface-gradio-vision-fresh | Hugging Face ML | Hugging Face ML | huggingface-gradio | huggingface-vision-trainer / 4 | huggingface-vision-trainer / 6 | huggingface-gradio / 1 | Hugging Face ML | huggingface-gradio -> huggingface-vision-trainer -> huggingface-paper-publisher -> huggingface-trackio -> huggingface-community-evals |
 | api-versioning-docs-fresh | Documents and publishing | Documents and PDFs | api-versioning-strategy | api-versioning-strategy / 1 | api-versioning-strategy / 1 | api-versioning-strategy / 1 | Backend APIs and services | api-versioning-strategy -> api-docs-writer -> dev-backend-api-design -> technical-spec-template -> dev-java-dotnet-services |
 | launch-risk-flags-fresh | Product, research, and planning | Product planning | launch-readiness | launch-readiness / 1 | launch-readiness / 1 | launch-readiness / 1 | Product planning | launch-readiness -> risk-register -> feature-flag-guide -> product-launch-checklist -> dev-release-productization |
@@ -125,7 +125,7 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 | security-diff-remediation-fresh | Security and risk | Security review | security-diff-scan | security-diff-scan / 1 | security-diff-scan / 1 | security-diff-scan / 1 | Security review | security-diff-scan -> validation -> deep-security-scan -> track-findings -> triage-finding |
 | electron-native-release-fresh | Frontend experience | Frontend implementation | dev-mobile-desktop | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | Frontend implementation | dev-mobile-desktop -> winui-app -> launch-readiness -> dev-release-productization -> frontend-app-builder |
 | creative-competitor-offer-fresh | Marketing, growth, and creative | Marketing growth | creative-offer | creative-ads-explorer / 2 | creative-ads-explorer / 5 | creative-offer / 1 | Marketing growth | creative-offer -> creative-ads-explorer -> creative-positioning -> competitive-intelligence-monitor -> business-strategy-and-research |
-| voice-browser-loop-fresh | AI agent apps | Agent and LLM apps | transcribe | control-in-app-browser / 37 | speech / 8 | transcribe / 1 | Agent and LLM apps | transcribe -> speech -> transformers-js -> frontend-testing-debugging -> control-in-app-browser |
+| voice-browser-loop-fresh | AI agent apps | Agent and LLM apps | transcribe | control-in-app-browser / 37 | speech / 8 | transcribe / 1 | Agent and LLM apps | transcribe -> speech -> transformers-js -> frontend-testing-debugging -> openai-agents-js |
 
 ## V2 Support Misses
 
@@ -136,7 +136,7 @@ This table is a support-quality backlog source, not an acceptance failure list. 
 | notion-meeting-email-fresh | notion-spec-to-implementation | notion-meeting-intelligence -> gmail -> gmail-inbox-triage -> notion-knowledge-capture -> email-triage |
 | vercel-bot-firewall-fresh | security-best-practices | vercel-firewall -> vercel-deploy -> building-mcp-server-on-cloudflare -> env-vars -> agent-browser-verify |
 | postgres-migration-rollback-fresh | api-versioning-strategy | database-migration-plan -> database-schema-design -> dev-database-postgres -> data-quality-audit -> data-analysis-standard |
-| durable-object-agent-fresh | wrangler | durable-objects -> sandbox-sdk -> workers-best-practices -> agents-sdk -> building-ai-agent-on-cloudflare |
+| durable-object-agent-fresh | wrangler | durable-objects -> sandbox-sdk -> agents-sdk -> workers-best-practices -> building-ai-agent-on-cloudflare |
 
 ## Interpretation
 

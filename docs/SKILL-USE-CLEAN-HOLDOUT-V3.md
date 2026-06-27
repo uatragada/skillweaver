@@ -1,9 +1,9 @@
 # SkillWeaver V2 Clean Holdout V3 Regression Benchmark
 
-Generated: 2026-06-27T21:38:10.763Z
+Generated: 2026-06-27T22:04:16.644Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782596290763,"command":"npm run benchmark:skills:clean-v3","suite":{"id":"clean-holdout-v3","label":"Clean Holdout V3 Regression","gatesAcceptance":false},"git":{"commit":"77d4c733f3ba2cf937b5f967ffe44a2a28170fa0","dirty":true,"dirtyPaths":[".env.example","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":18,"sha256":"sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732","scanner":"sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a","benchmarkScript":"sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:2e47e162c7df374bc1c771037bd1687881b4016596fdb13eb00ca2ce177a3476"}
+{"generatedAt":1782597856644,"command":"npm run benchmark:skills:clean-v3","suite":{"id":"clean-holdout-v3","label":"Clean Holdout V3 Regression","gatesAcceptance":false},"git":{"commit":"38e4c6df2a46acc4840560ad73a872ee61460c37","dirty":true,"dirtyPaths":["README.md","REQUIREMENTS.md","benchmarks/skill-routing-clean-holdout-v5.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","docs/SUPPORT-QUALITY-ROADMAP.md","docs/V2-EXPERIMENT-LOG.md","docs/VERIFICATION.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":18,"sha256":"sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732","scanner":"sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37","benchmarkScript":"sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:10eb5ca40678367322dade3a862c95fa760238757567e9489701688ef4c902ba"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:clean-v3`
 - Suite: Clean Holdout V3 Regression
 - Acceptance gate: no
-- Git commit at generation: `77d4c733f3ba2cf937b5f967ffe44a2a28170fa0`
+- Git commit at generation: `38e4c6df2a46acc4840560ad73a872ee61460c37`
 - Git dirty: yes
 - Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732`
-- Scanner hash: `sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a`
-- Benchmark script hash: `sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0`
+- Scanner hash: `sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37`
+- Benchmark script hash: `sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:2e47e162c7df374bc1c771037bd1687881b4016596fdb13eb00ca2ce177a3476`
+- Snapshot fingerprint: `sha256:10eb5ca40678367322dade3a862c95fa760238757567e9489701688ef4c902ba`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -123,7 +123,7 @@ Clean Holdout V3 Regression quality is intentionally reported rather than accept
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | netlify-preview-rollback-v3 | Platform delivery | Deployment and release | netlify-deploy | control-in-app-browser / 14 | winui-app / 33 | netlify-deploy / 1 | Deployment and release | netlify-deploy -> launch-readiness -> frontend-testing-debugging -> dev-release-productization -> agent-browser-verify |
 | skill-author-reference-pack-v3 | Skill tooling | Skill authoring | skill-creator | skill-security-auditor / 6 | cli-creator !cli-creator / 7 | skill-creator / 1 | Skill authoring | skill-creator -> skill-security-auditor -> skillweaver -> dev-documentation-systems -> hatch-pet |
-| inapp-responsive-console-v3 | Frontend experience | Browser verification | control-in-app-browser | control-in-app-browser / 1 | control-in-app-browser / 1 | control-in-app-browser / 1 | Browser verification | control-in-app-browser -> design-image-to-code -> frontend-testing-debugging -> screenshot -> playwright-interactive |
+| inapp-responsive-console-v3 | Frontend experience | Browser verification | control-in-app-browser | control-in-app-browser / 1 | control-in-app-browser / 1 | control-in-app-browser / 1 | Browser verification | control-in-app-browser -> design-image-to-code -> screenshot -> frontend-testing-debugging -> playwright-interactive |
 | figma-motion-token-handoff-v3 | Frontend experience | Figma design handoff | figma-implement-motion, figma-use-motion | figma-implement-motion / 1 | figma-use / 1 | figma-use-motion / 1 | Figma design handoff | figma-use-motion -> figma-code-connect-components -> figma-swiftui -> figma-code-connect -> figma-use |
 | roadmap-research-slide-template-v3 | Documents and publishing | Presentations | Presentations, roadmap-presentation | prd-template !prd-template / 5 | onboarding-plan / 2 | Presentations / 1 | Presentations | Presentations -> roadmap-presentation -> roadmap-narrative -> template-creator -> feature-prioritisation |
 | notebook-cohort-audit-v3 | Data analytics | Data dashboards and reports | jupyter-notebooks | jupyter-notebooks / 1 | jupyter-notebooks / 1 | jupyter-notebooks / 1 | Data dashboards and reports | jupyter-notebooks -> build-report -> data-analysis-standard -> analyze-data-quality -> kpi-reporting |

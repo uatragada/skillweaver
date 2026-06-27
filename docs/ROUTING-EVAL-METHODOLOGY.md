@@ -12,19 +12,21 @@ The last pre-concept commit was `80d31f1`; the benchmark does not execute code f
 
 ## Permitted Claims
 
-Safe: "V2 improves deterministic skill routing on the active acceptance suite and remains strong on the post-tuning challenge, fresh-probe regression, frozen-holdout regression, clean-holdout V2 regression, clean-holdout V3 regression, and clean-holdout V4 regression suites."
+Safe: "V2 improves deterministic skill routing on the active acceptance suite and remains strong on the post-tuning challenge, fresh-probe regression, frozen-holdout regression, clean-holdout V2 regression, clean-holdout V3 regression, clean-holdout V4 regression, and clean-holdout V5 regression suites."
 
-Safe: "V2 has 0.0% forbidden primary rate across the current active, challenge, fresh-probe regression, frozen holdout regression, clean V2 regression, clean V3 regression, and clean V4 regression suites, while improving output quality versus both compared baselines."
+Safe: "V2 has 0.0% forbidden primary rate across the current active, challenge, fresh-probe regression, frozen holdout regression, clean V2 regression, clean V3 regression, clean V4 regression, and clean V5 regression suites, while improving output quality versus both compared baselines."
 
 Safe: "On the clean V4 regression suite, V2 now reaches 100.0% primary hit@1 and 0.0% forbidden primaries, after the pre-tuning clean V4 baseline was preserved at `77d4c73`."
 
-Not safe with the current evidence: "V2 generalizes across all domains", "V2 has 100% routing accuracy", "cross-domain routing is solved", "the current clean V2 report is untouched holdout evidence", "the current clean V3 report is untouched holdout evidence", "the current clean V4 report is untouched holdout evidence", or "clean V4 proves V2 is solved."
+Safe: "On the clean V5 regression suite, V2 now reaches 100.0% primary hit@1 and 0.0% forbidden primaries, after the pre-tuning clean V5 baseline was preserved at `38e4c6d`."
+
+Not safe with the current evidence: "V2 generalizes across all domains", "V2 has 100% routing accuracy", "cross-domain routing is solved", "the current clean V2 report is untouched holdout evidence", "the current clean V3 report is untouched holdout evidence", "the current clean V4 report is untouched holdout evidence", "the current clean V5 report is untouched holdout evidence", or "clean V5 proves V2 is solved."
 
 Any cross-domain quality claim must include suite role, case count, domain/case coverage, primary hit@1, expected top/workflow-five retrieval, MRR, support coverage@5, support precision@5, forbidden primary rate, and support-miss count.
 
 ## Evaluation Splits
 
-SkillWeaver reports seven routing suites:
+SkillWeaver reports eight routing suites:
 
 - Active acceptance suite: `benchmarks/skill-routing-cases.json`, generated into `docs/SKILL-USE-GAINS.md`. This is the regression gate for V2 routing claims.
 - Post-tuning challenge suite: `benchmarks/skill-routing-holdout.json`, generated into `docs/SKILL-USE-HOLDOUT.md`. This reports generalization pressure and is not an acceptance gate.
@@ -33,14 +35,15 @@ SkillWeaver reports seven routing suites:
 - Clean holdout V2 regression suite: `benchmarks/skill-routing-clean-holdout-v2.json`, generated into `docs/SKILL-USE-CLEAN-HOLDOUT-V2.md`. This began as the clean V2 baseline captured after commit `3cd6e51`; after misses from it informed routing fixes, the current report is non-gating regression evidence for that prompt set.
 - Clean holdout V3 regression suite: `benchmarks/skill-routing-clean-holdout-v3.json`, generated into `docs/SKILL-USE-CLEAN-HOLDOUT-V3.md`. This began as the clean V3 baseline captured after commit `e2a47a6`; after misses from it informed routing fixes, the current report is non-gating regression evidence for that prompt set. The pre-tuning baseline is preserved at `00ad343`.
 - Clean holdout V4 regression suite: `benchmarks/skill-routing-clean-holdout-v4.json`, generated into `docs/SKILL-USE-CLEAN-HOLDOUT-V4.md`. This began as the clean V4 baseline captured after commit `764924b`; after misses from it informed routing fixes, the current report is non-gating regression evidence for that prompt set. The pre-tuning baseline is preserved at `77d4c73`.
+- Clean holdout V5 regression suite: `benchmarks/skill-routing-clean-holdout-v5.json`, generated into `docs/SKILL-USE-CLEAN-HOLDOUT-V5.md`. This began as the clean V5 baseline captured after commit `c090354`; after misses from it informed routing fixes, the current report is non-gating regression evidence for that prompt set. The pre-tuning baseline is preserved at `38e4c6d`.
 
-The current challenge suite started as a frozen pilot, then its misses were used to improve broad routing anchors and specialist concept membership. From this commit forward it is a fixed post-tuning challenge suite, not pristine untouched holdout evidence. The clean holdout V2, V3, and V4 suites are also no longer pristine because their misses drove later routing passes. A future clean-split claim requires another prompt set captured after the latest tuning commit and reported before tuning from those prompts.
+The current challenge suite started as a frozen pilot, then its misses were used to improve broad routing anchors and specialist concept membership. From this commit forward it is a fixed post-tuning challenge suite, not pristine untouched holdout evidence. The clean holdout V2, V3, V4, and V5 suites are also no longer pristine because their misses drove later routing passes. A future clean-split claim requires another prompt set captured after the latest tuning commit and reported before tuning from those prompts.
 
 Fresh-probe, frozen-holdout, and clean-holdout provenance are process claims, not something the benchmark metadata can prove by itself. The metadata proves report freshness against the current cases, scanner, benchmark script, corpus, and acceptance inputs. It does not prove that prompts were collected before tuning. Preserve the first pre-tuning result in the experiment log or git history before using fresh prompts to tune the router.
 
 ## Case Schema
 
-Cases live in `benchmarks/skill-routing-cases.json`, `benchmarks/skill-routing-holdout.json`, `benchmarks/skill-routing-fresh.json`, `benchmarks/skill-routing-frozen-holdout.json`, `benchmarks/skill-routing-clean-holdout-v2.json`, `benchmarks/skill-routing-clean-holdout-v3.json`, and `benchmarks/skill-routing-clean-holdout-v4.json`.
+Cases live in `benchmarks/skill-routing-cases.json`, `benchmarks/skill-routing-holdout.json`, `benchmarks/skill-routing-fresh.json`, `benchmarks/skill-routing-frozen-holdout.json`, `benchmarks/skill-routing-clean-holdout-v2.json`, `benchmarks/skill-routing-clean-holdout-v3.json`, `benchmarks/skill-routing-clean-holdout-v4.json`, and `benchmarks/skill-routing-clean-holdout-v5.json`.
 
 - `id`: stable case identifier.
 - `domain`: one benchmark-intent domain label. It is evaluation metadata, not a skill-derived domain.
@@ -246,12 +249,12 @@ The frozen holdout result is valuable because it contradicts a too-broad V2 clai
 
 After narrow tuning from the frozen-holdout misses, the same suite becomes regression evidence:
 
-- V2 output quality: 95.6.
-- V2 gain over no SkillWeaver: +24.9 points.
-- V2 gain over skill-level baseline: +25.7 points.
+- V2 output quality: 95.3.
+- V2 gain over no SkillWeaver: +24.6 points.
+- V2 gain over skill-level baseline: +25.4 points.
 - V2 primary hit@1: 100.0%.
 - V2 expected primary top/workflow 5: 100.0%.
-- V2 support coverage@5: 77.8%.
+- V2 support coverage@5: 76.4%.
 - V2 support precision@5: 56.3%.
 - V2 forbidden primary rate: 0.0%.
 
@@ -273,15 +276,15 @@ Clean holdout V2 baseline generated by `npm run benchmark:skills:clean` on June 
 
 After narrow tuning from the clean-holdout V2 misses, the same suite is regression evidence generated by `npm run benchmark:skills:clean-v2-regression`:
 
-- V2 output quality: 91.9.
-- V2 gain over no SkillWeaver: +23.7 points.
-- V2 gain over skill-level baseline: +12.9 points.
+- V2 output quality: 92.9.
+- V2 gain over no SkillWeaver: +24.6 points.
+- V2 gain over skill-level baseline: +13.8 points.
 - V2 primary hit@1: 100.0%.
 - V2 expected primary top/workflow 5: 100.0%.
-- V2 support coverage@5: 59.5%.
-- V2 support precision@5: 44.6%.
+- V2 support coverage@5: 64.3%.
+- V2 support precision@5: 48.2%.
 - V2 forbidden primary rate: 0.0%.
-- V2 support-miss cases: 14/14.
+- V2 support-miss cases: 13/14.
 
 Clean holdout V3 baseline generated by `npm run benchmark:skills:clean-v3` on June 27, 2026 after commit `e2a47a6`:
 
@@ -341,4 +344,32 @@ After narrow tuning from the clean-holdout V4 misses, the same suite is regressi
 - V2 forbidden primary rate: 0.0%.
 - V2 support-miss cases: 13/21.
 
-These snapshots are strong evidence for the active, challenge, fresh-probe regression, frozen-holdout regression, clean-holdout V2 regression, clean-holdout V3 regression, and clean-holdout V4 regression suites, not proof of universal routing correctness.
+Clean holdout V5 baseline generated by `npm run benchmark:skills:clean-v5` on June 27, 2026 after commit `c090354` and preserved at `38e4c6d`:
+
+- Cases: 17.
+- Domains covered: 11.
+- Expected concepts covered: 14.
+- Cases with provenance fields: 17/17.
+- V2 output quality: 42.8.
+- V2 gain over no SkillWeaver: -16.5 points.
+- V2 gain over skill-level baseline: -12.3 points.
+- V2 primary hit@1: 23.5%.
+- V2 expected primary top/workflow 5: 82.4%.
+- V2 support coverage@5: 37.3%.
+- V2 support precision@5: 27.9%.
+- V2 forbidden primary rate: 58.8%.
+- V2 support-miss cases: 16/17.
+
+After narrow tuning from the clean-holdout V5 misses, the same suite is regression evidence generated by `npm run benchmark:skills:clean-v5`:
+
+- V2 output quality: 95.3.
+- V2 gain over no SkillWeaver: +36.0 points.
+- V2 gain over skill-level baseline: +40.2 points.
+- V2 primary hit@1: 100.0%.
+- V2 expected primary top/workflow 5: 100.0%.
+- V2 support coverage@5: 76.5%.
+- V2 support precision@5: 55.9%.
+- V2 forbidden primary rate: 0.0%.
+- V2 support-miss cases: 9/17.
+
+These snapshots are strong evidence for the active, challenge, fresh-probe regression, frozen-holdout regression, clean-holdout V2 regression, clean-holdout V3 regression, clean-holdout V4 regression, and clean-holdout V5 regression suites, not proof of universal routing correctness.

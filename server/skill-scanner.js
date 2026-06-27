@@ -70,8 +70,8 @@ const CONCEPT_RULES = [
     domains: ["frontend"],
     tools: ["Playwright", "Node"],
     gatewaySkillNames: ["browser:control-in-app-browser", "control-in-app-browser", "chrome:control-chrome", "control-chrome"],
-    primarySkillNames: ["playwright", "playwright-interactive", "build-web-apps:frontend-testing-debugging", "frontend-testing-debugging"],
-    supportingSkillNames: ["screenshot", "motion-qa"],
+    primarySkillNames: ["playwright", "playwright-interactive", "build-web-apps:frontend-testing-debugging", "frontend-testing-debugging", "screenshot"],
+    supportingSkillNames: ["control-in-app-browser", "motion-qa"],
     verificationSkillNames: ["vercel:agent-browser-verify", "agent-browser-verify"],
     relatedConceptIds: ["frontend-implementation", "deployment-release"]
   },
@@ -79,24 +79,24 @@ const CONCEPT_RULES = [
     id: "figma-handoff",
     label: "Figma design handoff",
     description: "Navigate Figma context, audit component intent, and translate designs into implementation work.",
-    triggers: ["figma design", "design to code", "implement figma", "design handoff", "component audit", "swiftui", "figma swiftui motion"],
+    triggers: ["figma design", "design to code", "implement figma", "design handoff", "component audit", "swiftui", "figma swiftui motion", "figma annotation", "engineering handoff"],
     domains: ["frontend", "product", "creative"],
     tools: ["Figma", "Node"],
     gatewaySkillNames: ["figma-use", "figma:figma-use"],
-    primarySkillNames: ["figma-implement-design", "figma-generate-library", "figma:figma-code-connect", "figma-code-connect", "figma-code-connect-components", "product-design:image-to-code", "design-image-to-code", "design-url-to-code", "figma:figma-swiftui", "figma-swiftui"],
-    supportingSkillNames: ["figma-design-qa", "figma-component-audit", "figma-create-design-system-rules", "product-design:get-context", "figma:figma-generate-design", "figma-generate-design", "figma:figma-implement-motion", "figma-implement-motion", "figma:figma-use-motion", "figma-use-motion"],
-    verificationSkillNames: ["design-qa", "figma-design-review"],
+    primarySkillNames: ["figma-implement-design", "figma-generate-library", "figma:figma-code-connect", "figma-code-connect", "figma-code-connect-components", "figma-annotation-guide", "product-design:image-to-code", "design-image-to-code", "design-url-to-code", "figma:figma-swiftui", "figma-swiftui"],
+    supportingSkillNames: ["figma-design-qa", "figma-component-audit", "figma-create-design-system-rules", "product-design:get-context", "design-get-context", "figma:figma-generate-design", "figma-generate-design", "figma:figma-implement-motion", "figma-implement-motion", "figma:figma-use-motion", "figma-use-motion"],
+    verificationSkillNames: ["design-qa", "figma-design-review", "figma-design-qa"],
     relatedConceptIds: ["frontend-implementation", "browser-verification"]
   },
   {
     id: "data-dashboarding",
     label: "Data dashboards and reports",
     description: "Profile data, design KPIs, build dashboards or reports, and validate analytical outputs.",
-    triggers: ["analytics dashboard", "kpi report", "visualize data", "data quality", "business analysis", "metric diagnostics", "market sizing", "experiment design", "a/b test", "visualization accessibility"],
+    triggers: ["analytics dashboard", "kpi report", "visualize data", "data quality", "business analysis", "metric diagnostics", "market sizing", "experiment design", "a/b test", "visualization accessibility", "geospatial map", "cartographic visualization"],
     domains: ["data", "product"],
     tools: ["Python", "Node"],
     gatewaySkillNames: ["data-analytics:index"],
-    primarySkillNames: ["data-analytics:build-dashboard", "build-dashboard", "data-analytics:build-report", "build-report", "build-web-data-visualization:data-visualization", "data-visualization", "data-analytics:visualize-data", "visualize-data", "data-analytics:jupyter-notebooks", "jupyter-notebooks", "metric-diagnostics", "product-business-analysis", "spreadsheets:Spreadsheets", "Spreadsheets", "chart-data-extractor"],
+    primarySkillNames: ["data-analytics:build-dashboard", "build-dashboard", "data-analytics:build-report", "build-report", "build-web-data-visualization:data-visualization", "data-visualization", "geospatial-and-cartographic-visualization", "data-analytics:visualize-data", "visualize-data", "data-analytics:jupyter-notebooks", "jupyter-notebooks", "metric-diagnostics", "product-business-analysis", "spreadsheets:Spreadsheets", "Spreadsheets", "chart-data-extractor"],
     supportingSkillNames: ["data-analytics:design-kpis", "design-kpis", "kpi-reporting", "data-analysis-standard", "chart-data-extractor", "visualization-strategy-and-critique"],
     verificationSkillNames: ["data-analytics:validate-data", "data-analytics:analyze-data-quality", "testing-data-visualizations", "accessibility-and-inclusive-visualization"],
     relatedConceptIds: ["frontend-implementation", "product-planning"]
@@ -120,7 +120,7 @@ const CONCEPT_RULES = [
     triggers: ["security scan", "threat model", "vulnerability", "audit finding", "risk review", "attack path", "exploit chain"],
     domains: ["security", "operations"],
     tools: ["GitHub"],
-    primarySkillNames: ["codex-security:security-scan", "security-scan", "codex-security:deep-security-scan", "deep-security-scan", "codex-security:threat-model", "threat-model", "security-threat-model", "security-ownership-map", "security-best-practices", "codex-security:finding-discovery", "finding-discovery"],
+    primarySkillNames: ["codex-security:security-scan", "security-scan", "codex-security:deep-security-scan", "deep-security-scan", "codex-security:threat-model", "threat-model", "security-threat-model", "security-ownership-map", "security-best-practices", "codex-security:finding-discovery", "finding-discovery", "codex-security:validation", "validation"],
     supportingSkillNames: ["codex-security:attack-path-analysis", "attack-path-analysis", "codex-security:finding-discovery", "finding-discovery", "codex-security:triage-finding", "triage-finding", "codex-security:track-findings", "track-findings", "skill-security-auditor"],
     verificationSkillNames: ["codex-security:validation", "validation", "codex-security:security-diff-scan", "security-diff-scan"],
     relatedConceptIds: ["github-pr-repair", "repo-operations"]
@@ -169,8 +169,8 @@ const CONCEPT_RULES = [
     triggers: ["presentation", "slides", "roadmap deck", "pitch deck", "board-ready deck", "slide template", "speaker narrative"],
     domains: ["documents", "product"],
     tools: ["Node"],
-    primarySkillNames: ["presentations:Presentations", "Presentations", "roadmap-presentation"],
-    supportingSkillNames: ["template-creator:template-creator", "template-creator", "roadmap-narrative", "linear", "documents:documents"],
+    primarySkillNames: ["presentations:Presentations", "Presentations", "roadmap-presentation", "template-creator:template-creator", "template-creator"],
+    supportingSkillNames: ["roadmap-narrative", "linear", "documents:documents", "documents", "premium-saas-landing-pages"],
     relatedConceptIds: ["documents-pdf", "product-planning"]
   },
   {
@@ -202,8 +202,8 @@ const CONCEPT_RULES = [
     triggers: ["openai", "agent sdk", "llm app", "rag", "chatgpt app", "copilot", "mcp server", "node typescript mcp", "typed tool handlers", "speech-to-text", "text-to-speech", "transcription", "voiceover", "voice agent", "local speech", "browser microphone", "silence rejection", "whisper"],
     domains: ["ai", "backend", "frontend"],
     tools: ["OpenAI", "Cloudflare", "Vercel", "Node"],
-    primarySkillNames: ["dev-ai-llm-apps", "openai-docs", "openai-agents-js", "chatgpt-apps", "copilot-sdk", "cloudflare:agents-sdk", "vercel:ai-sdk", "transcribe", "speech"],
-    supportingSkillNames: ["dev-node-typescript-services", "api-docs-writer", "hugging-face:transformers-js", "transformers-js", "hugging-face:huggingface-gradio", "local-speech-ai-mvp"],
+    primarySkillNames: ["dev-ai-llm-apps", "openai-docs", "openai-agents-js", "chatgpt-apps", "copilot-sdk", "cloudflare:agents-sdk", "agents-sdk", "vercel:ai-sdk", "ai-sdk", "vercel:ai-elements", "ai-elements", "vercel:ai-generation-persistence", "ai-generation-persistence", "transcribe", "speech"],
+    supportingSkillNames: ["dev-node-typescript-services", "dev-frontend-react-next", "frontend-testing-debugging", "database-schema-design", "api-docs-writer", "hugging-face:transformers-js", "transformers-js", "hugging-face:huggingface-gradio", "local-speech-ai-mvp"],
     relatedConceptIds: ["skill-authoring", "cloudflare-workers", "huggingface-ml"]
   },
   {
@@ -214,7 +214,7 @@ const CONCEPT_RULES = [
     domains: ["product", "documents"],
     tools: ["Linear"],
     primarySkillNames: ["linear", "linear:linear", "prd-template", "roadmap-narrative", "feature-prioritisation", "ux-research-plan", "user-research-synthesis", "risk-register", "notion-knowledge-capture", "notion-research-documentation", "notion-meeting-intelligence", "notion-spec-to-implementation", "experiment-designer", "product-business-analysis", "market-sizing"],
-    supportingSkillNames: ["product-launch-checklist", "product-design:index", "onboarding-plan", "launch-readiness", "metric-diagnostics", "design-kpis"],
+    supportingSkillNames: ["product-launch-checklist", "product-design:index", "onboarding-plan", "launch-readiness", "metric-diagnostics", "design-kpis", "last-30-days-research", "research-protocol"],
     relatedConceptIds: ["presentations", "data-dashboarding", "github-pr-repair"]
   },
   {
@@ -224,7 +224,7 @@ const CONCEPT_RULES = [
     triggers: ["cloudflare workers", "wrangler", "durable object", "cloudflare mcp server", "mcp server on cloudflare", "cloudflare agent"],
     domains: ["operations", "backend", "ai"],
     tools: ["Cloudflare", "Node"],
-    primarySkillNames: ["cloudflare:workers-best-practices", "workers-best-practices", "cloudflare:wrangler", "wrangler", "cloudflare:durable-objects", "durable-objects", "cloudflare:building-mcp-server-on-cloudflare", "building-mcp-server-on-cloudflare", "cloudflare:building-ai-agent-on-cloudflare", "building-ai-agent-on-cloudflare"],
+    primarySkillNames: ["cloudflare:workers-best-practices", "workers-best-practices", "cloudflare:wrangler", "wrangler", "cloudflare:durable-objects", "durable-objects", "cloudflare:agents-sdk", "agents-sdk", "cloudflare:building-mcp-server-on-cloudflare", "building-mcp-server-on-cloudflare", "cloudflare:building-ai-agent-on-cloudflare", "building-ai-agent-on-cloudflare"],
     supportingSkillNames: ["cloudflare:cloudflare", "cloudflare", "cloudflare:web-perf", "web-perf", "cloudflare:sandbox-sdk", "sandbox-sdk"],
     relatedConceptIds: ["deployment-release", "agent-llm-apps"]
   },
@@ -235,8 +235,8 @@ const CONCEPT_RULES = [
     triggers: ["hugging face", "dataset", "model training", "gradio", "papers", "spaces"],
     domains: ["ai", "data"],
     tools: ["Python"],
-    primarySkillNames: ["hugging-face:hf-cli", "hf-cli", "hugging-face:huggingface-datasets", "huggingface-datasets", "hugging-face:huggingface-llm-trainer", "huggingface-llm-trainer", "hugging-face:huggingface-vision-trainer", "huggingface-vision-trainer", "hugging-face:huggingface-papers", "huggingface-papers", "hugging-face:huggingface-paper-publisher", "huggingface-paper-publisher", "hugging-face:huggingface-gradio", "huggingface-gradio", "hugging-face:huggingface-trackio", "huggingface-trackio"],
-    supportingSkillNames: ["hugging-face:huggingface-community-evals", "huggingface-community-evals", "hugging-face:huggingface-gradio", "huggingface-gradio", "hugging-face:huggingface-jobs", "huggingface-jobs", "hugging-face:transformers-js", "transformers-js"],
+    primarySkillNames: ["hugging-face:hf-cli", "hf-cli", "hugging-face:huggingface-datasets", "huggingface-datasets", "hugging-face:huggingface-jobs", "huggingface-jobs", "hugging-face:huggingface-llm-trainer", "huggingface-llm-trainer", "hugging-face:huggingface-vision-trainer", "huggingface-vision-trainer", "hugging-face:huggingface-papers", "huggingface-papers", "hugging-face:huggingface-paper-publisher", "huggingface-paper-publisher", "hugging-face:huggingface-gradio", "huggingface-gradio", "hugging-face:huggingface-trackio", "huggingface-trackio"],
+    supportingSkillNames: ["hugging-face:huggingface-community-evals", "huggingface-community-evals", "hugging-face:huggingface-gradio", "huggingface-gradio", "hugging-face:transformers-js", "transformers-js"],
     relatedConceptIds: ["agent-llm-apps", "data-dashboarding"]
   },
   {
@@ -269,8 +269,8 @@ const CONCEPT_RULES = [
     triggers: ["database schema", "postgres", "migration", "data pipeline", "etl", "warehouse"],
     domains: ["backend", "data", "operations"],
     tools: ["Python", "Node"],
-    primarySkillNames: ["dev-database-postgres", "database-schema-design", "database-migration-plan", "dev-data-engineering", "data-pipeline-spec"],
-    supportingSkillNames: ["data-quality-audit", "data-analysis-standard", "dev-python-services"],
+    primarySkillNames: ["dev-database-postgres", "database-schema-design", "database-migration-plan", "dev-data-engineering", "data-pipeline-spec", "data-quality-audit"],
+    supportingSkillNames: ["data-analysis-standard", "dev-python-services"],
     verificationSkillNames: ["data-analytics:validate-data", "validate-data", "dependency-audit"],
     relatedConceptIds: ["backend-services", "data-dashboarding", "observability-reliability"]
   },
@@ -306,7 +306,7 @@ const CONCEPT_RULES = [
     domains: ["backend", "operations", "github", "security"],
     tools: ["GitHub", "Node", "Python"],
     primarySkillNames: ["conservative-repo-operations", "code-review-checklist", "dependency-audit", "dependency-conflict-resolver", "dev-architecture-review", "technical-debt-register", "code-explainer"],
-    supportingSkillNames: ["dev-monorepo-build-systems", "dev-dependency-maintenance", "error-decoder", "debugging-log-analyser"],
+    supportingSkillNames: ["dev-monorepo-build-systems", "dev-dependency-maintenance", "error-decoder", "debugging-log-analyser", "dev-git-github-collaboration"],
     verificationSkillNames: ["codex-security:security-diff-scan"],
     relatedConceptIds: ["github-pr-repair", "security-review", "deployment-release"]
   }
@@ -1441,7 +1441,7 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   const negatedCloudflareRuntimeIntent = hasNegatedIntent(normalizedQuery, ["cloudflare", "cloudflare worker", "cloudflare workers", "worker", "workers", "wrangler", "durable object"]);
   const chatgptAppIntent = /\bchatgpt app\b/.test(normalizedQuery);
   const negatedChatgptAppIntent = hasNegatedIntent(normalizedQuery, ["chatgpt app", "chatgpt"]);
-  const inAppBrowserIntent = /\bin app browser\b|\bcontrol in app browser\b|\bbrowser plugin\b/.test(normalizedQuery);
+  const inAppBrowserIntent = /\bin app browser\b|\bcontrol in app browser\b|\bapp embedded browser\b|\bembedded browser\b|\bbrowser plugin\b/.test(normalizedQuery);
   const negatedChromeIntent = hasNegatedIntent(normalizedQuery, ["chrome", "desktop chrome"]);
   const agentBrowserPreviewIntent = /\bagent browser verify\b|\bvercel agent browser\b|\bprotected preview\b|\bpreview deployment\b/.test(normalizedQuery)
     || (/\bvercel\b/.test(normalizedQuery) && /\bpreview\b|\bdeployment\b|\bprotected\b/.test(normalizedQuery) && /\bscreenshot|\bconsole errors?\b|\bcompare\b|\binspect\b/.test(normalizedQuery));
@@ -1522,6 +1522,37 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   const openAiDocsVerificationIntent = /\bopenai\b/.test(normalizedQuery)
     && /\bverify|current|migration|structured output|structured-output|api reference|before implementation\b/.test(normalizedQuery)
     && !openAiAgentsJsIntent;
+  const aiElementsIntent = /\bai elements\b|\bstreaming messages?\b|\btool[- ]call states?\b/.test(normalizedQuery)
+    && (!chatgptAppIntent || negatedChatgptAppIntent);
+  const aiGenerationPersistenceIntent = /\bai generations?\b|\bgeneration persistence\b|\bresume outputs?\b|\bresume\b.*\brefresh\b/.test(normalizedQuery)
+    && /\bpersist|\bpersistence|\bstorage boundaries?\b|\breplay tests?\b|\brefresh\b/.test(normalizedQuery);
+  const cloudflareAgentStateIntent = /\bcloudflare\b/.test(normalizedQuery)
+    && /\bagents? sdk\b|\bstateful\b.*\bagent|\bagent\b.*\bdurable object\b|\bworker bindings?\b.*\bagent/.test(normalizedQuery);
+  const screenshotEvidenceIntent = /\bscreenshot evidence\b|\bcapture screenshots?\b|\battach browser qa notes?\b|\bdesktop and mobile states?\b/.test(normalizedQuery)
+    && !agentBrowserPreviewIntent
+    && !inAppBrowserIntent;
+  const figmaAnnotationIntent = /\bfigma\b/.test(normalizedQuery)
+    && /\bannotat|\bannotation|\bspacing\b|\bcomponent notes?\b|\breview comments?\b|\bengineering handoff\b/.test(normalizedQuery)
+    && !/\bfigjam\b|\buser flow\b/.test(normalizedQuery);
+  const productDesignAuditIntent = /\baudit\b/.test(normalizedQuery)
+    && /\bproduct design\b|\bonboarding flow\b|\binteraction risks?\b|\bbefore implementation\b/.test(normalizedQuery)
+    && !/\bbuild the page\b|\bimplement\b/.test(normalizedQuery);
+  const geospatialMapIntent = /\bgeospatial\b|\bcartographic\b|\bmap visualization\b|\bprojection choices?\b/.test(normalizedQuery);
+  const eventTableQualityIntent = /\bevent table\b|\bduplicate keys?\b|\bnull rates?\b|\bfreshness\b|\bdata pipeline contract\b/.test(normalizedQuery)
+    && /\baudit\b|\bquality\b|\bownership rules?\b/.test(normalizedQuery);
+  const securityRemediationValidationIntent = /\bvalidate\b|\bvalidation\b/.test(normalizedQuery)
+    && /\bsecurity remediation\b|\bremediation pr\b|\breported issue\b|\bfixes?\b|\bfinding status\b/.test(normalizedQuery);
+  const huggingFaceJobsIntent = /\bhugging face\b|\bhf\b/.test(normalizedQuery)
+    && /\bgpu job\b|\bremote\b.*\bjob\b|\blaunch\b.*\bjob\b|\bmonitor\b.*\bjob\b|\brun artifacts?\b/.test(normalizedQuery);
+  const speechToTextIntent = /\bspeech[- ]to[- ]text\b|\btranscrib|\bmicrophone\b|\bwhisper\b/.test(normalizedQuery);
+  const voiceoverTtsIntent = /\bvoiceover\b|\bprepared script\b|\bvoice settings?\b|\bplayback\b/.test(normalizedQuery)
+    || (/\btext[- ]to[- ]speech\b|\btts\b/.test(normalizedQuery) && !speechToTextIntent);
+  const technicalDebtRegisterIntent = /\btechnical debt register\b|\bmodule hotspots?\b|\btodos?\b|\bowner notes?\b/.test(normalizedQuery);
+  const presentationTemplateIntent = /\bpresentation\b|\bslides?\b|\btemplate pack\b|\breusable presentation\b/.test(normalizedQuery)
+    && /\btemplate pack\b|\bslide layouts?\b|\bplaceholders?\b|\bbrand assets?\b|\bvalidation guidance\b/.test(normalizedQuery);
+  const notionResearchSourceBankIntent = /\bnotion\b/.test(normalizedQuery)
+    && /\bsource bank\b|\bevidence summaries?\b|\bopen questions?\b/.test(normalizedQuery)
+    && !notionSpecImplementationIntent;
 
   if (/\bdashboard\b/.test(normalizedQuery) && dataOutputIntent) {
     if (name.includes("build dashboard")) boost += 520;
@@ -1560,6 +1591,91 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("dev ai llm apps")) boost += 1800;
     if (["dev node typescript services", "api docs writer"].some((term) => name.includes(term))) boost += 620;
     if (["building mcp server on cloudflare", "workers best practices", "wrangler", "chatgpt apps"].some((term) => name.includes(term))) boost -= 1400;
+  }
+
+  if (aiElementsIntent) {
+    if (name.includes("ai elements")) boost += 3400;
+    if (["ai sdk", "dev frontend react next", "frontend testing debugging"].some((term) => name.includes(term))) boost += 520;
+    if (["chatgpt apps", "openai agents js", "dev ai llm apps", "building ai agent on cloudflare"].some((term) => name.includes(term))) boost -= 1300;
+  }
+
+  if (aiGenerationPersistenceIntent) {
+    if (name.includes("ai generation persistence")) boost += 3400;
+    if (["ai sdk", "dev node typescript services", "database schema design"].some((term) => name.includes(term))) boost += 520;
+    if (["vercel storage", "openai agents js", "dev database postgres", "database migration plan"].some((term) => name.includes(term))) boost -= 1200;
+  }
+
+  if (cloudflareAgentStateIntent) {
+    if (name.includes("agents sdk") || name.includes("building ai agent on cloudflare")) boost += 3200;
+    if (["durable objects", "wrangler", "workers best practices"].some((term) => name.includes(term))) boost += 640;
+    if (["openai agents js", "agent browser", "vercel agent"].some((term) => name.includes(term))) boost -= 1800;
+  }
+
+  if (screenshotEvidenceIntent) {
+    if (name === "screenshot" || name.includes("screenshot")) boost += 3600;
+    if (["control in app browser", "frontend testing debugging", "playwright"].some((term) => name.includes(term))) boost += 520;
+    if (["design image to code", "image to code", "design url to code", "url to code"].some((term) => name.includes(term))) boost -= 2200;
+  }
+
+  if (figmaAnnotationIntent) {
+    if (name.includes("figma annotation guide")) boost += 3600;
+    if (["figma use", "figma design review", "figma design qa"].some((term) => name.includes(term))) boost += 520;
+    if (["figma implement design", "figma code connect", "dev frontend react next"].some((term) => name.includes(term))) boost -= 1800;
+  }
+
+  if (productDesignAuditIntent) {
+    if (name === "design audit" || name.includes("design audit")) boost += 4200;
+    if (["design get context", "ux research plan", "design qa"].some((term) => name.includes(term))) boost += 520;
+    if (["frontend app builder", "figma implement design"].some((term) => name.includes(term))) boost -= 1400;
+    if (name === "audit") boost -= 2600;
+  }
+
+  if (geospatialMapIntent) {
+    if (name.includes("geospatial and cartographic visualization")) boost += 3400;
+    if (["data visualization", "testing data visualizations", "build report"].some((term) => name.includes(term))) boost += 520;
+    if (["build dashboard", "chart data extractor", "uml and software architecture visualization"].some((term) => name.includes(term))) boost -= 1200;
+  }
+
+  if (eventTableQualityIntent) {
+    if (name.includes("data quality audit")) boost += 3400;
+    if (["validate data", "data pipeline spec", "data analysis standard"].some((term) => name.includes(term))) boost += 620;
+    if (["database schema design", "database migration plan", "dev database postgres", "build dashboard"].some((term) => name.includes(term))) boost -= 1200;
+  }
+
+  if (securityRemediationValidationIntent) {
+    if (name === "validation" || name.includes("validation")) boost += 3400;
+    if (["security diff scan", "track findings", "security best practices"].some((term) => name.includes(term))) boost += 520;
+    if (["finding discovery", "triage finding", "deep security scan"].some((term) => name.includes(term))) boost -= 1800;
+  }
+
+  if (huggingFaceJobsIntent) {
+    if (name.includes("huggingface jobs")) boost += 3600;
+    if (["hf cli", "huggingface trackio", "huggingface llm trainer"].some((term) => name.includes(term))) boost += 520;
+    if (["huggingface gradio", "huggingface datasets", "huggingface vision trainer"].some((term) => name.includes(term))) boost -= 1600;
+  }
+
+  if (voiceoverTtsIntent) {
+    if (name === "speech") boost += 3400;
+    if (["openai docs", "dev ai llm apps"].some((term) => name.includes(term))) boost += 420;
+    if (["transcribe", "transformers js", "openai agents js", "copilot sdk"].some((term) => name.includes(term))) boost -= 1800;
+  }
+
+  if (technicalDebtRegisterIntent) {
+    if (name.includes("technical debt register")) boost += 3400;
+    if (["dependency audit", "code review checklist", "dev git github collaboration"].some((term) => name.includes(term))) boost += 520;
+    if (["dependency conflict resolver", "changelog generator"].some((term) => name.includes(term))) boost -= 1800;
+  }
+
+  if (presentationTemplateIntent) {
+    if (name.includes("template creator")) boost += 3400;
+    if (["presentations", "documents", "premium saas landing pages"].some((term) => name.includes(term))) boost += 520;
+    if (["roadmap presentation", "roadmap narrative"].some((term) => name.includes(term))) boost -= 1800;
+  }
+
+  if (notionResearchSourceBankIntent) {
+    if (name.includes("notion research documentation")) boost += 3400;
+    if (["last 30 days research", "research protocol", "notion knowledge capture"].some((term) => name.includes(term))) boost += 520;
+    if (["notion meeting intelligence", "notion spec to implementation"].some((term) => name.includes(term))) boost -= 1800;
   }
 
   if (inAppBrowserIntent || negatedChromeIntent) {
@@ -1658,9 +1774,10 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   }
 
   if (/\breact three fiber\b|\br3f\b/.test(normalizedQuery)) {
-    if (name.includes("react three fiber game")) boost += 1240;
-    if (name.includes("three webgl game")) boost += 180;
+    if (name.includes("react three fiber game")) boost += 3400;
+    if (["three webgl game", "game playtest", "web 3d asset pipeline"].some((term) => name.includes(term))) boost += 520;
     if (name.includes("threejs data visualization")) boost -= 420;
+    if (name.includes("template creator")) boost -= 1800;
   }
 
   if (/\b(game prototype|prototype a game|full web game|game mechanics|playtest loop)\b/.test(normalizedQuery)) {

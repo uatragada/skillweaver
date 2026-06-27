@@ -1,9 +1,9 @@
 # SkillWeaver V2 Frozen Holdout Regression Benchmark
 
-Generated: 2026-06-27T21:38:48.353Z
+Generated: 2026-06-27T22:04:36.320Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782596328353,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"77d4c733f3ba2cf937b5f967ffe44a2a28170fa0","dirty":true,"dirtyPaths":[".env.example","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a","benchmarkScript":"sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:315b55966af53961860d16216c09c142d9a6354bd0b3c8af64d3db0322dd84f1"}
+{"generatedAt":1782597876320,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"38e4c6df2a46acc4840560ad73a872ee61460c37","dirty":true,"dirtyPaths":["README.md","REQUIREMENTS.md","benchmarks/skill-routing-clean-holdout-v5.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","docs/SUPPORT-QUALITY-ROADMAP.md","docs/V2-EXPERIMENT-LOG.md","docs/VERIFICATION.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37","benchmarkScript":"sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:a65bba950f5cc2b642e915de215ca84d0acb49b49d8a188a205abbef86a9d85a"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:frozen`
 - Suite: Frozen Holdout Regression
 - Acceptance gate: no
-- Git commit at generation: `77d4c733f3ba2cf937b5f967ffe44a2a28170fa0`
+- Git commit at generation: `38e4c6df2a46acc4840560ad73a872ee61460c37`
 - Git dirty: yes
 - Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948`
-- Scanner hash: `sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a`
-- Benchmark script hash: `sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0`
+- Scanner hash: `sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37`
+- Benchmark script hash: `sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:315b55966af53961860d16216c09c142d9a6354bd0b3c8af64d3db0322dd84f1`
+- Snapshot fingerprint: `sha256:a65bba950f5cc2b642e915de215ca84d0acb49b49d8a188a205abbef86a9d85a`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -53,18 +53,18 @@ This suite began as untouched frozen-holdout evidence, then its misses informed 
 
 | Metric | No SkillWeaver | Skill-Level Baseline | SkillWeaver V2 | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Output quality score (0-100) | 70.6 | 69.8 | 95.6 | +24.9 pts | +25.7 pts |
+| Output quality score (0-100) | 70.6 | 69.8 | 95.3 | +24.6 pts | +25.4 pts |
 | Primary hit@1 | 66.7% | 58.3% | 100.0% | +33.3 pp | +41.7 pp |
 | Expected skill in top/workflow 5 | 83.3% | 100.0% | 100.0% | +16.7 pp | 0.0 pp |
 | Mean reciprocal rank | 0.754 | 0.714 | 1.000 | +0.246 | +0.286 |
-| Support-skill coverage@5 | 61.1% | 61.1% | 77.8% | +16.7 pp | +16.7 pp |
+| Support-skill coverage@5 | 61.1% | 61.1% | 76.4% | +15.3 pp | +15.3 pp |
 | Support precision@5, exploratory | 45.8% | 45.8% | 56.3% | +10.4 pp | +10.4 pp |
 | Forbidden primary rate, lower is better | 8.3% | 16.7% | 0.0% | -8.3 pp better | -16.7 pp better |
 | Mean candidates to expected skill, lower is better | 2.8 | 2.1 | 1.0 | -1.8 candidates better | -1.1 candidates better |
 
 ## Claim Scope
 
-This report measures the current route against the previously frozen holdout prompt set after its misses informed routing fixes. Current results are regression evidence for those prompts, not clean-split generalization proof: 12/12 primary hit@1, 12/12 expected primary in top/workflow five, 0/12 forbidden primaries, support coverage@5 77.8%, support precision@5 56.3%, and 6/12 support-miss cases. Use the earlier frozen-holdout baseline report in git history for pre-tuning evidence.
+This report measures the current route against the previously frozen holdout prompt set after its misses informed routing fixes. Current results are regression evidence for those prompts, not clean-split generalization proof: 12/12 primary hit@1, 12/12 expected primary in top/workflow five, 0/12 forbidden primaries, support coverage@5 76.4%, support precision@5 56.3%, and 6/12 support-miss cases. Use the earlier frozen-holdout baseline report in git history for pre-tuning evidence.
 
 V2 raw counts: primary hit@1 12/12; expected primary top/workflow-five 12/12; forbidden primary 0/12; support-miss cases 6/12.
 
@@ -76,8 +76,8 @@ Frozen Holdout Regression quality is intentionally reported rather than accepted
 
 | Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Frontend experience | 2 | 96.7 | 100.0% | 100.0% | 83.3% | 62.5% | 0.0% | 1/2 | +31.7 pts | +31.3 pts |
-| AI agent apps | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +98.6 pts | +76.0 pts |
+| Frontend experience | 2 | 100.0 | 100.0% | 100.0% | 100.0% | 75.0% | 0.0% | 0/2 | +35.0 pts | +34.7 pts |
+| AI agent apps | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 1/1 | +88.6 pts | +66.0 pts |
 | Communications and knowledge | 1 | 93.3 | 100.0% | 100.0% | 66.7% | 50.0% | 0.0% | 1/1 | -6.7 pts | 0.0 pts |
 | Data analytics | 1 | 86.7 | 100.0% | 100.0% | 33.3% | 25.0% | 0.0% | 1/1 | -6.7 pts | 0.0 pts |
 | Documents and publishing | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 75.0% | 0.0% | 0/1 | +6.7 pts | 0.0 pts |
@@ -92,8 +92,8 @@ Frozen Holdout Regression quality is intentionally reported rather than accepted
 
 | Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Agent and LLM apps | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +98.6 pts | +76.0 pts |
-| Browser verification | 1 | 93.3 | 100.0% | 100.0% | 66.7% | 50.0% | 0.0% | 1/1 | +13.3 pts | +6.7 pts |
+| Agent and LLM apps | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 1/1 | +88.6 pts | +66.0 pts |
+| Browser verification | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 75.0% | 0.0% | 0/1 | +20.0 pts | +13.3 pts |
 | Data dashboards and reports | 1 | 86.7 | 100.0% | 100.0% | 33.3% | 25.0% | 0.0% | 1/1 | -6.7 pts | 0.0 pts |
 | Deployment and release | 1 | 86.7 | 100.0% | 100.0% | 33.3% | 25.0% | 0.0% | 1/1 | 0.0 pts | 0.0 pts |
 | Email triage | 1 | 93.3 | 100.0% | 100.0% | 66.7% | 50.0% | 0.0% | 1/1 | -6.7 pts | 0.0 pts |
@@ -109,18 +109,18 @@ Frozen Holdout Regression quality is intentionally reported rather than accepted
 
 | Case | Domain | Expected concept | Expected primary | No primary / rank | Skill-level primary / rank | V2 primary / rank | V2 top concept | V2 top/workflow 5 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| node-typescript-mcp-server-holdout | AI agent apps | Agent and LLM apps | dev-ai-llm-apps | building-mcp-server-on-cloudflare !building-mcp-server-on-cloudflare / 14 | chatgpt-apps !chatgpt-apps / 5 | dev-ai-llm-apps / 1 | Agent and LLM apps | dev-ai-llm-apps -> dev-node-typescript-services -> building-mcp-server-on-cloudflare -> api-docs-writer -> agents-sdk |
+| node-typescript-mcp-server-holdout | AI agent apps | Agent and LLM apps | dev-ai-llm-apps | building-mcp-server-on-cloudflare !building-mcp-server-on-cloudflare / 14 | chatgpt-apps !chatgpt-apps / 5 | dev-ai-llm-apps / 1 | Agent and LLM apps | dev-ai-llm-apps -> dev-node-typescript-services -> building-mcp-server-on-cloudflare -> agents-sdk -> dev-frontend-react-next |
 | gmail-notion-inbox-holdout | Communications and knowledge | Email triage | gmail-inbox-triage, gmail | gmail-inbox-triage / 1 | gmail / 1 | gmail-inbox-triage / 1 | Email triage | gmail-inbox-triage -> gmail -> email-triage -> notion-meeting-intelligence -> triage-finding |
 | phaser-sprite-hud-holdout | Games and simulation | Game development | sprite-pipeline | phaser-2d-game / 3 | phaser-2d-game / 3 | sprite-pipeline / 1 | Game development | sprite-pipeline -> phaser-2d-game -> game-playtest -> game-ui-frontend -> web-3d-asset-pipeline |
-| vercel-storage-marketplace-holdout | Platform delivery | Deployment and release | vercel-storage | vercel-storage / 1 | vercel-storage / 1 | vercel-storage / 1 | Skill ranking anchor | vercel-storage -> vercel-api -> env-vars -> bootstrap -> building-mcp-server-on-cloudflare |
+| vercel-storage-marketplace-holdout | Platform delivery | Deployment and release | vercel-storage | vercel-storage / 1 | vercel-storage / 1 | vercel-storage / 1 | Skill ranking anchor | vercel-storage -> vercel-api -> env-vars -> bootstrap -> vercel-functions |
 | analytics-semantic-layer-holdout | Data analytics | Data dashboards and reports | create-data-context | create-data-context / 1 | create-data-context / 1 | create-data-context / 1 | Skill ranking anchor | create-data-context -> product-business-analysis -> build-report -> build-dashboard -> design-kpis |
 | otel-slo-tracing-holdout | Observability and reliability | Observability and reliability | dev-observability-sre | slo-error-budget / 7 | slo-error-budget / 3 | dev-observability-sre / 1 | Observability and reliability | dev-observability-sre -> monitoring-setup-guide -> slo-error-budget -> sentry -> performance-budget |
 | huggingface-paper-evals-holdout | Hugging Face ML | Hugging Face ML | huggingface-paper-publisher | huggingface-paper-publisher / 1 | huggingface-papers / 2 | huggingface-paper-publisher / 1 | Hugging Face ML | huggingface-paper-publisher -> huggingface-community-evals -> huggingface-papers -> huggingface-datasets -> hf-cli |
 | brand-logo-moodboard-holdout | Marketing, growth, and creative | Marketing growth | logo-explorer | logo-explorer / 1 | logo-explorer / 1 | logo-explorer / 1 | Skill ranking anchor | logo-explorer -> moodboard-explorer -> offer-explorer -> creative-production -> ads-explorer |
-| in-app-browser-choice-holdout | Frontend experience | Browser verification | control-in-app-browser | control-in-app-browser / 1 | control-in-app-browser / 1 | control-in-app-browser / 1 | Browser verification | control-in-app-browser -> url-to-code -> playwright-interactive -> agent-browser -> design-image-to-code |
-| figma-swiftui-motion-holdout | Frontend experience | Figma design handoff | figma-swiftui | figma-implement-motion / 2 | figma-implement-design !figma-implement-design / 5 | figma-swiftui / 1 | Figma design handoff | figma-swiftui -> figma-use-motion -> figma-use -> figma-implement-motion -> design-image-to-code |
+| in-app-browser-choice-holdout | Frontend experience | Browser verification | control-in-app-browser | control-in-app-browser / 1 | control-in-app-browser / 1 | control-in-app-browser / 1 | Browser verification | control-in-app-browser -> url-to-code -> playwright-interactive -> agent-browser -> screenshot |
+| figma-swiftui-motion-holdout | Frontend experience | Figma design handoff | figma-swiftui | figma-implement-motion / 2 | figma-implement-design !figma-implement-design / 5 | figma-swiftui / 1 | Figma design handoff | figma-swiftui -> figma-use-motion -> figma-use -> figma-implement-motion -> design-handoff-brief |
 | skill-install-security-holdout | Skill tooling | Skill authoring | skill-installer | skill-installer / 1 | skill-installer / 1 | skill-installer / 1 | Skill authoring | skill-installer -> skill-security-auditor -> skillweaver -> hatch-pet -> copilot-sdk |
-| analytics-report-to-slides-holdout | Documents and publishing | Presentations | reports-pdfs-and-slide-automation | reports-pdfs-and-slide-automation / 1 | reports-pdfs-and-slide-automation / 1 | reports-pdfs-and-slide-automation / 1 | Presentations | reports-pdfs-and-slide-automation -> build-report -> threejs-data-visualization -> Presentations -> template-creator |
+| analytics-report-to-slides-holdout | Documents and publishing | Presentations | reports-pdfs-and-slide-automation | reports-pdfs-and-slide-automation / 1 | reports-pdfs-and-slide-automation / 1 | reports-pdfs-and-slide-automation / 1 | Presentations | reports-pdfs-and-slide-automation -> build-report -> threejs-data-visualization -> template-creator -> Presentations |
 
 ## V2 Support Misses
 
@@ -128,16 +128,16 @@ This table is a support-quality backlog source, not an acceptance failure list. 
 
 | Case | Missing expected support | V2 top/workflow 5 |
 | --- | --- | --- |
+| node-typescript-mcp-server-holdout | api-docs-writer | dev-ai-llm-apps -> dev-node-typescript-services -> building-mcp-server-on-cloudflare -> agents-sdk -> dev-frontend-react-next |
 | gmail-notion-inbox-holdout | notion-knowledge-capture | gmail-inbox-triage -> gmail -> email-triage -> notion-meeting-intelligence -> triage-finding |
-| vercel-storage-marketplace-holdout | marketplace, nextjs | vercel-storage -> vercel-api -> env-vars -> bootstrap -> building-mcp-server-on-cloudflare |
+| vercel-storage-marketplace-holdout | marketplace, nextjs | vercel-storage -> vercel-api -> env-vars -> bootstrap -> vercel-functions |
 | analytics-semantic-layer-holdout | gather-business-context, validate-data | create-data-context -> product-business-analysis -> build-report -> build-dashboard -> design-kpis |
 | brand-logo-moodboard-holdout | positioning-explorer | logo-explorer -> moodboard-explorer -> offer-explorer -> creative-production -> ads-explorer |
-| in-app-browser-choice-holdout | screenshot | control-in-app-browser -> url-to-code -> playwright-interactive -> agent-browser -> design-image-to-code |
 | skill-install-security-holdout | skill-creator | skill-installer -> skill-security-auditor -> skillweaver -> hatch-pet -> copilot-sdk |
 
 ## Interpretation
 
-On the frozen holdout regression suite, SkillWeaver V2 changes the composite output-quality score by +24.9 points versus no SkillWeaver and +25.7 points versus the skill-level baseline.
+On the frozen holdout regression suite, SkillWeaver V2 changes the composite output-quality score by +24.6 points versus no SkillWeaver and +25.4 points versus the skill-level baseline.
 V2 changes primary selection by +33.3 percentage points versus no SkillWeaver and +41.7 percentage points versus the skill-level baseline.
 V2 changes expected-skill top/workflow-5 retrieval by +16.7 percentage points versus no SkillWeaver and 0.0 percentage points versus the skill-level baseline.
 The V2 score reflects a concept-aided skill-loading experience, not an LLM reranker; it is fully deterministic and derived from the local skill corpus.

@@ -1933,3 +1933,155 @@ test("concept workflow promotes clean holdout V4 regression boundaries", () => {
   assert.notEqual(names[0], "api-docs-writer");
   assert.notEqual(names[0], "chatgpt-apps");
 });
+
+test("concept workflow promotes clean holdout V5 regression boundaries", () => {
+  const index = makeConceptIndex([
+    makeSkill({ id: "ai-elements", name: "ai-elements", description: "Build Vercel AI Elements chat surfaces with streaming messages and tool-call states.", domains: ["ai", "frontend"], tools: ["Vercel"], triggers: ["ai elements streaming messages tool-call states"] }),
+    makeSkill({ id: "ai-sdk", name: "ai-sdk", description: "Use the Vercel AI SDK for model-backed UI.", domains: ["ai"], tools: ["Vercel"], triggers: ["ai sdk"] }),
+    makeSkill({ id: "openai-agents-js", name: "openai-agents-js", description: "Build OpenAI Agents JS workflows.", domains: ["ai"], tools: ["OpenAI"], triggers: ["openai agents js"] }),
+    makeSkill({ id: "chatgpt-apps", name: "chatgpt-apps", description: "Build ChatGPT Apps.", domains: ["ai", "frontend"], tools: ["OpenAI"], triggers: ["chatgpt app"] }),
+    makeSkill({ id: "dev-frontend-react-next", name: "dev-frontend-react-next", description: "Build React and Next.js frontends.", domains: ["frontend"], tools: ["Node"], triggers: ["react next frontend"] }),
+    makeSkill({ id: "frontend-testing-debugging", name: "frontend-testing-debugging", description: "Verify frontend behavior.", domains: ["frontend"], tools: ["Playwright"], triggers: ["frontend testing"] }),
+    makeSkill({ id: "ai-generation-persistence", name: "ai-generation-persistence", description: "Persist AI generations so users can resume outputs after refresh.", domains: ["ai", "backend"], tools: ["Vercel"], triggers: ["ai generation persistence resume outputs"] }),
+    makeSkill({ id: "vercel-storage", name: "vercel-storage", description: "Provision Vercel Blob and storage.", domains: ["backend"], tools: ["Vercel"], triggers: ["vercel blob storage"] }),
+    makeSkill({ id: "database-schema-design", name: "database-schema-design", description: "Design database schemas.", domains: ["backend", "data"], tools: ["Node"], triggers: ["database schema"] }),
+    makeSkill({ id: "dev-node-typescript-services", name: "dev-node-typescript-services", description: "Build Node TypeScript services.", domains: ["backend"], tools: ["Node"], triggers: ["node typescript services"] }),
+
+    makeSkill({ id: "agents-sdk", name: "agents-sdk", description: "Build Cloudflare Agents SDK workflows.", domains: ["ai", "backend"], tools: ["Cloudflare"], triggers: ["cloudflare agents sdk"] }),
+    makeSkill({ id: "building-ai-agent-on-cloudflare", name: "building-ai-agent-on-cloudflare", description: "Build AI agents on Cloudflare.", domains: ["ai"], tools: ["Cloudflare"], triggers: ["cloudflare ai agent"] }),
+    makeSkill({ id: "durable-objects", name: "durable-objects", description: "Use Durable Objects for state.", domains: ["backend"], tools: ["Cloudflare"], triggers: ["durable object state"] }),
+    makeSkill({ id: "wrangler", name: "wrangler", description: "Deploy and configure Cloudflare Workers.", domains: ["operations"], tools: ["Cloudflare"], triggers: ["wrangler workers"] }),
+    makeSkill({ id: "workers-best-practices", name: "workers-best-practices", description: "Apply Workers best practices.", domains: ["backend"], tools: ["Cloudflare"], triggers: ["workers best practices"] }),
+    makeSkill({ id: "agent-browser-verify", name: "agent-browser-verify", description: "Verify Vercel Agent Browser previews.", domains: ["frontend"], tools: ["Vercel"], triggers: ["agent browser verify"] }),
+
+    makeSkill({ id: "screenshot", name: "screenshot", description: "Capture screenshot evidence for browser QA.", domains: ["frontend"], tools: ["Playwright"], triggers: ["screenshot evidence"] }),
+    makeSkill({ id: "design-image-to-code", name: "design-image-to-code", description: "Turn screenshots and images into code.", domains: ["frontend"], tools: ["Node"], triggers: ["image to code screenshot to code"] }),
+    makeSkill({ id: "design-url-to-code", name: "design-url-to-code", description: "Turn URLs into code.", domains: ["frontend"], tools: ["Node"], triggers: ["url to code"] }),
+    makeSkill({ id: "control-in-app-browser", name: "control-in-app-browser", description: "Control the in-app browser.", domains: ["frontend"], tools: ["Playwright"], triggers: ["in app browser"] }),
+    makeSkill({ id: "playwright", name: "playwright", description: "Run Playwright browser checks.", domains: ["frontend"], tools: ["Playwright"], triggers: ["playwright browser qa"] }),
+
+    makeSkill({ id: "figma-annotation-guide", name: "figma-annotation-guide", description: "Annotate Figma files for engineering handoff.", domains: ["frontend", "product"], tools: ["Figma"], triggers: ["figma annotation engineering handoff spacing component notes"] }),
+    makeSkill({ id: "figma-use-figjam", name: "figma-use-figjam", description: "Use FigJam boards for user flows, sections, connectors, sticky notes, and decision maps.", domains: ["frontend", "product"], tools: ["Figma"], triggers: ["figjam user flow sections connectors sticky notes"] }),
+    makeSkill({ id: "figma-user-flow-planner", name: "figma-user-flow-planner", description: "Plan user flows in FigJam and Figma with decision paths and annotations.", domains: ["product"], tools: ["Figma"], triggers: ["figjam user flow decision annotations"] }),
+    makeSkill({ id: "figma-use", name: "figma-use", description: "Use Figma files and nodes.", domains: ["frontend"], tools: ["Figma"], triggers: ["figma use"] }),
+    makeSkill({ id: "figma-code-connect", name: "figma-code-connect", description: "Create Figma Code Connect mappings.", domains: ["frontend"], tools: ["Figma"], triggers: ["figma code connect"] }),
+    makeSkill({ id: "figma-implement-design", name: "figma-implement-design", description: "Implement Figma designs in code.", domains: ["frontend"], tools: ["Figma"], triggers: ["implement figma"] }),
+    makeSkill({ id: "design-audit", name: "design-audit", description: "Audit product design flows and interaction risks.", domains: ["frontend", "product"], tools: ["Figma"], triggers: ["product design audit onboarding interaction risks"] }),
+    makeSkill({ id: "audit", name: "audit", description: "Generic product design audit.", domains: ["product"], tools: [], triggers: ["audit"] }),
+
+    makeSkill({ id: "geospatial-and-cartographic-visualization", name: "geospatial-and-cartographic-visualization", description: "Create geospatial map visualizations with projections and legends.", domains: ["data"], tools: ["Node"], triggers: ["geospatial map cartographic projection"] }),
+    makeSkill({ id: "data-visualization", name: "data-visualization", description: "Create data visualizations.", domains: ["data"], tools: ["Node"], triggers: ["data visualization"] }),
+    makeSkill({ id: "build-dashboard", name: "build-dashboard", description: "Build BI dashboards.", domains: ["data"], tools: ["Node"], triggers: ["dashboard"] }),
+    makeSkill({ id: "chart-data-extractor", name: "chart-data-extractor", description: "Extract chart data.", domains: ["data"], tools: ["Python"], triggers: ["chart extraction"] }),
+    makeSkill({ id: "data-quality-audit", name: "data-quality-audit", description: "Audit data freshness, duplicate keys, null rates, and quality contracts.", domains: ["data"], tools: ["Python"], triggers: ["data quality audit event table duplicate keys null rates"] }),
+    makeSkill({ id: "data-pipeline-spec", name: "data-pipeline-spec", description: "Specify data pipeline contracts.", domains: ["data"], tools: ["Node"], triggers: ["data pipeline contract"] }),
+
+    makeSkill({ id: "validation", name: "validation", description: "Validate security remediation fixes.", domains: ["security"], tools: ["GitHub"], triggers: ["validate remediation fixing reported issue"] }),
+    makeSkill({ id: "finding-discovery", name: "finding-discovery", description: "Discover security findings before triage.", domains: ["security"], tools: ["GitHub"], triggers: ["finding discovery"] }),
+    makeSkill({ id: "triage-finding", name: "triage-finding", description: "Triage security findings.", domains: ["security"], tools: ["GitHub"], triggers: ["triage finding"] }),
+    makeSkill({ id: "security-diff-scan", name: "security-diff-scan", description: "Scan security diffs.", domains: ["security"], tools: ["GitHub"], triggers: ["security diff scan"] }),
+    makeSkill({ id: "security-best-practices", name: "security-best-practices", description: "Apply security best practices.", domains: ["security"], tools: ["GitHub"], triggers: ["security best practices"] }),
+
+    makeSkill({ id: "huggingface-jobs", name: "huggingface-jobs", description: "Launch and monitor Hugging Face GPU jobs.", domains: ["ai"], tools: ["Python"], triggers: ["hugging face gpu job remote job logs metrics"] }),
+    makeSkill({ id: "huggingface-datasets", name: "huggingface-datasets", description: "Inspect Hugging Face datasets.", domains: ["ai", "data"], tools: ["Python"], triggers: ["dataset card"] }),
+    makeSkill({ id: "huggingface-gradio", name: "huggingface-gradio", description: "Create Gradio Spaces.", domains: ["ai", "frontend"], tools: ["Python"], triggers: ["gradio space"] }),
+    makeSkill({ id: "hf-cli", name: "hf-cli", description: "Use the Hugging Face CLI.", domains: ["ai"], tools: ["Python"], triggers: ["hf cli"] }),
+    makeSkill({ id: "huggingface-trackio", name: "huggingface-trackio", description: "Track Hugging Face runs.", domains: ["ai"], tools: ["Python"], triggers: ["trackio metrics"] }),
+
+    makeSkill({ id: "speech", name: "speech", description: "Generate text-to-speech voiceover audio.", domains: ["ai"], tools: ["OpenAI"], triggers: ["text to speech voiceover voice settings playback"] }),
+    makeSkill({ id: "transcribe", name: "transcribe", description: "Transcribe microphone and audio input.", domains: ["ai"], tools: ["OpenAI"], triggers: ["transcribe microphone speech to text"] }),
+    makeSkill({ id: "transformers-js", name: "transformers-js", description: "Run local browser ML models.", domains: ["ai"], tools: ["Node"], triggers: ["transformers js"] }),
+    makeSkill({ id: "dev-ai-llm-apps", name: "dev-ai-llm-apps", description: "Build LLM apps.", domains: ["ai"], tools: ["OpenAI"], triggers: ["llm app"] }),
+    makeSkill({ id: "openai-docs", name: "openai-docs", description: "Check OpenAI docs.", domains: ["ai", "documents"], tools: ["OpenAI"], triggers: ["openai docs"] }),
+
+    makeSkill({ id: "react-three-fiber-game", name: "react-three-fiber-game", description: "Build React Three Fiber game scenes.", domains: ["frontend", "creative"], tools: ["Node"], triggers: ["react three fiber game scene camera controls physics placeholders"] }),
+    makeSkill({ id: "three-webgl-game", name: "three-webgl-game", description: "Build Three.js WebGL games.", domains: ["frontend"], tools: ["Node"], triggers: ["three webgl game"] }),
+    makeSkill({ id: "game-playtest", name: "game-playtest", description: "Playtest game scenes.", domains: ["frontend"], tools: ["Node"], triggers: ["game playtest"] }),
+    makeSkill({ id: "web-3d-asset-pipeline", name: "web-3d-asset-pipeline", description: "Prepare 3D web game assets.", domains: ["frontend"], tools: ["Node"], triggers: ["3d asset pipeline"] }),
+    makeSkill({ id: "threejs-data-visualization", name: "threejs-data-visualization", description: "Create 3D data visualizations.", domains: ["data"], tools: ["Node"], triggers: ["3d data visualization"] }),
+    makeSkill({ id: "template-creator", name: "template-creator", description: "Create reusable document and slide templates.", domains: ["documents"], tools: ["Node"], triggers: ["template pack slide layouts placeholders"] }),
+    makeSkill({ id: "roadmap-presentation", name: "roadmap-presentation", description: "Create roadmap decks.", domains: ["documents"], tools: ["Node"], triggers: ["roadmap deck"] }),
+    makeSkill({ id: "Presentations", name: "Presentations", description: "Create presentations.", domains: ["documents"], tools: ["Node"], triggers: ["presentation slides"] }),
+    makeSkill({ id: "documents", name: "documents", description: "Work with documents.", domains: ["documents"], tools: ["Node"], triggers: ["documents"] }),
+
+    makeSkill({ id: "technical-debt-register", name: "technical-debt-register", description: "Create technical debt registers from hotspots, TODOs, dependency risk, and owner notes.", domains: ["operations"], tools: ["GitHub"], triggers: ["technical debt register module hotspots todos owner notes"] }),
+    makeSkill({ id: "dependency-conflict-resolver", name: "dependency-conflict-resolver", description: "Resolve dependency conflicts.", domains: ["operations"], tools: ["Node"], triggers: ["dependency conflict"] }),
+    makeSkill({ id: "dependency-audit", name: "dependency-audit", description: "Audit dependency risk.", domains: ["operations"], tools: ["Node"], triggers: ["dependency audit risk"] }),
+    makeSkill({ id: "code-review-checklist", name: "code-review-checklist", description: "Review code with a checklist.", domains: ["github"], tools: ["GitHub"], triggers: ["code review checklist"] }),
+    makeSkill({ id: "changelog-generator", name: "changelog-generator", description: "Write release notes and changelogs.", domains: ["documents"], tools: ["Node"], triggers: ["changelog release notes"] }),
+
+    makeSkill({ id: "notion-research-documentation", name: "notion-research-documentation", description: "Document Notion research notes, source links, evidence summaries, and open questions.", domains: ["product", "documents"], tools: ["Linear"], triggers: ["notion research notes source links evidence summaries open questions"] }),
+    makeSkill({ id: "notion-spec-to-implementation", name: "notion-spec-to-implementation", description: "Convert Notion specs into implementation tickets.", domains: ["product"], tools: ["Linear"], triggers: ["notion spec implementation tickets"] }),
+    makeSkill({ id: "notion-meeting-intelligence", name: "notion-meeting-intelligence", description: "Summarize Notion meeting notes.", domains: ["product"], tools: ["Linear"], triggers: ["notion meeting notes"] }),
+    makeSkill({ id: "notion-knowledge-capture", name: "notion-knowledge-capture", description: "Capture knowledge in Notion.", domains: ["product"], tools: ["Linear"], triggers: ["notion knowledge capture"] })
+  ]);
+  const topFive = (query) => rankConceptWorkflowSkills(index, query).slice(0, 5).map((skill) => skill.name);
+
+  let names = topFive("Build a production chat UI with Vercel AI Elements, streaming messages, tool-call states, and accessibility checks; do not create a ChatGPT App or OpenAI Agents workflow.");
+  assert.equal(names[0], "ai-elements");
+  assert.notEqual(names[0], "openai-agents-js");
+
+  names = topFive("Add persistence for AI generations in a Next.js app so users can resume outputs after refresh, including storage boundaries and replay tests; do not route this to generic database schema design or Vercel Blob setup.");
+  assert.equal(names[0], "ai-generation-persistence");
+  assert.notEqual(names[0], "vercel-storage");
+
+  names = topFive("Build a stateful Cloudflare Agents SDK workflow with Worker bindings and Durable Object state; do not use Vercel Agent Browser or OpenAI Agents JS.");
+  assert.ok(["agents-sdk", "building-ai-agent-on-cloudflare"].includes(names[0]));
+  assert.notEqual(names[0], "openai-agents-js");
+
+  names = topFive("Capture screenshot evidence for a local UI bug, compare desktop and mobile states, and attach browser QA notes; do not turn the screenshot into code.");
+  assert.equal(names[0], "screenshot");
+  assert.notEqual(names[0], "design-image-to-code");
+
+  names = topFive("Use Vercel Agent Browser Verify to inspect a protected preview deployment, capture screenshots and console errors, and compare the deployed UI; not the local in-app browser or desktop Chrome.");
+  assert.equal(names[0], "agent-browser-verify");
+  assert.notEqual(names[0], "screenshot");
+
+  names = topFive("Use the app embedded browser against localhost, reproduce a mobile layout break, capture screenshot proof, and inspect console output without launching desktop Chrome.");
+  assert.equal(names[0], "control-in-app-browser");
+  assert.notEqual(names[0], "screenshot");
+
+  names = topFive("Annotate a Figma design for engineering handoff with spacing, component notes, and review comments; do not implement React code or create Code Connect mappings.");
+  assert.equal(names[0], "figma-annotation-guide");
+  assert.notEqual(names[0], "figma-code-connect");
+
+  names = topFive("Use FigJam to map a user flow with sections, connectors, sticky notes, and decision annotations; do not create a Figma design file or component library.");
+  assert.ok(["figma-use-figjam", "figma-user-flow-planner"].includes(names[0]));
+  assert.notEqual(names[0], "figma-annotation-guide");
+
+  names = topFive("Create a geospatial map visualization from regional performance data with legend, projection choices, and QA notes; not a general BI dashboard or chart extraction task.");
+  assert.equal(names[0], "geospatial-and-cartographic-visualization");
+  assert.notEqual(names[0], "build-dashboard");
+
+  names = topFive("Audit event table freshness, duplicate keys, null rates, and ownership rules before locking a data pipeline contract; do not build a dashboard.");
+  assert.equal(names[0], "data-quality-audit");
+  assert.notEqual(names[0], "database-schema-design");
+
+  names = topFive("Validate that a security remediation PR actually fixes the reported issue, attach evidence, and update finding status; do not discover new findings or triage the backlog.");
+  assert.equal(names[0], "validation");
+  assert.notEqual(names[0], "finding-discovery");
+
+  names = topFive("Launch and monitor a remote Hugging Face GPU Job for a training script, capture logs and metrics, and summarize run artifacts; do not make a Gradio Space or dataset card.");
+  assert.equal(names[0], "huggingface-jobs");
+  assert.notEqual(names[0], "huggingface-datasets");
+
+  names = topFive("Generate text-to-speech voiceover audio from a prepared script, choose voice settings, and verify playback; do not transcribe microphone input.");
+  assert.equal(names[0], "speech");
+  assert.notEqual(names[0], "transcribe");
+
+  names = topFive("Build an interactive React Three Fiber game scene with camera controls, physics placeholders, and canvas verification; do not create a 3D data visualization.");
+  assert.equal(names[0], "react-three-fiber-game");
+  assert.notEqual(names[0], "template-creator");
+
+  names = topFive("Create a technical debt register from module hotspots, TODOs, dependency risk, and owner notes; do not resolve a dependency conflict or write release notes.");
+  assert.equal(names[0], "technical-debt-register");
+  assert.notEqual(names[0], "dependency-conflict-resolver");
+
+  names = topFive("Create a reusable presentation template pack from brand assets with slide layouts, placeholders, and validation guidance; do not produce a one-off roadmap deck.");
+  assert.equal(names[0], "template-creator");
+  assert.notEqual(names[0], "roadmap-presentation");
+
+  names = topFive("Turn Notion research notes and source links into a structured source bank with evidence summaries and open questions; do not convert a spec into implementation tickets or prepare meeting follow-ups.");
+  assert.equal(names[0], "notion-research-documentation");
+  assert.notEqual(names[0], "notion-spec-to-implementation");
+});

@@ -10,13 +10,14 @@ This roadmap turns V2's remaining workflow-quality gaps into deliberate research
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | Active acceptance | 78 | 100.0% | 99.4% | 40.5% | 1 | Regression gate |
 | Post-tuning challenge | 22 | 95.5% | 70.5% | 35.2% | 12 | Non-gating pressure |
-| Fresh-probe regression | 18 | 100.0% | 88.0% | 50.0% | 5 | Non-gating regression |
-| Frozen holdout regression | 12 | 100.0% | 77.8% | 56.3% | 6 | Non-gating regression |
-| Clean holdout V2 regression | 14 | 100.0% | 59.5% | 44.6% | 14 | Non-gating regression |
+| Fresh-probe regression | 18 | 94.4% | 90.7% | 51.4% | 4 | Non-gating regression |
+| Frozen holdout regression | 12 | 100.0% | 76.4% | 56.3% | 6 | Non-gating regression |
+| Clean holdout V2 regression | 14 | 100.0% | 64.3% | 48.2% | 13 | Non-gating regression |
 | Clean holdout V3 regression | 18 | 100.0% | 72.2% | 54.2% | 9 | Non-gating regression |
 | Clean holdout V4 regression | 21 | 100.0% | 65.1% | 47.6% | 13 | Non-gating regression |
+| Clean holdout V5 regression | 17 | 100.0% | 76.5% | 55.9% | 9 | Non-gating regression |
 
-The active suite proves the current acceptance claim. The challenge, fresh-probe, frozen-holdout-regression, clean-holdout V2 regression, clean-holdout V3 regression, and clean-holdout V4 regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout, clean V2, clean V3, and clean V4 baselines are preserved in git history. Clean holdout V4's pre-tuning baseline at `77d4c73` contradicted broad generalization claims; the current V4 report measures promoted regression fixes, not a new untouched split.
+The active suite proves the current acceptance claim. The challenge, fresh-probe, frozen-holdout-regression, clean-holdout V2 regression, clean-holdout V3 regression, clean-holdout V4 regression, and clean-holdout V5 regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout, clean V2, clean V3, clean V4, and clean V5 baselines are preserved in git history. Clean holdout V5's pre-tuning baseline at `38e4c6d` contradicted broad generalization claims even more sharply than V4; the current V5 report measures promoted regression fixes, not a new untouched split.
 
 ## Triage Rules
 
@@ -80,6 +81,20 @@ These cases were captured after commit `764924b`, reported before tuning from th
 | `hf-paper-publisher-no-training-v4` | `huggingface-datasets` | `huggingface-paper-publisher` | Paper publishing was treated as dataset research. | P0 | Fixed; V2 primary hit@1 |
 | `racingsim-map-runtime-v4` | `racingsim-ai-ml` | `racingsim-game-dev` | RacingSim runtime/map work was displaced by PPO training. | P0 | Fixed; V2 primary hit@1 |
 
+## Clean Holdout V5 Promoted Queue
+
+These cases were captured after commit `c090354`, reported before tuning from the suite, then promoted into regression work after the clean V5 baseline was preserved at `38e4c6d`. The current V5 report fixes the primary/forbidden-primary issues, but this suite must now be cited only as regression evidence.
+
+| Case | Baseline V2 primary | Expected primary | Issue | Priority | Current status |
+| --- | --- | --- | --- | --- | --- |
+| `ai-elements-chat-surface-v5` | `dev-ai-llm-apps` | `ai-elements` | Vercel AI UI primitives were displaced by generic LLM app routing. | P0 | Fixed; V2 primary hit@1 |
+| `cloudflare-agent-state-v5` | `openai-agents-js` | `agents-sdk`, `building-ai-agent-on-cloudflare` | Cloudflare Agents SDK state work was displaced by OpenAI/Vercel agent routes. | P0 | Fixed; V2 primary hit@1 |
+| `screenshot-bug-evidence-v5` | `design-image-to-code` | `screenshot` | Screenshot evidence was treated as image-to-code work despite a negative guard. | P0 | Fixed; V2 primary hit@1 |
+| `security-validation-after-fix-v5` | `finding-discovery` | `validation` | Post-fix validation was pulled backward into discovery/triage. | P0 | Fixed; V2 primary hit@1 |
+| `tts-voiceover-not-transcription-v5` | `transcribe` | `speech` | Text-to-speech voiceover generation was displaced by transcription despite a negative guard. | P0 | Fixed; V2 primary hit@1 |
+| `presentation-template-pack-v5` | `roadmap-presentation` | `template-creator` | Reusable template creation was displaced by one-off roadmap deck authoring. | P0 | Fixed; V2 primary hit@1 |
+| `notion-research-source-bank-v5` | `notion-meeting-intelligence` | `notion-research-documentation` | Source-bank research documentation was displaced by meeting/spec actions. | P0 | Fixed; V2 primary hit@1 |
+
 ## Frozen Failure Atlas
 
 These were clean-split failures from the pre-tuning frozen-holdout report. They drove the current V2 routing fixes, so [SKILL-USE-FROZEN-HOLDOUT.md](SKILL-USE-FROZEN-HOLDOUT.md) is now regression evidence for this prompt set.
@@ -117,7 +132,7 @@ These were clean-split failures from the pre-tuning frozen-holdout report. They 
 
 ## Next Holdout Coverage Needs
 
-The clean holdout V2, V3, and V4 prompt sets are now regression evidence. The next clean holdout should be captured only after this routing-tuning commit and reported before tuning from those prompts. Candidate families, not final prompts:
+The clean holdout V2, V3, V4, and V5 prompt sets are now regression evidence. The next clean holdout should be captured only after this routing-tuning commit and reported before tuning from those prompts. Candidate families, not final prompts:
 
 | Coverage gap | Why it matters | Candidate family |
 | --- | --- | --- |
@@ -172,7 +187,7 @@ Before a backlog item becomes an active acceptance case:
 5. Add or update the failure atlas entry.
 6. Run the initial report before changing routing.
 7. Tune narrowly.
-8. Re-run active, challenge, fresh, frozen, clean-v2-regression, clean-v3, clean-v4, tests, index, and build.
+8. Re-run active, challenge, fresh, frozen, clean-v2-regression, clean-v3, clean-v4, clean-v5, tests, index, and build.
 9. Confirm support precision@5 does not drop in the affected suite.
 
 ## No-Bloat Boundary
