@@ -1,9 +1,9 @@
 # SkillWeaver V2 Post-Tuning Challenge Benchmark
 
-Generated: 2026-06-27T20:22:40.992Z
+Generated: 2026-06-27T20:37:08.966Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782591760992,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"3cd6e51f971b91248e621893ce15a492288fe63c","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","package.json","scripts/benchmark-skill-routing.mjs"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d","benchmarkScript":"sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:01aedc04af988f4d270f0fe45b5b4d16ced9e3da238688dfe38793280a02eef9"}
+{"generatedAt":1782592628966,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"fb1b4cb310d3b721d7c92cbff5cb28d494def751","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b","benchmarkScript":"sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:421ebdef3853ddcff44398685784abe74494c01063fead713c544fa089694414"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:holdout`
 - Suite: Post-Tuning Challenge
 - Acceptance gate: no
-- Git commit at generation: `3cd6e51f971b91248e621893ce15a492288fe63c`
+- Git commit at generation: `fb1b4cb310d3b721d7c92cbff5cb28d494def751`
 - Git dirty: yes
-- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`
+- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6`
-- Scanner hash: `sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d`
-- Benchmark script hash: `sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639`
+- Scanner hash: `sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b`
+- Benchmark script hash: `sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:01aedc04af988f4d270f0fe45b5b4d16ced9e3da238688dfe38793280a02eef9`
+- Snapshot fingerprint: `sha256:421ebdef3853ddcff44398685784abe74494c01063fead713c544fa089694414`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -45,20 +45,20 @@ This is not pristine untouched holdout evidence for the current V2 route. The fi
 
 | Metric | No SkillWeaver | Skill-Level Baseline | SkillWeaver V2 | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Output quality score (0-100) | 70.1 | 77.0 | 91.8 | +21.7 pts | +14.8 pts |
+| Output quality score (0-100) | 70.1 | 77.0 | 91.4 | +21.3 pts | +14.4 pts |
 | Primary hit@1 | 68.2% | 77.3% | 95.5% | +27.3 pp | +18.2 pp |
 | Expected skill in top/workflow 5 | 100.0% | 100.0% | 100.0% | 0.0 pp | 0.0 pp |
 | Mean reciprocal rank | 0.801 | 0.850 | 0.977 | +0.177 | +0.127 |
-| Support-skill coverage@5 | 34.1% | 45.5% | 70.5% | +36.4 pp | +25.0 pp |
-| Support precision@5, exploratory | 18.2% | 25.4% | 35.2% | +17.0 pp | +9.8 pp |
+| Support-skill coverage@5 | 34.1% | 45.5% | 68.2% | +34.1 pp | +22.7 pp |
+| Support precision@5, exploratory | 18.2% | 25.4% | 34.1% | +15.9 pp | +8.7 pp |
 | Forbidden primary rate, lower is better | 0.0% | 0.0% | 0.0% | 0.0 pp | 0.0 pp |
 | Mean candidates to expected skill, lower is better | 1.6 | 1.5 | 1.0 | -0.6 candidates better | -0.5 candidates better |
 
 ## Claim Scope
 
-This report supports the claim that V2 remains strong on a 22-case post-tuning challenge suite: 21/22 primary hit@1, 22/22 expected primary in top/workflow five, and 0/22 forbidden primaries. Workflow support quality is weaker than primary routing: support coverage@5 is 70.5%, support precision@5 is 35.2%, and 11/22 cases miss at least one expected support skill.
+This report supports the claim that V2 remains strong on a 22-case post-tuning challenge suite: 21/22 primary hit@1, 22/22 expected primary in top/workflow five, and 0/22 forbidden primaries. Workflow support quality is weaker than primary routing: support coverage@5 is 68.2%, support precision@5 is 34.1%, and 12/22 cases miss at least one expected support skill.
 
-V2 raw counts: primary hit@1 21/22; expected primary top/workflow-five 22/22; forbidden primary 0/22; support-miss cases 11/22.
+V2 raw counts: primary hit@1 21/22; expected primary top/workflow-five 22/22; forbidden primary 0/22; support-miss cases 12/22.
 
 Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from 442 skills to 5 candidates, a 98.9% candidate reduction per task.
 Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.
@@ -72,7 +72,7 @@ Post-Tuning Challenge quality is intentionally reported rather than accepted or 
 | Platform delivery | 3 | 90.0 | 100.0% | 100.0% | 50.0% | 33.3% | 0.0% | 2/3 | +47.8 pts | +36.4 pts |
 | Product, research, and planning | 3 | 86.7 | 100.0% | 100.0% | 33.3% | 16.7% | 0.0% | 3/3 | +22.0 pts | +16.7 pts |
 | AI agent apps | 2 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 2/2 | +5.0 pts | 0.0 pts |
-| Data analytics | 2 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +41.7 pts | +10.0 pts |
+| Data analytics | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +36.7 pts | +5.0 pts |
 | Frontend experience | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +35.0 pts | +26.7 pts |
 | Games and simulation | 2 | 75.0 | 50.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +17.5 pts | +21.7 pts |
 | Communications and knowledge | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +10.0 pts | +10.0 pts |
@@ -88,7 +88,7 @@ Post-Tuning Challenge quality is intentionally reported rather than accepted or 
 | Product planning | 4 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 3/4 | +19.0 pts | +15.0 pts |
 | Deployment and release | 3 | 90.0 | 100.0% | 100.0% | 50.0% | 33.3% | 0.0% | 2/3 | +47.8 pts | +36.4 pts |
 | Agent and LLM apps | 2 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 2/2 | +5.0 pts | 0.0 pts |
-| Data dashboards and reports | 2 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +41.7 pts | +10.0 pts |
+| Data dashboards and reports | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +36.7 pts | +5.0 pts |
 | Game development | 2 | 75.0 | 50.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +17.5 pts | +21.7 pts |
 | Documents and PDFs | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | 0.0 pts | 0.0 pts |
 | Figma design handoff | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +70.0 pts | +63.3 pts |
@@ -114,14 +114,14 @@ Post-Tuning Challenge quality is intentionally reported rather than accepted or 
 | nextjs-auth-implementation | Backend services | Backend APIs and services | auth | auth / 1 | auth / 1 | auth / 1 | Backend APIs and services | auth -> dev-backend-api-design -> aspnet-core -> payments -> dev-java-dotnet-services |
 | vercel-firewall-rules | Security and risk | Security review | vercel-firewall | vercel-firewall / 1 | vercel-firewall / 1 | vercel-firewall / 1 | Skill ranking anchor | vercel-firewall -> vercel-deploy -> frontend-app-builder -> figma-implement-design -> env-vars |
 | core-web-vitals-audit | Frontend experience | Frontend implementation | web-perf | web-perf / 1 | web-perf / 1 | web-perf / 1 | Cloudflare workers | web-perf -> frontend-testing-debugging -> frontend-app-builder -> dev-frontend-accessibility-css -> dev-frontend-react-next |
-| market-sizing-research | Product, research, and planning | Product planning | market-sizing | market-sizing / 1 | market-sizing / 1 | market-sizing / 1 | Skill ranking anchor | market-sizing -> product-business-analysis -> experiment-designer -> user-research-synthesis -> launch-readiness |
-| metric-diagnostics-shift | Data analytics | Data dashboards and reports | metric-diagnostics | analyze-data-quality / 3 | metric-diagnostics / 1 | metric-diagnostics / 1 | Data dashboards and reports | metric-diagnostics -> data-analysis-standard -> product-business-analysis -> analyze-data-quality -> validate-data |
+| market-sizing-research | Product, research, and planning | Product planning | market-sizing | market-sizing / 1 | market-sizing / 1 | market-sizing / 1 | Skill ranking anchor | market-sizing -> product-business-analysis -> build-report -> jupyter-notebooks -> experiment-designer |
+| metric-diagnostics-shift | Data analytics | Data dashboards and reports | metric-diagnostics | analyze-data-quality / 3 | metric-diagnostics / 1 | metric-diagnostics / 1 | Data dashboards and reports | metric-diagnostics -> data-analysis-standard -> product-business-analysis -> analyze-data-quality -> data-visualization |
 | ab-test-design | Product, research, and planning | Product planning | experiment-designer | design-kpis / 5 | design-kpis / 2 | experiment-designer / 1 | Product planning | experiment-designer -> design-kpis -> product-business-analysis -> metric-diagnostics -> ux-research-plan |
 | product-business-retention | Product, research, and planning | Product planning | product-business-analysis | product-business-analysis / 1 | product-business-analysis / 1 | product-business-analysis / 1 | Product planning | product-business-analysis -> design-kpis -> risk-register -> user-research-synthesis -> build-dashboard |
 | code-path-explanation | Repo collaboration | Repository operations | code-explainer | code-explainer / 1 | code-explainer / 1 | code-explainer / 1 | Repository operations | code-explainer -> dev-architecture-review -> error-decoder -> dependency-conflict-resolver -> dev-dependency-maintenance |
 | system-design-interview-prep | Backend services | Backend APIs and services | system-design-interview | system-design-interview / 1 | system-design-interview / 1 | system-design-interview / 1 | Backend APIs and services | system-design-interview -> technical-spec-template -> dev-architecture-review -> database-schema-design -> dev-performance-engineering |
 | api-docs-from-behavior | Documents and publishing | Documents and PDFs | api-docs-writer | api-docs-writer / 1 | api-docs-writer / 1 | api-docs-writer / 1 | Documents and PDFs | api-docs-writer -> dev-backend-api-design -> api-versioning-strategy -> dev-documentation-systems -> dev-node-typescript-services |
-| visualization-accessibility-audit | Data analytics | Data dashboards and reports | accessibility-and-inclusive-visualization | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | Data dashboards and reports | accessibility-and-inclusive-visualization -> visualization-strategy-and-critique -> d3-data-visualization -> data-visualization -> testing-data-visualizations |
+| visualization-accessibility-audit | Data analytics | Data dashboards and reports | accessibility-and-inclusive-visualization | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | Data dashboards and reports | accessibility-and-inclusive-visualization -> testing-data-visualizations -> data-visualization -> visualization-strategy-and-critique -> d3-data-visualization |
 
 ## V2 Support Misses
 
@@ -136,14 +136,15 @@ This table is a support-quality backlog source, not an acceptance failure list. 
 | nextjs-auth-implementation | security-best-practices | auth -> dev-backend-api-design -> aspnet-core -> payments -> dev-java-dotnet-services |
 | vercel-firewall-rules | security-best-practices | vercel-firewall -> vercel-deploy -> frontend-app-builder -> figma-implement-design -> env-vars |
 | core-web-vitals-audit | performance-budget | web-perf -> frontend-testing-debugging -> frontend-app-builder -> dev-frontend-accessibility-css -> dev-frontend-react-next |
-| market-sizing-research | business-strategy-and-research, external-research-digests | market-sizing -> product-business-analysis -> experiment-designer -> user-research-synthesis -> launch-readiness |
+| market-sizing-research | business-strategy-and-research, external-research-digests | market-sizing -> product-business-analysis -> build-report -> jupyter-notebooks -> experiment-designer |
+| metric-diagnostics-shift | validate-data | metric-diagnostics -> data-analysis-standard -> product-business-analysis -> analyze-data-quality -> data-visualization |
 | ab-test-design | kpi-reporting | experiment-designer -> design-kpis -> product-business-analysis -> metric-diagnostics -> ux-research-plan |
 | product-business-retention | metric-diagnostics | product-business-analysis -> design-kpis -> risk-register -> user-research-synthesis -> build-dashboard |
 | system-design-interview-prep | dev-backend-api-design | system-design-interview -> technical-spec-template -> dev-architecture-review -> database-schema-design -> dev-performance-engineering |
 
 ## Interpretation
 
-On the post-tuning challenge suite, SkillWeaver V2 changes the composite output-quality score by +21.7 points versus no SkillWeaver and +14.8 points versus the skill-level baseline.
+On the post-tuning challenge suite, SkillWeaver V2 changes the composite output-quality score by +21.3 points versus no SkillWeaver and +14.4 points versus the skill-level baseline.
 V2 changes primary selection by +27.3 percentage points versus no SkillWeaver and +18.2 percentage points versus the skill-level baseline.
 V2 changes expected-skill top/workflow-5 retrieval by 0.0 percentage points versus no SkillWeaver and 0.0 percentage points versus the skill-level baseline.
 The V2 score reflects a concept-aided skill-loading experience, not an LLM reranker; it is fully deterministic and derived from the local skill corpus.

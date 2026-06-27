@@ -1,9 +1,9 @@
 # SkillWeaver V2 Fresh-Probe Regression Benchmark
 
-Generated: 2026-06-27T20:22:40.861Z
+Generated: 2026-06-27T20:37:08.837Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782591760861,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"3cd6e51f971b91248e621893ce15a492288fe63c","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","package.json","scripts/benchmark-skill-routing.mjs"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs"],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","scanner":"sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d","benchmarkScript":"sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:7cd5a0b11fd64adaa97ccf7b9bcd8cdd6844b2f92e90ddc9a68bf6d251e8cdad"}
+{"generatedAt":1782592628837,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"fb1b4cb310d3b721d7c92cbff5cb28d494def751","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","scanner":"sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b","benchmarkScript":"sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:8ba88f6c3578a313e15795c48ea4c727c045ab1f09c15ca2fc861a8820f11fbc"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:fresh`
 - Suite: Fresh-Probe Regression
 - Acceptance gate: no
-- Git commit at generation: `3cd6e51f971b91248e621893ce15a492288fe63c`
+- Git commit at generation: `fb1b4cb310d3b721d7c92cbff5cb28d494def751`
 - Git dirty: yes
-- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`
+- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea`
-- Scanner hash: `sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d`
-- Benchmark script hash: `sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639`
+- Scanner hash: `sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b`
+- Benchmark script hash: `sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:7cd5a0b11fd64adaa97ccf7b9bcd8cdd6844b2f92e90ddc9a68bf6d251e8cdad`
+- Snapshot fingerprint: `sha256:8ba88f6c3578a313e15795c48ea4c727c045ab1f09c15ca2fc861a8820f11fbc`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -113,12 +113,12 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 | notion-meeting-email-fresh | Communications and knowledge | Product planning | notion-meeting-intelligence | notion-spec-to-implementation / 3 | gmail / 4 | notion-meeting-intelligence / 1 | Product planning | notion-meeting-intelligence -> gmail -> gmail-inbox-triage -> notion-knowledge-capture -> email-triage |
 | vercel-auth-protection-fresh | Backend services | Backend APIs and services | auth | vercel-api / 16 | auth / 1 | auth / 1 | Backend APIs and services | auth -> security-best-practices -> dev-backend-api-design -> payments -> dev-security-engineering |
 | vercel-bot-firewall-fresh | Security and risk | Security review | vercel-firewall | vercel-firewall / 1 | vercel-firewall / 1 | vercel-firewall / 1 | Skill ranking anchor | vercel-firewall -> vercel-deploy -> building-mcp-server-on-cloudflare -> env-vars -> agent-browser-verify |
-| visualization-accessibility-review-fresh | Data analytics | Data dashboards and reports | accessibility-and-inclusive-visualization | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | Data dashboards and reports | accessibility-and-inclusive-visualization -> data-visualization -> testing-data-visualizations -> visualization-strategy-and-critique -> d3-data-visualization |
+| visualization-accessibility-review-fresh | Data analytics | Data dashboards and reports | accessibility-and-inclusive-visualization | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | Data dashboards and reports | accessibility-and-inclusive-visualization -> testing-data-visualizations -> data-visualization -> visualize-data -> visualization-strategy-and-critique |
 | postgres-migration-rollback-fresh | Database and data engineering | Databases and data engineering | database-migration-plan | database-migration-plan / 1 | database-migration-plan / 1 | database-migration-plan / 1 | Databases and data engineering | database-migration-plan -> database-schema-design -> dev-database-postgres -> data-quality-audit -> data-analysis-standard |
 | sentry-incident-slo-fresh | Observability and reliability | Observability and reliability | incident-postmortem | slo-error-budget / 2 | slo-error-budget / 2 | incident-postmortem / 1 | Observability and reliability | incident-postmortem -> sentry -> slo-error-budget -> dev-observability-sre -> monitoring-setup-guide |
 | dependency-conflict-monorepo-fresh | Repo collaboration | Repository operations | dependency-conflict-resolver | dependency-conflict-resolver / 1 | dependency-conflict-resolver / 1 | dependency-conflict-resolver / 1 | Repository operations | dependency-conflict-resolver -> dev-monorepo-build-systems -> dev-git-github-collaboration -> turborepo -> gh-fix-ci |
 | durable-object-agent-fresh | Infrastructure platforms | Cloudflare workers | durable-objects, building-ai-agent-on-cloudflare | building-ai-agent-on-cloudflare / 1 | durable-objects / 1 | durable-objects / 1 | Cloudflare workers | durable-objects -> sandbox-sdk -> workers-best-practices -> agents-sdk -> building-ai-agent-on-cloudflare |
-| huggingface-gradio-vision-fresh | Hugging Face ML | Hugging Face ML | huggingface-gradio | huggingface-vision-trainer / 4 | huggingface-vision-trainer / 6 | huggingface-gradio / 1 | Hugging Face ML | huggingface-gradio -> huggingface-vision-trainer -> huggingface-trackio -> huggingface-paper-publisher -> huggingface-community-evals |
+| huggingface-gradio-vision-fresh | Hugging Face ML | Hugging Face ML | huggingface-gradio | huggingface-vision-trainer / 4 | huggingface-vision-trainer / 6 | huggingface-gradio / 1 | Hugging Face ML | huggingface-gradio -> huggingface-vision-trainer -> huggingface-paper-publisher -> huggingface-trackio -> huggingface-community-evals |
 | api-versioning-docs-fresh | Documents and publishing | Documents and PDFs | api-versioning-strategy | api-versioning-strategy / 1 | api-versioning-strategy / 1 | api-versioning-strategy / 1 | Backend APIs and services | api-versioning-strategy -> api-docs-writer -> dev-backend-api-design -> technical-spec-template -> dev-java-dotnet-services |
 | launch-risk-flags-fresh | Product, research, and planning | Product planning | launch-readiness | launch-readiness / 1 | launch-readiness / 1 | launch-readiness / 1 | Product planning | launch-readiness -> risk-register -> feature-flag-guide -> product-launch-checklist -> dev-release-productization |
 | gmail-label-draft-fresh | Communications and knowledge | Email triage | gmail-inbox-triage, gmail | gmail-inbox-triage / 1 | gmail / 1 | gmail-inbox-triage / 1 | Email triage | gmail-inbox-triage -> gmail -> email-triage -> triage-finding -> engineering-weekly-report |

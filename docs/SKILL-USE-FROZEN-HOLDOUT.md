@@ -1,9 +1,9 @@
 # SkillWeaver V2 Frozen Holdout Regression Benchmark
 
-Generated: 2026-06-27T20:22:40.274Z
+Generated: 2026-06-27T20:37:08.433Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782591760274,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"3cd6e51f971b91248e621893ce15a492288fe63c","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","package.json","scripts/benchmark-skill-routing.mjs"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs"],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d","benchmarkScript":"sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:548477de11d57d31905b43d5346080da7d2ca90552e0ed30f57f042fac05ad73"}
+{"generatedAt":1782592628433,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"fb1b4cb310d3b721d7c92cbff5cb28d494def751","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b","benchmarkScript":"sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:1a32898b9e9a91ec29c897264c6d5baa648c6ae9103ed1fddc8f42f7a719008a"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:frozen`
 - Suite: Frozen Holdout Regression
 - Acceptance gate: no
-- Git commit at generation: `3cd6e51f971b91248e621893ce15a492288fe63c`
+- Git commit at generation: `fb1b4cb310d3b721d7c92cbff5cb28d494def751`
 - Git dirty: yes
-- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`
+- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948`
-- Scanner hash: `sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d`
-- Benchmark script hash: `sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639`
+- Scanner hash: `sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b`
+- Benchmark script hash: `sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:548477de11d57d31905b43d5346080da7d2ca90552e0ed30f57f042fac05ad73`
+- Snapshot fingerprint: `sha256:1a32898b9e9a91ec29c897264c6d5baa648c6ae9103ed1fddc8f42f7a719008a`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -118,7 +118,7 @@ Frozen Holdout Regression quality is intentionally reported rather than accepted
 | huggingface-paper-evals-holdout | Hugging Face ML | Hugging Face ML | huggingface-paper-publisher | huggingface-paper-publisher / 1 | huggingface-papers / 2 | huggingface-paper-publisher / 1 | Hugging Face ML | huggingface-paper-publisher -> huggingface-datasets -> huggingface-community-evals -> huggingface-papers -> huggingface-vision-trainer |
 | brand-logo-moodboard-holdout | Marketing, growth, and creative | Marketing growth | logo-explorer | logo-explorer / 1 | logo-explorer / 1 | logo-explorer / 1 | Skill ranking anchor | logo-explorer -> moodboard-explorer -> offer-explorer -> creative-production -> ads-explorer |
 | in-app-browser-choice-holdout | Frontend experience | Browser verification | control-in-app-browser | control-in-app-browser / 1 | control-in-app-browser / 1 | control-in-app-browser / 1 | Browser verification | control-in-app-browser -> url-to-code -> playwright-interactive -> agent-browser -> design-image-to-code |
-| figma-swiftui-motion-holdout | Frontend experience | Figma design handoff | figma-swiftui | figma-implement-motion / 2 | figma-implement-design !figma-implement-design / 5 | figma-swiftui / 1 | Figma design handoff | figma-swiftui -> figma-use-motion -> figma-use -> figma-implement-motion -> design-handoff-brief |
+| figma-swiftui-motion-holdout | Frontend experience | Figma design handoff | figma-swiftui | figma-implement-motion / 2 | figma-implement-design !figma-implement-design / 5 | figma-swiftui / 1 | Figma design handoff | figma-swiftui -> figma-use-motion -> figma-use -> figma-implement-motion -> design-image-to-code |
 | skill-install-security-holdout | Skill tooling | Skill authoring | skill-installer | skill-installer / 1 | skill-installer / 1 | skill-installer / 1 | Skill ranking anchor | skill-installer -> skill-security-auditor -> copilot-sdk -> template-creator -> skill-creator |
 | analytics-report-to-slides-holdout | Documents and publishing | Presentations | reports-pdfs-and-slide-automation | reports-pdfs-and-slide-automation / 1 | reports-pdfs-and-slide-automation / 1 | reports-pdfs-and-slide-automation / 1 | Presentations | reports-pdfs-and-slide-automation -> build-report -> threejs-data-visualization -> Presentations -> template-creator |
 

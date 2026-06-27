@@ -9,12 +9,12 @@ This roadmap turns V2's remaining workflow-quality gaps into deliberate research
 | Suite | Cases | V2 primary hit@1 | V2 support coverage@5 | V2 support precision@5 | Support-miss cases | Role |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | Active acceptance | 78 | 100.0% | 100.0% | 40.9% | 0 | Regression gate |
-| Post-tuning challenge | 22 | 95.5% | 70.5% | 35.2% | 11 | Non-gating pressure |
+| Post-tuning challenge | 22 | 95.5% | 68.2% | 34.1% | 12 | Non-gating pressure |
 | Fresh-probe regression | 18 | 94.4% | 88.0% | 50.0% | 5 | Non-gating regression |
 | Frozen holdout regression | 12 | 100.0% | 77.8% | 56.3% | 6 | Non-gating regression |
-| Clean holdout V2 | 14 | 57.1% | 45.2% | 33.9% | 13 | Untouched baseline |
+| Clean holdout V2 regression | 14 | 100.0% | 52.4% | 39.3% | 14 | Non-gating regression |
 
-The active suite proves the current acceptance claim. The challenge, fresh-probe, and frozen-holdout-regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout baseline is preserved in git history. The clean holdout V2 suite is the current untouched baseline and currently shows V2 trailing both baselines, so broad generalization claims should stay off the table.
+The active suite proves the current acceptance claim. The challenge, fresh-probe, frozen-holdout-regression, and clean-holdout V2 regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout baseline and clean V2 baseline are preserved in git history. Broad generalization claims should stay off the table until a new clean holdout is captured after this tuning pass.
 
 ## Triage Rules
 
@@ -31,20 +31,20 @@ Do not tune from the current challenge, fresh, or frozen-regression support miss
 
 For future clean holdouts, do not tune from the holdout inside the same evidence pass. If one of those cases becomes a routing target, first promote it with a failure-atlas entry, relabel the suite or fork the case into a challenge/regression file, and preserve the current report as the pre-tuning baseline.
 
-## Clean Holdout V2 Failure Queue
+## Clean Holdout V2 Promoted Queue
 
-These cases were captured after commit `3cd6e51` and reported before tuning from the suite. Do not tune directly against this file while still citing it as untouched holdout evidence.
+These cases were captured after commit `3cd6e51`, reported before tuning from the suite, then promoted into regression work. The current V2 report fixes the P0 primary/forbidden-primary issues, but this suite must now be cited only as regression evidence.
 
-| Case | Current V2 primary | Expected primary | Issue | Priority | Next action |
+| Case | Pre-tuning V2 primary | Expected primary | Issue | Priority | Current status |
 | --- | --- | --- | --- | --- | --- |
-| `agent-browser-preview-qa-holdout` | `control-in-app-browser` | `agent-browser-verify` | Local browser tooling displaces the Vercel protected-preview verification skill. | P0 | Promote or fork before tuning browser-verification rules. |
-| `data-viz-accessible-report-holdout` | `accessibility-and-inclusive-visualization` | `data-visualization`, `visualize-data`, `build-report` | Support/QA helper becomes primary for a chart-report task. | P0 | Decide whether accessibility should stay support-only for report generation prompts. |
-| `data-jupyter-audit-trail-holdout` | `build-dashboard` | `jupyter-notebooks` | Dashboard concept overrules explicit notebook/reproducibility wording. | P0 | Promote as a notebook-vs-dashboard confusable rival. |
-| `figma-code-connect-holdout` | `figma-implement-design` | `figma-code-connect-components`, `figma-code-connect` | Implementation/generation intent beats Code Connect mapping for existing React components. | P0 | Promote after recording Code Connect rivals. |
-| `huggingface-trackio-eval-holdout` | `huggingface-gradio` | `huggingface-trackio` | Demo/publishing helpers displace experiment-tracking primary. | P0 | Promote Hugging Face tracking as a separate concept boundary if repeated. |
-| `linear-notion-roadmap-holdout` | `gmail-inbox-triage` | `roadmap-narrative`, `linear` | Knowledge/collaboration words route to inbox triage despite roadmap ownership wording. | P0 | Promote product-planning vs email-triage rival before tuning. |
-| `figjam-user-flow-holdout` | `figma-user-flow-planner` | `figma-use-figjam`, `figma-user-flow-planner` | Primary is acceptable, but support is missing UX/product context and includes creation/implementation noise. | P1 | Review support expectations before tuning. |
-| `security-ownership-map-holdout` | `security-ownership-map` | `security-ownership-map` | Primary is correct, but ownership-map support misses tracking/risk/security helpers. | P1 | Treat as support-quality backlog only. |
+| `agent-browser-preview-qa-holdout` | `control-in-app-browser` | `agent-browser-verify` | Local browser tooling displaced the Vercel protected-preview verification skill. | P0 | Fixed; V2 primary hit@1 |
+| `data-viz-accessible-report-holdout` | `accessibility-and-inclusive-visualization` | `data-visualization`, `visualize-data`, `build-report` | Support/QA helper became primary for a chart-report task. | P0 | Fixed; V2 primary hit@1 |
+| `data-jupyter-audit-trail-holdout` | `build-dashboard` | `jupyter-notebooks` | Dashboard concept overruled explicit notebook/reproducibility wording. | P0 | Fixed; V2 primary hit@1 |
+| `figma-code-connect-holdout` | `figma-implement-design` | `figma-code-connect-components`, `figma-code-connect` | Implementation/generation intent beat Code Connect mapping for existing React components. | P0 | Fixed; V2 primary hit@1 |
+| `huggingface-trackio-eval-holdout` | `huggingface-gradio` | `huggingface-trackio` | Demo/publishing helpers displaced experiment-tracking primary. | P0 | Fixed; V2 primary hit@1 |
+| `linear-notion-roadmap-holdout` | `gmail-inbox-triage` | `roadmap-narrative`, `linear` | Knowledge/collaboration words routed to inbox triage despite roadmap ownership wording. | P0 | Fixed; V2 primary hit@1 |
+| `figjam-user-flow-holdout` | `figma-user-flow-planner` | `figma-use-figjam`, `figma-user-flow-planner` | Primary was acceptable, but support missed UX/product context and included creation/implementation noise. | P1 | Backlog; primary still accepted |
+| `security-ownership-map-holdout` | `security-ownership-map` | `security-ownership-map` | Primary was correct, but ownership-map support missed tracking/risk/security helpers. | P1 | Backlog; primary still accepted |
 
 ## Frozen Failure Atlas
 
@@ -83,7 +83,7 @@ These were clean-split failures from the pre-tuning frozen-holdout report. They 
 
 ## Next Holdout Coverage Needs
 
-The current clean holdout is now captured in `benchmarks/skill-routing-clean-holdout-v2.json`. The next clean holdout should be captured only after any future routing-tuning commit and reported before tuning from those prompts. Candidate families, not final prompts:
+The clean holdout V2 prompt set is now regression evidence in `benchmarks/skill-routing-clean-holdout-v2.json`. The next clean holdout should be captured only after this routing-tuning commit and reported before tuning from those prompts. Candidate families, not final prompts:
 
 | Coverage gap | Why it matters | Candidate family |
 | --- | --- | --- |
@@ -138,7 +138,7 @@ Before a backlog item becomes an active acceptance case:
 5. Add or update the failure atlas entry.
 6. Run the initial report before changing routing.
 7. Tune narrowly.
-8. Re-run active, challenge, fresh, frozen, clean, tests, index, and build.
+8. Re-run active, challenge, fresh, frozen, clean-v2-regression, tests, index, and build.
 9. Confirm support precision@5 does not drop in the affected suite.
 
 ## No-Bloat Boundary

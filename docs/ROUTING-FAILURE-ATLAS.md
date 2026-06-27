@@ -73,6 +73,14 @@ Use this shape for new entries:
 - Fix type: live-name aliases in existing concepts plus narrow intent boosts.
 - Regression risk: concept nodes can become noisy if aliases are added without benchmark evidence. Guarded by the new cases and by the concept-governance rule to prefer existing concepts before adding new ones.
 
+### Clean Holdout V2 Promoted Boundaries
+
+- Queries: `agent-browser-preview-qa-holdout`, `data-viz-accessible-report-holdout`, `data-jupyter-audit-trail-holdout`, `figma-code-connect-holdout`, `huggingface-trackio-eval-holdout`, and `linear-notion-roadmap-holdout`.
+- Previous V2 behavior: concept-level gateways or adjacent helpers displaced explicit specialist primaries in protected preview QA, chart-report creation, notebook audit trails, Figma Code Connect, Hugging Face Trackio, and roadmap planning.
+- Current V2 behavior: all six promoted cases route to an expected primary at rank 1, and the clean V2 regression suite has 0.0% forbidden primary rate.
+- Fix type: exact specialist concept membership plus narrow intent guards for the confusable rivals.
+- Regression risk: Trackio must not steal Gradio Space prompts, report-building must not make visualization QA primary, Code Connect must not steal normal Figma implementation, and browser preview verification must not break Chrome or in-app-browser routing. Guarded by `concept workflow preserves clean holdout V2 specialist boundaries`.
+
 ## Current Residual Weak Spots
 
 ### No Open Benchmark Misses
@@ -99,7 +107,7 @@ The 22-case post-tuning challenge suite now covers 11 benchmark domains and 11 e
 - 34.1% V2 support precision@5 as an exploratory noise metric.
 - 0.0% V2 forbidden primary rate.
 
-Because the pilot misses informed the current fix, this suite is challenge evidence from this commit forward. A new clean holdout now lives in `benchmarks/skill-routing-clean-holdout-v2.json`; its misses should not drive tuning until promoted or forked into challenge/regression work. Current support-quality backlog is concentrated in challenge slices such as product/research/planning, platform delivery, backend services, AI agent apps, security/risk, and the clean-holdout P0 cases tracked in [SUPPORT-QUALITY-ROADMAP.md](SUPPORT-QUALITY-ROADMAP.md).
+Because the pilot misses informed the current fix, this suite is challenge evidence from this commit forward. The clean holdout V2 file now also contains regression evidence because its P0 misses were promoted into the current tuning pass. Current support-quality backlog is concentrated in challenge slices such as product/research/planning, platform delivery, backend services, AI agent apps, security/risk, and the clean-holdout support cases tracked in [SUPPORT-QUALITY-ROADMAP.md](SUPPORT-QUALITY-ROADMAP.md).
 
 ### Recently Covered Robustness Traps
 
@@ -168,7 +176,7 @@ Remaining useful future cases:
 - Additional Vercel Auth, Firewall, AI Gateway, and Cron paraphrases from real usage.
 - Visualization QA and accessibility prompts that distinguish chart creation, chart review, and frontend accessibility.
 
-These should become fresh holdout cases before any routing boost is tuned for them, or be compared against the current clean holdout before promotion.
+These should become fresh holdout cases before any routing boost is tuned for them, or be compared against the next clean holdout before promotion.
 
 ## Tuning Rules
 

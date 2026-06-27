@@ -4,14 +4,24 @@
     "domain": "platform-delivery",
     "concept": "deployment-release",
     "query": "Configure Vercel Flags with Flags Explorer, provider adapters, staged rollout rules, and an A/B experiment guardrail; not a generic feature-flag plan.",
-    "expectedPrimary": ["vercel-flags"],
-    "expectedSupport": ["feature-flag-guide", "experiment-designer", "launch-readiness"],
-    "mustNotPrimary": ["feature-flag-guide", "experiment-designer", "launch-readiness"],
+    "expectedPrimary": [
+      "vercel-flags"
+    ],
+    "expectedSupport": [
+      "feature-flag-guide",
+      "experiment-designer",
+      "launch-readiness"
+    ],
+    "mustNotPrimary": [
+      "feature-flag-guide",
+      "experiment-designer",
+      "launch-readiness"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "backlog",
     "supportCriticality": "primary-critical"
   },
   {
@@ -19,14 +29,24 @@
     "domain": "ai-agent-apps",
     "concept": "agent-llm-apps",
     "query": "Use Vercel Sandbox to run untrusted AI-generated code in ephemeral microVMs with file IO, exposed ports, cleanup, and SDK docs verification; not Cloudflare Sandbox.",
-    "expectedPrimary": ["vercel-sandbox"],
-    "expectedSupport": ["ai-sdk", "security-best-practices", "agent-browser-verify"],
-    "mustNotPrimary": ["sandbox-sdk", "workers-best-practices", "durable-objects"],
+    "expectedPrimary": [
+      "vercel-sandbox"
+    ],
+    "expectedSupport": [
+      "ai-sdk",
+      "security-best-practices",
+      "agent-browser-verify"
+    ],
+    "mustNotPrimary": [
+      "sandbox-sdk",
+      "workers-best-practices",
+      "durable-objects"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "backlog",
     "supportCriticality": "primary-critical"
   },
   {
@@ -34,14 +54,24 @@
     "domain": "frontend-experience",
     "concept": "browser-verification",
     "query": "Use Vercel Agent Browser Verify to inspect a protected preview deployment, capture screenshots and console errors, and compare the deployed UI; not the local in-app browser or desktop Chrome.",
-    "expectedPrimary": ["agent-browser-verify"],
-    "expectedSupport": ["agent-browser", "vercel-deploy", "frontend-testing-debugging"],
-    "mustNotPrimary": ["control-in-app-browser", "control-chrome", "playwright"],
+    "expectedPrimary": [
+      "agent-browser-verify"
+    ],
+    "expectedSupport": [
+      "agent-browser",
+      "vercel-deploy",
+      "frontend-testing-debugging"
+    ],
+    "mustNotPrimary": [
+      "control-in-app-browser",
+      "control-chrome",
+      "playwright"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -49,14 +79,24 @@
     "domain": "infrastructure-platforms",
     "concept": "cloudflare-workers",
     "query": "Build a Cloudflare Sandbox SDK code-interpreter Worker for untrusted generated code with Worker bindings, Wrangler deployment, and security notes; not Vercel Sandbox.",
-    "expectedPrimary": ["sandbox-sdk"],
-    "expectedSupport": ["workers-best-practices", "wrangler", "security-best-practices"],
-    "mustNotPrimary": ["vercel-sandbox", "durable-objects", "building-ai-agent-on-cloudflare"],
+    "expectedPrimary": [
+      "sandbox-sdk"
+    ],
+    "expectedSupport": [
+      "workers-best-practices",
+      "wrangler",
+      "security-best-practices"
+    ],
+    "mustNotPrimary": [
+      "vercel-sandbox",
+      "durable-objects",
+      "building-ai-agent-on-cloudflare"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "backlog",
     "supportCriticality": "primary-critical"
   },
   {
@@ -64,14 +104,26 @@
     "domain": "data-analytics",
     "concept": "data-dashboarding",
     "query": "Build an accessible narrative chart report from product metrics with data visualization, alt text, color checks, and chart QA; do not turn this into a frontend CSS accessibility audit.",
-    "expectedPrimary": ["data-visualization", "visualize-data", "build-report"],
-    "expectedSupport": ["accessibility-and-inclusive-visualization", "testing-data-visualizations", "visualization-strategy-and-critique"],
-    "mustNotPrimary": ["dev-frontend-accessibility-css", "build-dashboard", "chart-data-extractor"],
+    "expectedPrimary": [
+      "data-visualization",
+      "visualize-data",
+      "build-report"
+    ],
+    "expectedSupport": [
+      "accessibility-and-inclusive-visualization",
+      "testing-data-visualizations",
+      "visualization-strategy-and-critique"
+    ],
+    "mustNotPrimary": [
+      "dev-frontend-accessibility-css",
+      "build-dashboard",
+      "chart-data-extractor"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "support-critical"
   },
   {
@@ -79,14 +131,23 @@
     "domain": "data-analytics",
     "concept": "data-dashboarding",
     "query": "Create a reproducible SQL and Python analytics notebook with validation checks, audit trail, and exportable findings for an experiment readout before any dashboard is built.",
-    "expectedPrimary": ["jupyter-notebooks"],
-    "expectedSupport": ["data-analysis-standard", "validate-data", "build-report"],
-    "mustNotPrimary": ["build-dashboard", "Spreadsheets"],
+    "expectedPrimary": [
+      "jupyter-notebooks"
+    ],
+    "expectedSupport": [
+      "data-analysis-standard",
+      "validate-data",
+      "build-report"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard",
+      "Spreadsheets"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -94,14 +155,25 @@
     "domain": "frontend-experience",
     "concept": "figma-handoff",
     "query": "Create Figma Code Connect mappings for existing React components and variant props; do not generate a new Figma design or implement the UI from scratch.",
-    "expectedPrimary": ["figma-code-connect-components", "figma-code-connect"],
-    "expectedSupport": ["figma-use", "figma-component-audit", "dev-frontend-react-next"],
-    "mustNotPrimary": ["figma-generate-design", "figma-generate-library", "figma-implement-design"],
+    "expectedPrimary": [
+      "figma-code-connect-components",
+      "figma-code-connect"
+    ],
+    "expectedSupport": [
+      "figma-use",
+      "figma-component-audit",
+      "dev-frontend-react-next"
+    ],
+    "mustNotPrimary": [
+      "figma-generate-design",
+      "figma-generate-library",
+      "figma-implement-design"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -109,14 +181,25 @@
     "domain": "product-research-planning",
     "concept": "figma-handoff",
     "query": "Use FigJam to map a user flow with sections, connectors, sticky notes, and decision annotations; do not create a Figma design file or component library.",
-    "expectedPrimary": ["figma-use-figjam", "figma-user-flow-planner"],
-    "expectedSupport": ["figma-use", "ux-research-plan", "product-design:get-context"],
-    "mustNotPrimary": ["figma-create-new-file", "figma-generate-library", "figma-implement-design"],
+    "expectedPrimary": [
+      "figma-use-figjam",
+      "figma-user-flow-planner"
+    ],
+    "expectedSupport": [
+      "figma-use",
+      "ux-research-plan",
+      "product-design:get-context"
+    ],
+    "mustNotPrimary": [
+      "figma-create-new-file",
+      "figma-generate-library",
+      "figma-implement-design"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "backlog",
     "supportCriticality": "primary-critical"
   },
   {
@@ -124,14 +207,24 @@
     "domain": "skill-tooling",
     "concept": "skill-authoring",
     "query": "Audit a third-party Codex skill pack for unsafe instructions, hidden tool use, and install risk before deciding whether to install it; do not author a new skill or plugin.",
-    "expectedPrimary": ["skill-security-auditor"],
-    "expectedSupport": ["skill-installer", "skillweaver", "security-best-practices"],
-    "mustNotPrimary": ["skill-creator", "plugin-creator", "cli-creator"],
+    "expectedPrimary": [
+      "skill-security-auditor"
+    ],
+    "expectedSupport": [
+      "skill-installer",
+      "skillweaver",
+      "security-best-practices"
+    ],
+    "mustNotPrimary": [
+      "skill-creator",
+      "plugin-creator",
+      "cli-creator"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "backlog",
     "supportCriticality": "primary-critical"
   },
   {
@@ -139,14 +232,24 @@
     "domain": "security-risk",
     "concept": "security-review",
     "query": "Create a security ownership map from repo evidence to identify orphaned sensitive code, bus-factor hotspots, and remediation owners; not a vulnerability scan or threat model.",
-    "expectedPrimary": ["security-ownership-map"],
-    "expectedSupport": ["track-findings", "risk-register", "security-best-practices"],
-    "mustNotPrimary": ["security-scan", "deep-security-scan", "threat-model"],
+    "expectedPrimary": [
+      "security-ownership-map"
+    ],
+    "expectedSupport": [
+      "track-findings",
+      "risk-register",
+      "security-best-practices"
+    ],
+    "mustNotPrimary": [
+      "security-scan",
+      "deep-security-scan",
+      "threat-model"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "backlog",
     "supportCriticality": "primary-critical"
   },
   {
@@ -154,14 +257,24 @@
     "domain": "huggingface-ml",
     "concept": "huggingface-ml",
     "query": "Set up Hugging Face Trackio experiment tracking for a model run, connect evaluation artifacts, and summarize results on the Hub; not a Gradio demo or paper summary.",
-    "expectedPrimary": ["huggingface-trackio"],
-    "expectedSupport": ["huggingface-community-evals", "huggingface-llm-trainer", "hf-cli"],
-    "mustNotPrimary": ["huggingface-gradio", "huggingface-paper-publisher", "huggingface-papers"],
+    "expectedPrimary": [
+      "huggingface-trackio"
+    ],
+    "expectedSupport": [
+      "huggingface-community-evals",
+      "huggingface-llm-trainer",
+      "hf-cli"
+    ],
+    "mustNotPrimary": [
+      "huggingface-gradio",
+      "huggingface-paper-publisher",
+      "huggingface-papers"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "primary-critical"
   },
   {
@@ -169,14 +282,23 @@
     "domain": "documents-publishing",
     "concept": "presentations",
     "query": "Create a reusable artifact-template skill from an existing PowerPoint deck with placeholders, examples, and validation guidance; not a one-off slide deck.",
-    "expectedPrimary": ["template-creator"],
-    "expectedSupport": ["Presentations", "documents", "dev-documentation-systems"],
-    "mustNotPrimary": ["roadmap-presentation", "Presentations"],
+    "expectedPrimary": [
+      "template-creator"
+    ],
+    "expectedSupport": [
+      "Presentations",
+      "documents",
+      "dev-documentation-systems"
+    ],
+    "mustNotPrimary": [
+      "roadmap-presentation",
+      "Presentations"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "backlog",
     "supportCriticality": "primary-critical"
   },
   {
@@ -184,14 +306,24 @@
     "domain": "product-research-planning",
     "concept": "product-planning",
     "query": "Turn Linear issues and Notion research notes into a roadmap narrative, release milestones, and follow-up owners; do not triage email or write a PRD from scratch.",
-    "expectedPrimary": ["roadmap-narrative", "linear"],
-    "expectedSupport": ["notion-research-documentation", "launch-readiness", "feature-prioritisation"],
-    "mustNotPrimary": ["gmail-inbox-triage", "prd-template"],
+    "expectedPrimary": [
+      "roadmap-narrative",
+      "linear"
+    ],
+    "expectedSupport": [
+      "notion-research-documentation",
+      "launch-readiness",
+      "feature-prioritisation"
+    ],
+    "mustNotPrimary": [
+      "gmail-inbox-triage",
+      "prd-template"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "challenge",
     "supportCriticality": "support-critical"
   },
   {
@@ -199,14 +331,23 @@
     "domain": "frontend-experience",
     "concept": "cloudflare-workers",
     "query": "Audit Cloudflare Worker edge caching and Core Web Vitals for a production frontend, including cache rules, render-blocking resources, and performance budget follow-up.",
-    "expectedPrimary": ["web-perf"],
-    "expectedSupport": ["workers-best-practices", "performance-budget", "frontend-testing-debugging"],
-    "mustNotPrimary": ["frontend-app-builder", "playwright"],
+    "expectedPrimary": [
+      "web-perf"
+    ],
+    "expectedSupport": [
+      "workers-best-practices",
+      "performance-budget",
+      "frontend-testing-debugging"
+    ],
+    "mustNotPrimary": [
+      "frontend-app-builder",
+      "playwright"
+    ],
     "source": "subagent-audit",
     "collectedAfterCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
     "frozenBeforeTuningCommit": "3cd6e51f971b91248e621893ce15a492288fe63c",
-    "suiteState": "untouched-holdout",
-    "promotionStatus": "candidate",
+    "suiteState": "regression",
+    "promotionStatus": "backlog",
     "supportCriticality": "support-critical"
   }
 ]

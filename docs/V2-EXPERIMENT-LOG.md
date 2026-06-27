@@ -402,7 +402,7 @@ The frozen holdout failures are narrow routing-boundary problems, not proof that
 | Suite | Cases | V2 quality | V2 hit@1 | V2 support coverage@5 | V2 forbidden primary | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Active acceptance | 78 | 100.0 | 100.0% | 100.0% | 0.0% | +24.7 pts | +22.8 pts |
-| Post-tuning challenge | 22 | 91.8 | 95.5% | 70.5% | 0.0% | +21.7 pts | +14.8 pts |
+| Post-tuning challenge | 22 | 91.4 | 95.5% | 68.2% | 0.0% | +21.3 pts | +14.4 pts |
 | Fresh-probe regression | 18 | 94.6 | 94.4% | 88.0% | 0.0% | +24.4 pts | +20.3 pts |
 | Frozen holdout regression | 12 | 95.6 | 100.0% | 77.8% | 0.0% | +24.9 pts | +25.7 pts |
 
@@ -419,7 +419,7 @@ Question: after the frozen-regression tuning commit `3cd6e51`, does V2 still bea
 ### Change
 
 - Added `benchmarks/skill-routing-clean-holdout-v2.json` with 14 provenance-backed prompts collected after commit `3cd6e51`.
-- Added `npm run benchmark:skills:clean` and `npm run benchmark:skills:clean:check`, reusing the existing evaluator, report metadata, freshness checks, case validation, domain slices, and concept slices.
+- Added an initial clean holdout command, later renamed to `npm run benchmark:skills:clean-v2-regression` after the suite drove tuning.
 - Generated [SKILL-USE-CLEAN-HOLDOUT-V2.md](SKILL-USE-CLEAN-HOLDOUT-V2.md) before tuning from these prompts.
 
 ### Result
@@ -442,9 +442,34 @@ No runtime infrastructure changed. The new cost is one explicit benchmark comman
 
 ## Next Experiments
 
-- Promote or fork the clean-holdout P0 failures before tuning, then preserve the current clean report as the pre-tuning baseline.
+- Capture a new clean holdout after the clean V2 regression tuning commit before making any renewed generalization claim.
 - Use the frozen regression suite as a guardrail, not as fresh evidence.
 - Work through the remaining coverage backlog from the independent audit, especially broader MCP server creation, deeper game-studio variants, Notion meeting-to-email ambiguity, Vercel Auth/Firewall variants, and visualization QA/accessibility variants.
 - Decide whether support precision@5 should become an acceptance gate after expected-support lists are reviewed for completeness.
 - Add an end-to-end graph-cap survival test if the corpus grows or cap behavior changes.
 - Track latency over repeated scans if the indexed skill corpus grows past 1,000 skills.
+
+## Clean Holdout V2 Regression Tuning
+
+Question: after preserving the clean V2 baseline at `fb1b4cb`, can narrow concept aliases and intent guards repair the six promoted P0 misses without adding runtime machinery or weakening the exercised suites?
+
+### Change
+
+- Relabeled `benchmarks/skill-routing-clean-holdout-v2.json` from `untouched-holdout` to `regression`.
+- Promoted the six P0 primary failures to `promotionStatus: "challenge"` and left support-only cases in backlog.
+- Added deterministic concept aliases and intent guards for Vercel Agent Browser Verify, accessible chart-report building, Jupyter notebooks, Figma Code Connect, Hugging Face Trackio, and Linear/Notion roadmap planning.
+- Renamed the public clean command to `npm run benchmark:skills:clean-v2-regression`.
+
+### Result
+
+| System | Quality | Hit@1 | Top/workflow 5 | Support coverage@5 | Forbidden primary |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| No SkillWeaver | 68.3 | 71.4% | 92.9% | 26.2% | 7.1% |
+| Skill-level baseline | 79.0 | 85.7% | 100.0% | 33.3% | 7.1% |
+| SkillWeaver V2 | 90.5 | 100.0% | 100.0% | 52.4% | 0.0% |
+
+V2 moved from -7.0 quality points versus no SkillWeaver and -17.7 versus the skill-level baseline to +22.2 and +11.5 respectively on this promoted regression suite. Primary hit@1 improved from 57.1% to 100.0%, and forbidden-primary rate improved from 35.7% to 0.0%.
+
+### Runtime Impact
+
+No new dependencies, persistence, model calls, graph caps, background jobs, or product-route passes were added. The changes stay inside deterministic concept membership, intent scoring, benchmark provenance, and tests.

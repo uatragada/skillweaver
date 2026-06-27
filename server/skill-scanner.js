@@ -69,7 +69,7 @@ const CONCEPT_RULES = [
     gatewaySkillNames: ["browser:control-in-app-browser", "control-in-app-browser", "chrome:control-chrome", "control-chrome"],
     primarySkillNames: ["playwright", "playwright-interactive", "build-web-apps:frontend-testing-debugging", "frontend-testing-debugging"],
     supportingSkillNames: ["screenshot", "motion-qa"],
-    verificationSkillNames: ["vercel:agent-browser-verify"],
+    verificationSkillNames: ["vercel:agent-browser-verify", "agent-browser-verify"],
     relatedConceptIds: ["frontend-implementation", "deployment-release"]
   },
   {
@@ -80,7 +80,7 @@ const CONCEPT_RULES = [
     domains: ["frontend", "product", "creative"],
     tools: ["Figma", "Node"],
     gatewaySkillNames: ["figma-use", "figma:figma-use"],
-    primarySkillNames: ["figma-implement-design", "figma-generate-library", "figma:figma-code-connect", "product-design:image-to-code", "design-image-to-code", "design-url-to-code", "figma:figma-swiftui", "figma-swiftui"],
+    primarySkillNames: ["figma-implement-design", "figma-generate-library", "figma:figma-code-connect", "figma-code-connect", "figma-code-connect-components", "product-design:image-to-code", "design-image-to-code", "design-url-to-code", "figma:figma-swiftui", "figma-swiftui"],
     supportingSkillNames: ["figma-design-qa", "figma-component-audit", "figma-create-design-system-rules", "product-design:get-context", "figma:figma-generate-design", "figma-generate-design", "figma:figma-implement-motion", "figma-implement-motion", "figma:figma-use-motion", "figma-use-motion"],
     verificationSkillNames: ["design-qa", "figma-design-review"],
     relatedConceptIds: ["frontend-implementation", "browser-verification"]
@@ -93,7 +93,7 @@ const CONCEPT_RULES = [
     domains: ["data", "product"],
     tools: ["Python", "Node"],
     gatewaySkillNames: ["data-analytics:index"],
-    primarySkillNames: ["data-analytics:build-dashboard", "build-dashboard", "data-analytics:build-report", "build-report", "build-web-data-visualization:data-visualization", "data-analytics:visualize-data", "visualize-data", "metric-diagnostics", "product-business-analysis", "spreadsheets:Spreadsheets", "Spreadsheets"],
+    primarySkillNames: ["data-analytics:build-dashboard", "build-dashboard", "data-analytics:build-report", "build-report", "build-web-data-visualization:data-visualization", "data-visualization", "data-analytics:visualize-data", "visualize-data", "data-analytics:jupyter-notebooks", "jupyter-notebooks", "metric-diagnostics", "product-business-analysis", "spreadsheets:Spreadsheets", "Spreadsheets"],
     supportingSkillNames: ["data-analytics:design-kpis", "design-kpis", "kpi-reporting", "data-analysis-standard", "chart-data-extractor", "visualization-strategy-and-critique"],
     verificationSkillNames: ["data-analytics:validate-data", "data-analytics:analyze-data-quality", "testing-data-visualizations", "accessibility-and-inclusive-visualization"],
     relatedConceptIds: ["frontend-implementation", "product-planning"]
@@ -232,7 +232,7 @@ const CONCEPT_RULES = [
     triggers: ["hugging face", "dataset", "model training", "gradio", "papers", "spaces"],
     domains: ["ai", "data"],
     tools: ["Python"],
-    primarySkillNames: ["hugging-face:hf-cli", "hf-cli", "hugging-face:huggingface-datasets", "huggingface-datasets", "hugging-face:huggingface-llm-trainer", "huggingface-llm-trainer", "hugging-face:huggingface-vision-trainer", "huggingface-vision-trainer", "hugging-face:huggingface-papers", "huggingface-papers", "hugging-face:huggingface-gradio", "huggingface-gradio"],
+    primarySkillNames: ["hugging-face:hf-cli", "hf-cli", "hugging-face:huggingface-datasets", "huggingface-datasets", "hugging-face:huggingface-llm-trainer", "huggingface-llm-trainer", "hugging-face:huggingface-vision-trainer", "huggingface-vision-trainer", "hugging-face:huggingface-papers", "huggingface-papers", "hugging-face:huggingface-gradio", "huggingface-gradio", "hugging-face:huggingface-trackio", "huggingface-trackio"],
     supportingSkillNames: ["hugging-face:huggingface-community-evals", "huggingface-community-evals", "hugging-face:huggingface-gradio", "huggingface-gradio", "hugging-face:huggingface-jobs", "huggingface-jobs", "hugging-face:transformers-js", "transformers-js"],
     relatedConceptIds: ["agent-llm-apps", "data-dashboarding"]
   },
@@ -1422,8 +1422,13 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   const negatedChatgptAppIntent = hasNegatedIntent(normalizedQuery, ["chatgpt app", "chatgpt"]);
   const inAppBrowserIntent = /\bin app browser\b|\bcontrol in app browser\b|\bbrowser plugin\b/.test(normalizedQuery);
   const negatedChromeIntent = hasNegatedIntent(normalizedQuery, ["chrome", "desktop chrome"]);
+  const agentBrowserPreviewIntent = /\bagent browser verify\b|\bvercel agent browser\b|\bprotected preview\b|\bpreview deployment\b/.test(normalizedQuery)
+    || (/\bvercel\b/.test(normalizedQuery) && /\bpreview\b|\bdeployment\b|\bprotected\b/.test(normalizedQuery) && /\bscreenshot|\bconsole errors?\b|\bcompare\b|\binspect\b/.test(normalizedQuery));
   const incidentReviewIntent = /\bpostmortem\b|\bincident\b/.test(normalizedQuery);
   const broadObservabilitySetupIntent = /\bopentelemetry\b|\botel\b|\bdistributed tracing\b|\btracing\b|\bslo\b|\berror budget\b|\bmonitoring dashboard\b|\balert rules?\b/.test(normalizedQuery);
+  const notebookAnalyticsIntent = /\bnotebooks?\b|\bjupyter\b|\breproducible\b|\baudit trail\b|\bsql\b.*\bpython\b|\bpython\b.*\bsql\b|\bexperiment readout\b/.test(normalizedQuery);
+  const dataReportBuildIntent = /\bbuild\b|\bcreate\b|\bnarrative\b|\breport\b|\bproduct metrics?\b/.test(normalizedQuery)
+    && /\bcharts?\b|\bvisuali[sz]ation\b|\balt text\b|\bcolor checks?\b|\bchart qa\b/.test(normalizedQuery);
 
   if (/\bdashboard\b/.test(normalizedQuery) && dataOutputIntent) {
     if (name.includes("build dashboard")) boost += 520;
@@ -1444,6 +1449,12 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (["build report", "kpi reporting", "visualize data", "data visualization"].some((term) => name.includes(term))) boost += 220;
   }
 
+  if (notebookAnalyticsIntent) {
+    if (name.includes("jupyter notebooks")) boost += 1900;
+    if (["data analysis standard", "validate data", "build report"].some((term) => name.includes(term))) boost += 420;
+    if (["build dashboard", "spreadsheets"].some((term) => name.includes(term))) boost -= 820;
+  }
+
   if (genericMcpServerIntent
     && (!cloudflareRuntimeIntent || negatedCloudflareRuntimeIntent)
     && (!chatgptAppIntent || negatedChatgptAppIntent)) {
@@ -1456,6 +1467,12 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("control in app browser")) boost += 980;
     if (/\binspect\b|\binteractions?\b|\bcontrol\b|\bscreenshot\b/.test(normalizedQuery) && name.includes("playwright interactive")) boost += 220;
     if (["control chrome", "agent browser verify", "design url to code"].some((term) => name.includes(term))) boost -= negatedChromeIntent ? 760 : 240;
+  }
+
+  if (agentBrowserPreviewIntent) {
+    if (name.includes("agent browser verify")) boost += 1900;
+    if (name.includes("agent browser") && !name.includes("verify")) boost += 520;
+    if (["control in app browser", "control chrome", "playwright interactive"].some((term) => name.includes(term))) boost -= 720;
   }
 
   if (/\bchrome\b/.test(normalizedQuery) && !negatedChromeIntent) {
@@ -1494,11 +1511,13 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("design system audit") && !/\bdesign system\b/.test(normalizedQuery)) boost -= 220;
   }
 
-  if (/\bvisualization accessibility\b|\bchart\b.*\b(accessibility|contrast|alt text|keyboard)\b|\bdata visualization\b.*\b(accessibility|contrast|alt text|keyboard)\b/.test(normalizedQuery)) {
-    if (name.includes("accessibility and inclusive visualization")) boost += 1560;
-    if (["testing data visualizations", "visualization strategy and critique", "data visualization"].some((term) => name.includes(term))) boost += 520;
+  if (/\bvisualization accessibility\b|\bchart\b.*\b(accessibility|contrast|alt text|keyboard)\b|\bdata visualization\b.*\b(accessibility|contrast|alt text|keyboard)\b|\balt text\b|\bcolor checks?\b|\bchart qa\b/.test(normalizedQuery)) {
+    if (name.includes("accessibility and inclusive visualization")) boost += dataReportBuildIntent ? 540 : 1560;
+    if (["testing data visualizations", "visualization strategy and critique"].some((term) => name.includes(term))) boost += 520;
+    if (dataReportBuildIntent && name.includes("testing data visualizations")) boost -= 260;
+    if (["data visualization", "visualize data", "build report"].some((term) => name.includes(term))) boost += dataReportBuildIntent ? 1080 : 520;
     if (name.includes("figma implement motion")) boost -= 520;
-    if (name.includes("dev frontend accessibility css")) boost += 160;
+    if (name.includes("dev frontend accessibility css")) boost += dataReportBuildIntent ? -260 : 160;
   }
 
   if (broadObservabilitySetupIntent) {
@@ -1562,7 +1581,8 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   }
 
   const emailInboxIntent = /\bgmail\b|\binbox\b|\bemail\b|\bdraft repl|\bthread\b/.test(normalizedQuery);
-  if (emailInboxIntent) {
+  const negatedEmailInboxIntent = hasNegatedIntent(normalizedQuery, ["gmail", "inbox", "email", "triage email", "triage"]);
+  if (emailInboxIntent && !negatedEmailInboxIntent) {
     if (name.includes("gmail inbox triage")) boost += 1500;
     if (name === "gmail" || name.includes("gmail:gmail")) boost += 920;
     if (name.includes("email triage")) boost += 700;
@@ -1571,6 +1591,10 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
       if (name.includes("notion research documentation")) boost += 180;
       if (name.includes("notion meeting intelligence")) boost -= 120;
     }
+  }
+
+  if (negatedEmailInboxIntent && ["gmail inbox triage", "gmail", "email triage"].some((term) => name === term || name.includes(term))) {
+    boost -= 1100;
   }
 
   if (/\bnotion\b|\bworkspace knowledge\b|\bknowledge base\b|\bdecision log\b/.test(normalizedQuery)) {
@@ -1650,6 +1674,13 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     const figmaMotionIntent = /\bmotion\b|\banimation\b|\bprototype\b/.test(normalizedQuery);
     const negatedReactIntent = hasNegatedIntent(normalizedQuery, ["react", "react code"]);
     const figmaImplementationIntent = /\bimplement\b|\breact\b|\bcode\b/.test(normalizedQuery);
+    const figmaCodeConnectIntent = /\bcode connect\b|\bcode-connect\b|\bmappings?\b|\bvariant props?\b|\bexisting react components?\b/.test(normalizedQuery);
+    if (figmaCodeConnectIntent) {
+      if (name.includes("figma code connect")) boost += 1900;
+      if (name.includes("figma component audit")) boost += 360;
+      if (name.includes("dev frontend react next")) boost += 260;
+      if (["figma implement design", "figma generate design", "figma generate library"].some((term) => name.includes(term))) boost -= 980;
+    }
     if (figmaSwiftUiIntent) {
       if (name.includes("figma swiftui")) boost += 1800;
       if (figmaMotionIntent && ["figma implement motion", "figma use motion"].some((term) => name.includes(term))) boost += 720;
@@ -1658,7 +1689,7 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     }
     if (name.includes("figma use")) boost += figmaGatewayIntent ? 860 : 180;
     if (figmaImplementationIntent) {
-      if (name.includes("figma implement design")) boost += figmaGatewayIntent ? 120 : 900;
+      if (name.includes("figma implement design")) boost += figmaCodeConnectIntent ? 0 : figmaGatewayIntent ? 120 : 900;
       if (name.includes("dev frontend react next")) boost += 1120;
       if (name.includes("frontend app builder")) boost += 220;
     }
@@ -1757,10 +1788,14 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("creative ads explorer")) boost += /\bad concepts?\b/.test(normalizedQuery) ? 520 : 180;
   }
 
-  if (/\blinear\b|\bplan product\b|\bproduct work\b|\broadmap\b|\blaunch readiness\b|\brollback\b/.test(normalizedQuery)) {
-    if (name.includes("roadmap narrative")) boost += 220;
+  if (/\blinear\b|\bplan product\b|\bproduct work\b|\broadmap\b|\blaunch readiness\b|\brollback\b|\brelease milestones?\b|\bfollow-up owners?\b/.test(normalizedQuery)) {
+    if (name.includes("roadmap narrative")) boost += /\broadmap narrative\b|\brelease milestones?\b|\bfollow-up owners?\b/.test(normalizedQuery) ? 1260 : 220;
+    if (name === "linear" || name.includes("linear")) boost += /\blinear issues?\b|\blinear\b/.test(normalizedQuery) ? 860 : 160;
+    if (name.includes("notion research documentation")) boost += /\bnotion research\b|\bresearch notes?\b/.test(normalizedQuery) ? 520 : 120;
+    if (name.includes("feature prioritisation")) boost += /\broadmap\b|\bmilestones?\b/.test(normalizedQuery) ? 360 : 120;
     if (/\blaunch readiness checklist\b|\bchecklist\b.*\blaunch readiness\b|\brollback\b|\bfeature flags?\b/.test(normalizedQuery) && name.includes("launch readiness")) boost += 920;
     if (/\bfeature flags?\b/.test(normalizedQuery) && name.includes("feature flag guide")) boost += 620;
+    if ((/\bdo not\b.*\bprd\b|\bnot\b.*\bprd\b/.test(normalizedQuery)) && name.includes("prd template")) boost -= 720;
   }
 
   if (/\bfirewall\b|\bbot protection\b|\brate limits?\b|\bwaf\b/.test(normalizedQuery)) {
@@ -1814,15 +1849,21 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (/\bwithout\b.*\bcode review\b|\bnot\b.*\bcode review\b/.test(normalizedQuery) && name.includes("code review checklist")) boost -= 520;
   }
 
-  if (/\bhugging face\b|\bgradio\b|\bspace\b|\bdemo\b|\bvision model\b/.test(normalizedQuery)) {
-    if (/\bgradio\b|\bspace\b|\bdemo\b/.test(normalizedQuery) && name.includes("huggingface gradio")) boost += 1260;
+  if (/\bhugging face\b|\bgradio\b|\bspace\b|\bdemo\b|\bvision model\b|\btrackio\b/.test(normalizedQuery)) {
+    const huggingFaceDemoIntent = /\bgradio\b|\bspace\b|\bdemo\b/.test(normalizedQuery);
+    const trackioPrimaryIntent = /\btrackio\b|\bexperiment tracking\b|\bevaluation artifacts?\b|\bmodel run\b/.test(normalizedQuery)
+      || (!huggingFaceDemoIntent && /\btrack(?:ing)?\b|\bevaluation runs?\b/.test(normalizedQuery));
+    if (huggingFaceDemoIntent && name.includes("huggingface gradio")) boost += 1260;
     if (/\bvision\b/.test(normalizedQuery) && name.includes("huggingface vision trainer")) boost += 620;
-    if (/\btrack\b|\bevaluation runs?\b/.test(normalizedQuery) && name.includes("huggingface trackio")) boost += 720;
+    if (trackioPrimaryIntent && name.includes("huggingface trackio")) boost += 1800;
+    if (huggingFaceDemoIntent && /\btrack(?:ing)?\b|\bevaluation runs?\b/.test(normalizedQuery) && name.includes("huggingface trackio")) boost += 360;
     if (/\btrain\b|\bmodel training\b/.test(normalizedQuery) && name.includes("huggingface llm trainer")) boost += 620;
     if (/\bdatasets?\b|\bdataset metadata\b/.test(normalizedQuery) && name.includes("huggingface datasets")) boost += 680;
     if (name.includes("huggingface community evals")) boost += 240;
     if ((/\bhf cli\b|\bspace\b|\bgradio\b/.test(normalizedQuery)) && name.includes("hf cli")) boost += 260;
     if ((/\bpublish\b|\bpapers?\b|\bevaluation results?\b/.test(normalizedQuery)) && name.includes("huggingface paper publisher")) boost += 340;
+    if (/\btrackio\b|\bexperiment tracking\b|\bnot\b.*\bgradio\b|\bnot\b.*\bpaper\b/.test(normalizedQuery)
+      && ["huggingface gradio", "huggingface paper publisher", "huggingface papers"].some((term) => name.includes(term))) boost -= 860;
     if (/\bgradio\b|\bspace\b|\bdemo\b/.test(normalizedQuery) && ["huggingface papers", "huggingface llm trainer", "huggingface vision trainer"].some((term) => name.includes(term))) boost -= 260;
   }
 

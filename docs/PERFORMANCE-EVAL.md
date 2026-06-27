@@ -8,28 +8,29 @@ SkillWeaver should keep V2 routing quality gains without becoming a heavy servic
 
 | Journey | Budget | Current evidence |
 | --- | ---: | --- |
-| Scan local skill corpus | warn over 6s, investigate over 8s | 442 skills scanned in 4.221s |
-| Active benchmark check | warn over 15s | 11.9s for 78 cases |
-| Challenge benchmark check | warn over 10s | 7.4s for 22 cases |
-| Fresh-probe benchmark check | warn over 10s | 7.2s for 18 cases |
-| Frozen holdout benchmark check | warn over 10s | 6.8s for 12 cases |
-| Clean holdout V2 benchmark check | warn over 10s | 7.3s for 14 cases |
+| Scan local skill corpus | warn over 6s, investigate over 8s | 442 skills indexed in 4.692s |
+| Active benchmark check | warn over 15s | 12.087s for 78 cases |
+| Challenge benchmark check | warn over 10s | 7.180s for 22 cases |
+| Fresh-probe benchmark check | warn over 10s | 7.106s for 18 cases |
+| Frozen holdout benchmark check | warn over 10s | 6.931s for 12 cases |
+| Clean holdout V2 regression benchmark check | warn over 10s | 6.869s for 14 cases |
 | Production build JS bundle | warn over 250 kB raw JS | 211.33 kB raw JS in latest build |
 | Production build CSS bundle | warn over 20 kB raw CSS | 9.69 kB raw CSS in latest build |
 
 ## Latest Measurement Snapshot
 
-Measured on commit `d6a792d` with Node `v24.14.1` and npm `11.11.0`, with the clean holdout check added in the same commit.
+Measured on June 27, 2026 from a clean SkillWeaver worktree with Node `v24.14.1` and npm `11.11.0`.
 
 | Command | Elapsed | Exit code | Evidence |
 | --- | ---: | ---: | --- |
-| `node server\skill-scanner.js` | 4.221s | 0 | 442 skills, 8 roots |
-| `npm run --silent index:skills` | 4.221s | 0 | 442 skills, 2,000/4,105 skill edges kept, 200/231 concept edges kept |
-| `npm run --silent benchmark:skills:check` | 11.9s | 0 | 78 cases, report fresh |
-| `npm run --silent benchmark:skills:holdout:check` | 7.4s | 0 | 22 cases, report fresh |
-| `npm run --silent benchmark:skills:fresh:check` | 7.2s | 0 | 18 cases, report fresh |
-| `npm run --silent benchmark:skills:frozen:check` | 6.8s | 0 | 12 cases, report fresh |
-| `npm run --silent benchmark:skills:clean:check` | 7.3s | 0 | 14 cases, report fresh; quality failures are non-gating evidence |
+| `npm test` | 1.307s | 0 | 20 tests passed |
+| `npm run --silent index:skills` | 4.692s | 0 | 442 skills, 2,000/4,105 skill edges kept, 200/231 concept edges kept |
+| `npm run --silent benchmark:skills:check` | 12.087s | 0 | 78 cases, report fresh |
+| `npm run --silent benchmark:skills:holdout:check` | 7.180s | 0 | 22 cases, report fresh |
+| `npm run --silent benchmark:skills:fresh:check` | 7.106s | 0 | 18 cases, report fresh |
+| `npm run --silent benchmark:skills:frozen:check` | 6.931s | 0 | 12 cases, report fresh |
+| `npm run --silent benchmark:skills:clean-v2-regression:check` | 6.869s | 0 | 14 cases, report fresh; non-gating regression evidence |
+| `npm run build` | 2.342s | 0 | production build passed |
 | `Get-ChildItem dist\assets -File` | n/a | 0 | JS 211,334 bytes; CSS 9,690 bytes |
 
 The API waits for the initial scan before it is ready, and `/api/refresh` runs another scan on demand. Current scan time is inside the scanner budget, so this remains an in-memory scan concern rather than a reason to add persistence or caching infrastructure.
@@ -52,13 +53,13 @@ npm run benchmark:skills:check
 npm run benchmark:skills:holdout:check
 npm run benchmark:skills:fresh:check
 npm run benchmark:skills:frozen:check
-npm run benchmark:skills:clean:check
+npm run benchmark:skills:clean-v2-regression:check
 Measure-Command { node server\skill-scanner.js *> $null }
 Measure-Command { npm run benchmark:skills:check *> $null }
 Measure-Command { npm run benchmark:skills:holdout:check *> $null }
 Measure-Command { npm run benchmark:skills:fresh:check *> $null }
 Measure-Command { npm run benchmark:skills:frozen:check *> $null }
-Measure-Command { npm run benchmark:skills:clean:check *> $null }
+Measure-Command { npm run benchmark:skills:clean-v2-regression:check *> $null }
 Get-ChildItem dist\assets -File | Select-Object Name,Length
 ```
 
@@ -70,12 +71,12 @@ npm run benchmark:skills
 npm run benchmark:skills:holdout
 npm run benchmark:skills:fresh
 npm run benchmark:skills:frozen
-npm run benchmark:skills:clean
+npm run benchmark:skills:clean-v2-regression
 ```
 
 ## Current Assessment
 
-The V2 concept map and the benchmark slice reports add quality evidence, not product runtime infrastructure. Cross-domain, frozen-holdout, and clean-holdout reporting is generated only when benchmark commands run, and the API route continues to use the same `rankConceptWorkflowSkills()` helper.
+The V2 concept map and the benchmark slice reports add quality evidence, not product runtime infrastructure. Cross-domain, frozen-holdout, and clean-holdout V2 regression reporting is generated only when benchmark commands run, and the API route continues to use the same `rankConceptWorkflowSkills()` helper.
 
 The current performance posture is acceptable: quality reports are richer, but no new dependencies, persistence, model calls, larger graph caps, or extra product-route passes were added.
 

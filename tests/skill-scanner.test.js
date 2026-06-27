@@ -1253,3 +1253,245 @@ test("concept workflow handles frozen holdout specialist routing aliases", () =>
   assert.equal(names[0], "figma-swiftui");
   assert.ok(names.includes("figma-implement-motion"));
 });
+
+test("concept workflow preserves clean holdout V2 specialist boundaries", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "agent-browser-verify",
+      name: "agent-browser-verify",
+      description: "Verify protected Vercel preview deployments with screenshots, console errors, and deployed UI inspection.",
+      domains: ["frontend"],
+      tools: ["Vercel", "Playwright"],
+      triggers: ["agent browser verify protected preview deployment screenshots console errors"]
+    }),
+    makeSkill({
+      id: "agent-browser",
+      name: "agent-browser",
+      description: "Use Vercel Agent Browser for deployed app inspection.",
+      domains: ["frontend"],
+      tools: ["Vercel"],
+      triggers: ["vercel agent browser preview"]
+    }),
+    makeSkill({
+      id: "control-in-app-browser",
+      name: "control-in-app-browser",
+      description: "Control the local in-app browser for screenshots and inspection.",
+      domains: ["frontend"],
+      tools: ["Playwright"],
+      triggers: ["in app browser local screenshot inspect"]
+    }),
+    makeSkill({
+      id: "control-chrome",
+      name: "control-chrome",
+      description: "Control desktop Chrome for browser interactions.",
+      domains: ["frontend"],
+      tools: ["Playwright"],
+      triggers: ["desktop chrome control"]
+    }),
+    makeSkill({
+      id: "data-visualization",
+      name: "data-visualization",
+      description: "Build data visualizations and narrative chart reports.",
+      domains: ["data"],
+      tools: ["Node"],
+      triggers: ["data visualization chart report alt text color checks chart qa"]
+    }),
+    makeSkill({
+      id: "build-report",
+      name: "build-report",
+      description: "Build analytical reports with charts and narrative findings.",
+      domains: ["data", "product"],
+      tools: ["Node"],
+      triggers: ["build report product metrics charts"]
+    }),
+    makeSkill({
+      id: "accessibility-and-inclusive-visualization",
+      name: "accessibility-and-inclusive-visualization",
+      description: "Review visualization accessibility, alt text, and contrast.",
+      domains: ["data"],
+      tools: [],
+      triggers: ["visualization accessibility alt text contrast"]
+    }),
+    makeSkill({
+      id: "testing-data-visualizations",
+      name: "testing-data-visualizations",
+      description: "Test data visualizations for correctness and accessibility.",
+      domains: ["data"],
+      tools: [],
+      triggers: ["testing data visualizations chart qa"]
+    }),
+    makeSkill({
+      id: "build-dashboard",
+      name: "build-dashboard",
+      description: "Build interactive analytics dashboards.",
+      domains: ["data"],
+      tools: ["Node"],
+      triggers: ["dashboard analytics"]
+    }),
+    makeSkill({
+      id: "jupyter-notebooks",
+      name: "jupyter-notebooks",
+      description: "Create reproducible Jupyter notebooks with SQL, Python, validation checks, and audit trails.",
+      domains: ["data"],
+      tools: ["Python"],
+      triggers: ["jupyter notebook reproducible sql python audit trail experiment readout"]
+    }),
+    makeSkill({
+      id: "data-analysis-standard",
+      name: "data-analysis-standard",
+      description: "Run standard data analysis with validation and documented findings.",
+      domains: ["data"],
+      tools: ["Python"],
+      triggers: ["data analysis validation findings"]
+    }),
+    makeSkill({
+      id: "validate-data",
+      name: "validate-data",
+      description: "Validate datasets and analysis results.",
+      domains: ["data"],
+      tools: ["Python"],
+      triggers: ["validate data checks"]
+    }),
+    makeSkill({
+      id: "figma-code-connect-components",
+      name: "figma-code-connect-components",
+      description: "Create Figma Code Connect mappings for existing React components and variant props.",
+      domains: ["frontend", "product"],
+      tools: ["Figma", "Node"],
+      triggers: ["figma code connect mappings existing react components variant props"]
+    }),
+    makeSkill({
+      id: "figma-code-connect",
+      name: "figma-code-connect",
+      description: "Configure Figma Code Connect for component mappings.",
+      domains: ["frontend", "product"],
+      tools: ["Figma"],
+      triggers: ["figma code connect mappings"]
+    }),
+    makeSkill({
+      id: "figma-implement-design",
+      name: "figma-implement-design",
+      description: "Implement Figma designs in frontend code.",
+      domains: ["frontend"],
+      tools: ["Figma", "Node"],
+      triggers: ["figma react implementation"]
+    }),
+    makeSkill({
+      id: "figma-generate-design",
+      name: "figma-generate-design",
+      description: "Generate new Figma design files.",
+      domains: ["product"],
+      tools: ["Figma"],
+      triggers: ["generate figma design"]
+    }),
+    makeSkill({
+      id: "figma-generate-library",
+      name: "figma-generate-library",
+      description: "Generate a Figma component library.",
+      domains: ["product"],
+      tools: ["Figma"],
+      triggers: ["figma component library"]
+    }),
+    makeSkill({
+      id: "huggingface-trackio",
+      name: "huggingface-trackio",
+      description: "Use Hugging Face Trackio for experiment tracking, model runs, and evaluation artifacts.",
+      domains: ["ai", "data"],
+      tools: ["Python"],
+      triggers: ["hugging face trackio experiment tracking model run evaluation artifacts"]
+    }),
+    makeSkill({
+      id: "huggingface-gradio",
+      name: "huggingface-gradio",
+      description: "Build Gradio demos and Spaces.",
+      domains: ["ai"],
+      tools: ["Python"],
+      triggers: ["hugging face gradio demo space"]
+    }),
+    makeSkill({
+      id: "huggingface-papers",
+      name: "huggingface-papers",
+      description: "Search and summarize Hugging Face papers.",
+      domains: ["ai"],
+      tools: [],
+      triggers: ["hugging face papers summary"]
+    }),
+    makeSkill({
+      id: "roadmap-narrative",
+      name: "roadmap-narrative",
+      description: "Turn research and issue context into roadmap narratives, milestones, and owners.",
+      domains: ["product"],
+      tools: ["Linear"],
+      triggers: ["roadmap narrative release milestones follow up owners"]
+    }),
+    makeSkill({
+      id: "linear",
+      name: "linear",
+      description: "Plan and update Linear issues.",
+      domains: ["product"],
+      tools: ["Linear"],
+      triggers: ["linear issues"]
+    }),
+    makeSkill({
+      id: "notion-research-documentation",
+      name: "notion-research-documentation",
+      description: "Turn Notion research notes into structured product documentation.",
+      domains: ["product", "documents"],
+      tools: [],
+      triggers: ["notion research notes"]
+    }),
+    makeSkill({
+      id: "gmail-inbox-triage",
+      name: "gmail-inbox-triage",
+      description: "Triage Gmail inboxes and draft replies.",
+      domains: ["operations"],
+      tools: ["Gmail"],
+      triggers: ["gmail inbox triage email"]
+    }),
+    makeSkill({
+      id: "prd-template",
+      name: "prd-template",
+      description: "Write PRDs from scratch.",
+      domains: ["product", "documents"],
+      tools: [],
+      triggers: ["prd template"]
+    })
+  ]);
+
+  const topFive = (query) => rankConceptWorkflowSkills(index, query).slice(0, 5).map((skill) => skill.name);
+
+  let names = topFive("Use Vercel Agent Browser Verify to inspect a protected preview deployment, capture screenshots and console errors, and compare the deployed UI; not the local in-app browser or desktop Chrome.");
+  assert.equal(names[0], "agent-browser-verify");
+  assert.notEqual(names[0], "control-in-app-browser");
+  assert.notEqual(names[0], "control-chrome");
+
+  names = topFive("Build an accessible narrative chart report from product metrics with data visualization, alt text, color checks, and chart QA; do not turn this into a frontend CSS accessibility audit.");
+  assert.ok(["data-visualization", "build-report"].includes(names[0]));
+  assert.notEqual(names[0], "accessibility-and-inclusive-visualization");
+  assert.notEqual(names[0], "testing-data-visualizations");
+  assert.notEqual(names[0], "build-dashboard");
+
+  names = topFive("Create a reproducible SQL and Python analytics notebook with validation checks, audit trail, and exportable findings for an experiment readout before any dashboard is built.");
+  assert.equal(names[0], "jupyter-notebooks");
+  assert.notEqual(names[0], "build-dashboard");
+
+  names = topFive("Create Figma Code Connect mappings for existing React components and variant props; do not generate a new Figma design or implement the UI from scratch.");
+  assert.ok(["figma-code-connect-components", "figma-code-connect"].includes(names[0]));
+  assert.notEqual(names[0], "figma-implement-design");
+  assert.notEqual(names[0], "figma-generate-design");
+  assert.notEqual(names[0], "figma-generate-library");
+
+  names = topFive("Set up Hugging Face Trackio experiment tracking for a model run, connect evaluation artifacts, and summarize results on the Hub; not a Gradio demo or paper summary.");
+  assert.equal(names[0], "huggingface-trackio");
+  assert.notEqual(names[0], "huggingface-gradio");
+  assert.notEqual(names[0], "huggingface-papers");
+
+  names = topFive("Publish a Hugging Face Gradio demo Space for a vision model and track evaluation runs.");
+  assert.equal(names[0], "huggingface-gradio");
+  assert.ok(names.includes("huggingface-trackio"));
+
+  names = topFive("Turn Linear issues and Notion research notes into a roadmap narrative, release milestones, and follow-up owners; do not triage email or write a PRD from scratch.");
+  assert.ok(["roadmap-narrative", "linear"].includes(names[0]));
+  assert.notEqual(names[0], "gmail-inbox-triage");
+  assert.notEqual(names[0], "prd-template");
+});
