@@ -1,150 +1,339 @@
 [
   {
     "id": "chatgpt-app-mcp-widget",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
     "query": "Build a ChatGPT App with an MCP server, widget UI, tool metadata, and CSP settings",
-    "expectedPrimary": ["chatgpt-apps"],
-    "expectedSupport": ["openai-docs", "openai-agents-js"],
-    "mustNotPrimary": ["dev-ai-llm-apps"]
+    "expectedPrimary": [
+      "chatgpt-apps"
+    ],
+    "expectedSupport": [
+      "openai-docs",
+      "openai-agents-js"
+    ],
+    "mustNotPrimary": [
+      "dev-ai-llm-apps"
+    ]
   },
   {
     "id": "aspnet-minimal-api-review",
+    "domain": "backend-services",
+    "concept": "backend-services",
     "query": "Review an ASP.NET Core Minimal API with middleware, dependency injection, auth, and endpoint tests",
-    "expectedPrimary": ["aspnet-core"],
-    "expectedSupport": ["dev-java-dotnet-services", "dev-backend-api-design"]
+    "expectedPrimary": [
+      "aspnet-core"
+    ],
+    "expectedSupport": [
+      "dev-java-dotnet-services",
+      "dev-backend-api-design"
+    ]
   },
   {
     "id": "java-dotnet-service-boundary",
+    "domain": "backend-services",
+    "concept": "backend-services",
     "query": "Design a Java or .NET service boundary with API contracts, tests, and deployment tradeoffs",
-    "expectedPrimary": ["dev-java-dotnet-services"],
-    "expectedSupport": ["dev-backend-api-design", "dev-testing-qa"]
+    "expectedPrimary": [
+      "dev-java-dotnet-services"
+    ],
+    "expectedSupport": [
+      "dev-backend-api-design",
+      "dev-testing-qa"
+    ]
   },
   {
     "id": "netlify-frontend-deploy",
+    "domain": "platform-delivery",
+    "concept": "deployment-release",
     "query": "Deploy a static frontend to Netlify with redirects, environment variables, and build settings",
-    "expectedPrimary": ["netlify-deploy"],
-    "expectedSupport": ["dev-release-productization", "frontend-testing-debugging"],
-    "mustNotPrimary": ["vercel-deploy", "render-deploy"]
+    "expectedPrimary": [
+      "netlify-deploy"
+    ],
+    "expectedSupport": [
+      "dev-release-productization",
+      "frontend-testing-debugging"
+    ],
+    "mustNotPrimary": [
+      "vercel-deploy",
+      "render-deploy"
+    ]
   },
   {
     "id": "render-python-api-deploy",
+    "domain": "platform-delivery",
+    "concept": "deployment-release",
     "query": "Deploy a Python API service to Render with health checks, logs, and environment configuration",
-    "expectedPrimary": ["render-deploy"],
-    "expectedSupport": ["dev-python-services", "monitoring-setup-guide"],
-    "mustNotPrimary": ["netlify-deploy", "vercel-deploy"]
+    "expectedPrimary": [
+      "render-deploy"
+    ],
+    "expectedSupport": [
+      "dev-python-services",
+      "monitoring-setup-guide"
+    ],
+    "mustNotPrimary": [
+      "netlify-deploy",
+      "vercel-deploy"
+    ]
   },
   {
     "id": "screenshot-to-code-qa",
+    "domain": "frontend-experience",
+    "concept": "figma-handoff",
     "query": "Turn a supplied UI screenshot into matching frontend code and verify it with browser screenshots",
-    "expectedPrimary": ["design-image-to-code", "image-to-code"],
-    "expectedSupport": ["frontend-testing-debugging", "playwright"],
-    "mustNotPrimary": ["design-url-to-code"]
+    "expectedPrimary": [
+      "design-image-to-code",
+      "image-to-code"
+    ],
+    "expectedSupport": [
+      "frontend-testing-debugging",
+      "playwright"
+    ],
+    "mustNotPrimary": [
+      "design-url-to-code"
+    ]
   },
   {
     "id": "react-three-fiber-scene",
+    "domain": "games-simulation",
+    "concept": "game-development",
     "query": "Build a React Three Fiber interactive 3D scene and verify the WebGL canvas renders correctly",
-    "expectedPrimary": ["react-three-fiber-game"],
-    "expectedSupport": ["web-3d-asset-pipeline", "game-playtest"],
-    "mustNotPrimary": ["three-webgl-game"]
+    "expectedPrimary": [
+      "react-three-fiber-game"
+    ],
+    "expectedSupport": [
+      "web-3d-asset-pipeline",
+      "game-playtest"
+    ],
+    "mustNotPrimary": [
+      "three-webgl-game"
+    ]
   },
   {
     "id": "game-studio-prototype-plan",
+    "domain": "games-simulation",
+    "concept": "game-development",
     "query": "Plan a full web game prototype with mechanics, UI, asset pipeline, and playtest loop",
-    "expectedPrimary": ["game-studio"],
-    "expectedSupport": ["web-game-foundations", "game-ui-frontend"]
+    "expectedPrimary": [
+      "game-studio"
+    ],
+    "expectedSupport": [
+      "web-game-foundations",
+      "game-ui-frontend"
+    ]
   },
   {
     "id": "notion-meeting-followups",
+    "domain": "communications-knowledge",
+    "concept": "product-planning",
     "query": "Prepare a Notion meeting workspace with agenda, pre-reads, decisions, and follow-up tracking",
-    "expectedPrimary": ["notion-meeting-intelligence"],
-    "expectedSupport": ["notion-knowledge-capture", "notion-research-documentation"],
-    "mustNotPrimary": ["notion-spec-to-implementation"]
+    "expectedPrimary": [
+      "notion-meeting-intelligence"
+    ],
+    "expectedSupport": [
+      "notion-knowledge-capture",
+      "notion-research-documentation"
+    ],
+    "mustNotPrimary": [
+      "notion-spec-to-implementation"
+    ]
   },
   {
     "id": "vercel-ai-gateway-routing",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
     "query": "Configure Vercel AI Gateway model routing, provider failover, cost tracking, and AI SDK integration",
-    "expectedPrimary": ["ai-gateway"],
-    "expectedSupport": ["ai-sdk", "openai-docs"],
-    "mustNotPrimary": ["openai-agents-js"]
+    "expectedPrimary": [
+      "ai-gateway"
+    ],
+    "expectedSupport": [
+      "ai-sdk",
+      "openai-docs"
+    ],
+    "mustNotPrimary": [
+      "openai-agents-js"
+    ]
   },
   {
     "id": "vercel-cron-workflow",
+    "domain": "platform-delivery",
+    "concept": "deployment-release",
     "query": "Build a scheduled Vercel Cron job with workflow retries, queues, and serverless functions",
-    "expectedPrimary": ["cron-jobs"],
-    "expectedSupport": ["workflow", "vercel-functions", "vercel-queues"],
-    "mustNotPrimary": ["wrangler"]
+    "expectedPrimary": [
+      "cron-jobs"
+    ],
+    "expectedSupport": [
+      "workflow",
+      "vercel-functions",
+      "vercel-queues"
+    ],
+    "mustNotPrimary": [
+      "wrangler"
+    ]
   },
   {
     "id": "nextjs-auth-implementation",
+    "domain": "backend-services",
+    "concept": "backend-services",
     "query": "Implement authentication in a Next.js app with session protection, OAuth provider setup, and deployment notes",
-    "expectedPrimary": ["auth"],
-    "expectedSupport": ["security-best-practices", "dev-backend-api-design"],
-    "mustNotPrimary": ["security-scan"]
+    "expectedPrimary": [
+      "auth"
+    ],
+    "expectedSupport": [
+      "security-best-practices",
+      "dev-backend-api-design"
+    ],
+    "mustNotPrimary": [
+      "security-scan"
+    ]
   },
   {
     "id": "vercel-firewall-rules",
+    "domain": "security-risk",
+    "concept": "security-review",
     "query": "Configure Vercel Firewall WAF rules, bot protection, and rate limits for a production app",
-    "expectedPrimary": ["vercel-firewall"],
-    "expectedSupport": ["security-best-practices", "vercel-deploy"],
-    "mustNotPrimary": ["security-scan"]
+    "expectedPrimary": [
+      "vercel-firewall"
+    ],
+    "expectedSupport": [
+      "security-best-practices",
+      "vercel-deploy"
+    ],
+    "mustNotPrimary": [
+      "security-scan"
+    ]
   },
   {
     "id": "core-web-vitals-audit",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
     "query": "Audit Core Web Vitals, Lighthouse regressions, caching, and render-blocking frontend resources",
-    "expectedPrimary": ["web-perf"],
-    "expectedSupport": ["performance-budget", "frontend-testing-debugging"],
-    "mustNotPrimary": ["playwright"]
+    "expectedPrimary": [
+      "web-perf"
+    ],
+    "expectedSupport": [
+      "performance-budget",
+      "frontend-testing-debugging"
+    ],
+    "mustNotPrimary": [
+      "playwright"
+    ]
   },
   {
     "id": "market-sizing-research",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
     "query": "Run a market-sizing analysis with TAM SAM SOM assumptions and sourced evidence",
-    "expectedPrimary": ["market-sizing"],
-    "expectedSupport": ["business-strategy-and-research", "external-research-digests"]
+    "expectedPrimary": [
+      "market-sizing"
+    ],
+    "expectedSupport": [
+      "business-strategy-and-research",
+      "external-research-digests"
+    ]
   },
   {
     "id": "metric-diagnostics-shift",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
     "query": "Diagnose why a product metric changed and separate mix shift, data quality, and user behavior effects",
-    "expectedPrimary": ["metric-diagnostics"],
-    "expectedSupport": ["data-analysis-standard", "validate-data"],
-    "mustNotPrimary": ["build-dashboard"]
+    "expectedPrimary": [
+      "metric-diagnostics"
+    ],
+    "expectedSupport": [
+      "data-analysis-standard",
+      "validate-data"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard"
+    ]
   },
   {
     "id": "ab-test-design",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
     "query": "Design an A/B test with hypotheses, cohorts, success metrics, guardrails, and analysis plan",
-    "expectedPrimary": ["experiment-designer"],
-    "expectedSupport": ["design-kpis", "kpi-reporting"],
-    "mustNotPrimary": ["feature-flag-guide"]
+    "expectedPrimary": [
+      "experiment-designer"
+    ],
+    "expectedSupport": [
+      "design-kpis",
+      "kpi-reporting"
+    ],
+    "mustNotPrimary": [
+      "feature-flag-guide"
+    ]
   },
   {
     "id": "product-business-retention",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
     "query": "Analyze product usage and business impact to recommend retention or monetization changes",
-    "expectedPrimary": ["product-business-analysis"],
-    "expectedSupport": ["metric-diagnostics", "design-kpis"],
-    "mustNotPrimary": ["build-dashboard"]
+    "expectedPrimary": [
+      "product-business-analysis"
+    ],
+    "expectedSupport": [
+      "metric-diagnostics",
+      "design-kpis"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard"
+    ]
   },
   {
     "id": "code-path-explanation",
+    "domain": "repo-collaboration",
+    "concept": "repo-operations",
     "query": "Explain an unfamiliar code path in plain English before making any changes",
-    "expectedPrimary": ["code-explainer"],
-    "expectedSupport": ["dev-architecture-review"],
-    "mustNotPrimary": ["code-review-checklist"]
+    "expectedPrimary": [
+      "code-explainer"
+    ],
+    "expectedSupport": [
+      "dev-architecture-review"
+    ],
+    "mustNotPrimary": [
+      "code-review-checklist"
+    ]
   },
   {
     "id": "system-design-interview-prep",
+    "domain": "backend-services",
+    "concept": "backend-services",
     "query": "Prepare a system design answer with requirements, capacity estimates, APIs, data model, and tradeoffs",
-    "expectedPrimary": ["system-design-interview"],
-    "expectedSupport": ["technical-spec-template", "dev-backend-api-design"]
+    "expectedPrimary": [
+      "system-design-interview"
+    ],
+    "expectedSupport": [
+      "technical-spec-template",
+      "dev-backend-api-design"
+    ]
   },
   {
     "id": "api-docs-from-behavior",
+    "domain": "documents-publishing",
+    "concept": "documents-pdf",
     "query": "Write API documentation from endpoint behavior, examples, error cases, and versioning notes",
-    "expectedPrimary": ["api-docs-writer"],
-    "expectedSupport": ["api-versioning-strategy", "dev-backend-api-design"]
+    "expectedPrimary": [
+      "api-docs-writer"
+    ],
+    "expectedSupport": [
+      "api-versioning-strategy",
+      "dev-backend-api-design"
+    ]
   },
   {
     "id": "visualization-accessibility-audit",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
     "query": "Audit a data visualization for contrast, keyboard support, alt text, and reduced motion",
-    "expectedPrimary": ["accessibility-and-inclusive-visualization"],
-    "expectedSupport": ["data-visualization", "visualization-strategy-and-critique"],
-    "mustNotPrimary": ["dev-frontend-accessibility-css"]
+    "expectedPrimary": [
+      "accessibility-and-inclusive-visualization"
+    ],
+    "expectedSupport": [
+      "data-visualization",
+      "visualization-strategy-and-critique"
+    ],
+    "mustNotPrimary": [
+      "dev-frontend-accessibility-css"
+    ]
   }
 ]

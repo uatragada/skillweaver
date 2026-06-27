@@ -216,13 +216,13 @@ No new dependencies, persistence, model calls, or background jobs were added. Th
 
 ### Hypothesis
 
-The active 78-case suite was too easy to overfit once every case was an acceptance target. A separate holdout/challenge report should expose whether V2 generalizes to specialist domains without adding runtime bloat.
+The active 78-case suite was too easy to overfit once every case was an acceptance target. A separate post-tuning challenge report should expose whether V2 remains strong on specialist domains without adding runtime bloat.
 
 ### Change
 
 - Added `benchmarks/skill-routing-holdout.json` with 22 cross-domain specialist prompts from the subagent coverage audits.
 - Added `npm run benchmark:skills:holdout` and `npm run benchmark:skills:holdout:check`, reusing the same evaluator, metadata, hashes, case validation, and stale-report checks as the active suite.
-- Kept holdout/challenge quality non-gating while still reporting the same metrics.
+- Kept post-tuning challenge quality non-gating while still reporting the same metrics.
 - Added high-confidence skill-level anchors so V2 cannot bury directly named specialist skills behind broad concept refs.
 - Tightened existing concept membership for provider deploys, Vercel Cron, Auth, screenshot-to-code, React Three Fiber, game planning, metric diagnostics, experiment design, code explanation, visualization accessibility, and spreadsheets without adding new concept nodes.
 - Added a regression test for directly named specialist-skill anchors.
@@ -231,7 +231,12 @@ The active 78-case suite was too easy to overfit once every case was an acceptan
 
 The first untouched holdout pilot exposed a real gap: V2 output quality was 48.4, primary hit@1 was 40.9%, top/workflow-5 retrieval was 54.5%, and forbidden primary rate was 4.5%.
 
-After the general anchor and concept-membership fixes, on the 22-case holdout/challenge suite:
+| Holdout stage | Output quality | Primary hit@1 | Expected top/workflow 5 | Support coverage@5 | Support precision@5 | Forbidden primary rate |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| First untouched pilot | 48.4 | 40.9% | 54.5% | not recorded | not recorded | 4.5% |
+| Post-tuning challenge | 92.7 | 100.0% | 100.0% | 63.6% | 31.8% | 0.0% |
+
+After the general anchor and concept-membership fixes, on the 22-case post-tuning challenge suite:
 
 | Metric | No SkillWeaver | Skill-Level Baseline | V2 |
 | --- | ---: | ---: | ---: |
@@ -258,11 +263,11 @@ V2 gain:
 - V2 now keeps direct specialist matches such as `ai-gateway`, `auth`, `metric-diagnostics`, `code-explainer`, and `accessibility-and-inclusive-visualization` ahead of broad concept candidates.
 - Provider-specific deployment prompts now keep `netlify-deploy`, `render-deploy`, and Vercel Cron skills visible.
 - The active acceptance suite stayed at 100.0 output quality after the holdout-driven fixes.
-- The report machinery now separates active acceptance from non-gating holdout/challenge evidence.
+- The report machinery now separates active acceptance from non-gating post-tuning challenge evidence.
 
 ### What Got Worse
 
-This 22-case file is no longer pristine untouched holdout evidence because the pilot misses informed the fix. It is now a frozen challenge suite. Future generalization claims should use fresh prompts gathered after this commit.
+This 22-case file is no longer pristine untouched holdout evidence because the pilot misses informed the fix. It is now a post-tuning challenge suite. Future generalization claims should use fresh prompts gathered after this commit.
 
 ### Runtime Impact
 

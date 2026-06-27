@@ -88,32 +88,56 @@ All 37 curated concept links are preserved before shared-evidence edges are capp
 - `template-creator`
 - `vercel`
 
+## Benchmark Domain Coverage
+
+Benchmark domains are evaluation metadata, not scanner-inferred skill domains.
+
+| Domain | Label | Active cases | Challenge cases |
+| --- | --- | ---: | ---: |
+| Frontend experience | `frontend-experience` | 12 | 2 |
+| Repo collaboration | `repo-collaboration` | 7 | 1 |
+| Backend services | `backend-services` | 3 | 4 |
+| Platform delivery | `platform-delivery` | 4 | 3 |
+| Product, research, and planning | `product-research-planning` | 4 | 3 |
+| AI agent apps | `ai-agent-apps` | 4 | 2 |
+| Data analytics | `data-analytics` | 4 | 2 |
+| Documents and publishing | `documents-publishing` | 5 | 1 |
+| Observability and reliability | `observability-reliability` | 6 | 0 |
+| Security and risk | `security-risk` | 5 | 1 |
+| Games and simulation | `games-simulation` | 3 | 2 |
+| Skill tooling | `skill-tooling` | 5 | 0 |
+| Hugging Face ML | `huggingface-ml` | 4 | 0 |
+| Marketing, growth, and creative | `marketing-growth-creative` | 4 | 0 |
+| Communications and knowledge | `communications-knowledge` | 2 | 1 |
+| Database and data engineering | `database-data-engineering` | 3 | 0 |
+| Infrastructure platforms | `infrastructure-platforms` | 3 | 0 |
+
 ## Concept Coverage
 
-| Concept | Skill refs | Benchmark cases | Roles |
-| --- | ---: | ---: | --- |
-| `agent-llm-apps` | 18 | 4 | primary:7, supporting:11 |
-| `backend-services` | 18 | 4 | primary:6, verification:3, supporting:9 |
-| `browser-verification` | 18 | 4 | gateway:2, primary:3, supporting:13 |
-| `cloudflare-workers` | 18 | 2 | primary:5, supporting:13 |
-| `data-dashboarding` | 18 | 4 | primary:6, verification:2, supporting:10 |
-| `database-data-engineering` | 18 | 3 | primary:5, verification:2, supporting:11 |
-| `deployment-release` | 18 | 1 | primary:8, verification:1, supporting:9 |
-| `documents-pdf` | 18 | 4 | primary:6, supporting:12 |
-| `email-triage` | 18 | 1 | primary:3, supporting:5, reference:10 |
-| `figma-handoff` | 18 | 3 | gateway:1, primary:4, verification:2, supporting:11 |
-| `frontend-implementation` | 18 | 5 | gateway:1, primary:2, verification:3, supporting:12 |
-| `game-development` | 18 | 3 | primary:6, verification:1, supporting:11 |
-| `github-pr-repair` | 18 | 3 | primary:2, verification:1, supporting:15 |
-| `huggingface-ml` | 18 | 4 | primary:6, supporting:12 |
-| `infrastructure-platforms` | 18 | 3 | primary:5, verification:2, supporting:11 |
-| `marketing-growth` | 18 | 4 | primary:7, supporting:11 |
-| `observability-reliability` | 18 | 5 | primary:5, verification:2, supporting:11 |
-| `presentations` | 18 | 1 | primary:2, supporting:5, reference:11 |
-| `product-planning` | 18 | 5 | primary:14, supporting:4 |
-| `repo-operations` | 18 | 5 | primary:6, supporting:12 |
-| `security-review` | 18 | 5 | primary:5, verification:2, supporting:11 |
-| `skill-authoring` | 18 | 5 | gateway:1, primary:4, verification:1, supporting:12 |
+| Concept | Skill refs | Active cases | Challenge cases | Roles |
+| --- | ---: | ---: | ---: | --- |
+| `product-planning` | 18 | 5 | 4 | primary:14, supporting:4 |
+| `backend-services` | 18 | 3 | 4 | primary:6, verification:3, supporting:9 |
+| `frontend-implementation` | 18 | 6 | 1 | gateway:1, primary:2, verification:3, supporting:12 |
+| `agent-llm-apps` | 18 | 4 | 2 | primary:7, supporting:11 |
+| `data-dashboarding` | 18 | 4 | 2 | primary:6, verification:2, supporting:10 |
+| `observability-reliability` | 18 | 6 | 0 | primary:5, verification:2, supporting:11 |
+| `security-review` | 18 | 5 | 1 | primary:5, verification:2, supporting:11 |
+| `deployment-release` | 18 | 2 | 3 | primary:8, verification:1, supporting:9 |
+| `documents-pdf` | 18 | 4 | 1 | primary:6, supporting:12 |
+| `game-development` | 18 | 3 | 2 | primary:6, verification:1, supporting:11 |
+| `repo-operations` | 18 | 4 | 1 | primary:6, supporting:12 |
+| `skill-authoring` | 18 | 5 | 0 | gateway:1, primary:4, verification:1, supporting:12 |
+| `figma-handoff` | 18 | 3 | 1 | gateway:1, primary:4, verification:2, supporting:11 |
+| `huggingface-ml` | 18 | 4 | 0 | primary:6, supporting:12 |
+| `marketing-growth` | 18 | 4 | 0 | primary:7, supporting:11 |
+| `browser-verification` | 18 | 3 | 0 | gateway:2, primary:3, supporting:13 |
+| `database-data-engineering` | 18 | 3 | 0 | primary:5, verification:2, supporting:11 |
+| `github-pr-repair` | 18 | 3 | 0 | primary:2, verification:1, supporting:15 |
+| `infrastructure-platforms` | 18 | 3 | 0 | primary:5, verification:2, supporting:11 |
+| `cloudflare-workers` | 18 | 2 | 0 | primary:5, supporting:13 |
+| `email-triage` | 18 | 1 | 0 | primary:3, supporting:5, reference:10 |
+| `presentations` | 18 | 1 | 0 | primary:2, supporting:5, reference:11 |
 
 ## Corpus Quality Checklist
 
@@ -131,4 +155,5 @@ Older docs referenced 439 skills and 18 concepts. Current V2 work indexes 442 sk
 The June 27, 2026 breadth pass kept 22 concepts but expanded coverage from 39 to 49 benchmark cases and added live-name aliases for LaTeX, Notion, mobile/desktop, speech, competitive intelligence, and RacingSim skills.
 The June 27, 2026 support-precision pass kept the same 22 concepts and 49 cases, but raised V2 primary hit@1 and support coverage to 100.0% on the benchmark by tuning concept role membership and narrow intent guards.
 The June 27, 2026 challenge expansion kept 22 concepts but expanded coverage from 49 to 78 benchmark cases. It also added support precision@5, benchmark case validation, wider domain guards, negation-variant tests, and SkillWeaver self-review routing coverage.
-The June 27, 2026 holdout/challenge pass kept 22 concepts and the same 18 refs per concept cap, while reallocating scarce refs toward specialist skills that repeatedly appeared in coverage audits: spreadsheets, metric diagnostics, product-business analysis, provider deploys, Vercel Cron, code explanation, and visualization accessibility.
+The June 27, 2026 post-tuning challenge pass kept 22 concepts and the same 18 refs per concept cap, while reallocating scarce refs toward specialist skills that repeatedly appeared in coverage audits: spreadsheets, metric diagnostics, product-business analysis, provider deploys, Vercel Cron, code explanation, and visualization accessibility.
+The June 27, 2026 slice-reporting pass added explicit benchmark `domain` and expected `concept` labels to all 100 active/challenge cases. It did not add product concept nodes or runtime routing passes; the labels drive generated quality-by-domain and quality-by-concept report tables.

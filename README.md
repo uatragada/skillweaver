@@ -40,6 +40,8 @@ npm test
 npm run index:skills
 npm run benchmark:skills
 npm run benchmark:skills:check
+npm run benchmark:skills:holdout
+npm run benchmark:skills:holdout:check
 npm run build
 npm start
 ```
@@ -74,6 +76,7 @@ By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Us
 
 - [Routing evaluation methodology](docs/ROUTING-EVAL-METHODOLOGY.md)
 - [Skill use gains benchmark](docs/SKILL-USE-GAINS.md)
+- [Post-tuning challenge benchmark](docs/SKILL-USE-HOLDOUT.md)
 - [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
 - [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
 - [Corpus snapshot](docs/CORPUS-SNAPSHOT.md)
@@ -89,3 +92,11 @@ npm run benchmark:skills
 
 The benchmark compares V2 against a flat no-SkillWeaver metadata-search baseline and the V1 skill-level SkillWeaver route, then writes [docs/SKILL-USE-GAINS.md](docs/SKILL-USE-GAINS.md).
 Use `npm run benchmark:skills:check` to fail fast when the checked-in benchmark report is stale, generated from different scanner/case/corpus inputs, or generated while benchmark-invalidating files are dirty.
+
+Run the non-gating post-tuning challenge suite with:
+
+```powershell
+npm run benchmark:skills:holdout
+```
+
+Use `npm run benchmark:skills:holdout:check` before citing [docs/SKILL-USE-HOLDOUT.md](docs/SKILL-USE-HOLDOUT.md). Both reports include generated quality slices by benchmark domain and expected concept so broad claims show their coverage and thin spots.

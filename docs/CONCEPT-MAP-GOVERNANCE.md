@@ -6,6 +6,8 @@ SkillWeaver V2 should stay lightweight. The concept map is a deterministic routi
 
 A concept node represents a high-level kind of agent work. Skills remain the source artifacts. Concepts only group and order skills for faster loading.
 
+Benchmark `domain` labels are separate evaluation metadata. They describe the intent coverage of a test case and should not be treated as product concept nodes. Benchmark `concept` labels are expected existing concept ids used for slice reporting, not a request to create or rename concepts.
+
 Good concept examples:
 
 - `data-dashboarding`: build dashboards, KPI reports, visualizations, and data QA.
@@ -75,9 +77,10 @@ Before committing concept changes:
 
 - Run `npm test`.
 - Run `npm run benchmark:skills`.
+- Run `npm run benchmark:skills:holdout` when challenge coverage or report shape changes.
 - Run `npm run index:skills`.
 - Confirm V2 does not regress expected top/workflow-5 retrieval.
-- Inspect changed per-case rows in `docs/SKILL-USE-GAINS.md`.
+- Inspect changed per-case rows, `Quality by Domain`, and `Quality by Expected Concept` in `docs/SKILL-USE-GAINS.md` and `docs/SKILL-USE-HOLDOUT.md`.
 
 ## Mini Decision Record Template
 

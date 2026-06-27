@@ -1,471 +1,1032 @@
 [
   {
     "id": "frontend-dashboard",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
     "query": "Build a polished frontend dashboard with browser QA",
-    "expectedPrimary": ["frontend-app-builder"],
-    "expectedSupport": ["frontend-testing-debugging", "playwright"]
+    "expectedPrimary": [
+      "frontend-app-builder"
+    ],
+    "expectedSupport": [
+      "frontend-testing-debugging",
+      "playwright"
+    ]
   },
   {
     "id": "frontend-regression",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
     "query": "Debug a React UI regression with console errors and responsive layout issues",
-    "expectedPrimary": ["frontend-testing-debugging"],
-    "expectedSupport": ["dev-frontend-react-next", "playwright"]
+    "expectedPrimary": [
+      "frontend-testing-debugging"
+    ],
+    "expectedSupport": [
+      "dev-frontend-react-next",
+      "playwright"
+    ]
   },
   {
     "id": "github-ci",
+    "domain": "repo-collaboration",
+    "concept": "github-pr-repair",
     "query": "Fix failing GitHub Actions CI and address PR comments",
-    "expectedPrimary": ["gh-fix-ci", "gh-address-comments"],
-    "expectedSupport": ["gh-address-comments", "dev-testing-qa"]
+    "expectedPrimary": [
+      "gh-fix-ci",
+      "gh-address-comments"
+    ],
+    "expectedSupport": [
+      "gh-address-comments",
+      "dev-testing-qa"
+    ]
   },
   {
     "id": "github-comments",
+    "domain": "repo-collaboration",
+    "concept": "github-pr-repair",
     "query": "Address GitHub PR review comments and update the branch",
-    "expectedPrimary": ["gh-address-comments"],
-    "expectedSupport": ["gh-fix-ci"]
+    "expectedPrimary": [
+      "gh-address-comments"
+    ],
+    "expectedSupport": [
+      "gh-fix-ci"
+    ]
   },
   {
     "id": "figma-use-implement",
+    "domain": "frontend-experience",
+    "concept": "figma-handoff",
     "query": "Use Figma to inspect a design and implement it",
-    "expectedPrimary": ["figma-use"],
-    "expectedSupport": ["figma-implement-design"]
+    "expectedPrimary": [
+      "figma-use"
+    ],
+    "expectedSupport": [
+      "figma-implement-design"
+    ]
   },
   {
     "id": "figma-library",
+    "domain": "frontend-experience",
+    "concept": "figma-handoff",
     "query": "Generate a Figma component library and reusable design system",
-    "expectedPrimary": ["figma-generate-library"],
-    "expectedSupport": ["figma-use", "figma-create-design-system-rules"]
+    "expectedPrimary": [
+      "figma-generate-library"
+    ],
+    "expectedSupport": [
+      "figma-use",
+      "figma-create-design-system-rules"
+    ]
   },
   {
     "id": "data-dashboard",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
     "query": "Create a data analytics dashboard from KPI data",
-    "expectedPrimary": ["build-dashboard"],
-    "expectedSupport": ["data-visualization", "kpi-reporting"]
+    "expectedPrimary": [
+      "build-dashboard"
+    ],
+    "expectedSupport": [
+      "data-visualization",
+      "kpi-reporting"
+    ]
   },
   {
     "id": "kpi-report",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
     "query": "Build an executive KPI report with charts and methodology notes",
-    "expectedPrimary": ["kpi-reporting", "build-report"],
-    "expectedSupport": ["visualize-data", "data-visualization"]
+    "expectedPrimary": [
+      "kpi-reporting",
+      "build-report"
+    ],
+    "expectedSupport": [
+      "visualize-data",
+      "data-visualization"
+    ]
   },
   {
     "id": "data-quality",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
     "query": "Audit a CSV export for data quality issues and suspicious missing values",
-    "expectedPrimary": ["analyze-data-quality", "data-quality-audit"],
-    "expectedSupport": ["data-analysis-standard"]
+    "expectedPrimary": [
+      "analyze-data-quality",
+      "data-quality-audit"
+    ],
+    "expectedSupport": [
+      "data-analysis-standard"
+    ]
   },
   {
     "id": "security-scan",
+    "domain": "security-risk",
+    "concept": "security-review",
     "query": "Audit a repo for security vulnerabilities and attack paths",
-    "expectedPrimary": ["security-scan", "deep-security-scan"],
-    "expectedSupport": ["attack-path-analysis", "dev-security-engineering"]
+    "expectedPrimary": [
+      "security-scan",
+      "deep-security-scan"
+    ],
+    "expectedSupport": [
+      "attack-path-analysis",
+      "dev-security-engineering"
+    ]
   },
   {
     "id": "attack-path",
+    "domain": "security-risk",
+    "concept": "security-review",
     "query": "Analyze likely exploit chains and attack paths in a codebase",
-    "expectedPrimary": ["attack-path-analysis"],
-    "expectedSupport": ["security-scan", "threat-model"]
+    "expectedPrimary": [
+      "attack-path-analysis"
+    ],
+    "expectedSupport": [
+      "security-scan",
+      "threat-model"
+    ]
   },
   {
     "id": "vercel-deploy",
+    "domain": "platform-delivery",
+    "concept": "deployment-release",
     "query": "Deploy this project to Vercel and inspect build logs",
-    "expectedPrimary": ["deployments-cicd", "vercel-deploy", "vercel-api"],
-    "expectedSupport": ["agent-browser-verify", "env-vars"]
+    "expectedPrimary": [
+      "deployments-cicd",
+      "vercel-deploy",
+      "vercel-api"
+    ],
+    "expectedSupport": [
+      "agent-browser-verify",
+      "env-vars"
+    ]
   },
   {
     "id": "cloudflare-worker",
+    "domain": "platform-delivery",
+    "concept": "cloudflare-workers",
     "query": "Deploy a Cloudflare Worker and configure Wrangler",
-    "expectedPrimary": ["wrangler", "workers-best-practices"],
-    "expectedSupport": ["cloudflare"]
+    "expectedPrimary": [
+      "wrangler",
+      "workers-best-practices"
+    ],
+    "expectedSupport": [
+      "cloudflare"
+    ]
   },
   {
     "id": "skill-create",
+    "domain": "skill-tooling",
+    "concept": "skill-authoring",
     "query": "Create or update a Codex skill with scripts and references",
-    "expectedPrimary": ["skill-creator"],
-    "expectedSupport": ["skillweaver", "skill-installer"]
+    "expectedPrimary": [
+      "skill-creator"
+    ],
+    "expectedSupport": [
+      "skillweaver",
+      "skill-installer"
+    ]
   },
   {
     "id": "skillweaver-self",
+    "domain": "skill-tooling",
+    "concept": "skill-authoring",
     "query": "Investigate SkillWeaver skill routing and benchmark its recommendations",
-    "expectedPrimary": ["skillweaver"],
-    "expectedSupport": ["skill-creator"]
+    "expectedPrimary": [
+      "skillweaver"
+    ],
+    "expectedSupport": [
+      "skill-creator"
+    ]
   },
   {
     "id": "pdf-extract",
+    "domain": "documents-publishing",
+    "concept": "documents-pdf",
     "query": "Work with PDF extraction, forms, and manipulation",
-    "expectedPrimary": ["pdf"],
-    "expectedSupport": ["documents"]
+    "expectedPrimary": [
+      "pdf"
+    ],
+    "expectedSupport": [
+      "documents"
+    ]
   },
   {
     "id": "spreadsheet-analysis",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
     "query": "Analyze an Excel workbook and produce tables from spreadsheet data",
-    "expectedPrimary": ["Spreadsheets"],
-    "expectedSupport": ["data-analysis-standard"]
+    "expectedPrimary": [
+      "Spreadsheets"
+    ],
+    "expectedSupport": [
+      "data-analysis-standard"
+    ]
   },
   {
     "id": "presentation-deck",
+    "domain": "documents-publishing",
+    "concept": "presentations",
     "query": "Make a PowerPoint presentation deck from a roadmap",
-    "expectedPrimary": ["Presentations", "roadmap-presentation"],
-    "expectedSupport": ["template-creator"]
+    "expectedPrimary": [
+      "Presentations",
+      "roadmap-presentation"
+    ],
+    "expectedSupport": [
+      "template-creator"
+    ]
   },
   {
     "id": "hf-train",
+    "domain": "huggingface-ml",
+    "concept": "huggingface-ml",
     "query": "Train or inspect Hugging Face models and datasets",
-    "expectedPrimary": ["huggingface-llm-trainer", "huggingface-datasets"],
-    "expectedSupport": ["huggingface-community-evals"]
+    "expectedPrimary": [
+      "huggingface-llm-trainer",
+      "huggingface-datasets"
+    ],
+    "expectedSupport": [
+      "huggingface-community-evals"
+    ]
   },
   {
     "id": "hf-dataset",
+    "domain": "huggingface-ml",
+    "concept": "huggingface-ml",
     "query": "Search Hugging Face datasets and inspect dataset metadata",
-    "expectedPrimary": ["huggingface-datasets"],
-    "expectedSupport": ["huggingface-papers"]
+    "expectedPrimary": [
+      "huggingface-datasets"
+    ],
+    "expectedSupport": [
+      "huggingface-papers"
+    ]
   },
   {
     "id": "gmail-triage",
+    "domain": "communications-knowledge",
+    "concept": "email-triage",
     "query": "Triage Gmail inbox and draft replies",
-    "expectedPrimary": ["gmail", "gmail-inbox-triage"],
-    "expectedSupport": ["email-triage"]
+    "expectedPrimary": [
+      "gmail",
+      "gmail-inbox-triage"
+    ],
+    "expectedSupport": [
+      "email-triage"
+    ]
   },
   {
     "id": "phaser-game",
+    "domain": "games-simulation",
+    "concept": "game-development",
     "query": "Build a Phaser browser game with playtesting",
-    "expectedPrimary": ["phaser-2d-game"],
-    "expectedSupport": ["game-playtest", "web-game-foundations"]
+    "expectedPrimary": [
+      "phaser-2d-game"
+    ],
+    "expectedSupport": [
+      "game-playtest",
+      "web-game-foundations"
+    ]
   },
   {
     "id": "three-game",
+    "domain": "games-simulation",
+    "concept": "game-development",
     "query": "Create a Three.js WebGL game scene and verify canvas rendering",
-    "expectedPrimary": ["three-webgl-game"],
-    "expectedSupport": ["game-playtest", "web-3d-asset-pipeline"]
+    "expectedPrimary": [
+      "three-webgl-game"
+    ],
+    "expectedSupport": [
+      "game-playtest",
+      "web-3d-asset-pipeline"
+    ]
   },
   {
     "id": "adr",
+    "domain": "repo-collaboration",
+    "concept": "repo-operations",
     "query": "Write an architecture decision record for a backend design choice",
-    "expectedPrimary": ["architecture-decision-record"],
-    "expectedSupport": ["dev-architecture-review"]
+    "expectedPrimary": [
+      "architecture-decision-record"
+    ],
+    "expectedSupport": [
+      "dev-architecture-review"
+    ]
   },
   {
     "id": "cro-reporting",
+    "domain": "marketing-growth-creative",
+    "concept": "marketing-growth",
     "query": "Analyze conversion tracking and CRO reporting for a marketing funnel",
-    "expectedPrimary": ["analytics-cro-and-reporting"],
-    "expectedSupport": ["kpi-reporting"]
+    "expectedPrimary": [
+      "analytics-cro-and-reporting"
+    ],
+    "expectedSupport": [
+      "kpi-reporting"
+    ]
   },
   {
     "id": "linear-planning",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
     "query": "Update Linear issues, plan product work, and move completed tasks",
-    "expectedPrimary": ["linear"],
-    "expectedSupport": ["roadmap-narrative"]
+    "expectedPrimary": [
+      "linear"
+    ],
+    "expectedSupport": [
+      "roadmap-narrative"
+    ]
   },
   {
     "id": "openai-docs",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
     "query": "Look up current OpenAI API docs before using a product feature",
-    "expectedPrimary": ["openai-docs"],
-    "expectedSupport": ["dev-ai-llm-apps"]
+    "expectedPrimary": [
+      "openai-docs"
+    ],
+    "expectedSupport": [
+      "dev-ai-llm-apps"
+    ]
   },
   {
     "id": "openai-agents",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
     "query": "Build a JavaScript OpenAI agents workflow",
-    "expectedPrimary": ["openai-agents-js"],
-    "expectedSupport": ["openai-docs"]
+    "expectedPrimary": [
+      "openai-agents-js"
+    ],
+    "expectedSupport": [
+      "openai-docs"
+    ]
   },
   {
     "id": "browser-qa",
+    "domain": "frontend-experience",
+    "concept": "browser-verification",
     "query": "Run browser QA with Playwright screenshots on a local web app",
-    "expectedPrimary": ["playwright", "frontend-testing-debugging"],
-    "expectedSupport": ["browser:control-in-app-browser", "control-in-app-browser"]
+    "expectedPrimary": [
+      "playwright",
+      "frontend-testing-debugging"
+    ],
+    "expectedSupport": [
+      "browser:control-in-app-browser",
+      "control-in-app-browser"
+    ]
   },
   {
     "id": "chrome-control",
+    "domain": "frontend-experience",
+    "concept": "browser-verification",
     "query": "Use Chrome to inspect a live page and control browser interactions",
-    "expectedPrimary": ["control-chrome", "chrome:control-chrome"],
-    "expectedSupport": ["playwright-interactive"]
+    "expectedPrimary": [
+      "control-chrome",
+      "chrome:control-chrome"
+    ],
+    "expectedSupport": [
+      "playwright-interactive"
+    ]
   },
   {
     "id": "backend-api",
+    "domain": "backend-services",
+    "concept": "backend-services",
     "query": "Design a versioned backend API for a Node service and document endpoints",
-    "expectedPrimary": ["dev-backend-api-design"],
-    "expectedSupport": ["api-versioning-strategy", "api-docs-writer"]
+    "expectedPrimary": [
+      "dev-backend-api-design"
+    ],
+    "expectedSupport": [
+      "api-versioning-strategy",
+      "api-docs-writer"
+    ]
   },
   {
     "id": "python-service",
+    "domain": "backend-services",
+    "concept": "backend-services",
     "query": "Build a Python backend service with tests and operational readiness",
-    "expectedPrimary": ["dev-python-services"],
-    "expectedSupport": ["dev-testing-qa", "monitoring-setup-guide"]
+    "expectedPrimary": [
+      "dev-python-services"
+    ],
+    "expectedSupport": [
+      "dev-testing-qa",
+      "monitoring-setup-guide"
+    ]
   },
   {
     "id": "database-migration",
+    "domain": "database-data-engineering",
+    "concept": "database-data-engineering",
     "query": "Plan a Postgres database schema migration without breaking production data",
-    "expectedPrimary": ["database-migration-plan", "dev-database-postgres"],
-    "expectedSupport": ["database-schema-design"]
+    "expectedPrimary": [
+      "database-migration-plan",
+      "dev-database-postgres"
+    ],
+    "expectedSupport": [
+      "database-schema-design"
+    ]
   },
   {
     "id": "data-pipeline-spec",
+    "domain": "database-data-engineering",
+    "concept": "database-data-engineering",
     "query": "Specify a reliable data pipeline with quality checks and ownership",
-    "expectedPrimary": ["data-pipeline-spec", "dev-data-engineering"],
-    "expectedSupport": ["data-quality-audit", "data-analysis-standard"]
+    "expectedPrimary": [
+      "data-pipeline-spec",
+      "dev-data-engineering"
+    ],
+    "expectedSupport": [
+      "data-quality-audit",
+      "data-analysis-standard"
+    ]
   },
   {
     "id": "observability-slo",
+    "domain": "observability-reliability",
+    "concept": "observability-reliability",
     "query": "Define service SLOs, monitoring, and error budget policy",
-    "expectedPrimary": ["slo-error-budget", "dev-observability-sre"],
-    "expectedSupport": ["monitoring-setup-guide"]
+    "expectedPrimary": [
+      "slo-error-budget",
+      "dev-observability-sre"
+    ],
+    "expectedSupport": [
+      "monitoring-setup-guide"
+    ]
   },
   {
     "id": "incident-postmortem",
+    "domain": "observability-reliability",
+    "concept": "observability-reliability",
     "query": "Write an incident postmortem and identify reliability follow-ups",
-    "expectedPrimary": ["incident-postmortem"],
-    "expectedSupport": ["monitoring-setup-guide", "slo-error-budget"]
+    "expectedPrimary": [
+      "incident-postmortem"
+    ],
+    "expectedSupport": [
+      "monitoring-setup-guide",
+      "slo-error-budget"
+    ]
   },
   {
     "id": "infra-terraform",
+    "domain": "infrastructure-platforms",
+    "concept": "infrastructure-platforms",
     "query": "Review Terraform infrastructure as code for cloud deployment risks",
-    "expectedPrimary": ["dev-infra-terraform-cloud", "infra-as-code-review"],
-    "expectedSupport": ["security-best-practices"]
+    "expectedPrimary": [
+      "dev-infra-terraform-cloud",
+      "infra-as-code-review"
+    ],
+    "expectedSupport": [
+      "security-best-practices"
+    ]
   },
   {
     "id": "containers-kubernetes",
+    "domain": "infrastructure-platforms",
+    "concept": "infrastructure-platforms",
     "query": "Plan container and Kubernetes operations for a service rollout",
-    "expectedPrimary": ["dev-containers-kubernetes"],
-    "expectedSupport": ["dev-devops-ci-cd", "monitoring-setup-guide"]
+    "expectedPrimary": [
+      "dev-containers-kubernetes"
+    ],
+    "expectedSupport": [
+      "dev-devops-ci-cd",
+      "monitoring-setup-guide"
+    ]
   },
   {
     "id": "repo-dependency-audit",
+    "domain": "repo-collaboration",
+    "concept": "repo-operations",
     "query": "Audit repository dependencies and technical debt while preserving unrelated worktree changes",
-    "expectedPrimary": ["dependency-audit", "technical-debt-register"],
-    "expectedSupport": ["code-review-checklist", "dev-dependency-maintenance"]
+    "expectedPrimary": [
+      "dependency-audit",
+      "technical-debt-register"
+    ],
+    "expectedSupport": [
+      "code-review-checklist",
+      "dev-dependency-maintenance"
+    ]
   },
   {
     "id": "seo-organic-growth",
+    "domain": "marketing-growth-creative",
+    "concept": "marketing-growth",
     "query": "Plan an SEO and organic growth strategy with technical SEO, entity content, and AI search guidance",
-    "expectedPrimary": ["seo-and-organic-growth"],
-    "expectedSupport": ["marketing-strategy-and-growth", "industry-playbooks"]
+    "expectedPrimary": [
+      "seo-and-organic-growth"
+    ],
+    "expectedSupport": [
+      "marketing-strategy-and-growth",
+      "industry-playbooks"
+    ]
   },
   {
     "id": "creative-ad-offer-production",
+    "domain": "marketing-growth-creative",
+    "concept": "marketing-growth",
     "query": "Generate creative ad concepts, offer angles, and product-shot prompts for a new product campaign",
-    "expectedPrimary": ["creative-ads-explorer", "creative-production"],
-    "expectedSupport": ["creative-offer", "creative-positioning", "creative-shot"]
+    "expectedPrimary": [
+      "creative-ads-explorer",
+      "creative-production"
+    ],
+    "expectedSupport": [
+      "creative-offer",
+      "creative-positioning",
+      "creative-shot"
+    ]
   },
   {
     "id": "competitive-intelligence-monitor",
+    "domain": "marketing-growth-creative",
+    "concept": "marketing-growth",
     "query": "Set up a competitive intelligence monitor and summarize competitor positioning changes",
-    "expectedPrimary": ["competitive-intelligence-monitor"],
-    "expectedSupport": ["business-strategy-and-research", "creative-positioning"]
+    "expectedPrimary": [
+      "competitive-intelligence-monitor"
+    ],
+    "expectedSupport": [
+      "business-strategy-and-research",
+      "creative-positioning"
+    ]
   },
   {
     "id": "notion-workspace-knowledge",
+    "domain": "communications-knowledge",
+    "concept": "product-planning",
     "query": "Capture a product decision, source links, and follow-up tasks into a Notion workspace knowledge base",
-    "expectedPrimary": ["notion-knowledge-capture"],
-    "expectedSupport": ["notion-research-documentation", "notion-spec-to-implementation"]
+    "expectedPrimary": [
+      "notion-knowledge-capture"
+    ],
+    "expectedSupport": [
+      "notion-research-documentation",
+      "notion-spec-to-implementation"
+    ]
   },
   {
     "id": "latex-technical-publishing",
+    "domain": "documents-publishing",
+    "concept": "documents-pdf",
     "query": "Compile and debug a LaTeX paper with bibliography and missing package errors",
-    "expectedPrimary": ["latex-doctor", "latex-compile"],
-    "expectedSupport": ["latex-compile", "latex-doctor"]
+    "expectedPrimary": [
+      "latex-doctor",
+      "latex-compile"
+    ],
+    "expectedSupport": [
+      "latex-compile",
+      "latex-doctor"
+    ]
   },
   {
     "id": "mobile-desktop-packaging",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
     "query": "Plan a React Native, Electron, or WinUI desktop app packaging and app-store readiness review",
-    "expectedPrimary": ["dev-mobile-desktop"],
-    "expectedSupport": ["winui-app", "launch-readiness", "dev-release-productization"]
+    "expectedPrimary": [
+      "dev-mobile-desktop"
+    ],
+    "expectedSupport": [
+      "winui-app",
+      "launch-readiness",
+      "dev-release-productization"
+    ]
   },
   {
     "id": "speech-local-ai-loop",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
     "query": "Build a local speech-to-text and text-to-speech prototype with browser microphone capture and silence rejection",
-    "expectedPrimary": ["transformers-js", "transcribe", "speech"],
-    "expectedSupport": ["transcribe", "speech", "transformers-js"]
+    "expectedPrimary": [
+      "transformers-js",
+      "transcribe",
+      "speech"
+    ],
+    "expectedSupport": [
+      "transcribe",
+      "speech",
+      "transformers-js"
+    ]
   },
   {
     "id": "racingsim-ppo-progress",
+    "domain": "games-simulation",
+    "concept": "game-development",
     "query": "Continue RacingSim PPO training and verify lap progress on the Nurburgring map",
-    "expectedPrimary": ["racingsim-ai-ml"],
-    "expectedSupport": ["racingsim-game-dev"]
+    "expectedPrimary": [
+      "racingsim-ai-ml"
+    ],
+    "expectedSupport": [
+      "racingsim-game-dev"
+    ]
   },
   {
     "id": "design-accessibility-audit",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
     "query": "Audit a frontend page for accessibility, motion, and design QA issues",
-    "expectedPrimary": ["design-audit", "dev-frontend-accessibility-css"],
-    "expectedSupport": ["dev-frontend-accessibility-css", "motion-qa"]
+    "expectedPrimary": [
+      "design-audit",
+      "dev-frontend-accessibility-css"
+    ],
+    "expectedSupport": [
+      "dev-frontend-accessibility-css",
+      "motion-qa"
+    ]
   },
   {
     "id": "url-to-code",
+    "domain": "frontend-experience",
+    "concept": "browser-verification",
     "query": "Turn a live URL into frontend code and compare screenshots",
-    "expectedPrimary": ["design-url-to-code", "url-to-code"],
-    "expectedSupport": ["frontend-testing-debugging"]
+    "expectedPrimary": [
+      "design-url-to-code",
+      "url-to-code"
+    ],
+    "expectedSupport": [
+      "frontend-testing-debugging"
+    ]
   },
   {
     "id": "plugin-create",
+    "domain": "skill-tooling",
+    "concept": "skill-authoring",
     "query": "Create a Codex plugin with skills, MCP tools, and validation docs",
-    "expectedPrimary": ["plugin-creator"],
-    "expectedSupport": ["skill-security-auditor", "dev-documentation-systems"]
+    "expectedPrimary": [
+      "plugin-creator"
+    ],
+    "expectedSupport": [
+      "skill-security-auditor",
+      "dev-documentation-systems"
+    ]
   },
   {
     "id": "cli-create",
+    "domain": "skill-tooling",
+    "concept": "skill-authoring",
     "query": "Design a command line tool with help text, arguments, and release packaging",
-    "expectedPrimary": ["cli-creator"],
-    "expectedSupport": ["dev-release-productization"]
+    "expectedPrimary": [
+      "cli-creator"
+    ],
+    "expectedSupport": [
+      "dev-release-productization"
+    ]
   },
   {
     "id": "changelog-release",
+    "domain": "repo-collaboration",
+    "concept": "github-pr-repair",
     "query": "Generate a changelog and release notes from recent commits",
-    "expectedPrimary": ["changelog-generator"],
-    "expectedSupport": ["dev-release-productization"]
+    "expectedPrimary": [
+      "changelog-generator"
+    ],
+    "expectedSupport": [
+      "dev-release-productization"
+    ]
   },
   {
     "id": "developer-onboarding",
+    "domain": "documents-publishing",
+    "concept": "documents-pdf",
     "query": "Write a developer onboarding guide for a new service repository",
-    "expectedPrimary": ["developer-onboarding-doc"],
-    "expectedSupport": ["dev-documentation-systems"]
+    "expectedPrimary": [
+      "developer-onboarding-doc"
+    ],
+    "expectedSupport": [
+      "dev-documentation-systems"
+    ]
   },
   {
     "id": "resume-cover-letter",
+    "domain": "documents-publishing",
+    "concept": "documents-pdf",
     "query": "Tailor a resume and cover letter for a specific job posting",
-    "expectedPrimary": ["resume-cover-letter-tailor"],
-    "expectedSupport": ["huggingface-jobs"]
+    "expectedPrimary": [
+      "resume-cover-letter-tailor"
+    ],
+    "expectedSupport": [
+      "huggingface-jobs"
+    ]
   },
   {
     "id": "performance-load-test",
+    "domain": "observability-reliability",
+    "concept": "observability-reliability",
     "query": "Plan load testing and a performance budget for a backend API",
-    "expectedPrimary": ["load-testing-plan"],
-    "expectedSupport": ["performance-budget", "dev-performance-engineering"]
+    "expectedPrimary": [
+      "load-testing-plan"
+    ],
+    "expectedSupport": [
+      "performance-budget",
+      "dev-performance-engineering"
+    ]
   },
   {
     "id": "feature-flag-rollout",
+    "domain": "platform-delivery",
+    "concept": "deployment-release",
     "query": "Design a feature flag rollout and rollback guide for a risky launch",
-    "expectedPrimary": ["feature-flag-guide"],
-    "expectedSupport": ["launch-readiness", "dev-release-productization"]
+    "expectedPrimary": [
+      "feature-flag-guide"
+    ],
+    "expectedSupport": [
+      "launch-readiness",
+      "dev-release-productization"
+    ]
   },
   {
     "id": "disaster-recovery",
+    "domain": "observability-reliability",
+    "concept": "observability-reliability",
     "query": "Write a disaster recovery plan with backup, restore, and incident ownership",
-    "expectedPrimary": ["disaster-recovery-plan"],
-    "expectedSupport": ["incident-postmortem", "monitoring-setup-guide"]
+    "expectedPrimary": [
+      "disaster-recovery-plan"
+    ],
+    "expectedSupport": [
+      "incident-postmortem",
+      "monitoring-setup-guide"
+    ]
   },
   {
     "id": "sentry-setup",
+    "domain": "observability-reliability",
+    "concept": "observability-reliability",
     "query": "Set up Sentry error monitoring and triage noisy production exceptions",
-    "expectedPrimary": ["sentry"],
-    "expectedSupport": ["monitoring-setup-guide", "dev-observability-sre"]
+    "expectedPrimary": [
+      "sentry"
+    ],
+    "expectedSupport": [
+      "monitoring-setup-guide",
+      "dev-observability-sre"
+    ]
   },
   {
     "id": "supabase-postgres",
+    "domain": "database-data-engineering",
+    "concept": "database-data-engineering",
     "query": "Design Supabase Postgres schema policies and migration safety checks",
-    "expectedPrimary": ["supabase-postgres-best-practices", "dev-database-postgres"],
-    "expectedSupport": ["database-schema-design", "database-migration-plan"]
+    "expectedPrimary": [
+      "supabase-postgres-best-practices",
+      "dev-database-postgres"
+    ],
+    "expectedSupport": [
+      "database-schema-design",
+      "database-migration-plan"
+    ]
   },
   {
     "id": "stripe-integration",
+    "domain": "backend-services",
+    "concept": "backend-services",
     "query": "Implement Stripe billing with webhook handling and subscription lifecycle checks",
-    "expectedPrimary": ["stripe-best-practices"],
-    "expectedSupport": ["dev-backend-api-design", "dev-node-typescript-services"]
+    "expectedPrimary": [
+      "stripe-best-practices"
+    ],
+    "expectedSupport": [
+      "dev-backend-api-design",
+      "dev-node-typescript-services"
+    ]
   },
   {
     "id": "cloudflare-durable-objects",
+    "domain": "platform-delivery",
+    "concept": "cloudflare-workers",
     "query": "Build a Cloudflare Durable Object service with Wrangler deployment",
-    "expectedPrimary": ["durable-objects"],
-    "expectedSupport": ["wrangler", "workers-best-practices"]
+    "expectedPrimary": [
+      "durable-objects"
+    ],
+    "expectedSupport": [
+      "wrangler",
+      "workers-best-practices"
+    ]
   },
   {
     "id": "hf-vision-trainer",
+    "domain": "huggingface-ml",
+    "concept": "huggingface-ml",
     "query": "Train a Hugging Face vision model and publish evaluation results",
-    "expectedPrimary": ["huggingface-vision-trainer"],
-    "expectedSupport": ["huggingface-community-evals", "huggingface-paper-publisher"]
+    "expectedPrimary": [
+      "huggingface-vision-trainer"
+    ],
+    "expectedSupport": [
+      "huggingface-community-evals",
+      "huggingface-paper-publisher"
+    ]
   },
   {
     "id": "hf-gradio-space",
+    "domain": "huggingface-ml",
+    "concept": "huggingface-ml",
     "query": "Create a Hugging Face Gradio demo Space for a model",
-    "expectedPrimary": ["huggingface-gradio"],
-    "expectedSupport": ["hf-cli", "huggingface-community-evals"]
+    "expectedPrimary": [
+      "huggingface-gradio"
+    ],
+    "expectedSupport": [
+      "hf-cli",
+      "huggingface-community-evals"
+    ]
   },
   {
     "id": "prd-feature-prioritization",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
     "query": "Write a PRD and prioritize product features from user research",
-    "expectedPrimary": ["prd-template", "feature-prioritisation"],
-    "expectedSupport": ["user-research-synthesis", "ux-research-plan"]
+    "expectedPrimary": [
+      "prd-template",
+      "feature-prioritisation"
+    ],
+    "expectedSupport": [
+      "user-research-synthesis",
+      "ux-research-plan"
+    ]
   },
   {
     "id": "user-research-synthesis",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
     "query": "Synthesize user interviews into themes, opportunities, and product decisions",
-    "expectedPrimary": ["user-research-synthesis"],
-    "expectedSupport": ["design-research", "ux-research-plan"]
+    "expectedPrimary": [
+      "user-research-synthesis"
+    ],
+    "expectedSupport": [
+      "design-research",
+      "ux-research-plan"
+    ]
   },
   {
     "id": "dependency-conflict",
+    "domain": "repo-collaboration",
+    "concept": "repo-operations",
     "query": "Resolve dependency conflicts after an npm upgrade",
-    "expectedPrimary": ["dependency-conflict-resolver"],
-    "expectedSupport": ["dev-dependency-maintenance"]
+    "expectedPrimary": [
+      "dependency-conflict-resolver"
+    ],
+    "expectedSupport": [
+      "dev-dependency-maintenance"
+    ]
   },
   {
     "id": "debugging-log-analysis",
+    "domain": "observability-reliability",
+    "concept": "observability-reliability",
     "query": "Analyze logs and decode a production error stack trace",
-    "expectedPrimary": ["error-decoder", "debugging-log-analyser"],
-    "expectedSupport": ["dev-observability-sre", "sentry"]
+    "expectedPrimary": [
+      "error-decoder",
+      "debugging-log-analyser"
+    ],
+    "expectedSupport": [
+      "dev-observability-sre",
+      "sentry"
+    ]
   },
   {
     "id": "monorepo-build",
+    "domain": "repo-collaboration",
+    "concept": "repo-operations",
     "query": "Fix a monorepo build system and Turborepo pipeline issue",
-    "expectedPrimary": ["dev-monorepo-build-systems", "turborepo"],
-    "expectedSupport": ["dev-git-github-collaboration"]
+    "expectedPrimary": [
+      "dev-monorepo-build-systems",
+      "turborepo"
+    ],
+    "expectedSupport": [
+      "dev-git-github-collaboration"
+    ]
   },
   {
     "id": "security-finding-triage",
+    "domain": "security-risk",
+    "concept": "security-review",
     "query": "Triage security findings, validate exploitability, and track remediation",
-    "expectedPrimary": ["triage-finding", "track-findings"],
-    "expectedSupport": ["validation", "security-diff-scan"]
+    "expectedPrimary": [
+      "triage-finding",
+      "track-findings"
+    ],
+    "expectedSupport": [
+      "validation",
+      "security-diff-scan"
+    ]
   },
   {
     "id": "risk-register",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
     "query": "Create a risk register for a launch readiness review",
-    "expectedPrimary": ["risk-register"],
-    "expectedSupport": ["launch-readiness"]
+    "expectedPrimary": [
+      "risk-register"
+    ],
+    "expectedSupport": [
+      "launch-readiness"
+    ]
   },
   {
     "id": "capacity-planning",
+    "domain": "infrastructure-platforms",
+    "concept": "infrastructure-platforms",
     "query": "Forecast capacity and scaling needs for a traffic spike",
-    "expectedPrimary": ["capacity-planning"],
-    "expectedSupport": ["dev-performance-engineering", "dev-containers-kubernetes"]
+    "expectedPrimary": [
+      "capacity-planning"
+    ],
+    "expectedSupport": [
+      "dev-performance-engineering",
+      "dev-containers-kubernetes"
+    ]
   },
   {
     "id": "copilot-sdk",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
     "query": "Build a Copilot SDK integration for an app assistant",
-    "expectedPrimary": ["copilot-sdk"],
-    "expectedSupport": ["agents-sdk", "openai-agents-js"]
+    "expectedPrimary": [
+      "copilot-sdk"
+    ],
+    "expectedSupport": [
+      "agents-sdk",
+      "openai-agents-js"
+    ]
   },
   {
     "id": "skillweaver-routing-review",
+    "domain": "skill-tooling",
+    "concept": "skill-authoring",
     "query": "Read-only performance and robustness review of SkillWeaver V2 routing",
-    "expectedPrimary": ["skillweaver", "code-review-checklist"],
-    "expectedSupport": ["dev-performance-engineering"],
-    "mustNotPrimary": ["racingsim-game-dev", "racingsim-ai-ml", "game-playtest", "performance-review"]
+    "expectedPrimary": [
+      "skillweaver",
+      "code-review-checklist"
+    ],
+    "expectedSupport": [
+      "dev-performance-engineering"
+    ],
+    "mustNotPrimary": [
+      "racingsim-game-dev",
+      "racingsim-ai-ml",
+      "game-playtest",
+      "performance-review"
+    ]
   },
   {
     "id": "figma-implement-not-use",
+    "domain": "frontend-experience",
+    "concept": "figma-handoff",
     "query": "Implement a Figma design in React code",
-    "expectedPrimary": ["figma-implement-design"],
-    "expectedSupport": ["figma-use", "dev-frontend-react-next"]
+    "expectedPrimary": [
+      "figma-implement-design"
+    ],
+    "expectedSupport": [
+      "figma-use",
+      "dev-frontend-react-next"
+    ]
   },
   {
     "id": "frontend-dashboard-not-analytics",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
     "query": "Build a React dashboard UI shell, not a data analytics report",
-    "expectedPrimary": ["frontend-app-builder", "dev-frontend-react-next"],
-    "mustNotPrimary": ["build-dashboard", "visualize-data", "data-visualization", "build-report"]
+    "expectedPrimary": [
+      "frontend-app-builder",
+      "dev-frontend-react-next"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard",
+      "visualize-data",
+      "data-visualization",
+      "build-report"
+    ]
   },
   {
     "id": "frontend-dashboard-instead-analytics",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
     "query": "Build a React dashboard UI shell instead of a data analytics report",
-    "expectedPrimary": ["frontend-app-builder", "dev-frontend-react-next"],
-    "mustNotPrimary": ["build-dashboard", "visualize-data", "data-visualization", "build-report"]
+    "expectedPrimary": [
+      "frontend-app-builder",
+      "dev-frontend-react-next"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard",
+      "visualize-data",
+      "data-visualization",
+      "build-report"
+    ]
   },
   {
     "id": "threat-model-no-scan",
+    "domain": "security-risk",
+    "concept": "security-review",
     "query": "Create a threat model without running a vulnerability scan",
-    "expectedPrimary": ["security-threat-model", "threat-model"],
-    "mustNotPrimary": ["security-scan", "deep-security-scan"]
+    "expectedPrimary": [
+      "security-threat-model",
+      "threat-model"
+    ],
+    "mustNotPrimary": [
+      "security-scan",
+      "deep-security-scan"
+    ]
   },
   {
     "id": "threat-model-dont-scan",
+    "domain": "security-risk",
+    "concept": "security-review",
     "query": "Create a threat model, don't run a vulnerability scan",
-    "expectedPrimary": ["security-threat-model", "threat-model"],
-    "mustNotPrimary": ["security-scan", "deep-security-scan"]
+    "expectedPrimary": [
+      "security-threat-model",
+      "threat-model"
+    ],
+    "mustNotPrimary": [
+      "security-scan",
+      "deep-security-scan"
+    ]
   }
 ]

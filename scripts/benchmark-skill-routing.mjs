@@ -15,8 +15,8 @@ const HOLDOUT_MODE = process.argv.includes("--holdout");
 const SUITE = HOLDOUT_MODE
   ? {
       id: "holdout",
-      label: "Frozen Holdout",
-      reportTitle: "Frozen Holdout Benchmark",
+      label: "Post-Tuning Challenge",
+      reportTitle: "Post-Tuning Challenge Benchmark",
       casesPath: resolve("benchmarks/skill-routing-holdout.json"),
       casesRelativePath: "benchmarks/skill-routing-holdout.json",
       reportPath: resolve("docs/SKILL-USE-HOLDOUT.md"),
@@ -68,6 +68,26 @@ const STOP_WORDS = new Set([
   "use",
   "using",
   "with"
+]);
+
+const DOMAIN_LABELS = new Map([
+  ["ai-agent-apps", "AI agent apps"],
+  ["backend-services", "Backend services"],
+  ["communications-knowledge", "Communications and knowledge"],
+  ["data-analytics", "Data analytics"],
+  ["database-data-engineering", "Database and data engineering"],
+  ["documents-publishing", "Documents and publishing"],
+  ["frontend-experience", "Frontend experience"],
+  ["games-simulation", "Games and simulation"],
+  ["huggingface-ml", "Hugging Face ML"],
+  ["infrastructure-platforms", "Infrastructure platforms"],
+  ["marketing-growth-creative", "Marketing, growth, and creative"],
+  ["observability-reliability", "Observability and reliability"],
+  ["platform-delivery", "Platform delivery"],
+  ["product-research-planning", "Product, research, and planning"],
+  ["repo-collaboration", "Repo collaboration"],
+  ["security-risk", "Security and risk"],
+  ["skill-tooling", "Skill tooling"]
 ]);
 
 function normalize(value) {
@@ -282,11 +302,22 @@ function validateCases(cases, index) {
   const issues = [];
   const ids = new Set();
   const skillNames = index.skills.map((skill) => skill.name);
+  const conceptIds = new Set((index.concepts ?? []).map((concept) => concept.id));
   for (const testCase of cases) {
     if (!testCase.id) issues.push("case missing id");
     if (ids.has(testCase.id)) issues.push(`duplicate case id: ${testCase.id}`);
     ids.add(testCase.id);
     if (!testCase.query) issues.push(`${testCase.id}: missing query`);
+    if (!testCase.domain) {
+      issues.push(`${testCase.id}: missing domain`);
+    } else if (!DOMAIN_LABELS.has(testCase.domain)) {
+      issues.push(`${testCase.id}: unknown domain: ${testCase.domain}`);
+    }
+    if (!testCase.concept) {
+      issues.push(`${testCase.id}: missing concept`);
+    } else if (!conceptIds.has(testCase.concept)) {
+      issues.push(`${testCase.id}: unknown concept: ${testCase.concept}`);
+    }
     if (!Array.isArray(testCase.expectedPrimary) || !testCase.expectedPrimary.length) {
       issues.push(`${testCase.id}: expectedPrimary must be a non-empty array`);
     }
@@ -375,6 +406,61 @@ function summarize(evaluations) {
     medianCandidatesToExpected: reviewed[Math.floor(reviewed.length / 2)] ?? null,
     medianExpectedRank: ranks[Math.floor(ranks.length / 2)] ?? null
   };
+}
+
+function summarizeRows(rows) {
+  const noSkillWeaverSummary = summarize(rows.map((row) => row.noSkillWeaver));
+  const v1Summary = summarize(rows.map((row) => row.v1));
+  const v2Summary = summarize(rows.map((row) => row.v2));
+  return {
+    noSkillWeaverSummary,
+    v1Summary,
+    v2Summary,
+    v2PrimaryHits: rows.filter((row) => row.v2.primaryHit).length,
+    v2TopHits: rows.filter((row) => row.v2.hitAt5).length,
+    v2ForbiddenPrimaries: rows.filter((row) => row.v2.forbiddenPrimary).length,
+    v2SupportMissCases: rows.filter((row) => row.v2.supportMisses.length).length
+  };
+}
+
+function summarizeByField(rows, field, labelForKey) {
+  const groups = new Map();
+  for (const row of rows) {
+    const key = row[field] ?? "unclassified";
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(row);
+  }
+
+  return [...groups.entries()]
+    .map(([key, groupRows]) => {
+      const group = summarizeRows(groupRows);
+      return {
+        key,
+        label: labelForKey(key),
+        cases: groupRows.length,
+        ...group,
+        outputQualityGainVsNo: group.v2Summary.outputQualityScore - group.noSkillWeaverSummary.outputQualityScore,
+        outputQualityGainVsV1: group.v2Summary.outputQualityScore - group.v1Summary.outputQualityScore
+      };
+    })
+    .sort((left, right) => right.cases - left.cases || left.label.localeCompare(right.label));
+}
+
+function compactSliceSummaries(summaries) {
+  return summaries.map((summary) => ({
+    key: summary.key,
+    label: summary.label,
+    cases: summary.cases,
+    v2OutputQualityScore: summary.v2Summary.outputQualityScore,
+    v2PrimaryHitAt1: summary.v2Summary.primaryHitAt1,
+    v2HitAt5: summary.v2Summary.hitAt5,
+    v2SupportCoverage: summary.v2Summary.supportCoverage,
+    v2SupportPrecisionAt5: summary.v2Summary.supportPrecisionAt5,
+    v2ForbiddenPrimaryRate: summary.v2Summary.forbiddenPrimaryRate,
+    v2SupportMissCases: summary.v2SupportMissCases,
+    v2GainVsNoSkillWeaver: summary.outputQualityGainVsNo,
+    v2GainVsSkillLevel: summary.outputQualityGainVsV1
+  }));
 }
 
 function evaluateAcceptance({ noSkillWeaverSummary, v1Summary, v2Summary }) {
@@ -521,14 +607,58 @@ function buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary }) {
   ];
 }
 
-function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2Summary, generatedAt, freshness }) {
+function buildSliceTable(title, summaries) {
+  const lines = [
+    `## ${title}`,
+    "",
+    "| Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |",
+    "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"
+  ];
+
+  for (const summary of summaries) {
+    lines.push(
+      `| ${summary.label} | ${summary.cases} | ${summary.v2Summary.outputQualityScore.toFixed(1)} | ${formatPercent(summary.v2Summary.primaryHitAt1)} | ${formatPercent(summary.v2Summary.hitAt5)} | ${formatPercent(summary.v2Summary.supportCoverage)} | ${formatPercent(summary.v2Summary.supportPrecisionAt5)} | ${formatPercent(summary.v2Summary.forbiddenPrimaryRate)} | ${summary.v2SupportMissCases}/${summary.cases} | ${formatDelta(summary.outputQualityGainVsNo, " pts")} | ${formatDelta(summary.outputQualityGainVsV1, " pts")} |`
+    );
+  }
+
+  return lines;
+}
+
+function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2SupportMissCases, v2Summary }) {
+  if (SUITE.gatesAcceptance) {
+    return [
+      "## Claim Scope",
+      "",
+      `This report supports the claim that V2 is stronger on the current ${cases.length}-case active acceptance suite: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, and ${v2SupportMissCases}/${cases.length} support-miss cases. It does not prove universal routing correctness or unseen cross-domain generalization.`
+    ];
+  }
+
+  return [
+    "## Claim Scope",
+    "",
+    `This report supports the claim that V2 remains strong on a ${cases.length}-case post-tuning challenge suite: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, and ${v2Forbidden}/${cases.length} forbidden primaries. Workflow support quality is weaker than primary routing: support coverage@5 is ${formatPercent(v2Summary.supportCoverage)}, support precision@5 is ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} cases miss at least one expected support skill.`
+  ];
+}
+
+function buildMarkdown({
+  index,
+  cases,
+  rows,
+  noSkillWeaverSummary,
+  v1Summary,
+  v2Summary,
+  domainSummaries,
+  conceptSummaries,
+  generatedAt,
+  freshness
+}) {
   const summaryRows = buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary });
   const candidateReduction = 1 - (5 / index.skills.length);
   const qualityVsNo = v2Summary.outputQualityScore - noSkillWeaverSummary.outputQualityScore;
   const qualityVsV1 = v2Summary.outputQualityScore - v1Summary.outputQualityScore;
   const strongClaimPrefix = SUITE.gatesAcceptance
     ? freshness.acceptance.ok ? "SkillWeaver V2 changes" : "SkillWeaver V2 currently reports"
-    : "On the frozen holdout, SkillWeaver V2 changes";
+    : "On the post-tuning challenge suite, SkillWeaver V2 changes";
 
   const lines = [
     `# SkillWeaver V2 ${SUITE.reportTitle}`,
@@ -573,7 +703,7 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
       : [
           "## Suite Role",
           "",
-          "This is a frozen, non-gating holdout suite. It is meant to measure generalization after the active acceptance benchmark is already green. Do not tune concept rules directly from this report; promote misses into the active benchmark only after they recur in real task logs or are explicitly accepted as challenge coverage.",
+          "This is not pristine untouched holdout evidence for the current V2 route. The first 22-case pilot exposed gaps, then those misses informed the current fixes. Treat this report as frozen challenge/regression evidence. A clean cross-domain generalization claim requires a fresh prompt set collected after the last routing-tuning commit and reported before any tuning from those prompts.",
           ""
         ]),
     "## Compared Systems",
@@ -599,23 +729,36 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
 
   lines.push(
     "",
+    ...buildClaimScope({
+      cases,
+      v2PrimaryHits,
+      v2TopHits,
+      v2Forbidden,
+      v2SupportMissCases,
+      v2Summary
+    }),
+    "",
     `V2 raw counts: primary hit@1 ${v2PrimaryHits}/${cases.length}; expected primary top/workflow-five ${v2TopHits}/${cases.length}; forbidden primary ${v2Forbidden}/${cases.length}; support-miss cases ${v2SupportMissCases}/${cases.length}.`,
     "",
     `Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from ${index.skills.length} skills to 5 candidates, a ${(candidateReduction * 100).toFixed(1)}% candidate reduction per task.`,
     "Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.",
     ...(SUITE.gatesAcceptance
       ? []
-      : ["Holdout quality is intentionally reported rather than accepted or failed; the freshness check only proves that the report matches the current code, corpus, and holdout cases."]),
+      : ["Challenge quality is intentionally reported rather than accepted or failed; the freshness check only proves that the report matches the current code, corpus, and challenge cases."]),
+    "",
+    ...buildSliceTable("Quality by Domain", domainSummaries),
+    "",
+    ...buildSliceTable("Quality by Expected Concept", conceptSummaries),
     "",
     "## Per-Case Results",
     "",
-    "| Case | Expected primary | No primary / rank | Skill-level primary / rank | V2 primary / rank | V2 top concept | V2 top/workflow 5 |",
-    "| --- | --- | --- | --- | --- | --- | --- |"
+    "| Case | Domain | Expected concept | Expected primary | No primary / rank | Skill-level primary / rank | V2 primary / rank | V2 top concept | V2 top/workflow 5 |",
+    "| --- | --- | --- | --- | --- | --- | --- | --- | --- |"
   );
 
   for (const row of rows) {
     lines.push(
-      `| ${row.id} | ${row.expectedPrimary.join(", ")} | ${formatPrimaryCell(row.noSkillWeaver)} | ${formatPrimaryCell(row.v1)} | ${formatPrimaryCell(row.v2)} | ${row.v2.contextLabel ?? "-"} | ${row.v2.topNames.join(" -> ")} |`
+      `| ${row.id} | ${row.domainLabel} | ${row.conceptLabel} | ${row.expectedPrimary.join(", ")} | ${formatPrimaryCell(row.noSkillWeaver)} | ${formatPrimaryCell(row.v1)} | ${formatPrimaryCell(row.v2)} | ${row.v2.contextLabel ?? "-"} | ${row.v2.topNames.join(" -> ")} |`
     );
   }
 
@@ -656,6 +799,7 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
 async function main() {
   const cases = JSON.parse(await readFile(CASES_PATH, "utf8"));
   const index = await scanSkillRoots();
+  const conceptLabels = new Map((index.concepts ?? []).map((concept) => [concept.id, concept.label]));
   const caseValidation = validateCases(cases, index);
   if (!caseValidation.ok) {
     console.error(`Benchmark case validation failed:\n${caseValidation.issues.map((issue) => `- ${issue}`).join("\n")}`);
@@ -673,6 +817,10 @@ async function main() {
 
     rows.push({
       id: testCase.id,
+      domain: testCase.domain,
+      domainLabel: DOMAIN_LABELS.get(testCase.domain) ?? testCase.domain,
+      concept: testCase.concept,
+      conceptLabel: conceptLabels.get(testCase.concept) ?? testCase.concept,
       query: testCase.query,
       expectedPrimary: testCase.expectedPrimary,
       expectedSupport: testCase.expectedSupport ?? [],
@@ -702,11 +850,20 @@ async function main() {
     });
   }
 
-  const noSkillWeaverSummary = summarize(rows.map((row) => row.noSkillWeaver));
-  const v1Summary = summarize(rows.map((row) => row.v1));
-  const v2Summary = summarize(rows.map((row) => row.v2));
+  const aggregate = summarizeRows(rows);
+  const { noSkillWeaverSummary, v1Summary, v2Summary } = aggregate;
+  const domainSummaries = summarizeByField(rows, "domain", (domain) => DOMAIN_LABELS.get(domain) ?? domain);
+  const conceptSummaries = summarizeByField(rows, "concept", (concept) => conceptLabels.get(concept) ?? concept);
+  const compactDomainSummaries = compactSliceSummaries(domainSummaries);
+  const compactConceptSummaries = compactSliceSummaries(conceptSummaries);
   const generatedAt = Date.now();
-  const summaries = { noSkillWeaverSummary, v1Summary, v2Summary };
+  const summaries = {
+    noSkillWeaverSummary,
+    v1Summary,
+    v2Summary,
+    domainSummaries: compactDomainSummaries,
+    conceptSummaries: compactConceptSummaries
+  };
   const freshness = await buildFreshness({
     index,
     cases,
@@ -721,6 +878,8 @@ async function main() {
     noSkillWeaverSummary,
     v1Summary,
     v2Summary,
+    domainSummaries,
+    conceptSummaries,
     generatedAt,
     freshness
   });
@@ -768,6 +927,8 @@ async function main() {
     noSkillWeaver: noSkillWeaverSummary,
     skillweaverV1: v1Summary,
     skillweaverV2: v2Summary,
+    domains: compactDomainSummaries,
+    concepts: compactConceptSummaries,
     gains: {
       v2VsNoSkillWeaver: {
         primaryHitAt1PercentagePoints: (v2Summary.primaryHitAt1 - noSkillWeaverSummary.primaryHitAt1) * 100,
