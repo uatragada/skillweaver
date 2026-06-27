@@ -8,14 +8,14 @@ This roadmap turns V2's remaining workflow-quality gaps into deliberate research
 
 | Suite | Cases | V2 primary hit@1 | V2 support coverage@5 | V2 support precision@5 | Support-miss cases | Role |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| Active acceptance | 78 | 100.0% | 100.0% | 40.9% | 0 | Regression gate |
-| Post-tuning challenge | 22 | 95.5% | 68.2% | 34.1% | 12 | Non-gating pressure |
-| Fresh-probe regression | 18 | 94.4% | 88.0% | 50.0% | 5 | Non-gating regression |
+| Active acceptance | 78 | 100.0% | 99.4% | 40.5% | 1 | Regression gate |
+| Post-tuning challenge | 22 | 95.5% | 70.5% | 35.2% | 12 | Non-gating pressure |
+| Fresh-probe regression | 18 | 100.0% | 88.0% | 50.0% | 5 | Non-gating regression |
 | Frozen holdout regression | 12 | 100.0% | 77.8% | 56.3% | 6 | Non-gating regression |
-| Clean holdout V2 regression | 14 | 100.0% | 52.4% | 39.3% | 14 | Non-gating regression |
-| Clean holdout V3 | 18 | 55.6% | 61.1% | 45.8% | 13 | Untouched baseline |
+| Clean holdout V2 regression | 14 | 100.0% | 59.5% | 44.6% | 14 | Non-gating regression |
+| Clean holdout V3 regression | 18 | 100.0% | 72.2% | 54.2% | 9 | Non-gating regression |
 
-The active suite proves the current acceptance claim. The challenge, fresh-probe, frozen-holdout-regression, and clean-holdout V2 regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout baseline and clean V2 baseline are preserved in git history. Clean holdout V3 is the current untouched baseline. It shows V2 still improves composite quality over both baselines on new prompts, but it also shows V2 is not yet broad enough to call solved: primary hit@1 trails the skill-level baseline and forbidden-primary rate is 11.1%.
+The active suite proves the current acceptance claim. The challenge, fresh-probe, frozen-holdout-regression, clean-holdout V2 regression, and clean-holdout V3 regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout, clean V2, and clean V3 baselines are preserved in git history. Clean holdout V3's pre-tuning baseline at `00ad343` showed useful but incomplete generalization; the current V3 report measures the promoted regression fixes, not a new untouched split.
 
 ## Triage Rules
 
@@ -47,20 +47,20 @@ These cases were captured after commit `3cd6e51`, reported before tuning from th
 | `figjam-user-flow-holdout` | `figma-user-flow-planner` | `figma-use-figjam`, `figma-user-flow-planner` | Primary was acceptable, but support missed UX/product context and included creation/implementation noise. | P1 | Backlog; primary still accepted |
 | `security-ownership-map-holdout` | `security-ownership-map` | `security-ownership-map` | Primary was correct, but ownership-map support missed tracking/risk/security helpers. | P1 | Backlog; primary still accepted |
 
-## Clean Holdout V3 Baseline Queue
+## Clean Holdout V3 Promoted Queue
 
-These cases are still untouched evidence at the baseline commit. Do not tune from them until this report is committed. Once any case drives routing changes, preserve the baseline and relabel or fork the tuned file as regression evidence.
+These cases were captured after commit `e2a47a6`, reported before tuning from the suite, then promoted into regression work after the clean V3 baseline was preserved at `00ad343`. The current V3 report fixes the promoted P0/P1 primary misses, but this suite must now be cited only as regression evidence.
 
 | Case | Baseline V2 primary | Expected primary | Issue | Priority | Current status |
 | --- | --- | --- | --- | --- | --- |
-| `netlify-preview-rollback-v3` | `launch-readiness` | `netlify-deploy` | Provider-specific deployment intent is buried under generic release/readiness and unrelated frontend/game helpers. | P0 | Untouched baseline miss |
-| `skill-author-reference-pack-v3` | `skillweaver` | `skill-creator` | Skill navigation/gateway intent displaces the authoring skill for creating a reusable Codex skill. | P0 | Untouched baseline miss |
-| `roadmap-research-slide-template-v3` | `linear` | `Presentations`, `roadmap-presentation` | Linear/research source material displaces the deck deliverable. | P0 | Untouched baseline miss |
-| `otel-before-postmortem-v3` | `incident-postmortem` | `dev-observability-sre` | Proactive instrumentation routes to a reactive incident artifact and triggers a forbidden primary. | P0 | Untouched baseline miss |
-| `pr-security-finding-triage-v3` | `dependency-audit` | `triage-finding`, `validation` | Dependency wording displaces security finding triage and validation ownership. | P0 | Untouched baseline miss |
-| `huggingface-dataset-card-eval-v3` | `huggingface-llm-trainer` | `huggingface-datasets` | Dataset/card/licensing research is pulled into training and triggers a forbidden primary. | P0 | Untouched baseline miss |
-| `game-accessible-hud-playtest-v3` | `sprite-pipeline` | `game-ui-frontend` | HUD/menu interaction design is routed to asset pipeline support instead of game UI. | P1 | Untouched baseline miss |
-| `openai-agents-approval-flow-v3` | `openai-docs` | `openai-agents-js` | Current-docs support displaces the implementation skill for Agents JS workflows. | P1 | Untouched baseline miss |
+| `netlify-preview-rollback-v3` | `launch-readiness` | `netlify-deploy` | Provider-specific deployment intent is buried under generic release/readiness and unrelated frontend/game helpers. | P0 | Fixed; V2 primary hit@1 |
+| `skill-author-reference-pack-v3` | `skillweaver` | `skill-creator` | Skill navigation/gateway intent displaces the authoring skill for creating a reusable Codex skill. | P0 | Fixed; V2 primary hit@1 |
+| `roadmap-research-slide-template-v3` | `linear` | `Presentations`, `roadmap-presentation` | Linear/research source material displaces the deck deliverable. | P0 | Fixed; V2 primary hit@1 |
+| `otel-before-postmortem-v3` | `incident-postmortem` | `dev-observability-sre` | Proactive instrumentation routes to a reactive incident artifact and triggers a forbidden primary. | P0 | Fixed; V2 primary hit@1 |
+| `pr-security-finding-triage-v3` | `dependency-audit` | `triage-finding`, `validation` | Dependency wording displaces security finding triage and validation ownership. | P0 | Fixed; V2 primary hit@1 |
+| `huggingface-dataset-card-eval-v3` | `huggingface-llm-trainer` | `huggingface-datasets` | Dataset/card/licensing research is pulled into training and triggers a forbidden primary. | P0 | Fixed; V2 primary hit@1 |
+| `game-accessible-hud-playtest-v3` | `sprite-pipeline` | `game-ui-frontend` | HUD/menu interaction design is routed to asset pipeline support instead of game UI. | P1 | Fixed; V2 primary hit@1 |
+| `openai-agents-approval-flow-v3` | `openai-docs` | `openai-agents-js` | Current-docs support displaces the implementation skill for Agents JS workflows. | P1 | Fixed; V2 primary hit@1 |
 | `market-sizing-source-bank-v3` | `market-sizing` | `market-sizing` | Primary is correct, but external-source and research-protocol support are absent. | P2 | Support backlog |
 
 ## Frozen Failure Atlas

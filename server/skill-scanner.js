@@ -117,7 +117,7 @@ const CONCEPT_RULES = [
     triggers: ["security scan", "threat model", "vulnerability", "audit finding", "risk review", "attack path", "exploit chain"],
     domains: ["security", "operations"],
     tools: ["GitHub"],
-    primarySkillNames: ["codex-security:security-scan", "security-scan", "codex-security:deep-security-scan", "deep-security-scan", "codex-security:threat-model", "threat-model", "security-threat-model", "security-best-practices"],
+    primarySkillNames: ["codex-security:security-scan", "security-scan", "codex-security:deep-security-scan", "deep-security-scan", "codex-security:threat-model", "threat-model", "security-threat-model", "security-ownership-map", "security-best-practices"],
     supportingSkillNames: ["codex-security:attack-path-analysis", "attack-path-analysis", "codex-security:finding-discovery", "finding-discovery", "codex-security:triage-finding", "triage-finding", "codex-security:track-findings", "track-findings", "skill-security-auditor"],
     verificationSkillNames: ["codex-security:validation", "validation", "codex-security:security-diff-scan", "security-diff-scan"],
     relatedConceptIds: ["github-pr-repair", "repo-operations"]
@@ -126,7 +126,7 @@ const CONCEPT_RULES = [
     id: "deployment-release",
     label: "Deployment and release",
     description: "Prepare releases, deploy to hosting providers, repair deployment issues, and verify production surfaces.",
-    triggers: ["deploy app", "release readiness", "vercel", "cloudflare", "netlify", "render", "cron job", "scheduled workflow"],
+    triggers: ["deploy app", "release readiness", "vercel", "cloudflare", "netlify", "render", "branch preview", "dns cutover", "cron job", "scheduled workflow"],
     domains: ["operations", "frontend", "backend"],
     tools: ["Vercel", "Cloudflare", "GitHub", "Node"],
     primarySkillNames: ["vercel-deploy", "vercel:bootstrap", "vercel-api", "deployments-cicd", "cloudflare-deploy", "cloudflare:wrangler", "netlify-deploy", "render-deploy", "cron-jobs", "vercel-functions"],
@@ -138,7 +138,7 @@ const CONCEPT_RULES = [
     id: "skill-authoring",
     label: "Skill authoring",
     description: "Create, install, evaluate, and maintain Codex skills and plugin bundles.",
-    triggers: ["create a skill", "install skill", "skill navigator", "plugin creator", "skill routing", "command line tool", "cli"],
+    triggers: ["create a skill", "codex skill", "frontmatter", "reference files", "example scripts", "install skill", "skill navigator", "skillweaver", "plugin creator", "skill routing", "command line tool", "cli"],
     domains: ["ai", "documents"],
     tools: ["OpenAI", "GitHub", "Node"],
     gatewaySkillNames: ["skillweaver"],
@@ -163,11 +163,11 @@ const CONCEPT_RULES = [
     id: "presentations",
     label: "Presentations",
     description: "Build slide decks, roadmap narratives, and presentation-ready documents.",
-    triggers: ["presentation", "slides", "roadmap deck", "pitch deck"],
+    triggers: ["presentation", "slides", "roadmap deck", "pitch deck", "board-ready deck", "slide template", "speaker narrative"],
     domains: ["documents", "product"],
     tools: ["Node"],
     primarySkillNames: ["presentations:Presentations", "Presentations", "roadmap-presentation"],
-    supportingSkillNames: ["template-creator:template-creator", "documents:documents"],
+    supportingSkillNames: ["template-creator:template-creator", "template-creator", "roadmap-narrative", "linear", "documents:documents"],
     relatedConceptIds: ["documents-pdf", "product-planning"]
   },
   {
@@ -187,8 +187,8 @@ const CONCEPT_RULES = [
     triggers: ["game", "phaser", "three.js", "webgl", "playtest", "sprite", "racingsim", "ppo", "stable-baselines3", "godot json bridge", "lap progress", "nurburgring", "checkpoint progress"],
     domains: ["frontend", "creative"],
     tools: ["Node", "Playwright"],
-    primarySkillNames: ["game-studio:game-studio", "game-studio", "game-studio:phaser-2d-game", "phaser-2d-game", "game-studio:sprite-pipeline", "sprite-pipeline", "game-studio:three-webgl-game", "three-webgl-game", "game-studio:web-game-foundations", "web-game-foundations", "game-studio:react-three-fiber-game", "react-three-fiber-game", "racingsim-ai-ml"],
-    supportingSkillNames: ["game-studio:web-3d-asset-pipeline", "web-3d-asset-pipeline", "game-studio:game-ui-frontend", "game-ui-frontend", "racingsim-game-dev", "project-derived-skills"],
+    primarySkillNames: ["game-studio:game-studio", "game-studio", "game-studio:phaser-2d-game", "phaser-2d-game", "game-studio:game-ui-frontend", "game-ui-frontend", "game-studio:sprite-pipeline", "sprite-pipeline", "game-studio:three-webgl-game", "three-webgl-game", "game-studio:web-game-foundations", "web-game-foundations", "game-studio:react-three-fiber-game", "react-three-fiber-game", "racingsim-ai-ml"],
+    supportingSkillNames: ["game-studio:web-3d-asset-pipeline", "web-3d-asset-pipeline", "racingsim-game-dev", "project-derived-skills"],
     verificationSkillNames: ["game-studio:game-playtest", "game-playtest"],
     relatedConceptIds: ["frontend-implementation", "browser-verification"]
   },
@@ -1424,11 +1424,39 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   const negatedChromeIntent = hasNegatedIntent(normalizedQuery, ["chrome", "desktop chrome"]);
   const agentBrowserPreviewIntent = /\bagent browser verify\b|\bvercel agent browser\b|\bprotected preview\b|\bpreview deployment\b/.test(normalizedQuery)
     || (/\bvercel\b/.test(normalizedQuery) && /\bpreview\b|\bdeployment\b|\bprotected\b/.test(normalizedQuery) && /\bscreenshot|\bconsole errors?\b|\bcompare\b|\binspect\b/.test(normalizedQuery));
-  const incidentReviewIntent = /\bpostmortem\b|\bincident\b/.test(normalizedQuery);
   const broadObservabilitySetupIntent = /\bopentelemetry\b|\botel\b|\bdistributed tracing\b|\btracing\b|\bslo\b|\berror budget\b|\bmonitoring dashboard\b|\balert rules?\b/.test(normalizedQuery);
+  const proactiveObservabilityIntent = broadObservabilitySetupIntent
+    && (/\binstrument\b|\btraces?\b|\bservice indicators?\b|\balerting\b/.test(normalizedQuery)
+      || /\bbefore\b.*\bincident\b|\bbefore there is any incident\b|\bbefore any incident\b/.test(normalizedQuery));
+  const incidentReviewIntent = /\bpostmortem\b|\bincident\b/.test(normalizedQuery) && !proactiveObservabilityIntent;
   const notebookAnalyticsIntent = /\bnotebooks?\b|\bjupyter\b|\breproducible\b|\baudit trail\b|\bsql\b.*\bpython\b|\bpython\b.*\bsql\b|\bexperiment readout\b/.test(normalizedQuery);
   const dataReportBuildIntent = /\bbuild\b|\bcreate\b|\bnarrative\b|\breport\b|\bproduct metrics?\b/.test(normalizedQuery)
     && /\bcharts?\b|\bvisuali[sz]ation\b|\balt text\b|\bcolor checks?\b|\bchart qa\b/.test(normalizedQuery);
+  const codexSkillAuditIntent = /\bcodex skill\b|\bskill pack\b/.test(normalizedQuery)
+    && /\baudit\b|\bunsafe instructions?\b|\bhidden tool use\b|\binstall risk\b|\bthird party\b|\bthird-party\b/.test(normalizedQuery);
+  const codexSkillInstallIntent = /\bcodex skill\b|\bskill pack\b/.test(normalizedQuery)
+    && /\binstall\b|\bgithub\b|\blocal(?:ly)?\b/.test(normalizedQuery)
+    && !/\binstall risk\b|\bwhether to install\b|\bdeciding whether to install\b/.test(normalizedQuery);
+  const codexSkillAuthoringIntent = /\bcodex skill\b|\bfrontmatter\b|\breference files?\b|\bexample scripts?\b|\bvalidation notes?\b|\bsafe tool\b/.test(normalizedQuery)
+    && /\bcreate\b|\bturn\b|\bauthor\b|\bshare\b|\breusable\b/.test(normalizedQuery)
+    && !codexSkillAuditIntent
+    && !codexSkillInstallIntent
+    && !hasNegatedIntent(normalizedQuery, ["author a new skill", "create a skill", "create a new skill"]);
+  const roadmapDeckIntent = /\bdeck\b|\bslides?\b|\bpresentation\b|\bspeaker narrative\b|\bslide template\b|\bboard ready\b/.test(normalizedQuery)
+    && /\broadmap\b|\blinear\b|\bmilestones?\b|\bresearch notes?\b/.test(normalizedQuery);
+  const securityFindingTriageIntent = (/\bcodeql\b|\bdependency alerts?\b|\bpull request\b|\bpr\b/.test(normalizedQuery)
+      && /\bfindings?\b|\bfalse positives?\b|\bexploitable\b|\bremediation owners?\b|\bvalidation steps?\b/.test(normalizedQuery))
+    || /\bsecurity findings?\b.*\btriage\b|\btriage\b.*\bsecurity findings?\b/.test(normalizedQuery);
+  const securityDiffScanIntent = /\bsecurity diff scan\b|\bdiff scan\b/.test(normalizedQuery);
+  const securityOwnershipMapIntent = /\bsecurity ownership map\b|\bownership map\b|\borphaned sensitive code\b|\bbus[- ]factor\b|\bsensitive code\b.*\bowners?\b/.test(normalizedQuery);
+  const gameUiIntent = /\bmenu\b|\bcontroller\b|\bkeyboard\b|\bstates?\b|\bui layer\b|\bhud layer\b/.test(normalizedQuery)
+    && /\bgame\b|\bphaser\b|\bprototype\b|\bhud\b/.test(normalizedQuery);
+  const phaserPrototypePlanningIntent = /\bplan\b/.test(normalizedQuery)
+    && /\bphaser\b/.test(normalizedQuery)
+    && /\bprototype\b|\bbrowser game\b/.test(normalizedQuery)
+    && /\bplaytest loop\b/.test(normalizedQuery)
+    && !/\bcontroller\b|\bkeyboard\b|\bhud layer\b|\bui layer\b/.test(normalizedQuery);
+  const openAiAgentsJsIntent = /\bopenai agents js\b|\bagents js\b|\btool approvals?\b|\btyped handoffs?\b/.test(normalizedQuery);
 
   if (/\bdashboard\b/.test(normalizedQuery) && dataOutputIntent) {
     if (name.includes("build dashboard")) boost += 520;
@@ -1521,10 +1549,10 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   }
 
   if (broadObservabilitySetupIntent) {
-    if (name.includes("dev observability sre")) boost += incidentReviewIntent ? 260 : 1560;
+    if (name.includes("dev observability sre")) boost += proactiveObservabilityIntent ? 2200 : incidentReviewIntent ? 260 : 1560;
     if (["monitoring setup guide", "slo error budget"].some((term) => name.includes(term))) boost += incidentReviewIntent ? 120 : 520;
     if (name === "sentry" && !incidentReviewIntent) boost -= /\bsentry\b/.test(normalizedQuery) ? 480 : 720;
-    if (name.includes("incident postmortem") && !incidentReviewIntent) boost -= 280;
+    if (name.includes("incident postmortem") && !incidentReviewIntent) boost -= proactiveObservabilityIntent ? 1400 : 280;
   }
 
   if (/\bmonitoring\b|\boperational\b|\breadiness\b|\bslo\b|\botel\b|\bopentelemetry\b|\btracing\b/.test(normalizedQuery)) {
@@ -1533,7 +1561,7 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
 
   if (/\bsentry\b/.test(normalizedQuery)) {
     if (name === "sentry") boost += 860;
-    if (/\bpostmortem\b|\bincident\b/.test(normalizedQuery) && name.includes("incident postmortem")) boost += 1080;
+    if (incidentReviewIntent && name.includes("incident postmortem")) boost += 1080;
     if (["monitoring setup guide", "dev observability sre"].some((term) => name.includes(term))) boost += 260;
     if (name.includes("slo error budget") && !/\bslo\b|\berror budget\b/.test(normalizedQuery)) boost -= 180;
     if (name.includes("huggingface")) boost -= 520;
@@ -1542,9 +1570,9 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   const spritePipelineIntent = /\bsprites?\b|\bsprite sheet\b|\bhud\b|\btilemap\b|\basset pipeline\b/.test(normalizedQuery)
     && /\bgame\b|\bphaser\b|\bhud\b|\btilemap\b|\bplaytest\b|\bsprites?\b/.test(normalizedQuery);
   if (spritePipelineIntent) {
-    if (name.includes("sprite pipeline")) boost += 1540;
+    if (name.includes("sprite pipeline")) boost += gameUiIntent ? 260 : 1540;
     if (/\bphaser\b/.test(normalizedQuery) && name.includes("phaser 2d game")) boost += 620;
-    if (/\bhud\b|\bui\b/.test(normalizedQuery) && name.includes("game ui frontend")) boost += 720;
+    if (/\bhud\b|\bui\b/.test(normalizedQuery) && name.includes("game ui frontend")) boost += gameUiIntent ? 1900 : 720;
     if (/\bplaytest\b|\bchecks?\b|\bverify\b/.test(normalizedQuery) && name.includes("game playtest")) boost += 260;
     if (name.includes("web game foundations")) boost += 180;
     if (!/\b3d\b|\bwebgl\b|\bthree\b|\breact three fiber\b|\br3f\b/.test(normalizedQuery)) {
@@ -1567,6 +1595,19 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   if (/\b(game prototype|prototype a game|full web game|game mechanics|playtest loop)\b/.test(normalizedQuery)) {
     if (name === "game-studio" || name.includes("game studio")) boost += 980;
     if (["web game foundations", "game ui frontend", "game playtest", "sprite pipeline"].some((term) => name.includes(term))) boost += 420;
+  }
+
+  if (phaserPrototypePlanningIntent) {
+    if (name.includes("phaser 2d game")) boost += 1800;
+    if (name === "game-studio" || name.includes("game studio")) boost += 1480;
+    if (["game ui frontend", "game playtest"].some((term) => name.includes(term))) boost += 360;
+    if (name.includes("sprite pipeline")) boost -= 620;
+  }
+
+  if (gameUiIntent) {
+    if (name.includes("game ui frontend")) boost += 1080;
+    if (["phaser 2d game", "game playtest"].some((term) => name.includes(term))) boost += 320;
+    if (["three webgl game", "react three fiber game", "web 3d asset pipeline"].some((term) => name.includes(term))) boost -= 760;
   }
 
   if (/\bkubernetes\b|\bcontainer\b|\bdevops\b/.test(normalizedQuery)) {
@@ -1649,8 +1690,30 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (["playwright", "playwright interactive", "frontend testing debugging"].some((term) => name.includes(term))) boost += 140;
   }
 
+  if (codexSkillAuthoringIntent) {
+    if (name.includes("skill creator")) boost += 2200;
+    if (["dev documentation systems", "skill security auditor"].some((term) => name.includes(term))) boost += 520;
+    if (name.includes("skillweaver")) boost += 240;
+    if (["plugin creator", "cli creator", "chatgpt apps"].some((term) => name.includes(term))) boost -= 980;
+  }
+
+  if (codexSkillAuditIntent) {
+    if (name.includes("skill security auditor")) boost += codexSkillInstallIntent ? 620 : 2200;
+    if (name.includes("skill installer")) boost += 520;
+    if (name.includes("skillweaver")) boost += 280;
+    if (["skill creator", "plugin creator", "cli creator"].some((term) => name.includes(term))) boost -= 980;
+  }
+
+  if (codexSkillInstallIntent) {
+    if (name.includes("skill installer")) boost += 2200;
+    if (name.includes("skill security auditor")) boost += 620;
+    if (name.includes("skillweaver")) boost += 240;
+    if (["plugin creator", "cli creator"].some((term) => name.includes(term))) boost -= 980;
+    if (name.includes("skill creator")) boost -= 360;
+  }
+
   if (/\bskillweaver\b|\bskill routing\b|\brouting review\b|\brouting benchmark\b/.test(normalizedQuery)) {
-    if (name.includes("skillweaver")) boost += 1800;
+    if (name.includes("skillweaver")) boost += codexSkillAuthoringIntent ? 360 : 1800;
     if (name.includes("code review checklist")) boost += 980;
     if (name.includes("dev performance engineering")) boost += 860;
     if (["performance review", "build dashboard", "sentry", "launch readiness", "performance budget"].some((term) => name.includes(term))) boost -= 620;
@@ -1705,10 +1768,20 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("security best practices")) boost += /\brisks?\b|\bterraform\b|\binfrastructure\b/.test(normalizedQuery) ? 260 : 140;
   }
 
-  if (/\bsecurity findings?\b|\bvalidate exploitability\b|\btrack remediation\b/.test(normalizedQuery)) {
-    if (["triage finding", "track findings"].some((term) => name.includes(term))) boost += 520;
-    if (["validation", "security diff scan"].some((term) => name === term || name.includes(term))) boost += 620;
+  if (/\bsecurity findings?\b|\bvalidate exploitability\b|\btrack remediation\b/.test(normalizedQuery) || securityFindingTriageIntent) {
+    if (name.includes("triage finding")) boost += securityFindingTriageIntent ? securityDiffScanIntent ? 520 : 1700 : 520;
+    if (name.includes("security diff scan")) boost += securityDiffScanIntent ? 2200 : securityFindingTriageIntent ? 1280 : 620;
+    if (name === "validation" || name.includes("validation")) boost += securityFindingTriageIntent ? 1280 : 620;
+    if (name.includes("track findings")) boost += 520;
+    if (name.includes("dependency audit")) boost -= securityFindingTriageIntent ? 980 : 0;
+    if (["security threat model", "security ownership map"].some((term) => name.includes(term))) boost -= 420;
     if (name.includes("security best practices")) boost -= 160;
+  }
+
+  if (securityOwnershipMapIntent) {
+    if (name.includes("security ownership map")) boost += 2200;
+    if (["risk register", "track findings", "security best practices"].some((term) => name.includes(term))) boost += 360;
+    if (["triage finding", "validation", "security diff scan", "security threat model", "threat model"].some((term) => name.includes(term))) boost -= 760;
   }
 
   if (/\bvercel\b|\bdeploy\b|\bbuild logs?\b|\benv\b|\benvironment\b/.test(normalizedQuery)) {
@@ -1721,11 +1794,13 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
       && ["vercel cli", "vercel services"].some((term) => name.includes(term))) boost -= 160;
   }
 
-  if (/\bnetlify\b|\brender\b/.test(normalizedQuery) && /\bdeploy\b|\bpublish\b|\bhosting\b|\bservice\b/.test(normalizedQuery)) {
-    if (/\bnetlify\b/.test(normalizedQuery) && name.includes("netlify deploy")) boost += 1120;
+  if (/\bnetlify\b|\brender\b/.test(normalizedQuery) && /\bdeploy\b|\bpublish\b|\bhosting\b|\bservice\b|\bship\b|\bpreview\b|\bbranch\b|\bdns\b|\bcutover\b|\brollback\b/.test(normalizedQuery)) {
+    if (/\bnetlify\b/.test(normalizedQuery) && name.includes("netlify deploy")) boost += /\bpreview\b|\bbranch\b|\bdns\b|\bcutover\b/.test(normalizedQuery) ? 2400 : 1120;
     if (/\brender\b/.test(normalizedQuery) && name.includes("render deploy")) boost += 1320;
     if (/\brender\b/.test(normalizedQuery) && ["vercel api", "vercel services", "vercel deploy", "netlify deploy"].some((term) => name.includes(term))) boost -= 360;
     if (/\bnetlify\b/.test(normalizedQuery) && ["vercel api", "vercel services", "vercel deploy", "render deploy"].some((term) => name.includes(term))) boost -= 360;
+    if (/\bnetlify\b/.test(normalizedQuery) && ["web 3d asset pipeline", "winui app", "sprite pipeline"].some((term) => name.includes(term))) boost -= 820;
+    if (/\bnetlify\b/.test(normalizedQuery) && ["launch readiness", "dev release productization", "frontend testing debugging"].some((term) => name.includes(term))) boost += 360;
   }
 
   if (/\bcron\b|\bscheduled\b/.test(normalizedQuery) && /\bvercel\b|\bserverless\b|\bworkflow\b/.test(normalizedQuery)) {
@@ -1798,6 +1873,15 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if ((/\bdo not\b.*\bprd\b|\bnot\b.*\bprd\b/.test(normalizedQuery)) && name.includes("prd template")) boost -= 720;
   }
 
+  if (roadmapDeckIntent) {
+    if (name === "presentations" || name.includes("presentations")) boost += 2200;
+    if (name.includes("roadmap presentation")) boost += 1900;
+    if (name.includes("template creator")) boost += 620;
+    if (name.includes("roadmap narrative")) boost += 420;
+    if (name === "linear" || name.includes("linear")) boost -= 420;
+    if (["prd template", "gmail inbox triage"].some((term) => name.includes(term))) boost -= 900;
+  }
+
   if (/\bfirewall\b|\bbot protection\b|\brate limits?\b|\bwaf\b/.test(normalizedQuery)) {
     if (name.includes("security best practices")) boost += 640;
     if (name.includes("vercel deploy")) boost += 220;
@@ -1843,6 +1927,13 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("dev ai llm apps")) boost += 180;
   }
 
+  if (openAiAgentsJsIntent) {
+    if (name.includes("openai agents js")) boost += 2200;
+    if (["dev ai llm apps", "dev node typescript services"].some((term) => name.includes(term))) boost += 520;
+    if (name === "openai docs") boost += 260;
+    if (["chatgpt apps", "copilot sdk"].some((term) => name.includes(term))) boost -= 1100;
+  }
+
   if (/\bexplain\b|\bcode path\b|\bunfamiliar module\b|\bcontrol flow\b/.test(normalizedQuery)) {
     if (name.includes("code explainer")) boost += 1420;
     if (name.includes("dev architecture review")) boost += 360;
@@ -1851,17 +1942,21 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
 
   if (/\bhugging face\b|\bgradio\b|\bspace\b|\bdemo\b|\bvision model\b|\btrackio\b/.test(normalizedQuery)) {
     const huggingFaceDemoIntent = /\bgradio\b|\bspace\b|\bdemo\b/.test(normalizedQuery);
+    const huggingFaceDatasetResearchIntent = /\bdatasets?\b/.test(normalizedQuery)
+      && /\bcard metadata\b|\bmetadata\b|\blicens(?:e|ing)\b|\brelated papers?\b|\bevals?\b|\bbefore any model training\b|\bbefore training\b/.test(normalizedQuery);
     const trackioPrimaryIntent = /\btrackio\b|\bexperiment tracking\b|\bevaluation artifacts?\b|\bmodel run\b/.test(normalizedQuery)
       || (!huggingFaceDemoIntent && /\btrack(?:ing)?\b|\bevaluation runs?\b/.test(normalizedQuery));
     if (huggingFaceDemoIntent && name.includes("huggingface gradio")) boost += 1260;
     if (/\bvision\b/.test(normalizedQuery) && name.includes("huggingface vision trainer")) boost += 620;
     if (trackioPrimaryIntent && name.includes("huggingface trackio")) boost += 1800;
     if (huggingFaceDemoIntent && /\btrack(?:ing)?\b|\bevaluation runs?\b/.test(normalizedQuery) && name.includes("huggingface trackio")) boost += 360;
-    if (/\btrain\b|\bmodel training\b/.test(normalizedQuery) && name.includes("huggingface llm trainer")) boost += 620;
-    if (/\bdatasets?\b|\bdataset metadata\b/.test(normalizedQuery) && name.includes("huggingface datasets")) boost += 680;
-    if (name.includes("huggingface community evals")) boost += 240;
-    if ((/\bhf cli\b|\bspace\b|\bgradio\b/.test(normalizedQuery)) && name.includes("hf cli")) boost += 260;
+    if (/\btrain\b|\bmodel training\b/.test(normalizedQuery) && name.includes("huggingface llm trainer")) boost += huggingFaceDatasetResearchIntent ? -920 : 620;
+    if (/\bdatasets?\b|\bdataset metadata\b/.test(normalizedQuery) && name.includes("huggingface datasets")) boost += huggingFaceDatasetResearchIntent ? 2200 : 680;
+    if (name.includes("huggingface community evals")) boost += huggingFaceDatasetResearchIntent ? 520 : 240;
+    if ((/\bhf cli\b|\bspace\b|\bgradio\b/.test(normalizedQuery) || huggingFaceDatasetResearchIntent) && name.includes("hf cli")) boost += 260;
     if ((/\bpublish\b|\bpapers?\b|\bevaluation results?\b/.test(normalizedQuery)) && name.includes("huggingface paper publisher")) boost += 340;
+    if (huggingFaceDatasetResearchIntent && ["huggingface gradio", "huggingface llm trainer", "huggingface vision trainer"].some((term) => name.includes(term))) boost -= 980;
+    if (huggingFaceDatasetResearchIntent && name.includes("huggingface papers")) boost -= 120;
     if (/\btrackio\b|\bexperiment tracking\b|\bnot\b.*\bgradio\b|\bnot\b.*\bpaper\b/.test(normalizedQuery)
       && ["huggingface gradio", "huggingface paper publisher", "huggingface papers"].some((term) => name.includes(term))) boost -= 860;
     if (/\bgradio\b|\bspace\b|\bdemo\b/.test(normalizedQuery) && ["huggingface papers", "huggingface llm trainer", "huggingface vision trainer"].some((term) => name.includes(term))) boost -= 260;

@@ -1245,6 +1245,10 @@ test("concept workflow handles frozen holdout specialist routing aliases", () =>
   assert.equal(names[0], "sprite-pipeline");
   assert.ok(names.includes("game-ui-frontend"));
 
+  names = topFive("Plan a Phaser browser game prototype with HUD menus, sprite production, and a repeatable playtest loop");
+  assert.equal(names[0], "phaser-2d-game");
+  assert.ok(names.includes("sprite-pipeline"));
+
   names = topFive("Set up OpenTelemetry tracing, SLO monitoring dashboards, error budgets, and Sentry alert rules");
   assert.equal(names[0], "dev-observability-sre");
   assert.notEqual(names[0], "sentry");
@@ -1455,6 +1459,70 @@ test("concept workflow preserves clean holdout V2 specialist boundaries", () => 
       domains: ["product", "documents"],
       tools: [],
       triggers: ["prd template"]
+    }),
+    makeSkill({
+      id: "skill-security-auditor",
+      name: "skill-security-auditor",
+      description: "Audit Codex skill packs for unsafe instructions, hidden tool use, and install risk.",
+      domains: ["ai", "security"],
+      tools: ["GitHub"],
+      triggers: ["audit codex skill pack unsafe instructions hidden tool use install risk"]
+    }),
+    makeSkill({
+      id: "skill-installer",
+      name: "skill-installer",
+      description: "Install reusable Codex skill packs from GitHub and validate them locally.",
+      domains: ["ai", "operations"],
+      tools: ["GitHub"],
+      triggers: ["install codex skill pack github validate locally"]
+    }),
+    makeSkill({
+      id: "skill-creator",
+      name: "skill-creator",
+      description: "Create reusable Codex skills with frontmatter and reference files.",
+      domains: ["ai", "documents"],
+      tools: ["OpenAI"],
+      triggers: ["create reusable codex skill frontmatter reference files"]
+    }),
+    makeSkill({
+      id: "plugin-creator",
+      name: "plugin-creator",
+      description: "Create Codex plugins.",
+      domains: ["ai"],
+      tools: ["OpenAI"],
+      triggers: ["plugin creator"]
+    }),
+    makeSkill({
+      id: "security-ownership-map",
+      name: "security-ownership-map",
+      description: "Create security ownership maps from repo evidence, orphaned sensitive code, and remediation owners.",
+      domains: ["security", "github"],
+      tools: ["GitHub"],
+      triggers: ["security ownership map repo evidence orphaned sensitive code bus factor remediation owners"]
+    }),
+    makeSkill({
+      id: "triage-finding",
+      name: "triage-finding",
+      description: "Triage CodeQL and dependency alert findings from pull requests.",
+      domains: ["security", "github"],
+      tools: ["GitHub"],
+      triggers: ["codeql dependency alert findings pull request false positives exploitable"]
+    }),
+    makeSkill({
+      id: "validation",
+      name: "validation",
+      description: "Validate security remediations and finding fixes.",
+      domains: ["security", "github"],
+      tools: ["GitHub"],
+      triggers: ["validation steps remediation"]
+    }),
+    makeSkill({
+      id: "security-diff-scan",
+      name: "security-diff-scan",
+      description: "Scan pull request diffs for security findings.",
+      domains: ["security", "github"],
+      tools: ["GitHub"],
+      triggers: ["security diff scan pull request"]
     })
   ]);
 
@@ -1494,4 +1562,223 @@ test("concept workflow preserves clean holdout V2 specialist boundaries", () => 
   assert.ok(["roadmap-narrative", "linear"].includes(names[0]));
   assert.notEqual(names[0], "gmail-inbox-triage");
   assert.notEqual(names[0], "prd-template");
+
+  names = topFive("Audit a third-party Codex skill pack for unsafe instructions, hidden tool use, and install risk before deciding whether to install it; do not author a new skill or plugin.");
+  assert.equal(names[0], "skill-security-auditor");
+  assert.notEqual(names[0], "skill-creator");
+  assert.notEqual(names[0], "plugin-creator");
+
+  names = topFive("Install a reusable Codex skill pack from GitHub, validate it locally, audit it for unsafe instructions, and avoid mutating unrelated repos");
+  assert.equal(names[0], "skill-installer");
+  assert.ok(names.includes("skill-security-auditor"));
+  assert.notEqual(names[0], "skill-creator");
+
+  names = topFive("Create a security ownership map from repo evidence to identify orphaned sensitive code, bus-factor hotspots, and remediation owners; not a vulnerability scan or threat model.");
+  assert.equal(names[0], "security-ownership-map");
+  assert.notEqual(names[0], "triage-finding");
+  assert.notEqual(names[0], "validation");
+
+  names = topFive("Run a security diff scan on a pull request and track remediation findings through validation");
+  assert.equal(names[0], "security-diff-scan");
+  assert.notEqual(names[0], "triage-finding");
+});
+
+test("concept workflow promotes clean holdout V3 regression boundaries", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "netlify-deploy",
+      name: "netlify-deploy",
+      description: "Deploy static apps to Netlify with branch previews, redirects, DNS cutover, and rollback notes.",
+      domains: ["operations", "frontend"],
+      tools: ["Node"],
+      triggers: ["netlify branch preview redirects dns cutover rollback"]
+    }),
+    makeSkill({
+      id: "launch-readiness",
+      name: "launch-readiness",
+      description: "Prepare release checklists, rollout plans, and rollback notes.",
+      domains: ["product", "operations"],
+      tools: [],
+      triggers: ["release readiness rollback"]
+    }),
+    makeSkill({
+      id: "skill-creator",
+      name: "skill-creator",
+      description: "Create Codex skills with frontmatter, references, examples, scripts, and validation notes.",
+      domains: ["ai", "documents"],
+      tools: ["OpenAI"],
+      triggers: ["codex skill frontmatter reference files examples validation"]
+    }),
+    makeSkill({
+      id: "skillweaver",
+      name: "skillweaver",
+      description: "Inspect SkillWeaver routes and benchmark skill navigation.",
+      domains: ["ai", "documents"],
+      tools: ["Node"],
+      triggers: ["skillweaver skill routing"]
+    }),
+    makeSkill({
+      id: "cli-creator",
+      name: "cli-creator",
+      description: "Create command line tools and CLIs.",
+      domains: ["backend"],
+      tools: ["Node"],
+      triggers: ["cli command line"]
+    }),
+    makeSkill({
+      id: "Presentations",
+      name: "Presentations",
+      description: "Create slide decks and presentation artifacts.",
+      domains: ["documents", "product"],
+      tools: ["Node"],
+      triggers: ["slides presentation deck"]
+    }),
+    makeSkill({
+      id: "roadmap-presentation",
+      name: "roadmap-presentation",
+      description: "Build roadmap decks with speaker narrative.",
+      domains: ["documents", "product"],
+      tools: ["Node"],
+      triggers: ["roadmap deck speaker narrative"]
+    }),
+    makeSkill({
+      id: "linear",
+      name: "linear",
+      description: "Plan and update Linear issues and milestones.",
+      domains: ["product"],
+      tools: ["Linear"],
+      triggers: ["linear issues milestones"]
+    }),
+    makeSkill({
+      id: "dev-observability-sre",
+      name: "dev-observability-sre",
+      description: "Instrument services with tracing, SLOs, alerting, and service indicators.",
+      domains: ["operations", "backend"],
+      tools: [],
+      triggers: ["otel tracing slo alerting service indicators"]
+    }),
+    makeSkill({
+      id: "incident-postmortem",
+      name: "incident-postmortem",
+      description: "Write incident postmortems after production incidents.",
+      domains: ["operations"],
+      tools: [],
+      triggers: ["incident postmortem"]
+    }),
+    makeSkill({
+      id: "triage-finding",
+      name: "triage-finding",
+      description: "Triage security findings and separate false positives from exploitable issues.",
+      domains: ["security"],
+      tools: ["GitHub"],
+      triggers: ["security findings false positives exploitable"]
+    }),
+    makeSkill({
+      id: "validation",
+      name: "validation",
+      description: "Validate security remediations and findings.",
+      domains: ["security"],
+      tools: ["GitHub"],
+      triggers: ["validation steps remediation"]
+    }),
+    makeSkill({
+      id: "dependency-audit",
+      name: "dependency-audit",
+      description: "Audit dependency vulnerabilities and packages.",
+      domains: ["security", "operations"],
+      tools: ["GitHub"],
+      triggers: ["dependency audit"]
+    }),
+    makeSkill({
+      id: "huggingface-datasets",
+      name: "huggingface-datasets",
+      description: "Search Hugging Face datasets, cards, metadata, licensing, and related resources.",
+      domains: ["ai", "data"],
+      tools: ["Python"],
+      triggers: ["hugging face dataset card metadata licensing"]
+    }),
+    makeSkill({
+      id: "huggingface-llm-trainer",
+      name: "huggingface-llm-trainer",
+      description: "Train language models on Hugging Face.",
+      domains: ["ai"],
+      tools: ["Python"],
+      triggers: ["hugging face model training"]
+    }),
+    makeSkill({
+      id: "game-ui-frontend",
+      name: "game-ui-frontend",
+      description: "Design game menus, HUD layers, controller states, and keyboard interaction UI.",
+      domains: ["frontend", "creative"],
+      tools: ["Node"],
+      triggers: ["game menu hud layer controller keyboard states"]
+    }),
+    makeSkill({
+      id: "sprite-pipeline",
+      name: "sprite-pipeline",
+      description: "Prepare sprite sheets, tilemaps, and game asset pipelines.",
+      domains: ["frontend", "creative"],
+      tools: ["Node"],
+      triggers: ["sprite sheet tilemap asset pipeline"]
+    }),
+    makeSkill({
+      id: "openai-agents-js",
+      name: "openai-agents-js",
+      description: "Implement OpenAI Agents JS workflows with tool approvals and typed handoffs.",
+      domains: ["ai", "backend"],
+      tools: ["OpenAI", "Node"],
+      triggers: ["openai agents js tool approvals typed handoffs"]
+    }),
+    makeSkill({
+      id: "openai-docs",
+      name: "openai-docs",
+      description: "Check current OpenAI documentation and API references.",
+      domains: ["ai", "documents"],
+      tools: ["OpenAI"],
+      triggers: ["openai docs api reference"]
+    }),
+    makeSkill({
+      id: "chatgpt-apps",
+      name: "chatgpt-apps",
+      description: "Build ChatGPT Apps.",
+      domains: ["ai", "frontend"],
+      tools: ["OpenAI"],
+      triggers: ["chatgpt app"]
+    })
+  ]);
+  const topFive = (query) => rankConceptWorkflowSkills(index, query).slice(0, 5).map((skill) => skill.name);
+
+  let names = topFive("Ship a Netlify branch preview for a static app, set redirect rules and environment scopes, run a deployed browser smoke check, and write the rollback note for DNS cutover.");
+  assert.equal(names[0], "netlify-deploy");
+  assert.notEqual(names[0], "launch-readiness");
+
+  names = topFive("Turn a recurring repo workflow into a Codex skill with frontmatter, reference files, example scripts, validation notes, safe tool-use guidance, and a SkillWeaver route check before sharing it.");
+  assert.equal(names[0], "skill-creator");
+  assert.notEqual(names[0], "skillweaver");
+  assert.notEqual(names[0], "cli-creator");
+
+  names = topFive("Create a board-ready roadmap deck from Linear milestones and research notes, with a reusable slide template and speaker narrative rather than a PRD or inbox triage.");
+  assert.ok(["Presentations", "roadmap-presentation"].includes(names[0]));
+  assert.notEqual(names[0], "linear");
+
+  names = topFive("Instrument a production API with traces, service indicators, SLO alerting, and Sentry noise controls before there is any incident report to write.");
+  assert.equal(names[0], "dev-observability-sre");
+  assert.notEqual(names[0], "incident-postmortem");
+
+  names = topFive("Classify CodeQL and dependency-alert findings from a pull request, separate false positives from exploitable issues, assign remediation owners, and define validation steps.");
+  assert.ok(["triage-finding", "validation"].includes(names[0]));
+  assert.notEqual(names[0], "dependency-audit");
+
+  names = topFive("Find the right Hugging Face dataset, inspect card metadata and licensing, compare related papers and evaluations, and prepare Hub notes before any model training starts.");
+  assert.equal(names[0], "huggingface-datasets");
+  assert.notEqual(names[0], "huggingface-llm-trainer");
+
+  names = topFive("Design the menu and HUD layer for a Phaser 2D prototype, including controller and keyboard states, sprite handoff, and playtest checks; avoid 3D or WebGL scene work.");
+  assert.equal(names[0], "game-ui-frontend");
+  assert.notEqual(names[0], "sprite-pipeline");
+
+  names = topFive("Implement an OpenAI Agents JS workflow with tool approvals, typed handoffs, test fixtures, and current docs checks; do not make it a ChatGPT App or Copilot SDK task.");
+  assert.equal(names[0], "openai-agents-js");
+  assert.notEqual(names[0], "openai-docs");
+  assert.notEqual(names[0], "chatgpt-apps");
 });

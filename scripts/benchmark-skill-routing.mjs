@@ -78,14 +78,14 @@ const SUITES = {
   },
   cleanHoldoutV3: {
     id: "clean-holdout-v3",
-    label: "Clean Holdout V3",
-    reportTitle: "Clean Holdout V3 Benchmark",
+    label: "Clean Holdout V3 Regression",
+    reportTitle: "Clean Holdout V3 Regression Benchmark",
     casesPath: resolve("benchmarks/skill-routing-clean-holdout-v3.json"),
     casesRelativePath: "benchmarks/skill-routing-clean-holdout-v3.json",
     reportPath: resolve("docs/SKILL-USE-CLEAN-HOLDOUT-V3.md"),
     command: CHECK_MODE ? "npm run benchmark:skills:clean-v3:check" : "npm run benchmark:skills:clean-v3",
     gatesAcceptance: false,
-    role: "untouched-holdout"
+    role: "clean-v3-regression"
   }
 };
 const SUITE = CLEAN_HOLDOUT_V3_MODE
@@ -802,6 +802,14 @@ function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2Suppo
     ];
   }
 
+  if (SUITE.role === "clean-v3-regression") {
+    return [
+      "## Claim Scope",
+      "",
+      `This report measures the current route against the clean holdout V3 prompt set after misses from that suite informed routing fixes. Current results are regression evidence for those prompts, not clean-split generalization proof: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, support coverage@5 ${formatPercent(v2Summary.supportCoverage)}, support precision@5 ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} support-miss cases. The pre-tuning clean V3 baseline is preserved in git history at \`00ad343\`; a new clean generalization claim requires another untouched prompt set captured after these routing changes.`
+    ];
+  }
+
   return [
     "## Claim Scope",
     "",
@@ -862,6 +870,8 @@ function buildMarkdown({
         ? "On the frozen holdout regression suite, SkillWeaver V2 changes"
       : SUITE.role === "clean-regression"
         ? "On the clean holdout regression suite, SkillWeaver V2 changes"
+      : SUITE.role === "clean-v3-regression"
+        ? "On the clean holdout V3 regression suite, SkillWeaver V2 changes"
       : SUITE.role === "untouched-holdout"
         ? "On the untouched holdout suite, SkillWeaver V2 changes"
     : "On the post-tuning challenge suite, SkillWeaver V2 changes";
@@ -1029,6 +1039,14 @@ function buildSuiteRoleSection() {
       "## Suite Role",
       "",
       "This suite began as the clean holdout V2 baseline, then its misses informed this routing pass. Treat the current checked-in report as non-gating regression evidence for that prompt set. The pre-tuning baseline remains preserved in git history at `fb1b4cb`; a new clean holdout claim requires a fresh prompt set captured after these routing changes and reported before tuning from it.",
+      ""
+    ];
+  }
+  if (SUITE.role === "clean-v3-regression") {
+    return [
+      "## Suite Role",
+      "",
+      "This suite began as the clean holdout V3 baseline, then its misses informed this routing pass. Treat the current checked-in report as non-gating regression evidence for that prompt set. The pre-tuning V3 baseline remains preserved in git history at `00ad343`; a new clean holdout claim requires a fresh prompt set captured after these routing changes and reported before tuning from it.",
       ""
     ];
   }

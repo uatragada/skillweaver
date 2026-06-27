@@ -138,10 +138,10 @@ npm run benchmark:skills:clean-v2-regression
 
 Use `npm run benchmark:skills:clean-v2-regression:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V2.md](docs/SKILL-USE-CLEAN-HOLDOUT-V2.md). This suite began as the clean V2 holdout; after its misses informed routing fixes, the checked-in report is regression evidence only. A future clean generalization claim needs a new prompt set captured after this tuning commit.
 
-Run the non-gating clean holdout V3 suite with:
+Run the non-gating clean holdout V3 regression suite with:
 
 ```powershell
 npm run benchmark:skills:clean-v3
 ```
 
-Use `npm run benchmark:skills:clean-v3:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V3.md](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md). This suite is the current untouched baseline captured after the clean V2 regression tuning commit. It is intentionally allowed to fail quality gates so it can expose real gaps before any V3-driven routing work.
+Use `npm run benchmark:skills:clean-v3:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V3.md](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md). This suite began as the clean V3 holdout; the pre-tuning baseline is preserved at `00ad343`, and the current checked-in report is regression evidence after V3 misses informed routing fixes. A future clean generalization claim needs another untouched prompt set captured after this tuning commit.

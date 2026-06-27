@@ -1,9 +1,9 @@
 # SkillWeaver V2 Active Acceptance Benchmark
 
-Generated: 2026-06-27T20:37:13.315Z
+Generated: 2026-06-27T21:17:05.139Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782592633315,"command":"npm run benchmark:skills","suite":{"id":"acceptance","label":"Active Acceptance","gatesAcceptance":true},"git":{"commit":"fb1b4cb310d3b721d7c92cbff5cb28d494def751","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":78,"sha256":"sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354","scanner":"sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b","benchmarkScript":"sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:ff598629be8c5085ea64703b73633bf7e2f70b1bf07864d0fde65dd06a860e7f"}
+{"generatedAt":1782595025139,"command":"npm run benchmark:skills","suite":{"id":"acceptance","label":"Active Acceptance","gatesAcceptance":true},"git":{"commit":"44d81b6d27e0ac7c060d1915785fc7d82c86ec17","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":78,"sha256":"sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354","scanner":"sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0","benchmarkScript":"sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:240e04c8cb29cc832caf93359f89c8abfbf4d83d00a292c1ee03ab3174c15b01"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills`
 - Suite: Active Acceptance
 - Acceptance gate: yes
-- Git commit at generation: `fb1b4cb310d3b721d7c92cbff5cb28d494def751`
-- Git dirty: yes
-- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
+- Git commit at generation: `44d81b6d27e0ac7c060d1915785fc7d82c86ec17`
+- Git dirty: no
+- Invalidating dirty paths: none
 - Case hash: `sha256:3d8e2f2c2ee747e741700fca043fa341e59157ea8e1fcd06ccbcf031ff346354`
-- Scanner hash: `sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b`
-- Benchmark script hash: `sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c`
+- Scanner hash: `sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0`
+- Benchmark script hash: `sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:ff598629be8c5085ea64703b73633bf7e2f70b1bf07864d0fde65dd06a860e7f`
+- Snapshot fingerprint: `sha256:240e04c8cb29cc832caf93359f89c8abfbf4d83d00a292c1ee03ab3174c15b01`
 - Acceptance: pass
 
 ## Corpus
@@ -40,20 +40,20 @@ skillweaver-benchmark-metadata -->
 
 | Metric | No SkillWeaver | Skill-Level Baseline | SkillWeaver V2 | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Output quality score (0-100) | 75.3 | 77.2 | 100.0 | +24.7 pts | +22.8 pts |
+| Output quality score (0-100) | 75.3 | 77.2 | 99.9 | +24.6 pts | +22.7 pts |
 | Primary hit@1 | 74.4% | 76.9% | 100.0% | +25.6 pp | +23.1 pp |
 | Expected skill in top/workflow 5 | 94.9% | 93.6% | 100.0% | +5.1 pp | +6.4 pp |
 | Mean reciprocal rank | 0.826 | 0.856 | 1.000 | +0.174 | +0.144 |
-| Support-skill coverage@5 | 50.4% | 52.8% | 100.0% | +49.6 pp | +47.2 pp |
-| Support precision@5, exploratory | 18.6% | 21.1% | 40.9% | +22.3 pp | +19.8 pp |
+| Support-skill coverage@5 | 50.4% | 52.8% | 99.4% | +48.9 pp | +46.6 pp |
+| Support precision@5, exploratory | 18.6% | 21.1% | 40.5% | +22.0 pp | +19.5 pp |
 | Forbidden primary rate, lower is better | 3.8% | 2.6% | 0.0% | -3.8 pp better | -2.6 pp better |
 | Mean candidates to expected skill, lower is better | 2.2 | 1.9 | 1.0 | -1.2 candidates better | -0.9 candidates better |
 
 ## Claim Scope
 
-This report supports the claim that V2 is stronger on the current 78-case active acceptance suite: 78/78 primary hit@1, 78/78 expected primary in top/workflow five, 0/78 forbidden primaries, and 0/78 support-miss cases. It does not prove universal routing correctness or unseen cross-domain generalization.
+This report supports the claim that V2 is stronger on the current 78-case active acceptance suite: 78/78 primary hit@1, 78/78 expected primary in top/workflow five, 0/78 forbidden primaries, and 1/78 support-miss cases. It does not prove universal routing correctness or unseen cross-domain generalization.
 
-V2 raw counts: primary hit@1 78/78; expected primary top/workflow-five 78/78; forbidden primary 0/78; support-miss cases 0/78.
+V2 raw counts: primary hit@1 78/78; expected primary top/workflow-five 78/78; forbidden primary 0/78; support-miss cases 1/78.
 
 Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from 442 skills to 5 candidates, a 98.9% candidate reduction per task.
 Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.
@@ -67,7 +67,7 @@ Support precision is exploratory: it estimates how much of the non-primary top/w
 | Observability and reliability | 6 | 100.0 | 100.0% | 100.0% | 100.0% | 45.8% | 0.0% | 0/6 | +16.7 pts | +5.0 pts |
 | Documents and publishing | 5 | 100.0 | 100.0% | 100.0% | 100.0% | 30.0% | 0.0% | 0/5 | +8.0 pts | +8.0 pts |
 | Security and risk | 5 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/5 | +27.2 pts | +39.9 pts |
-| Skill tooling | 5 | 100.0 | 100.0% | 100.0% | 100.0% | 35.0% | 0.0% | 0/5 | +51.8 pts | +63.5 pts |
+| Skill tooling | 5 | 98.0 | 100.0% | 100.0% | 90.0% | 30.0% | 0.0% | 1/5 | +49.8 pts | +61.5 pts |
 | AI agent apps | 4 | 100.0 | 100.0% | 100.0% | 100.0% | 43.8% | 0.0% | 0/4 | +23.3 pts | +5.0 pts |
 | Data analytics | 4 | 100.0 | 100.0% | 100.0% | 100.0% | 37.5% | 0.0% | 0/4 | +46.7 pts | +34.8 pts |
 | Hugging Face ML | 4 | 100.0 | 100.0% | 100.0% | 100.0% | 37.5% | 0.0% | 0/4 | +2.5 pts | +17.5 pts |
@@ -88,7 +88,7 @@ Support precision is exploratory: it estimates how much of the non-primary top/w
 | Observability and reliability | 6 | 100.0 | 100.0% | 100.0% | 100.0% | 45.8% | 0.0% | 0/6 | +16.7 pts | +5.0 pts |
 | Product planning | 5 | 100.0 | 100.0% | 100.0% | 100.0% | 40.0% | 0.0% | 0/5 | +28.7 pts | +22.0 pts |
 | Security review | 5 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/5 | +27.2 pts | +39.9 pts |
-| Skill authoring | 5 | 100.0 | 100.0% | 100.0% | 100.0% | 35.0% | 0.0% | 0/5 | +51.8 pts | +63.5 pts |
+| Skill authoring | 5 | 98.0 | 100.0% | 100.0% | 90.0% | 30.0% | 0.0% | 1/5 | +49.8 pts | +61.5 pts |
 | Agent and LLM apps | 4 | 100.0 | 100.0% | 100.0% | 100.0% | 43.8% | 0.0% | 0/4 | +23.3 pts | +5.0 pts |
 | Data dashboards and reports | 4 | 100.0 | 100.0% | 100.0% | 100.0% | 37.5% | 0.0% | 0/4 | +46.7 pts | +34.8 pts |
 | Documents and PDFs | 4 | 100.0 | 100.0% | 100.0% | 100.0% | 31.3% | 0.0% | 0/4 | +10.0 pts | +10.0 pts |
@@ -121,16 +121,16 @@ Support precision is exploratory: it estimates how much of the non-primary top/w
 | kpi-report | Data analytics | Data dashboards and reports | kpi-reporting, build-report | build-report / 1 | kpi-reporting / 1 | kpi-reporting / 1 | Data dashboards and reports | kpi-reporting -> build-report -> visualize-data -> data-visualization -> testing-data-visualizations |
 | data-quality | Data analytics | Data dashboards and reports | analyze-data-quality, data-quality-audit | data-quality-audit / 1 | data-quality-audit / 1 | data-quality-audit / 1 | Skill ranking anchor | data-quality-audit -> data-analysis-standard -> data-pipeline-spec -> data-visualization -> dev-data-engineering |
 | security-scan | Security and risk | Security review | security-scan, deep-security-scan | skill-security-auditor / 5 | security-threat-model / 5 | deep-security-scan / 1 | Security review | deep-security-scan -> security-scan -> attack-path-analysis -> dependency-audit -> dev-security-engineering |
-| attack-path | Security and risk | Security review | attack-path-analysis | security-threat-model / 2 | security-threat-model / 3 | attack-path-analysis / 1 | Security review | attack-path-analysis -> security-threat-model -> deep-security-scan -> web-perf -> security-ownership-map |
+| attack-path | Security and risk | Security review | attack-path-analysis | security-threat-model / 2 | security-threat-model / 3 | attack-path-analysis / 1 | Security review | attack-path-analysis -> security-threat-model -> deep-security-scan -> security-ownership-map -> web-perf |
 | vercel-deploy | Platform delivery | Deployment and release | deployments-cicd, vercel-deploy, vercel-api | deployments-cicd / 1 | vercel-api / 1 | vercel-api / 1 | Deployment and release | vercel-api -> deployments-cicd -> vercel-deploy -> env-vars -> agent-browser-verify |
 | cloudflare-worker | Platform delivery | Cloudflare workers | wrangler, workers-best-practices | building-mcp-server-on-cloudflare / 2 | building-mcp-server-on-cloudflare / 2 | wrangler / 1 | Cloudflare workers | wrangler -> workers-best-practices -> cloudflare-deploy -> durable-objects -> building-mcp-server-on-cloudflare |
-| skill-create | Skill tooling | Skill authoring | skill-creator | skill-creator / 1 | hatch-pet / 2 | skill-creator / 1 | Skill authoring | skill-creator -> skillweaver -> skill-installer -> dev-documentation-systems -> template-creator |
+| skill-create | Skill tooling | Skill authoring | skill-creator | skill-creator / 1 | hatch-pet / 2 | skill-creator / 1 | Skill authoring | skill-creator -> dev-documentation-systems -> skill-security-auditor -> skillweaver -> hatch-pet |
 | skillweaver-self | Skill tooling | Skill authoring | skillweaver | skillweaver / 1 | skillweaver / 1 | skillweaver / 1 | Skill authoring | skillweaver -> skill-creator -> skill-security-auditor -> skill-installer -> project-derived-skills |
 | pdf-extract | Documents and publishing | Documents and PDFs | pdf | pdf / 1 | pdf / 1 | pdf / 1 | Documents and PDFs | pdf -> reports-pdfs-and-slide-automation -> resume-cover-letter-tailor -> documents -> latex-doctor |
 | spreadsheet-analysis | Data analytics | Data dashboards and reports | Spreadsheets | analyze-data-quality / 2 | Spreadsheets / 1 | Spreadsheets / 1 | Data dashboards and reports | Spreadsheets -> data-analysis-standard -> analyze-data-quality -> chart-data-extractor -> product-business-analysis |
-| presentation-deck | Documents and publishing | Presentations | Presentations, roadmap-presentation | roadmap-presentation / 1 | roadmap-presentation / 1 | roadmap-presentation / 1 | Presentations | roadmap-presentation -> roadmap-narrative -> Presentations -> template-creator -> reports-pdfs-and-slide-automation |
+| presentation-deck | Documents and publishing | Presentations | Presentations, roadmap-presentation | roadmap-presentation / 1 | roadmap-presentation / 1 | Presentations / 1 | Presentations | Presentations -> roadmap-presentation -> template-creator -> roadmap-narrative -> reports-pdfs-and-slide-automation |
 | hf-train | Hugging Face ML | Hugging Face ML | huggingface-llm-trainer, huggingface-datasets | huggingface-llm-trainer / 1 | huggingface-llm-trainer / 1 | huggingface-llm-trainer / 1 | Hugging Face ML | huggingface-llm-trainer -> huggingface-datasets -> huggingface-community-evals -> huggingface-vision-trainer -> huggingface-papers |
-| hf-dataset | Hugging Face ML | Hugging Face ML | huggingface-datasets | huggingface-datasets / 1 | huggingface-datasets / 1 | huggingface-datasets / 1 | Hugging Face ML | huggingface-datasets -> huggingface-papers -> huggingface-community-evals -> huggingface-paper-publisher -> huggingface-llm-trainer |
+| hf-dataset | Hugging Face ML | Hugging Face ML | huggingface-datasets | huggingface-datasets / 1 | huggingface-datasets / 1 | huggingface-datasets / 1 | Hugging Face ML | huggingface-datasets -> huggingface-community-evals -> hf-cli -> huggingface-papers -> huggingface-paper-publisher |
 | gmail-triage | Communications and knowledge | Email triage | gmail, gmail-inbox-triage | gmail-inbox-triage / 1 | gmail / 1 | gmail-inbox-triage / 1 | Email triage | gmail-inbox-triage -> gmail -> email-triage -> triage-finding -> investigation-mode |
 | phaser-game | Games and simulation | Game development | phaser-2d-game | phaser-2d-game / 1 | phaser-2d-game / 1 | phaser-2d-game / 1 | Game development | phaser-2d-game -> game-playtest -> game-studio -> three-webgl-game -> web-game-foundations |
 | three-game | Games and simulation | Game development | three-webgl-game | three-webgl-game / 1 | three-webgl-game / 1 | three-webgl-game / 1 | Game development | three-webgl-game -> web-3d-asset-pipeline -> game-playtest -> react-three-fiber-game -> phaser-2d-game |
@@ -179,7 +179,7 @@ Support precision is exploratory: it estimates how much of the non-primary top/w
 | dependency-conflict | Repo collaboration | Repository operations | dependency-conflict-resolver | dependency-conflict-resolver / 1 | dependency-conflict-resolver / 1 | dependency-conflict-resolver / 1 | Repository operations | dependency-conflict-resolver -> dev-dependency-maintenance -> dev-monorepo-build-systems -> dev-git-github-collaboration -> dev-security-engineering |
 | debugging-log-analysis | Observability and reliability | Observability and reliability | error-decoder, debugging-log-analyser | error-decoder / 1 | error-decoder / 1 | error-decoder / 1 | Skill ranking anchor | error-decoder -> debugging-log-analyser -> dev-observability-sre -> sentry -> observability |
 | monorepo-build | Repo collaboration | Repository operations | dev-monorepo-build-systems, turborepo | dev-monorepo-build-systems / 1 | dev-monorepo-build-systems / 1 | dev-monorepo-build-systems / 1 | Repository operations | dev-monorepo-build-systems -> turborepo -> dev-git-github-collaboration -> dependency-audit -> dev-architecture-review |
-| security-finding-triage | Security and risk | Security review | triage-finding, track-findings | track-findings / 1 | track-findings / 1 | track-findings / 1 | Security review | track-findings -> triage-finding -> validation -> security-diff-scan -> dev-security-engineering |
+| security-finding-triage | Security and risk | Security review | triage-finding, track-findings | track-findings / 1 | track-findings / 1 | triage-finding / 1 | Security review | triage-finding -> validation -> security-diff-scan -> track-findings -> dev-security-engineering |
 | risk-register | Product, research, and planning | Product planning | risk-register | launch-readiness / 2 | launch-readiness / 2 | risk-register / 1 | Product planning | risk-register -> launch-readiness -> product-launch-checklist -> roadmap-narrative -> linear |
 | capacity-planning | Infrastructure platforms | Infrastructure and platforms | capacity-planning | capacity-planning / 1 | capacity-planning / 1 | capacity-planning / 1 | Infrastructure and platforms | capacity-planning -> dev-containers-kubernetes -> dev-performance-engineering -> infra-as-code-review -> dev-infra-terraform-cloud |
 | copilot-sdk | AI agent apps | Agent and LLM apps | copilot-sdk | copilot-sdk / 1 | copilot-sdk / 1 | copilot-sdk / 1 | Agent and LLM apps | copilot-sdk -> agents-sdk -> openai-agents-js -> chatgpt-apps -> ai-sdk |
@@ -192,12 +192,15 @@ Support precision is exploratory: it estimates how much of the non-primary top/w
 
 ## V2 Support Misses
 
-No expected support misses in the current V2 workflow.
+These rows have a correct expected primary somewhere in V2's workflow, but not every expected support skill appears in the top/workflow five.
 
+| Case | Missing expected support | V2 top/workflow 5 |
+| --- | --- | --- |
+| skill-create | skill-installer | skill-creator -> dev-documentation-systems -> skill-security-auditor -> skillweaver -> hatch-pet |
 
 ## Interpretation
 
-SkillWeaver V2 changes the composite output-quality score by +24.7 points versus no SkillWeaver and +22.8 points versus the skill-level baseline.
+SkillWeaver V2 changes the composite output-quality score by +24.6 points versus no SkillWeaver and +22.7 points versus the skill-level baseline.
 V2 changes primary selection by +25.6 percentage points versus no SkillWeaver and +23.1 percentage points versus the skill-level baseline.
 V2 changes expected-skill top/workflow-5 retrieval by +5.1 percentage points versus no SkillWeaver and +6.4 percentage points versus the skill-level baseline.
 The V2 score reflects a concept-aided skill-loading experience, not an LLM reranker; it is fully deterministic and derived from the local skill corpus.

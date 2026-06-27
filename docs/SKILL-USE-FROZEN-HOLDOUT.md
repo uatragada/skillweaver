@@ -1,9 +1,9 @@
 # SkillWeaver V2 Frozen Holdout Regression Benchmark
 
-Generated: 2026-06-27T20:37:08.433Z
+Generated: 2026-06-27T21:17:26.692Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782592628433,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"fb1b4cb310d3b721d7c92cbff5cb28d494def751","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b","benchmarkScript":"sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:1a32898b9e9a91ec29c897264c6d5baa648c6ae9103ed1fddc8f42f7a719008a"}
+{"generatedAt":1782595046692,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"c9bfbac6c526455ae63dc3554dcad4d71240e8ab","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0","benchmarkScript":"sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:6deb3e8f8c0c3d3119530d71b7cff43e62349e939b400e6b398732b779ad4156"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:frozen`
 - Suite: Frozen Holdout Regression
 - Acceptance gate: no
-- Git commit at generation: `fb1b4cb310d3b721d7c92cbff5cb28d494def751`
-- Git dirty: yes
-- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
+- Git commit at generation: `c9bfbac6c526455ae63dc3554dcad4d71240e8ab`
+- Git dirty: no
+- Invalidating dirty paths: none
 - Case hash: `sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948`
-- Scanner hash: `sha256:f6421ea8451cee6bdbd30739a1cda982685717291f8935540de3b4577ad6d78b`
-- Benchmark script hash: `sha256:014ce3ab1d7dd1afd100b9ae1359300efa8da4af124ac3541e45d6c3719a767c`
+- Scanner hash: `sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0`
+- Benchmark script hash: `sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:1a32898b9e9a91ec29c897264c6d5baa648c6ae9103ed1fddc8f42f7a719008a`
+- Snapshot fingerprint: `sha256:6deb3e8f8c0c3d3119530d71b7cff43e62349e939b400e6b398732b779ad4156`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -119,7 +119,7 @@ Frozen Holdout Regression quality is intentionally reported rather than accepted
 | brand-logo-moodboard-holdout | Marketing, growth, and creative | Marketing growth | logo-explorer | logo-explorer / 1 | logo-explorer / 1 | logo-explorer / 1 | Skill ranking anchor | logo-explorer -> moodboard-explorer -> offer-explorer -> creative-production -> ads-explorer |
 | in-app-browser-choice-holdout | Frontend experience | Browser verification | control-in-app-browser | control-in-app-browser / 1 | control-in-app-browser / 1 | control-in-app-browser / 1 | Browser verification | control-in-app-browser -> url-to-code -> playwright-interactive -> agent-browser -> design-image-to-code |
 | figma-swiftui-motion-holdout | Frontend experience | Figma design handoff | figma-swiftui | figma-implement-motion / 2 | figma-implement-design !figma-implement-design / 5 | figma-swiftui / 1 | Figma design handoff | figma-swiftui -> figma-use-motion -> figma-use -> figma-implement-motion -> design-image-to-code |
-| skill-install-security-holdout | Skill tooling | Skill authoring | skill-installer | skill-installer / 1 | skill-installer / 1 | skill-installer / 1 | Skill ranking anchor | skill-installer -> skill-security-auditor -> copilot-sdk -> template-creator -> skill-creator |
+| skill-install-security-holdout | Skill tooling | Skill authoring | skill-installer | skill-installer / 1 | skill-installer / 1 | skill-installer / 1 | Skill authoring | skill-installer -> skill-security-auditor -> skillweaver -> hatch-pet -> copilot-sdk |
 | analytics-report-to-slides-holdout | Documents and publishing | Presentations | reports-pdfs-and-slide-automation | reports-pdfs-and-slide-automation / 1 | reports-pdfs-and-slide-automation / 1 | reports-pdfs-and-slide-automation / 1 | Presentations | reports-pdfs-and-slide-automation -> build-report -> threejs-data-visualization -> Presentations -> template-creator |
 
 ## V2 Support Misses
@@ -133,7 +133,7 @@ This table is a support-quality backlog source, not an acceptance failure list. 
 | analytics-semantic-layer-holdout | gather-business-context, validate-data | create-data-context -> product-business-analysis -> build-report -> build-dashboard -> design-kpis |
 | brand-logo-moodboard-holdout | positioning-explorer | logo-explorer -> moodboard-explorer -> offer-explorer -> creative-production -> ads-explorer |
 | in-app-browser-choice-holdout | screenshot | control-in-app-browser -> url-to-code -> playwright-interactive -> agent-browser -> design-image-to-code |
-| skill-install-security-holdout | skillweaver | skill-installer -> skill-security-auditor -> copilot-sdk -> template-creator -> skill-creator |
+| skill-install-security-holdout | skill-creator | skill-installer -> skill-security-auditor -> skillweaver -> hatch-pet -> copilot-sdk |
 
 ## Interpretation
 

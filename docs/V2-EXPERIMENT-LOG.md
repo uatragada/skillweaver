@@ -506,3 +506,29 @@ This is the right kind of uncomfortable evidence: V2 is directionally useful on 
 ### Runtime Impact
 
 No runtime infrastructure changed. The new cost is one explicit benchmark command that scans the corpus once and evaluates 18 cases.
+
+## Clean Holdout V3 Regression Tuning
+
+Question: after preserving the clean V3 baseline at `00ad343`, can the concept map fix the promoted V3 misses while staying lightweight?
+
+### Change
+
+- Relabeled `benchmarks/skill-routing-clean-holdout-v3.json` from `untouched-holdout` to `regression`.
+- Promoted the Netlify deployment, skill authoring, roadmap deck, proactive observability, security finding triage, Hugging Face dataset research, game UI, and OpenAI Agents JS misses to `promotionStatus: "challenge"`.
+- Added narrow deterministic intent boosts and concept references for those boundaries.
+- Added a focused V3 regression-boundary unit test.
+- Did not add dependencies, persistence, model calls, graph caps, background jobs, or product-route passes.
+
+### Result
+
+| System | Quality | Hit@1 | Top/workflow 5 | Support coverage@5 | Support precision@5 | Forbidden primary |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| No SkillWeaver | 50.3 | 44.4% | 72.2% | 33.3% | 25.0% | 11.1% |
+| Skill-level baseline | 62.3 | 61.1% | 77.8% | 40.7% | 30.6% | 5.6% |
+| SkillWeaver V2 | 94.4 | 100.0% | 100.0% | 72.2% | 54.2% | 0.0% |
+
+V2 moved from 64.9 to 94.4 quality on the V3 suite after tuning. Primary hit@1 improved from 55.6% to 100.0%, expected top/workflow-five retrieval from 83.3% to 100.0%, and forbidden-primary rate from 11.1% to 0.0%.
+
+### Interpretation
+
+This is strong regression evidence, not a renewed clean-split claim. The lightweight concept map now handles the promoted V3 boundaries across delivery, skill tooling, documents, observability, security, Hugging Face, games, and OpenAI agent work. A new untouched split is still required before saying the route generalizes beyond exercised prompts.
