@@ -1,9 +1,9 @@
 # SkillWeaver V2 Post-Tuning Challenge Benchmark
 
-Generated: 2026-06-27T20:12:01.065Z
+Generated: 2026-06-27T20:22:40.992Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782591121065,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"8d7fa7e6a8ad281d9b7e629b94f6b5c2ae7753fa","dirty":true,"dirtyPaths":["README.md","benchmarks/skill-routing-frozen-holdout.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","docs/SUPPORT-QUALITY-ROADMAP.md","docs/V2-EXPERIMENT-LOG.md","docs/VERIFICATION.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d","benchmarkScript":"sha256:e18ae157485a61ff61e9f5369349e32758de712b17e7714a76c980871ecd55aa","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:d2b933daa5b12fa7bdb80c7f72404649824c3574ce1a45bceee01f6772b9264e"}
+{"generatedAt":1782591760992,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"3cd6e51f971b91248e621893ce15a492288fe63c","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","package.json","scripts/benchmark-skill-routing.mjs"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d","benchmarkScript":"sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:01aedc04af988f4d270f0fe45b5b4d16ced9e3da238688dfe38793280a02eef9"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:holdout`
 - Suite: Post-Tuning Challenge
 - Acceptance gate: no
-- Git commit at generation: `8d7fa7e6a8ad281d9b7e629b94f6b5c2ae7753fa`
+- Git commit at generation: `3cd6e51f971b91248e621893ce15a492288fe63c`
 - Git dirty: yes
-- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
+- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`
 - Case hash: `sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6`
 - Scanner hash: `sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d`
-- Benchmark script hash: `sha256:e18ae157485a61ff61e9f5369349e32758de712b17e7714a76c980871ecd55aa`
+- Benchmark script hash: `sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:d2b933daa5b12fa7bdb80c7f72404649824c3574ce1a45bceee01f6772b9264e`
+- Snapshot fingerprint: `sha256:01aedc04af988f4d270f0fe45b5b4d16ced9e3da238688dfe38793280a02eef9`
 - Freshness check: pass
 - Quality gate, reported only: pass
 

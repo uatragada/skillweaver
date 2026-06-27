@@ -14,8 +14,9 @@ const CHECK_MODE = process.argv.includes("--check");
 const HOLDOUT_MODE = process.argv.includes("--holdout");
 const FRESH_MODE = process.argv.includes("--fresh");
 const FROZEN_HOLDOUT_MODE = process.argv.includes("--frozen-holdout");
-if ([HOLDOUT_MODE, FRESH_MODE, FROZEN_HOLDOUT_MODE].filter(Boolean).length > 1) {
-  console.error("Use only one benchmark suite flag: --holdout, --fresh, or --frozen-holdout.");
+const CLEAN_HOLDOUT_MODE = process.argv.includes("--clean-holdout");
+if ([HOLDOUT_MODE, FRESH_MODE, FROZEN_HOLDOUT_MODE, CLEAN_HOLDOUT_MODE].filter(Boolean).length > 1) {
+  console.error("Use only one benchmark suite flag: --holdout, --fresh, --frozen-holdout, or --clean-holdout.");
   process.exit(1);
 }
 const SUITES = {
@@ -62,9 +63,28 @@ const SUITES = {
     command: CHECK_MODE ? "npm run benchmark:skills:frozen:check" : "npm run benchmark:skills:frozen",
     gatesAcceptance: false,
     role: "frozen-regression"
+  },
+  cleanHoldout: {
+    id: "clean-holdout-v2",
+    label: "Clean Holdout V2",
+    reportTitle: "Clean Holdout V2 Benchmark",
+    casesPath: resolve("benchmarks/skill-routing-clean-holdout-v2.json"),
+    casesRelativePath: "benchmarks/skill-routing-clean-holdout-v2.json",
+    reportPath: resolve("docs/SKILL-USE-CLEAN-HOLDOUT-V2.md"),
+    command: CHECK_MODE ? "npm run benchmark:skills:clean:check" : "npm run benchmark:skills:clean",
+    gatesAcceptance: false,
+    role: "untouched-holdout"
   }
 };
-const SUITE = FROZEN_HOLDOUT_MODE ? SUITES.frozenHoldout : FRESH_MODE ? SUITES.fresh : HOLDOUT_MODE ? SUITES.holdout : SUITES.acceptance;
+const SUITE = CLEAN_HOLDOUT_MODE
+  ? SUITES.cleanHoldout
+  : FROZEN_HOLDOUT_MODE
+    ? SUITES.frozenHoldout
+    : FRESH_MODE
+      ? SUITES.fresh
+      : HOLDOUT_MODE
+        ? SUITES.holdout
+        : SUITES.acceptance;
 const CASES_PATH = SUITE.casesPath;
 const REPORT_PATH = SUITE.reportPath;
 const INVALIDATING_PATHS = [
@@ -743,7 +763,7 @@ function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2Suppo
     return [
       "## Claim Scope",
       "",
-      `This report is a frozen-holdout baseline for prompts captured after the latest routing-tuning commit and before any tuning from this suite. It supports a clean-split claim only while no misses from these prompts have informed routing changes: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, support coverage@5 ${formatPercent(v2Summary.supportCoverage)}, support precision@5 ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} support-miss cases. If this suite later drives tuning, relabel it as challenge or regression evidence before citing it again.`
+      `This report is an untouched-holdout baseline for prompts captured after the latest routing-tuning commit and before any tuning from this suite. It supports a clean-split claim only while no misses from these prompts have informed routing changes: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, support coverage@5 ${formatPercent(v2Summary.supportCoverage)}, support precision@5 ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} support-miss cases. If this suite later drives tuning, relabel it as challenge or regression evidence before citing it again.`
     ];
   }
 
@@ -814,7 +834,7 @@ function buildMarkdown({
       : SUITE.role === "frozen-regression"
         ? "On the frozen holdout regression suite, SkillWeaver V2 changes"
       : SUITE.role === "untouched-holdout"
-        ? "On the frozen holdout suite, SkillWeaver V2 changes"
+        ? "On the untouched holdout suite, SkillWeaver V2 changes"
     : "On the post-tuning challenge suite, SkillWeaver V2 changes";
 
   const lines = [

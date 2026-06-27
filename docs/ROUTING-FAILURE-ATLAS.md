@@ -99,7 +99,7 @@ The 22-case post-tuning challenge suite now covers 11 benchmark domains and 11 e
 - 34.1% V2 support precision@5 as an exploratory noise metric.
 - 0.0% V2 forbidden primary rate.
 
-Because the pilot misses informed the current fix, this suite is challenge evidence from this commit forward. The next true holdout should come from future real task logs before additional tuning. Current support-quality backlog is concentrated in challenge slices such as product/research/planning, platform delivery, backend services, AI agent apps, and security/risk.
+Because the pilot misses informed the current fix, this suite is challenge evidence from this commit forward. A new clean holdout now lives in `benchmarks/skill-routing-clean-holdout-v2.json`; its misses should not drive tuning until promoted or forked into challenge/regression work. Current support-quality backlog is concentrated in challenge slices such as product/research/planning, platform delivery, backend services, AI agent apps, security/risk, and the clean-holdout P0 cases tracked in [SUPPORT-QUALITY-ROADMAP.md](SUPPORT-QUALITY-ROADMAP.md).
 
 ### Recently Covered Robustness Traps
 
@@ -168,7 +168,7 @@ Remaining useful future cases:
 - Additional Vercel Auth, Firewall, AI Gateway, and Cron paraphrases from real usage.
 - Visualization QA and accessibility prompts that distinguish chart creation, chart review, and frontend accessibility.
 
-These should become fresh holdout cases before any routing boost is tuned for them.
+These should become fresh holdout cases before any routing boost is tuned for them, or be compared against the current clean holdout before promotion.
 
 ## Tuning Rules
 

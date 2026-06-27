@@ -8,6 +8,7 @@ npm run benchmark:skills:check
 npm run benchmark:skills:holdout:check
 npm run benchmark:skills:fresh:check
 npm run benchmark:skills:frozen:check
+npm run benchmark:skills:clean:check
 npm run index:skills
 npm run build
 ```
@@ -22,13 +23,13 @@ Expected index result on this machine after the V2 concept-map work:
 - domains include `ai`, `backend`, `frontend`, `github`, `operations`, `security`, and `data`.
 - namespaces include plugin names such as `vercel`, `cloudflare`, `figma`, `github`, `gmail`, and `data-analytics`.
 
-The current detailed snapshot lives in [CORPUS-SNAPSHOT.md](CORPUS-SNAPSHOT.md). The active routing-quality benchmark lives in [SKILL-USE-GAINS.md](SKILL-USE-GAINS.md). The non-gating post-tuning challenge benchmark lives in [SKILL-USE-HOLDOUT.md](SKILL-USE-HOLDOUT.md). The non-gating fresh-probe regression benchmark lives in [SKILL-USE-FRESH.md](SKILL-USE-FRESH.md). The frozen holdout regression benchmark lives in [SKILL-USE-FROZEN-HOLDOUT.md](SKILL-USE-FROZEN-HOLDOUT.md); its pre-tuning clean-split baseline is preserved in git history. Remaining support-quality work is triaged in [SUPPORT-QUALITY-ROADMAP.md](SUPPORT-QUALITY-ROADMAP.md).
+The current detailed snapshot lives in [CORPUS-SNAPSHOT.md](CORPUS-SNAPSHOT.md). The active routing-quality benchmark lives in [SKILL-USE-GAINS.md](SKILL-USE-GAINS.md). The non-gating post-tuning challenge benchmark lives in [SKILL-USE-HOLDOUT.md](SKILL-USE-HOLDOUT.md). The non-gating fresh-probe regression benchmark lives in [SKILL-USE-FRESH.md](SKILL-USE-FRESH.md). The frozen holdout regression benchmark lives in [SKILL-USE-FROZEN-HOLDOUT.md](SKILL-USE-FROZEN-HOLDOUT.md); its pre-tuning clean-split baseline is preserved in git history. The current untouched clean holdout lives in [SKILL-USE-CLEAN-HOLDOUT-V2.md](SKILL-USE-CLEAN-HOLDOUT-V2.md) and is allowed to report quality failures without failing verification. Remaining support-quality work is triaged in [SUPPORT-QUALITY-ROADMAP.md](SUPPORT-QUALITY-ROADMAP.md).
 
 Before marking a release ready:
 
 1. Confirm `G:\Projects\MindWeaver` has no new changes from SkillWeaver work.
 2. Run the commands above.
-3. Confirm all four benchmark reports are fresh and include `Quality by Domain` plus `Quality by Expected Concept`.
+3. Confirm all five benchmark reports are fresh and include `Quality by Domain` plus `Quality by Expected Concept`.
 4. For routing changes, confirm any support-miss fix follows the promotion checklist in [SUPPORT-QUALITY-ROADMAP.md](SUPPORT-QUALITY-ROADMAP.md).
 5. Launch the UI and verify:
    - search returns relevant ranked skills,

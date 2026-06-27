@@ -18,7 +18,9 @@
     "benchmark:skills:fresh": "node scripts/benchmark-skill-routing.mjs --fresh",
     "benchmark:skills:fresh:check": "node scripts/benchmark-skill-routing.mjs --fresh --check",
     "benchmark:skills:frozen": "node scripts/benchmark-skill-routing.mjs --frozen-holdout",
-    "benchmark:skills:frozen:check": "node scripts/benchmark-skill-routing.mjs --frozen-holdout --check"
+    "benchmark:skills:frozen:check": "node scripts/benchmark-skill-routing.mjs --frozen-holdout --check",
+    "benchmark:skills:clean": "node scripts/benchmark-skill-routing.mjs --clean-holdout",
+    "benchmark:skills:clean:check": "node scripts/benchmark-skill-routing.mjs --clean-holdout --check"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.2",

@@ -1,9 +1,9 @@
 # SkillWeaver V2 Frozen Holdout Regression Benchmark
 
-Generated: 2026-06-27T20:12:00.383Z
+Generated: 2026-06-27T20:22:40.274Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782591120383,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"8d7fa7e6a8ad281d9b7e629b94f6b5c2ae7753fa","dirty":true,"dirtyPaths":["README.md","benchmarks/skill-routing-frozen-holdout.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","docs/SUPPORT-QUALITY-ROADMAP.md","docs/V2-EXPERIMENT-LOG.md","docs/VERIFICATION.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["benchmarks/skill-routing-frozen-holdout.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d","benchmarkScript":"sha256:e18ae157485a61ff61e9f5369349e32758de712b17e7714a76c980871ecd55aa","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:9b08954a384475cf2893d9d16f2d36930aa035da45747f5f246d12fa8ee7f4fa"}
+{"generatedAt":1782591760274,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"3cd6e51f971b91248e621893ce15a492288fe63c","dirty":true,"dirtyPaths":["benchmarks/skill-routing-clean-holdout-v2.json","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","package.json","scripts/benchmark-skill-routing.mjs"]},"invalidatingDirtyPaths":["package.json","scripts/benchmark-skill-routing.mjs"],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d","benchmarkScript":"sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:548477de11d57d31905b43d5346080da7d2ca90552e0ed30f57f042fac05ad73"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:frozen`
 - Suite: Frozen Holdout Regression
 - Acceptance gate: no
-- Git commit at generation: `8d7fa7e6a8ad281d9b7e629b94f6b5c2ae7753fa`
+- Git commit at generation: `3cd6e51f971b91248e621893ce15a492288fe63c`
 - Git dirty: yes
-- Invalidating dirty paths: `benchmarks/skill-routing-frozen-holdout.json`, `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
+- Invalidating dirty paths: `package.json`, `scripts/benchmark-skill-routing.mjs`
 - Case hash: `sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948`
 - Scanner hash: `sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d`
-- Benchmark script hash: `sha256:e18ae157485a61ff61e9f5369349e32758de712b17e7714a76c980871ecd55aa`
+- Benchmark script hash: `sha256:ad2bd39b4a674255cb246240d99c398632630a58a08e6e7af9cd0da5825ff639`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:9b08954a384475cf2893d9d16f2d36930aa035da45747f5f246d12fa8ee7f4fa`
+- Snapshot fingerprint: `sha256:548477de11d57d31905b43d5346080da7d2ca90552e0ed30f57f042fac05ad73`
 - Freshness check: pass
 - Quality gate, reported only: pass
 

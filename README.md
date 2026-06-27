@@ -46,6 +46,8 @@ npm run benchmark:skills:fresh
 npm run benchmark:skills:fresh:check
 npm run benchmark:skills:frozen
 npm run benchmark:skills:frozen:check
+npm run benchmark:skills:clean
+npm run benchmark:skills:clean:check
 npm run build
 npm start
 ```
@@ -83,6 +85,7 @@ By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Us
 - [Post-tuning challenge benchmark](docs/SKILL-USE-HOLDOUT.md)
 - [Fresh-probe regression benchmark](docs/SKILL-USE-FRESH.md)
 - [Frozen holdout benchmark](docs/SKILL-USE-FROZEN-HOLDOUT.md)
+- [Clean holdout V2 benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V2.md)
 - [Support quality roadmap](docs/SUPPORT-QUALITY-ROADMAP.md)
 - [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
 - [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
@@ -123,3 +126,11 @@ npm run benchmark:skills:frozen
 ```
 
 Use `npm run benchmark:skills:frozen:check` before citing [docs/SKILL-USE-FROZEN-HOLDOUT.md](docs/SKILL-USE-FROZEN-HOLDOUT.md). This prompt set began as clean-split holdout evidence; after its misses informed V2 fixes, the checked-in report is regression evidence for that frozen slice. Use the earlier committed report for the pre-tuning baseline.
+
+Run the non-gating clean holdout V2 suite with:
+
+```powershell
+npm run benchmark:skills:clean
+```
+
+Use `npm run benchmark:skills:clean:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V2.md](docs/SKILL-USE-CLEAN-HOLDOUT-V2.md). This suite was captured after commit `3cd6e51` and must stay untouched until any misses are deliberately promoted into challenge or regression work.

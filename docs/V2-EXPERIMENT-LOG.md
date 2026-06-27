@@ -412,9 +412,37 @@ The frozen prompt set moved from V2 trailing both baselines to V2 leading both b
 
 No new dependencies, persistence, model calls, graph caps, background jobs, or product-route passes were added. The changes stay inside the deterministic concept map, lightweight intent boosts, benchmark matcher, tests, and docs.
 
+## Clean Holdout V2 Benchmark
+
+Question: after the frozen-regression tuning commit `3cd6e51`, does V2 still beat no SkillWeaver and the skill-level baseline on untouched prompts?
+
+### Change
+
+- Added `benchmarks/skill-routing-clean-holdout-v2.json` with 14 provenance-backed prompts collected after commit `3cd6e51`.
+- Added `npm run benchmark:skills:clean` and `npm run benchmark:skills:clean:check`, reusing the existing evaluator, report metadata, freshness checks, case validation, domain slices, and concept slices.
+- Generated [SKILL-USE-CLEAN-HOLDOUT-V2.md](SKILL-USE-CLEAN-HOLDOUT-V2.md) before tuning from these prompts.
+
+### Result
+
+| System | Quality | Hit@1 | Top/workflow 5 | Support coverage@5 | Forbidden primary |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| No SkillWeaver | 68.3 | 71.4% | 92.9% | 26.2% | 7.1% |
+| Skill-level baseline | 79.0 | 85.7% | 100.0% | 33.3% | 7.1% |
+| SkillWeaver V2 | 61.3 | 57.1% | 78.6% | 45.2% | 35.7% |
+
+V2 improved support coverage on this clean holdout, but it regressed the main routing job: output quality was -7.0 points versus no SkillWeaver and -17.7 points versus the skill-level baseline. Primary hit@1 was also lower by 14.3 and 28.6 percentage points respectively, and forbidden-primary rate rose to 35.7%.
+
+### Interpretation
+
+This clean suite is useful precisely because it breaks the overconfident story. V2 is strong on exercised suites, but current concept routing can still over-apply concept-level gateways and displace specific primary skills in browser verification, data notebooks/reports, Figma Code Connect, Hugging Face tracking, and roadmap planning. Do not tune from this suite while continuing to cite it as untouched holdout evidence; promote or fork failures before making routing changes.
+
+### Runtime Impact
+
+No runtime infrastructure changed. The new cost is one explicit benchmark command that scans the corpus once and evaluates 14 cases.
+
 ## Next Experiments
 
-- Capture a new clean holdout after this routing commit before making any further broad generalization claim.
+- Promote or fork the clean-holdout P0 failures before tuning, then preserve the current clean report as the pre-tuning baseline.
 - Use the frozen regression suite as a guardrail, not as fresh evidence.
 - Work through the remaining coverage backlog from the independent audit, especially broader MCP server creation, deeper game-studio variants, Notion meeting-to-email ambiguity, Vercel Auth/Firewall variants, and visualization QA/accessibility variants.
 - Decide whether support precision@5 should become an acceptance gate after expected-support lists are reviewed for completeness.
