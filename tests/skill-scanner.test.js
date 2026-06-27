@@ -4,11 +4,15 @@ import { mkdtemp, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import {
+  buildConceptMap,
   parseFrontmatter,
   rankSkill,
   recommendWorkflow,
   scanSkillRoots,
-  searchSkills
+  searchConcepts,
+  searchSkills,
+  serializeConceptDetail,
+  summarizeIndex
 } from "../server/skill-scanner.js";
 
 test("parses nested YAML frontmatter without losing unknown fields", () => {
@@ -183,4 +187,81 @@ test("boosts gateway use skills and avoids generic index primaries", () => {
 
   assert.ok(rankSkill(figmaUse, "Use Figma to inspect a design") > rankSkill(figmaImplement, "Use Figma to inspect a design"));
   assert.ok(rankSkill(dashboard, "Create a data analytics dashboard from KPI data") > rankSkill(genericIndex, "Create a data analytics dashboard from KPI data"));
+});
+
+test("builds concept nodes with role-tagged skill references", () => {
+  const makeSkill = ({ id, name, description, domains = [], tools = [], triggers = [] }) => ({
+    id,
+    name,
+    description,
+    path: `C:/skills/${name}/SKILL.md`,
+    folder: `C:/skills/${name}`,
+    root: "C:/skills",
+    sourceType: "user",
+    namespace: name.includes(":") ? name.split(":")[0] : null,
+    domains,
+    triggers,
+    tools,
+    resources: {},
+    excerpt: "",
+    bodyLength: 1,
+    warnings: [],
+    searchText: `${name} ${description} ${triggers.join(" ")} ${domains.join(" ")} ${tools.join(" ")}`.toLowerCase()
+  });
+  const skills = [
+    makeSkill({
+      id: "figma-use",
+      name: "figma-use",
+      description: "Use before Figma tool calls and design inspection.",
+      domains: ["frontend", "product"],
+      tools: ["Figma"],
+      triggers: ["figma design"]
+    }),
+    makeSkill({
+      id: "figma-implement-design",
+      name: "figma-implement-design",
+      description: "Implement a Figma design in code.",
+      domains: ["frontend"],
+      tools: ["Figma", "Node"],
+      triggers: ["design to code"]
+    }),
+    makeSkill({
+      id: "frontend-app-builder",
+      name: "build-web-apps:frontend-app-builder",
+      description: "Build a React frontend app.",
+      domains: ["frontend"],
+      tools: ["Node"],
+      triggers: ["react ui"]
+    }),
+    makeSkill({
+      id: "frontend-testing",
+      name: "build-web-apps:frontend-testing-debugging",
+      description: "Verify frontend behavior in the browser.",
+      domains: ["frontend"],
+      tools: ["Playwright"],
+      triggers: ["browser qa"]
+    })
+  ];
+
+  const { concepts, conceptEdges } = buildConceptMap(skills);
+  const index = {
+    scannedAt: 0,
+    roots: ["C:/skills"],
+    skills,
+    edges: [],
+    concepts,
+    conceptEdges
+  };
+
+  const figma = serializeConceptDetail(index, "figma-handoff");
+  assert.equal(figma.skillRefs.find((ref) => ref.name === "figma-use").role, "gateway");
+  assert.equal(figma.skillRefs.find((ref) => ref.name === "figma-implement-design").role, "primary");
+  assert.ok(figma.relatedConcepts.some((concept) => concept.id === "frontend-implementation"));
+
+  const results = searchConcepts(index, "turn a Figma design into a React app");
+  assert.equal(results[0].id, "figma-handoff");
+
+  const summary = summarizeIndex(index);
+  assert.equal(summary.conceptCount, 18);
+  assert.ok(summary.conceptEdgeCount > 0);
 });

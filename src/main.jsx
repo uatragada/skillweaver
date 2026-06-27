@@ -18,6 +18,14 @@ import {
 import "./styles.css";
 
 const API_BASE = "";
+const ROLE_ORDER = ["gateway", "primary", "verification", "supporting", "reference"];
+const ROLE_LABELS = {
+  gateway: "Gateway",
+  primary: "Primary",
+  verification: "Verification",
+  supporting: "Supporting",
+  reference: "Reference"
+};
 
 async function apiGet(path) {
   const response = await fetch(`${API_BASE}${path}`);
@@ -50,6 +58,10 @@ function compactPath(path) {
 
 function SourceBadge({ value }) {
   return <span className={`source-badge source-${value}`}>{value}</span>;
+}
+
+function RoleBadge({ role }) {
+  return <span className={`role-badge role-${role}`}>{ROLE_LABELS[role] ?? role}</span>;
 }
 
 function EmptyState({ title, detail }) {
@@ -85,6 +97,51 @@ function SelectFilter({ icon: Icon, label, value, onChange, options }) {
   );
 }
 
+function ModeToggle({ value, onChange }) {
+  return (
+    <div className="mode-toggle" aria-label="Navigator mode">
+      <button type="button" className={value === "concepts" ? "is-active" : ""} onClick={() => onChange("concepts")}>
+        <GitBranch size={15} />
+        Concepts
+      </button>
+      <button type="button" className={value === "skills" ? "is-active" : ""} onClick={() => onChange("skills")}>
+        <Search size={15} />
+        Skills
+      </button>
+    </div>
+  );
+}
+
+function ConceptRow({ concept, selected, onSelect }) {
+  const topRefs = concept.skillRefs ?? [];
+  return (
+    <button className={`concept-row ${selected ? "is-selected" : ""}`} type="button" onClick={() => onSelect(concept.id)}>
+      <div className="concept-row-main">
+        <div className="concept-title-line">
+          <strong>{concept.label}</strong>
+          <span className="concept-count">{concept.skillCount} skills</span>
+        </div>
+        <p>{concept.description}</p>
+        <div className="tag-row">
+          {concept.domains.slice(0, 4).map((domain) => <span key={domain}>{domain}</span>)}
+          {concept.tools.slice(0, 3).map((tool) => <span key={tool}>{tool}</span>)}
+        </div>
+        <div className="concept-skill-strip">
+          {topRefs.slice(0, 4).map((ref) => (
+            <span key={`${concept.id}-${ref.skillId}`}>
+              {ref.name}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="skill-row-meta">
+        <span>{concept.score ? Math.round(concept.score) : 0}</span>
+        <ArrowRight size={16} />
+      </div>
+    </button>
+  );
+}
+
 function SkillRow({ skill, selected, onSelect }) {
   return (
     <button className={`skill-row ${selected ? "is-selected" : ""}`} type="button" onClick={() => onSelect(skill.id)}>
@@ -111,7 +168,7 @@ function SkillRow({ skill, selected, onSelect }) {
 function WorkflowPanel({ workflow, onSelect }) {
   const steps = workflow?.steps ?? [];
   return (
-    <section className="workflow-panel">
+    <section className="side-panel">
       <div className="section-heading">
         <Sparkles size={16} />
         <h2>Suggested Workflow</h2>
@@ -135,7 +192,117 @@ function WorkflowPanel({ workflow, onSelect }) {
   );
 }
 
-function Inspector({ skill, onSelectRelated }) {
+function ConceptLinksPanel({ concept, onSelect }) {
+  const related = concept?.relatedConcepts ?? [];
+  return (
+    <section className="side-panel">
+      <div className="section-heading">
+        <GitBranch size={16} />
+        <h2>Concept Links</h2>
+      </div>
+      <div className="related-list">
+        {related.length ? related.map((entry) => (
+          <button key={`${entry.id}-${entry.edge.type}`} type="button" onClick={() => onSelect(entry.id)}>
+            <span>{entry.label}</span>
+            <small>{entry.edge.label} · {entry.edge.reason}</small>
+          </button>
+        )) : <p className="muted">No neighboring concept selected.</p>}
+      </div>
+    </section>
+  );
+}
+
+function SkillRefButton({ refEntry, onSelect }) {
+  return (
+    <button className="skill-ref-button" type="button" onClick={() => onSelect(refEntry.skillId)}>
+      <div>
+        <strong>{refEntry.name}</strong>
+        <small>{refEntry.reason}</small>
+      </div>
+      <div className="skill-ref-meta">
+        <RoleBadge role={refEntry.role} />
+        <SourceBadge value={refEntry.sourceType} />
+      </div>
+    </button>
+  );
+}
+
+function ConceptInspector({ concept, onSelectSkill, onSelectConcept }) {
+  if (!concept) {
+    return (
+      <aside className="inspector">
+        <EmptyState title="Select a concept" detail="Search for a task or pick a concept node to inspect referenced skills." />
+      </aside>
+    );
+  }
+
+  return (
+    <aside className="inspector">
+      <div className="inspector-header">
+        <div>
+          <span className="eyeless-label">concept node</span>
+          <h2>{concept.label}</h2>
+        </div>
+        <div className="concept-score">{concept.skillCount}</div>
+      </div>
+
+      <p className="skill-description">{concept.description}</p>
+
+      <div className="concept-meta-grid">
+        <div>
+          <strong>{concept.relatedConcepts?.length ?? 0}</strong>
+          <span>links</span>
+        </div>
+        <div>
+          <strong>{concept.skillCount}</strong>
+          <span>skills</span>
+        </div>
+      </div>
+
+      <div className="inspector-section">
+        <h3>Trigger Phrases</h3>
+        <div className="trigger-list">
+          {(concept.triggers ?? []).slice(0, 8).map((trigger) => <span key={trigger}>{trigger}</span>)}
+        </div>
+      </div>
+
+      <div className="inspector-section">
+        <h3>Referenced Skills</h3>
+        <div className="role-stack">
+          {ROLE_ORDER.map((role) => {
+            const refs = (concept.skillRefs ?? []).filter((entry) => entry.role === role);
+            if (!refs.length) return null;
+            return (
+              <div className="role-group" key={role}>
+                <div className="role-group-heading">
+                  <RoleBadge role={role} />
+                  <span>{refs.length}</span>
+                </div>
+                {refs.map((entry) => (
+                  <SkillRefButton key={`${role}-${entry.skillId}`} refEntry={entry} onSelect={onSelectSkill} />
+                ))}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="inspector-section">
+        <h3>Related Concepts</h3>
+        <div className="related-list">
+          {(concept.relatedConcepts ?? []).length ? concept.relatedConcepts.map((entry) => (
+            <button key={`${entry.id}-${entry.edge.type}`} type="button" onClick={() => onSelectConcept(entry.id)}>
+              <span>{entry.label}</span>
+              <small>{entry.edge.label} · {entry.edge.type}</small>
+            </button>
+          )) : <p className="muted">No relationships found yet.</p>}
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function SkillInspector({ skill, onSelectRelated }) {
   const [copied, setCopied] = useState(false);
 
   if (!skill) {
@@ -217,16 +384,29 @@ function Inspector({ skill, onSelectRelated }) {
   );
 }
 
+function Inspector({ mode, concept, skill, onSelectConcept, onSelectSkill }) {
+  if (mode === "concepts") {
+    return <ConceptInspector concept={concept} onSelectConcept={onSelectConcept} onSelectSkill={onSelectSkill} />;
+  }
+
+  return <SkillInspector skill={skill} onSelectRelated={onSelectSkill} />;
+}
+
 function App() {
   const [summary, setSummary] = useState(null);
+  const [concepts, setConcepts] = useState([]);
   const [skills, setSkills] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedConceptId, setSelectedConceptId] = useState(null);
+  const [selectedConcept, setSelectedConcept] = useState(null);
+  const [selectedSkillId, setSelectedSkillId] = useState(null);
   const [selectedSkill, setSelectedSkill] = useState(null);
   const [workflow, setWorkflow] = useState(null);
-  const [query, setQuery] = useState("fix failing github ci");
+  const [query, setQuery] = useState("turn a Figma design into a React app");
   const [filters, setFilters] = useState({ domain: "", sourceType: "", namespace: "", root: "" });
+  const [mode, setMode] = useState("concepts");
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [refreshVersion, setRefreshVersion] = useState(0);
   const [error, setError] = useState("");
 
   const queryString = useMemo(() => buildQuery({ q: query, ...filters }), [query, filters]);
@@ -236,18 +416,26 @@ function App() {
     setLoading(true);
     setError("");
     Promise.all([
+      apiGet(`/api/concepts${queryString}`),
       apiGet(`/api/skills${queryString}`),
       apiGet(`/api/workflow${queryString}`)
     ])
-      .then(([skillPayload, workflowPayload]) => {
+      .then(([conceptPayload, skillPayload, workflowPayload]) => {
         if (cancelled) return;
-        setSummary(skillPayload.summary);
+        setSummary(conceptPayload.summary);
+        setConcepts(conceptPayload.concepts);
         setSkills(skillPayload.skills);
         setWorkflow(workflowPayload);
-        const nextSelected = skillPayload.skills.find((skill) => skill.id === selectedId)?.id
+        setSelectedConceptId((current) =>
+          conceptPayload.concepts.find((concept) => concept.id === current)?.id
+          ?? conceptPayload.concepts[0]?.id
+          ?? null
+        );
+        setSelectedSkillId((current) =>
+          skillPayload.skills.find((skill) => skill.id === current)?.id
           ?? skillPayload.skills[0]?.id
-          ?? null;
-        setSelectedId(nextSelected);
+          ?? null
+        );
       })
       .catch((err) => {
         if (!cancelled) setError(err.message);
@@ -258,15 +446,33 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [queryString]);
+  }, [queryString, refreshVersion]);
 
   useEffect(() => {
     let cancelled = false;
-    if (!selectedId) {
+    if (!selectedConceptId) {
+      setSelectedConcept(null);
+      return undefined;
+    }
+    apiGet(`/api/concepts/${selectedConceptId}`)
+      .then((payload) => {
+        if (!cancelled) setSelectedConcept(payload.concept);
+      })
+      .catch(() => {
+        if (!cancelled) setSelectedConcept(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedConceptId]);
+
+  useEffect(() => {
+    let cancelled = false;
+    if (!selectedSkillId) {
       setSelectedSkill(null);
       return undefined;
     }
-    apiGet(`/api/skills/${selectedId}`)
+    apiGet(`/api/skills/${selectedSkillId}`)
       .then((payload) => {
         if (!cancelled) setSelectedSkill(payload.skill);
       })
@@ -276,23 +482,33 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [selectedId]);
+  }, [selectedSkillId]);
 
   const updateFilter = (key, value) => {
     setFilters((current) => ({ ...current, [key]: value }));
+  };
+
+  const selectConcept = (id) => {
+    setSelectedConceptId(id);
+    setMode("concepts");
+  };
+
+  const selectSkill = (id) => {
+    setSelectedSkillId(id);
+    setMode("skills");
   };
 
   const refresh = async () => {
     setRefreshing(true);
     try {
       await apiPost("/api/refresh");
-      const payload = await apiGet(`/api/skills${queryString}`);
-      setSummary(payload.summary);
-      setSkills(payload.skills);
+      setRefreshVersion((version) => version + 1);
     } finally {
       setRefreshing(false);
     }
   };
+
+  const resultCount = mode === "concepts" ? concepts.length : skills.length;
 
   return (
     <main className="app-shell">
@@ -306,8 +522,9 @@ function App() {
         </div>
 
         <div className="stats-grid">
+          <Stat label="concepts" value={summary?.conceptCount ?? "?"} />
           <Stat label="skills" value={summary?.skillCount ?? "?"} />
-          <Stat label="edges" value={summary?.edgeCount ?? "?"} />
+          <Stat label="links" value={summary?.conceptEdgeCount ?? "?"} />
           <Stat label="warnings" value={summary?.warningCount ?? "?"} />
         </div>
 
@@ -334,6 +551,7 @@ function App() {
               aria-label="Skill search query"
             />
           </div>
+          <ModeToggle value={mode} onChange={setMode} />
           <div className="root-chip">{summary?.roots?.length ?? 0} roots indexed</div>
         </header>
 
@@ -342,25 +560,43 @@ function App() {
         <div className="workspace-grid">
           <section className="results-panel">
             <div className="section-heading results-heading">
-              <Search size={16} />
-              <h2>Ranked Skills</h2>
-              <span>{loading ? "Scanning..." : `${skills.length} shown`}</span>
+              {mode === "concepts" ? <GitBranch size={16} /> : <Search size={16} />}
+              <h2>{mode === "concepts" ? "Concept Nodes" : "Ranked Skills"}</h2>
+              <span>{loading ? "Scanning..." : `${resultCount} shown`}</span>
             </div>
-            <div className="skill-list">
-              {skills.length ? skills.map((skill) => (
-                <SkillRow key={skill.id} skill={skill} selected={skill.id === selectedId} onSelect={setSelectedId} />
-              )) : <EmptyState title="No matching skills" detail="Try a broader task phrase or clear the filters." />}
-            </div>
+
+            {mode === "concepts" ? (
+              <div className="skill-list">
+                {concepts.length ? concepts.map((concept) => (
+                  <ConceptRow key={concept.id} concept={concept} selected={concept.id === selectedConceptId} onSelect={selectConcept} />
+                )) : <EmptyState title="No matching concepts" detail="Try a broader task phrase or clear the filters." />}
+              </div>
+            ) : (
+              <div className="skill-list">
+                {skills.length ? skills.map((skill) => (
+                  <SkillRow key={skill.id} skill={skill} selected={skill.id === selectedSkillId} onSelect={selectSkill} />
+                )) : <EmptyState title="No matching skills" detail="Try a broader task phrase or clear the filters." />}
+              </div>
+            )}
           </section>
 
-          <WorkflowPanel workflow={workflow} onSelect={setSelectedId} />
+          {mode === "concepts" ? (
+            <ConceptLinksPanel concept={selectedConcept} onSelect={selectConcept} />
+          ) : (
+            <WorkflowPanel workflow={workflow} onSelect={selectSkill} />
+          )}
         </div>
       </section>
 
-      <Inspector skill={selectedSkill} onSelectRelated={setSelectedId} />
+      <Inspector
+        mode={mode}
+        concept={selectedConcept}
+        skill={selectedSkill}
+        onSelectConcept={selectConcept}
+        onSelectSkill={selectSkill}
+      />
     </main>
   );
 }
 
 createRoot(document.getElementById("root")).render(<App />);
-

@@ -8,6 +8,7 @@ Make Codex skill discovery faster, more reliable, and less context-expensive by 
 
 The app is built for the agent using it as much as for the human operator. It should answer:
 
+- Which high-level work concept does this task belong to?
 - Which skill should I load for this task?
 - Which skills overlap or form a workflow?
 - What trigger language makes a skill relevant?
@@ -50,14 +51,16 @@ The app is built for the agent using it as much as for the human operator. It sh
    - tool or platform hints.
 3. The API serves:
    - inventory summary,
+   - concept list and concept details,
    - skill list,
    - search results,
    - individual skill details,
    - generated relationship edges.
 4. The UI supports:
    - search by task wording,
+   - concept-first browsing,
    - filtering by domain/root/plugin,
-   - selected skill inspector,
+   - selected concept and selected skill inspectors,
    - related skills,
    - suggested multi-skill workflow for a query,
    - copyable path/loading guidance.
@@ -66,6 +69,35 @@ The app is built for the agent using it as much as for the human operator. It sh
 ## Data Model
 
 SkillWeaver uses a derived in-memory index. The filesystem remains authoritative.
+
+### Concept
+
+- `id`: stable concept identifier.
+- `label`: human-readable high-level agent work concept.
+- `description`: concise explanation of the work concept.
+- `triggers`: task phrases associated with the concept.
+- `domains`: inferred or configured domain tags.
+- `tools`: inferred or configured platform/tool tags.
+- `skillRefs`: referenced skills that belong to the concept.
+- `roleCounts`: count of referenced skills by role.
+- `skillCount`: total referenced skills.
+
+Concepts are derived from deterministic rules and current skill metadata. They are graph nodes above the skill layer: a concept groups the skills that help execute that kind of work.
+
+### Concept Skill Reference
+
+- `skillId`
+- `name`
+- `description`
+- `path`
+- `root`
+- `sourceType`
+- `namespace`
+- `domains`
+- `tools`
+- `role`: `gateway`, `primary`, `verification`, `supporting`, or `reference`.
+- `score`
+- `reason`
 
 ### Skill
 
@@ -89,7 +121,7 @@ SkillWeaver uses a derived in-memory index. The filesystem remains authoritative
 
 - `sourceId`
 - `targetId`
-- `type`: `same_namespace`, `shared_domain`, `shared_tool`, `mentions`, or `workflow_neighbor`.
+- `type`: `same_namespace`, `shared_domain`, `shared_tool`, `mentions`, `curated_concept_link`, or `shared_concept_evidence`.
 - `label`
 - `weight`
 - `reason`
@@ -120,4 +152,3 @@ SkillWeaver uses a derived in-memory index. The filesystem remains authoritative
 - Running the dev server must expose a usable UI.
 - The scanner must successfully index the current local Codex skill library.
 - MindWeaver `git status` must remain unchanged by SkillWeaver work.
-

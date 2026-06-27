@@ -4,10 +4,13 @@ import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  getRelatedConcepts,
   getRelatedSkills,
   recommendWorkflow,
   scanSkillRoots,
+  searchConcepts,
   searchSkills,
+  serializeConceptDetail,
   serializeSkillDetail,
   summarizeIndex
 } from "./skill-scanner.js";
@@ -68,6 +71,33 @@ app.get("/api/skills/:id", async (req, res) => {
 app.get("/api/skills/:id/related", async (req, res) => {
   const index = await indexPromise;
   res.json({ related: getRelatedSkills(index, req.params.id) });
+});
+
+app.get("/api/concepts", async (req, res) => {
+  const index = await indexPromise;
+  const filters = {
+    root: req.query.root,
+    domain: req.query.domain,
+    sourceType: req.query.sourceType,
+    namespace: req.query.namespace
+  };
+  res.json({
+    summary: summarizeIndex(index),
+    concepts: searchConcepts(index, String(req.query.q ?? ""), filters),
+    conceptEdges: index.conceptEdges
+  });
+});
+
+app.get("/api/concepts/:id", async (req, res) => {
+  const index = await indexPromise;
+  const concept = serializeConceptDetail(index, req.params.id);
+  if (!concept) return res.status(404).json({ error: "concept not found" });
+  res.json({ concept });
+});
+
+app.get("/api/concepts/:id/related", async (req, res) => {
+  const index = await indexPromise;
+  res.json({ related: getRelatedConcepts(index, req.params.id) });
 });
 
 app.get("/api/workflow", async (req, res) => {

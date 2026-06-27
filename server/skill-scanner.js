@@ -42,6 +42,230 @@ const TOOL_RULES = [
   ["Node", ["node", "npm", "typescript", "javascript"]]
 ];
 
+const CONCEPT_RULES = [
+  {
+    id: "frontend-implementation",
+    label: "Frontend implementation",
+    description: "Build, adapt, and harden browser-facing React, Vite, CSS, and component work.",
+    triggers: ["build a web app", "frontend app", "react ui", "implement a page", "fix ui"],
+    domains: ["frontend", "product"],
+    tools: ["Node", "Playwright", "Figma", "Vercel"],
+    gatewaySkillNames: ["build-web-apps:frontend-app-builder"],
+    primarySkillNames: ["dev-frontend-react-next", "build-web-apps:react-best-practices"],
+    supportingSkillNames: ["build-web-apps:shadcn", "dev-frontend-accessibility-css", "premium-web-design", "design-qa"],
+    verificationSkillNames: ["build-web-apps:frontend-testing-debugging", "playwright", "screenshot"],
+    relatedConceptIds: ["figma-handoff", "browser-verification", "deployment-release"]
+  },
+  {
+    id: "browser-verification",
+    label: "Browser verification",
+    description: "Exercise live browser behavior, inspect screenshots, and verify UI changes against the running app.",
+    triggers: ["browser qa", "playwright screenshot", "verify live app", "control chrome", "inspect page"],
+    domains: ["frontend"],
+    tools: ["Playwright", "Node"],
+    gatewaySkillNames: ["browser:control-in-app-browser", "chrome:control-chrome"],
+    primarySkillNames: ["playwright", "playwright-interactive", "build-web-apps:frontend-testing-debugging"],
+    supportingSkillNames: ["screenshot"],
+    verificationSkillNames: ["vercel:agent-browser-verify"],
+    relatedConceptIds: ["frontend-implementation", "deployment-release"]
+  },
+  {
+    id: "figma-handoff",
+    label: "Figma design handoff",
+    description: "Navigate Figma context, audit component intent, and translate designs into implementation work.",
+    triggers: ["figma design", "design to code", "implement figma", "design handoff", "component audit"],
+    domains: ["frontend", "product", "creative"],
+    tools: ["Figma", "Node"],
+    gatewaySkillNames: ["figma-use", "figma:figma-use"],
+    primarySkillNames: ["figma-implement-design", "figma:figma-code-connect", "product-design:image-to-code", "design-image-to-code", "design-url-to-code"],
+    supportingSkillNames: ["figma-design-qa", "figma-component-audit", "figma-create-design-system-rules", "product-design:get-context", "figma:figma-generate-design"],
+    verificationSkillNames: ["design-qa", "figma-design-review"],
+    relatedConceptIds: ["frontend-implementation", "browser-verification"]
+  },
+  {
+    id: "data-dashboarding",
+    label: "Data dashboards and reports",
+    description: "Profile data, design KPIs, build dashboards or reports, and validate analytical outputs.",
+    triggers: ["analytics dashboard", "kpi report", "visualize data", "data quality", "business analysis"],
+    domains: ["data", "product"],
+    tools: ["Python", "Node"],
+    gatewaySkillNames: ["data-analytics:index"],
+    primarySkillNames: ["data-analytics:build-dashboard", "data-analytics:build-report", "build-web-data-visualization:data-visualization", "data-analytics:visualize-data"],
+    supportingSkillNames: ["data-analytics:design-kpis", "data-analysis-standard", "chart-data-extractor", "spreadsheets:Spreadsheets"],
+    verificationSkillNames: ["data-analytics:validate-data", "data-analytics:analyze-data-quality"],
+    relatedConceptIds: ["frontend-implementation", "product-planning"]
+  },
+  {
+    id: "github-pr-repair",
+    label: "GitHub PR repair",
+    description: "Inspect branches, address review comments, repair CI, and keep issue or PR state aligned with code.",
+    triggers: ["fix ci", "github actions", "pull request review", "address comments", "check ci"],
+    domains: ["github", "operations"],
+    tools: ["GitHub", "Node"],
+    primarySkillNames: ["gh-fix-ci", "github:gh-fix-ci", "gh-address-comments", "github:gh-address-comments", "github:github"],
+    supportingSkillNames: ["coderabbit:code-review", "code-review-checklist", "changelog-generator", "dev-git-github-collaboration"],
+    verificationSkillNames: ["codex-security:security-diff-scan"],
+    relatedConceptIds: ["repo-operations", "deployment-release", "security-review"]
+  },
+  {
+    id: "security-review",
+    label: "Security review",
+    description: "Threat-model, scan, triage findings, and validate security-sensitive changes.",
+    triggers: ["security scan", "threat model", "vulnerability", "audit finding", "risk review"],
+    domains: ["security", "operations"],
+    tools: ["GitHub"],
+    primarySkillNames: ["codex-security:security-scan", "codex-security:deep-security-scan", "codex-security:threat-model", "security-threat-model", "security-best-practices"],
+    supportingSkillNames: ["codex-security:finding-discovery", "codex-security:triage-finding", "codex-security:track-findings", "skill-security-auditor"],
+    verificationSkillNames: ["codex-security:validation", "codex-security:security-diff-scan"],
+    relatedConceptIds: ["github-pr-repair", "repo-operations"]
+  },
+  {
+    id: "deployment-release",
+    label: "Deployment and release",
+    description: "Prepare releases, deploy to hosting providers, repair deployment issues, and verify production surfaces.",
+    triggers: ["deploy app", "release readiness", "vercel", "cloudflare", "netlify", "render"],
+    domains: ["operations", "frontend", "backend"],
+    tools: ["Vercel", "Cloudflare", "GitHub", "Node"],
+    primarySkillNames: ["vercel-deploy", "vercel:bootstrap", "cloudflare-deploy", "cloudflare:wrangler", "netlify-deploy", "render-deploy"],
+    supportingSkillNames: ["launch-readiness", "dev-release-productization", "cicd-playbook", "monitoring-setup-guide"],
+    verificationSkillNames: ["vercel:agent-browser-verify", "browser-verification"],
+    relatedConceptIds: ["frontend-implementation", "browser-verification", "github-pr-repair"]
+  },
+  {
+    id: "skill-authoring",
+    label: "Skill authoring",
+    description: "Create, install, evaluate, and maintain Codex skills and plugin bundles.",
+    triggers: ["create a skill", "install skill", "skill navigator", "plugin creator", "skill routing"],
+    domains: ["ai", "documents"],
+    tools: ["OpenAI", "GitHub", "Node"],
+    gatewaySkillNames: ["skillweaver"],
+    primarySkillNames: ["skill-creator", "skill-installer", "plugin-creator"],
+    supportingSkillNames: ["template-creator:template-creator", "dev-documentation-systems"],
+    verificationSkillNames: ["skill-security-auditor"],
+    relatedConceptIds: ["agent-llm-apps", "repo-operations"]
+  },
+  {
+    id: "documents-pdf",
+    label: "Documents and PDFs",
+    description: "Read, transform, write, or validate PDF, document, LaTeX, and documentation artifacts.",
+    triggers: ["pdf", "docx", "document pipeline", "latex", "write docs", "api documentation"],
+    domains: ["documents", "data"],
+    tools: ["Python", "Node"],
+    primarySkillNames: ["pdf", "pdf:pdf", "documents:documents", "api-docs-writer", "dev-documentation-systems"],
+    supportingSkillNames: ["latex:latex-compile", "latex:latex-doctor", "architecture-decision-record", "technical-spec-template"],
+    verificationSkillNames: ["docbridge-full-stack-verification"],
+    relatedConceptIds: ["presentations", "data-dashboarding"]
+  },
+  {
+    id: "presentations",
+    label: "Presentations",
+    description: "Build slide decks, roadmap narratives, and presentation-ready documents.",
+    triggers: ["presentation", "slides", "roadmap deck", "pitch deck"],
+    domains: ["documents", "product"],
+    tools: ["Node"],
+    primarySkillNames: ["presentations:Presentations", "roadmap-presentation"],
+    supportingSkillNames: ["template-creator:template-creator", "documents:documents"],
+    relatedConceptIds: ["documents-pdf", "product-planning"]
+  },
+  {
+    id: "email-triage",
+    label: "Email triage",
+    description: "Search, triage, summarize, and act on Gmail threads or inbox state.",
+    triggers: ["gmail", "inbox triage", "email", "draft reply"],
+    domains: ["operations"],
+    tools: ["Gmail"],
+    primarySkillNames: ["gmail:gmail", "gmail:gmail-inbox-triage", "email-triage"],
+    relatedConceptIds: ["product-planning", "repo-operations"]
+  },
+  {
+    id: "game-development",
+    label: "Game development",
+    description: "Build, test, and tune browser games, WebGL scenes, sprites, and playtest loops.",
+    triggers: ["game", "phaser", "three.js", "webgl", "playtest", "sprite"],
+    domains: ["frontend", "creative"],
+    tools: ["Node", "Playwright"],
+    primarySkillNames: ["game-studio:game-studio", "game-studio:phaser-2d-game", "game-studio:three-webgl-game", "game-studio:web-game-foundations", "game-studio:react-three-fiber-game"],
+    supportingSkillNames: ["game-studio:sprite-pipeline", "game-studio:web-3d-asset-pipeline", "racingsim-game-dev"],
+    verificationSkillNames: ["game-studio:game-playtest"],
+    relatedConceptIds: ["frontend-implementation", "browser-verification"]
+  },
+  {
+    id: "agent-llm-apps",
+    label: "Agent and LLM apps",
+    description: "Build OpenAI, agent SDK, RAG, ChatGPT app, and model-backed application workflows.",
+    triggers: ["openai", "agent sdk", "llm app", "rag", "chatgpt app", "copilot"],
+    domains: ["ai", "backend", "frontend"],
+    tools: ["OpenAI", "Cloudflare", "Vercel", "Node"],
+    primarySkillNames: ["openai-docs", "dev-ai-llm-apps", "openai-agents-js", "chatgpt-apps", "copilot-sdk", "cloudflare:agents-sdk", "vercel:ai-sdk"],
+    supportingSkillNames: ["hugging-face:transformers-js", "hugging-face:huggingface-gradio", "local-speech-ai-mvp"],
+    relatedConceptIds: ["skill-authoring", "cloudflare-workers", "huggingface-ml"]
+  },
+  {
+    id: "product-planning",
+    label: "Product planning",
+    description: "Turn goals, research, roadmaps, and issue trackers into actionable product or implementation plans.",
+    triggers: ["prd", "roadmap", "linear", "user research", "feature priority", "launch checklist"],
+    domains: ["product", "documents"],
+    tools: ["Linear"],
+    primarySkillNames: ["linear", "linear:linear", "prd-template", "roadmap-narrative", "feature-prioritisation", "ux-research-plan", "user-research-synthesis"],
+    supportingSkillNames: ["product-launch-checklist", "product-design:index", "onboarding-plan"],
+    relatedConceptIds: ["presentations", "data-dashboarding", "github-pr-repair"]
+  },
+  {
+    id: "cloudflare-workers",
+    label: "Cloudflare workers",
+    description: "Build, configure, and deploy Cloudflare Workers, Durable Objects, MCP servers, and agent runtimes.",
+    triggers: ["cloudflare workers", "wrangler", "durable object", "mcp server", "cloudflare agent"],
+    domains: ["operations", "backend", "ai"],
+    tools: ["Cloudflare", "Node"],
+    primarySkillNames: ["cloudflare:workers-best-practices", "cloudflare:wrangler", "cloudflare:durable-objects", "cloudflare:building-mcp-server-on-cloudflare", "cloudflare:building-ai-agent-on-cloudflare"],
+    supportingSkillNames: ["cloudflare:cloudflare", "cloudflare:web-perf", "cloudflare:sandbox-sdk"],
+    relatedConceptIds: ["deployment-release", "agent-llm-apps"]
+  },
+  {
+    id: "huggingface-ml",
+    label: "Hugging Face ML",
+    description: "Search, inspect, train, publish, and operate Hugging Face models, datasets, Spaces, and papers.",
+    triggers: ["hugging face", "dataset", "model training", "gradio", "papers", "spaces"],
+    domains: ["ai", "data"],
+    tools: ["Python"],
+    primarySkillNames: ["hugging-face:hf-cli", "hugging-face:huggingface-datasets", "hugging-face:huggingface-llm-trainer", "hugging-face:huggingface-vision-trainer", "hugging-face:huggingface-papers"],
+    supportingSkillNames: ["hugging-face:huggingface-gradio", "hugging-face:huggingface-jobs", "hugging-face:transformers-js"],
+    relatedConceptIds: ["agent-llm-apps", "data-dashboarding"]
+  },
+  {
+    id: "marketing-growth",
+    label: "Marketing growth",
+    description: "Plan, research, produce, and measure marketing, SEO, CRO, creative, and industry growth work.",
+    triggers: ["marketing strategy", "seo", "cro", "creative ads", "growth report", "competitive intelligence"],
+    domains: ["creative", "data", "product"],
+    tools: ["Node"],
+    primarySkillNames: ["marketing-strategy-and-growth", "seo-and-organic-growth", "analytics-cro-and-reporting", "creative-production", "creative-offer", "creative-ads-explorer"],
+    supportingSkillNames: ["competitive-intelligence-monitor", "business-strategy-and-research", "industry-playbooks", "creative-positioning"],
+    relatedConceptIds: ["data-dashboarding", "product-planning"]
+  },
+  {
+    id: "repo-operations",
+    label: "Repository operations",
+    description: "Inspect repos, preserve worktree state, review dependencies, document architecture, and keep implementation changes scoped.",
+    triggers: ["repo audit", "code review", "dependency audit", "technical debt", "architecture review", "monorepo"],
+    domains: ["backend", "operations", "github", "security"],
+    tools: ["GitHub", "Node", "Python"],
+    primarySkillNames: ["conservative-repo-operations", "code-review-checklist", "dependency-audit", "dev-architecture-review", "technical-debt-register"],
+    supportingSkillNames: ["dev-monorepo-build-systems", "dev-dependency-maintenance", "error-decoder", "debugging-log-analyser"],
+    verificationSkillNames: ["codex-security:security-diff-scan"],
+    relatedConceptIds: ["github-pr-repair", "security-review", "deployment-release"]
+  }
+];
+
+const CONCEPT_ROLE_PRIORITY = {
+  gateway: 5,
+  primary: 4,
+  verification: 3,
+  supporting: 2,
+  reference: 1
+};
+
 const STOP_WORDS = new Set([
   "about",
   "after",
@@ -559,6 +783,321 @@ function rankSkill(skill, query) {
   return score;
 }
 
+function getConceptNamedRole(rule, normalizedName) {
+  const roleFields = [
+    ["gateway", rule.gatewaySkillNames],
+    ["primary", rule.primarySkillNames],
+    ["verification", rule.verificationSkillNames],
+    ["supporting", rule.supportingSkillNames]
+  ];
+
+  for (const [role, names] of roleFields) {
+    if ((names ?? []).some((name) => normalizeSearchText(name) === normalizedName)) {
+      return role;
+    }
+  }
+  return null;
+}
+
+function overlap(left = [], right = []) {
+  const rightSet = new Set(right.map((value) => normalizeSearchText(value)));
+  return left.filter((value) => rightSet.has(normalizeSearchText(value)));
+}
+
+function makeConceptSkillRef(rule, skill) {
+  const normalizedName = normalizeSearchText(skill.name);
+  const namedRole = getConceptNamedRole(rule, normalizedName);
+  const nameText = normalizeSearchText(skill.name);
+  const descriptionText = normalizeSearchText(skill.description);
+  const triggerText = normalizeSearchText((skill.triggers ?? []).join(" "));
+  const domainText = normalizeSearchText((skill.domains ?? []).join(" "));
+  const toolText = normalizeSearchText((skill.tools ?? []).join(" "));
+  const bodyText = skill.searchText ?? "";
+  const conceptPhraseText = `${rule.label} ${rule.description} ${(rule.triggers ?? []).join(" ")}`;
+  const conceptTerms = tokenize(conceptPhraseText);
+  const sharedDomains = overlap(skill.domains, rule.domains);
+  const sharedTools = overlap(skill.tools, rule.tools);
+  const reasons = [];
+
+  let score = 0;
+  if (namedRole) {
+    score += {
+      gateway: 260,
+      primary: 240,
+      verification: 220,
+      supporting: 200
+    }[namedRole];
+    reasons.push(`Named ${namedRole} skill for this concept.`);
+  }
+
+  if (sharedDomains.length) {
+    score += sharedDomains.length * 28;
+    reasons.push(`Shares domain ${sharedDomains.slice(0, 2).join(", ")}.`);
+  }
+
+  if (sharedTools.length) {
+    score += sharedTools.length * 22;
+    reasons.push(`Shares tool ${sharedTools.slice(0, 2).join(", ")}.`);
+  }
+
+  for (const phrase of rule.triggers ?? []) {
+    const normalizedPhrase = normalizeSearchText(phrase);
+    if (!normalizedPhrase) continue;
+    if (descriptionText.includes(normalizedPhrase)) score += 24;
+    if (triggerText.includes(normalizedPhrase)) score += 22;
+    if (bodyText.includes(normalizedPhrase)) score += 8;
+  }
+
+  for (const term of conceptTerms) {
+    if (nameText.includes(term)) score += 14;
+    if (descriptionText.includes(term)) score += 7;
+    if (triggerText.includes(term)) score += 6;
+    if (domainText.includes(term)) score += 5;
+    if (toolText.includes(term)) score += 4;
+    if (bodyText.includes(term)) score += 0.5;
+  }
+
+  if (nameText === "index" && !namedRole) score -= 60;
+
+  const include = Boolean(namedRole) || score >= 46;
+  if (!include) return null;
+
+  const role = namedRole
+    ?? (score >= 95 ? "supporting" : "reference");
+
+  return {
+    skillId: skill.id,
+    name: skill.name,
+    description: skill.description,
+    path: skill.path,
+    folder: skill.folder,
+    root: skill.root,
+    sourceType: skill.sourceType,
+    namespace: skill.namespace,
+    domains: skill.domains,
+    tools: skill.tools,
+    role,
+    score: Number(score.toFixed(1)),
+    reason: reasons[0] ?? "Matches concept trigger language."
+  };
+}
+
+function compareConceptSkillRefs(left, right) {
+  return (CONCEPT_ROLE_PRIORITY[right.role] ?? 0) - (CONCEPT_ROLE_PRIORITY[left.role] ?? 0)
+    || right.score - left.score
+    || (SOURCE_TYPE_PRIORITY[right.sourceType] ?? 0) - (SOURCE_TYPE_PRIORITY[left.sourceType] ?? 0)
+    || left.name.localeCompare(right.name);
+}
+
+function dedupeConceptSkillRefs(refs) {
+  const byName = new Map();
+  for (const ref of refs) {
+    const key = normalizeSearchText(ref.name);
+    const existing = byName.get(key);
+    if (!existing || compareConceptSkillRefs(ref, existing) < 0) {
+      byName.set(key, ref);
+    }
+  }
+
+  return [...byName.values()]
+    .sort(compareConceptSkillRefs)
+    .slice(0, 18);
+}
+
+function buildConceptEdges(concepts) {
+  const conceptById = new Map(concepts.map((concept) => [concept.id, concept]));
+  const edges = [];
+
+  for (const concept of concepts) {
+    for (const targetId of concept.relatedConceptIds ?? []) {
+      if (!conceptById.has(targetId)) continue;
+      edges.push({
+        sourceId: concept.id,
+        targetId,
+        type: "curated_concept_link",
+        label: "curated",
+        weight: 0.95,
+        reason: `${concept.label} commonly feeds ${conceptById.get(targetId).label}.`
+      });
+    }
+  }
+
+  for (let leftIndex = 0; leftIndex < concepts.length; leftIndex += 1) {
+    for (let rightIndex = leftIndex + 1; rightIndex < concepts.length; rightIndex += 1) {
+      const left = concepts[leftIndex];
+      const right = concepts[rightIndex];
+      const sharedSkillIds = overlap(
+        left.skillRefs.map((ref) => ref.skillId),
+        right.skillRefs.map((ref) => ref.skillId)
+      );
+      const sharedDomains = overlap(left.domains, right.domains);
+      const sharedTools = overlap(left.tools, right.tools);
+      const weight = Math.min(0.9, (sharedSkillIds.length * 0.22) + (sharedDomains.length * 0.12) + (sharedTools.length * 0.1));
+
+      if (weight < 0.28) continue;
+      edges.push({
+        sourceId: left.id,
+        targetId: right.id,
+        type: "shared_concept_evidence",
+        label: sharedSkillIds.length ? "shared skills" : sharedTools.length ? "shared tools" : "shared domains",
+        weight: Number(weight.toFixed(2)),
+        reason: `Shared ${sharedSkillIds.length} skills, ${sharedDomains.length} domains, and ${sharedTools.length} tools.`
+      });
+    }
+  }
+
+  const seen = new Set();
+  return edges
+    .filter((edge) => {
+      const key = [edge.sourceId, edge.targetId].sort().join("|");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((left, right) => right.weight - left.weight || left.sourceId.localeCompare(right.sourceId))
+    .slice(0, 200);
+}
+
+function buildConceptMap(skills) {
+  const concepts = CONCEPT_RULES.map((rule) => {
+    const skillRefs = dedupeConceptSkillRefs(
+      skills
+        .map((skill) => makeConceptSkillRef(rule, skill))
+        .filter(Boolean)
+    );
+    const domains = [...new Set([...(rule.domains ?? []), ...skillRefs.flatMap((ref) => ref.domains)])].sort();
+    const tools = [...new Set([...(rule.tools ?? []), ...skillRefs.flatMap((ref) => ref.tools)])].sort();
+    const roleCounts = skillRefs.reduce((counts, ref) => {
+      counts[ref.role] = (counts[ref.role] ?? 0) + 1;
+      return counts;
+    }, {});
+
+    return {
+      id: rule.id,
+      label: rule.label,
+      description: rule.description,
+      triggers: rule.triggers ?? [],
+      domains,
+      tools,
+      skillRefs,
+      roleCounts,
+      skillCount: skillRefs.length,
+      relatedConceptIds: rule.relatedConceptIds ?? [],
+      searchText: normalizeSearchText([
+        rule.label,
+        rule.description,
+        ...(rule.triggers ?? []),
+        ...domains,
+        ...tools,
+        ...skillRefs.flatMap((ref) => [ref.name, ref.description, ref.reason])
+      ].join(" "))
+    };
+  });
+
+  return {
+    concepts,
+    conceptEdges: buildConceptEdges(concepts)
+  };
+}
+
+function rankConcept(concept, query) {
+  const normalizedQuery = normalizeSearchText(query);
+  const terms = tokenize(query);
+  if (!normalizedQuery) return 0;
+
+  const labelText = normalizeSearchText(concept.label);
+  const descriptionText = normalizeSearchText(concept.description);
+  const triggerText = normalizeSearchText((concept.triggers ?? []).join(" "));
+  const skillText = normalizeSearchText((concept.skillRefs ?? []).flatMap((ref) => [ref.name, ref.description]).join(" "));
+  const domainToolText = normalizeSearchText([...(concept.domains ?? []), ...(concept.tools ?? [])].join(" "));
+
+  let score = 0;
+  if (labelText === normalizedQuery) score += 160;
+  if (labelText.includes(normalizedQuery)) score += 120;
+  if (descriptionText.includes(normalizedQuery)) score += 80;
+  if (triggerText.includes(normalizedQuery)) score += 70;
+  if (skillText.includes(normalizedQuery)) score += 34;
+  if (concept.searchText.includes(normalizedQuery)) score += 12;
+
+  for (const term of terms) {
+    if (labelText.includes(term)) score += 22;
+    if (descriptionText.includes(term)) score += 14;
+    if (triggerText.includes(term)) score += 13;
+    if (domainToolText.includes(term)) score += 10;
+    if (skillText.includes(term)) score += 5;
+    if (concept.searchText.includes(term)) score += 1;
+  }
+
+  return score;
+}
+
+function conceptMatchesFilters(concept, filters = {}) {
+  const root = String(filters.root ?? "").trim();
+  const domain = String(filters.domain ?? "").trim();
+  const sourceType = String(filters.sourceType ?? "").trim();
+  const namespace = String(filters.namespace ?? "").trim();
+  if (!root && !domain && !sourceType && !namespace) return true;
+
+  return (concept.skillRefs ?? []).some((ref) =>
+    (!root || ref.root === root)
+    && (!domain || ref.domains.includes(domain))
+    && (!sourceType || ref.sourceType === sourceType)
+    && (!namespace || ref.namespace === namespace)
+  );
+}
+
+function serializeConceptSummary(concept) {
+  return {
+    id: concept.id,
+    label: concept.label,
+    description: concept.description,
+    triggers: concept.triggers,
+    domains: concept.domains,
+    tools: concept.tools,
+    roleCounts: concept.roleCounts,
+    skillCount: concept.skillCount,
+    skillRefs: concept.skillRefs.slice(0, 8)
+  };
+}
+
+function searchConcepts(index, query, filters = {}) {
+  return (index.concepts ?? [])
+    .filter((concept) => conceptMatchesFilters(concept, filters))
+    .map((concept) => ({ concept, score: query ? rankConcept(concept, query) : 1 }))
+    .filter((entry) => !query || entry.score > 0)
+    .sort((left, right) =>
+      right.score - left.score
+      || right.concept.skillCount - left.concept.skillCount
+      || left.concept.label.localeCompare(right.concept.label)
+    )
+    .map(({ concept, score }) => ({ ...serializeConceptSummary(concept), score }))
+    .slice(0, 50);
+}
+
+function getRelatedConcepts(index, conceptId) {
+  const conceptById = new Map((index.concepts ?? []).map((concept) => [concept.id, concept]));
+  return (index.conceptEdges ?? [])
+    .filter((edge) => edge.sourceId === conceptId || edge.targetId === conceptId)
+    .map((edge) => {
+      const relatedId = edge.sourceId === conceptId ? edge.targetId : edge.sourceId;
+      const concept = conceptById.get(relatedId);
+      return concept ? { ...serializeConceptSummary(concept), edge } : null;
+    })
+    .filter(Boolean)
+    .sort((left, right) => right.edge.weight - left.edge.weight || left.label.localeCompare(right.label))
+    .slice(0, 12);
+}
+
+function serializeConceptDetail(index, conceptId) {
+  const concept = (index.concepts ?? []).find((entry) => entry.id === conceptId);
+  if (!concept) return null;
+  return {
+    ...serializeConceptSummary(concept),
+    skillRefs: concept.skillRefs,
+    relatedConcepts: getRelatedConcepts(index, conceptId)
+  };
+}
+
 function searchSkills(index, query, filters = {}) {
   const root = String(filters.root ?? "").trim();
   const domain = String(filters.domain ?? "").trim();
@@ -687,6 +1226,8 @@ function summarizeIndex(index) {
     roots: index.roots,
     skillCount: index.skills.length,
     edgeCount: index.edges.length,
+    conceptCount: index.concepts?.length ?? 0,
+    conceptEdgeCount: index.conceptEdges?.length ?? 0,
     domains,
     namespaces,
     sourceTypes,
@@ -742,11 +1283,15 @@ async function scanSkillRoots(roots = getConfiguredSkillRoots()) {
   }
 
   skills.sort((left, right) => left.name.localeCompare(right.name) || left.path.localeCompare(right.path));
+  const edges = buildEdges(skills);
+  const { concepts, conceptEdges } = buildConceptMap(skills);
   return {
     scannedAt: Date.now(),
     roots: normalizedRoots,
     skills,
-    edges: buildEdges(skills)
+    edges,
+    concepts,
+    conceptEdges
   };
 }
 
@@ -764,6 +1309,10 @@ export {
   inferDomains,
   inferTools,
   rankSkill,
+  buildConceptMap,
+  searchConcepts,
+  getRelatedConcepts,
+  serializeConceptDetail,
   searchSkills,
   recommendWorkflow,
   getRelatedSkills,

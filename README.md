@@ -1,6 +1,6 @@
 # SkillWeaver
 
-SkillWeaver is a lightweight local-first navigator for Codex skills. It scans local `SKILL.md` files and turns them into a searchable skill map with ranked routing, related skills, resources, and source paths.
+SkillWeaver is a lightweight local-first navigator for Codex skills. It scans local `SKILL.md` files and turns them into a concept-first map with ranked routing, related skills, resources, and source paths.
 
 ## Quick Start
 
@@ -50,8 +50,22 @@ npm start
 - Resource folders: `references`, `reference`, `scripts`, `assets`, `examples`, and `evaluations`.
 - Heuristic domains and tool hints.
 - Duplicate names, shared namespaces, shared domains, shared tools, and skill mentions.
+- High-level work concepts that reference role-tagged skills.
+- Concept links from curated workflow adjacency and shared concept evidence.
 
 The filesystem stays authoritative. SkillWeaver does not rewrite existing skills.
+
+## Concept Mapping
+
+SkillWeaver now treats high-level work concepts as the primary graph nodes. Each concept references skills by role:
+
+- `gateway`: load or inspect first.
+- `primary`: main execution skill for that concept.
+- `verification`: skills that prove the work is correct.
+- `supporting`: adjacent helpers.
+- `reference`: weaker but still relevant matches.
+
+The concept layer is deterministic and derived from current skill metadata; it does not mutate the source `SKILL.md` files.
 
 ## Benchmarking
 

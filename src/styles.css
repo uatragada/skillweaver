@@ -82,7 +82,7 @@ button {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -167,7 +167,7 @@ button {
 
 .search-header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   gap: 12px;
   align-items: center;
 }
@@ -203,6 +203,39 @@ button {
   font-weight: 700;
 }
 
+.mode-toggle {
+  height: 38px;
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid #d6ded7;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.mode-toggle button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 104px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #51615c;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.mode-toggle button + button {
+  border-left: 1px solid #d6ded7;
+}
+
+.mode-toggle button.is-active {
+  background: #143c39;
+  color: #ffffff;
+}
+
 .workspace-grid {
   margin-top: 18px;
   display: grid;
@@ -212,7 +245,7 @@ button {
 }
 
 .results-panel,
-.workflow-panel {
+.side-panel {
   min-width: 0;
 }
 
@@ -240,6 +273,7 @@ button {
   gap: 9px;
 }
 
+.concept-row,
 .skill-row {
   width: 100%;
   min-height: 112px;
@@ -255,6 +289,8 @@ button {
   transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
 
+.concept-row:hover,
+.concept-row.is-selected,
 .skill-row:hover,
 .skill-row.is-selected {
   border-color: #179987;
@@ -262,10 +298,12 @@ button {
   transform: translateY(-1px);
 }
 
+.concept-row-main,
 .skill-row-main {
   min-width: 0;
 }
 
+.concept-title-line,
 .skill-title-line {
   display: flex;
   align-items: center;
@@ -273,11 +311,13 @@ button {
   gap: 8px;
 }
 
+.concept-title-line strong,
 .skill-title-line strong {
   font-size: 16px;
   line-height: 1.25;
 }
 
+.concept-row p,
 .skill-row p,
 .skill-description {
   margin: 8px 0 0;
@@ -297,6 +337,8 @@ button {
 .tag-row span,
 .trigger-list span,
 .namespace-pill,
+.concept-count,
+.role-badge,
 .source-badge {
   border-radius: 999px;
   padding: 4px 8px;
@@ -316,9 +358,60 @@ button {
   color: #5e5140;
 }
 
+.concept-count {
+  background: #eef4f1;
+  color: #31534c;
+}
+
+.concept-skill-strip {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.concept-skill-strip span {
+  max-width: 100%;
+  border: 1px solid #e1e8e3;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #40504b;
+  padding: 6px 8px;
+  font-size: 12px;
+  line-height: 1.1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .source-badge {
   background: #e7f5f2;
   color: #126b61;
+}
+
+.role-gateway {
+  background: #173d39;
+  color: #ffffff;
+}
+
+.role-primary {
+  background: #e7f5f2;
+  color: #126b61;
+}
+
+.role-verification {
+  background: #edf0f8;
+  color: #37406a;
+}
+
+.role-supporting {
+  background: #fff3d8;
+  color: #745008;
+}
+
+.role-reference {
+  background: #f0efe8;
+  color: #5e5140;
 }
 
 .source-system {
@@ -346,7 +439,7 @@ button {
   font-weight: 800;
 }
 
-.workflow-panel {
+.side-panel {
   position: sticky;
   top: 18px;
   border: 1px solid #dfe5df;
@@ -447,6 +540,50 @@ button {
   line-height: 1.35;
 }
 
+.concept-score {
+  min-width: 40px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #cbd8d3;
+  border-radius: 8px;
+  color: #173d39;
+  background: #ffffff;
+  font-weight: 900;
+}
+
+.concept-meta-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.concept-meta-grid div {
+  border: 1px solid #dbe4df;
+  border-radius: 8px;
+  background: #f6faf8;
+  padding: 10px;
+}
+
+.concept-meta-grid strong,
+.concept-meta-grid span {
+  display: block;
+}
+
+.concept-meta-grid strong {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.concept-meta-grid span {
+  margin-top: 5px;
+  color: #65736e;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
 .inspector-section {
   margin-top: 22px;
 }
@@ -489,6 +626,60 @@ button {
 .related-list {
   display: grid;
   gap: 8px;
+}
+
+.role-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.role-group {
+  display: grid;
+  gap: 8px;
+}
+
+.role-group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #65736e;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.skill-ref-button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+  border: 1px solid #dde5e0;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px;
+  text-align: left;
+  color: inherit;
+}
+
+.skill-ref-button strong,
+.skill-ref-button small {
+  display: block;
+}
+
+.skill-ref-button strong {
+  font-size: 13px;
+}
+
+.skill-ref-button small {
+  margin-top: 4px;
+  color: #65736e;
+  line-height: 1.35;
+}
+
+.skill-ref-meta {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
 }
 
 .related-list button {
@@ -598,10 +789,11 @@ button {
     padding: 16px;
   }
 
-  .workflow-panel {
+  .side-panel {
     position: static;
   }
 
+  .concept-row,
   .skill-row {
     grid-template-columns: 1fr;
   }
