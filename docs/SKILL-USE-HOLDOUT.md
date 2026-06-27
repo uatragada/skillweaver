@@ -1,9 +1,9 @@
 # SkillWeaver V2 Post-Tuning Challenge Benchmark
 
-Generated: 2026-06-27T12:04:49.139Z
+Generated: 2026-06-27T12:09:44.493Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782561889139,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"eca517a4d5bbe92f725e0de47babfacbfad0d056","dirty":true,"dirtyPaths":["benchmarks/skill-routing-cases.json","benchmarks/skill-routing-holdout.json","docs/SKILL-USE-GAINS.md","scripts/benchmark-skill-routing.mjs"]},"invalidatingDirtyPaths":["benchmarks/skill-routing-holdout.json","scripts/benchmark-skill-routing.mjs"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:d174b9eff6aaefcea64a3e6aa14f876c86969354d9b0b3a348bdf2b09a01e502","benchmarkScript":"sha256:b262b17d1926cfc84f73a46f44d04c0ff1e011e9f28adb27959bbaaf333c6876","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:300d33f846264c07ffbbf4182f952b7dc6e74e76b0978f12085ea0051a096eff"}
+{"generatedAt":1782562184493,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"ae0ae9380ea5f549a0fdc4d71e21ad6c09680720","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:d174b9eff6aaefcea64a3e6aa14f876c86969354d9b0b3a348bdf2b09a01e502","benchmarkScript":"sha256:b262b17d1926cfc84f73a46f44d04c0ff1e011e9f28adb27959bbaaf333c6876","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:300d33f846264c07ffbbf4182f952b7dc6e74e76b0978f12085ea0051a096eff"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,9 +11,9 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:holdout`
 - Suite: Post-Tuning Challenge
 - Acceptance gate: no
-- Git commit at generation: `eca517a4d5bbe92f725e0de47babfacbfad0d056`
-- Git dirty: yes
-- Invalidating dirty paths: `benchmarks/skill-routing-holdout.json`, `scripts/benchmark-skill-routing.mjs`
+- Git commit at generation: `ae0ae9380ea5f549a0fdc4d71e21ad6c09680720`
+- Git dirty: no
+- Invalidating dirty paths: none
 - Case hash: `sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6`
 - Scanner hash: `sha256:d174b9eff6aaefcea64a3e6aa14f876c86969354d9b0b3a348bdf2b09a01e502`
 - Benchmark script hash: `sha256:b262b17d1926cfc84f73a46f44d04c0ff1e011e9f28adb27959bbaaf333c6876`
