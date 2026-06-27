@@ -1,0 +1,410 @@
+[
+  {
+    "id": "ai-elements-chat-surface-v5",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
+    "query": "Build a production chat UI with Vercel AI Elements, streaming messages, tool-call states, and accessibility checks; do not create a ChatGPT App or OpenAI Agents workflow.",
+    "expectedPrimary": [
+      "ai-elements"
+    ],
+    "expectedSupport": [
+      "ai-sdk",
+      "dev-frontend-react-next",
+      "frontend-testing-debugging"
+    ],
+    "mustNotPrimary": [
+      "chatgpt-apps",
+      "openai-agents-js"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "ai-generation-persistence-resume-v5",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
+    "query": "Add persistence for AI generations in a Next.js app so users can resume outputs after refresh, including storage boundaries and replay tests; do not route this to generic database schema design or Vercel Blob setup.",
+    "expectedPrimary": [
+      "ai-generation-persistence"
+    ],
+    "expectedSupport": [
+      "ai-sdk",
+      "dev-node-typescript-services",
+      "database-schema-design"
+    ],
+    "mustNotPrimary": [
+      "vercel-storage",
+      "openai-agents-js"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "cloudflare-agent-state-v5",
+    "domain": "ai-agent-apps",
+    "concept": "cloudflare-workers",
+    "query": "Build a stateful Cloudflare Agents SDK workflow with Worker bindings and Durable Object state; do not use Vercel Agent Browser or OpenAI Agents JS.",
+    "expectedPrimary": [
+      "agents-sdk",
+      "building-ai-agent-on-cloudflare"
+    ],
+    "expectedSupport": [
+      "durable-objects",
+      "wrangler",
+      "workers-best-practices"
+    ],
+    "mustNotPrimary": [
+      "vercel-agent",
+      "agent-browser",
+      "openai-agents-js"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "screenshot-bug-evidence-v5",
+    "domain": "frontend-experience",
+    "concept": "browser-verification",
+    "query": "Capture screenshot evidence for a local UI bug, compare desktop and mobile states, and attach browser QA notes; do not turn the screenshot into code.",
+    "expectedPrimary": [
+      "screenshot"
+    ],
+    "expectedSupport": [
+      "control-in-app-browser",
+      "frontend-testing-debugging",
+      "playwright"
+    ],
+    "mustNotPrimary": [
+      "design-image-to-code",
+      "design-url-to-code"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "figma-annotation-review-v5",
+    "domain": "frontend-experience",
+    "concept": "figma-handoff",
+    "query": "Annotate a Figma design for engineering handoff with spacing, component notes, and review comments; do not implement React code or create Code Connect mappings.",
+    "expectedPrimary": [
+      "figma-annotation-guide"
+    ],
+    "expectedSupport": [
+      "figma-use",
+      "figma-design-review",
+      "figma-design-qa"
+    ],
+    "mustNotPrimary": [
+      "figma-implement-design",
+      "figma-code-connect"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "product-design-audit-no-build-v5",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
+    "query": "Audit a proposed onboarding flow for product design, accessibility, and interaction risks before implementation; do not build the page.",
+    "expectedPrimary": [
+      "design-audit"
+    ],
+    "expectedSupport": [
+      "design-get-context",
+      "ux-research-plan",
+      "design-qa"
+    ],
+    "mustNotPrimary": [
+      "frontend-app-builder",
+      "figma-implement-design"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "geospatial-map-report-v5",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
+    "query": "Create a geospatial map visualization from regional performance data with legend, projection choices, and QA notes; not a general BI dashboard or chart extraction task.",
+    "expectedPrimary": [
+      "geospatial-and-cartographic-visualization"
+    ],
+    "expectedSupport": [
+      "data-visualization",
+      "testing-data-visualizations",
+      "build-report"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard",
+      "chart-data-extractor"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "event-table-quality-contract-v5",
+    "domain": "database-data-engineering",
+    "concept": "database-data-engineering",
+    "query": "Audit event table freshness, duplicate keys, null rates, and ownership rules before locking a data pipeline contract; do not build a dashboard.",
+    "expectedPrimary": [
+      "data-quality-audit"
+    ],
+    "expectedSupport": [
+      "validate-data",
+      "data-pipeline-spec",
+      "data-analysis-standard"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard",
+      "chart-data-extractor"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "security-validation-after-fix-v5",
+    "domain": "security-risk",
+    "concept": "security-review",
+    "query": "Validate that a security remediation PR actually fixes the reported issue, attach evidence, and update finding status; do not discover new findings or triage the backlog.",
+    "expectedPrimary": [
+      "validation"
+    ],
+    "expectedSupport": [
+      "security-diff-scan",
+      "track-findings",
+      "security-best-practices"
+    ],
+    "mustNotPrimary": [
+      "finding-discovery",
+      "triage-finding"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "hf-jobs-gpu-run-v5",
+    "domain": "huggingface-ml",
+    "concept": "huggingface-ml",
+    "query": "Launch and monitor a remote Hugging Face GPU Job for a training script, capture logs and metrics, and summarize run artifacts; do not make a Gradio Space or dataset card.",
+    "expectedPrimary": [
+      "huggingface-jobs"
+    ],
+    "expectedSupport": [
+      "hf-cli",
+      "huggingface-trackio",
+      "huggingface-llm-trainer"
+    ],
+    "mustNotPrimary": [
+      "huggingface-gradio",
+      "huggingface-datasets"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "tts-voiceover-not-transcription-v5",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
+    "query": "Generate text-to-speech voiceover audio from a prepared script, choose voice settings, and verify playback; do not transcribe microphone input.",
+    "expectedPrimary": [
+      "speech"
+    ],
+    "expectedSupport": [
+      "openai-docs",
+      "dev-ai-llm-apps"
+    ],
+    "mustNotPrimary": [
+      "transcribe",
+      "transformers-js"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "vercel-firewall-observability-v5",
+    "domain": "security-risk",
+    "concept": "security-review",
+    "query": "Tune Vercel Firewall rules using recent traffic evidence, add bot and rate-limit notes, and define monitoring follow-up; do not run a repo vulnerability scan.",
+    "expectedPrimary": [
+      "vercel-firewall"
+    ],
+    "expectedSupport": [
+      "security-best-practices",
+      "monitoring-setup-guide",
+      "vercel-deploy"
+    ],
+    "mustNotPrimary": [
+      "security-scan",
+      "deep-security-scan"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "stripe-webhook-reconciliation-v5",
+    "domain": "backend-services",
+    "concept": "backend-services",
+    "query": "Implement Stripe webhook reconciliation for subscription lifecycle events, idempotency, and test fixtures; do not make it a generic payments overview or auth task.",
+    "expectedPrimary": [
+      "stripe-best-practices"
+    ],
+    "expectedSupport": [
+      "dev-node-typescript-services",
+      "dev-backend-api-design",
+      "security-best-practices"
+    ],
+    "mustNotPrimary": [
+      "payments",
+      "auth"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "r3f-scene-not-data-viz-v5",
+    "domain": "games-simulation",
+    "concept": "game-development",
+    "query": "Build an interactive React Three Fiber game scene with camera controls, physics placeholders, and canvas verification; do not create a 3D data visualization.",
+    "expectedPrimary": [
+      "react-three-fiber-game"
+    ],
+    "expectedSupport": [
+      "three-webgl-game",
+      "game-playtest",
+      "web-3d-asset-pipeline"
+    ],
+    "mustNotPrimary": [
+      "threejs-data-visualization",
+      "data-visualization"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "technical-debt-register-no-upgrade-v5",
+    "domain": "repo-collaboration",
+    "concept": "repo-operations",
+    "query": "Create a technical debt register from module hotspots, TODOs, dependency risk, and owner notes; do not resolve a dependency conflict or write release notes.",
+    "expectedPrimary": [
+      "technical-debt-register"
+    ],
+    "expectedSupport": [
+      "dependency-audit",
+      "code-review-checklist",
+      "dev-git-github-collaboration"
+    ],
+    "mustNotPrimary": [
+      "dependency-conflict-resolver",
+      "changelog-generator"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "presentation-template-pack-v5",
+    "domain": "documents-publishing",
+    "concept": "presentations",
+    "query": "Create a reusable presentation template pack from brand assets with slide layouts, placeholders, and validation guidance; do not produce a one-off roadmap deck.",
+    "expectedPrimary": [
+      "template-creator"
+    ],
+    "expectedSupport": [
+      "Presentations",
+      "documents",
+      "premium-saas-landing-pages"
+    ],
+    "mustNotPrimary": [
+      "roadmap-presentation"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "notion-research-source-bank-v5",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
+    "query": "Turn Notion research notes and source links into a structured source bank with evidence summaries and open questions; do not convert a spec into implementation tickets or prepare meeting follow-ups.",
+    "expectedPrimary": [
+      "notion-research-documentation"
+    ],
+    "expectedSupport": [
+      "last-30-days-research",
+      "research-protocol",
+      "notion-knowledge-capture"
+    ],
+    "mustNotPrimary": [
+      "notion-meeting-intelligence",
+      "notion-spec-to-implementation"
+    ],
+    "source": "subagent-audit",
+    "collectedAfterCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "frozenBeforeTuningCommit": "c090354bfdcceaa8f2a38e8bdb3b40a3d2d8b614",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  }
+]
