@@ -13,8 +13,9 @@ const PRE_CONCEPT_COMMIT = "80d31f1";
 const CHECK_MODE = process.argv.includes("--check");
 const HOLDOUT_MODE = process.argv.includes("--holdout");
 const FRESH_MODE = process.argv.includes("--fresh");
-if (HOLDOUT_MODE && FRESH_MODE) {
-  console.error("Use only one benchmark suite flag: --holdout or --fresh.");
+const FROZEN_HOLDOUT_MODE = process.argv.includes("--frozen-holdout");
+if ([HOLDOUT_MODE, FRESH_MODE, FROZEN_HOLDOUT_MODE].filter(Boolean).length > 1) {
+  console.error("Use only one benchmark suite flag: --holdout, --fresh, or --frozen-holdout.");
   process.exit(1);
 }
 const SUITES = {
@@ -50,9 +51,20 @@ const SUITES = {
     command: CHECK_MODE ? "npm run benchmark:skills:fresh:check" : "npm run benchmark:skills:fresh",
     gatesAcceptance: false,
     role: "fresh-probe-regression"
+  },
+  frozenHoldout: {
+    id: "frozen-holdout",
+    label: "Frozen Holdout",
+    reportTitle: "Frozen Holdout Benchmark",
+    casesPath: resolve("benchmarks/skill-routing-frozen-holdout.json"),
+    casesRelativePath: "benchmarks/skill-routing-frozen-holdout.json",
+    reportPath: resolve("docs/SKILL-USE-FROZEN-HOLDOUT.md"),
+    command: CHECK_MODE ? "npm run benchmark:skills:frozen:check" : "npm run benchmark:skills:frozen",
+    gatesAcceptance: false,
+    role: "untouched-holdout"
   }
 };
-const SUITE = FRESH_MODE ? SUITES.fresh : HOLDOUT_MODE ? SUITES.holdout : SUITES.acceptance;
+const SUITE = FROZEN_HOLDOUT_MODE ? SUITES.frozenHoldout : FRESH_MODE ? SUITES.fresh : HOLDOUT_MODE ? SUITES.holdout : SUITES.acceptance;
 const CASES_PATH = SUITE.casesPath;
 const REPORT_PATH = SUITE.reportPath;
 const INVALIDATING_PATHS = [
@@ -699,6 +711,14 @@ function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2Suppo
     ];
   }
 
+  if (SUITE.role === "untouched-holdout") {
+    return [
+      "## Claim Scope",
+      "",
+      `This report is a frozen-holdout baseline for prompts captured after the latest routing-tuning commit and before any tuning from this suite. It supports a clean-split claim only while no misses from these prompts have informed routing changes: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, support coverage@5 ${formatPercent(v2Summary.supportCoverage)}, support precision@5 ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} support-miss cases. If this suite later drives tuning, relabel it as challenge or regression evidence before citing it again.`
+    ];
+  }
+
   return [
     "## Claim Scope",
     "",
@@ -755,6 +775,8 @@ function buildMarkdown({
     ? freshness.acceptance.ok ? "SkillWeaver V2 changes" : "SkillWeaver V2 currently reports"
     : SUITE.role === "fresh-probe-regression"
       ? "On the fresh-probe regression suite, SkillWeaver V2 changes"
+      : SUITE.role === "untouched-holdout"
+        ? "On the frozen holdout suite, SkillWeaver V2 changes"
     : "On the post-tuning challenge suite, SkillWeaver V2 changes";
 
   const lines = [
@@ -891,6 +913,14 @@ function buildMarkdown({
 
 function buildSuiteRoleSection() {
   if (SUITE.gatesAcceptance) return [];
+  if (SUITE.role === "untouched-holdout") {
+    return [
+      "## Suite Role",
+      "",
+      "This suite is intended as untouched holdout evidence for current V2 routing. Cases include provenance fields and were frozen before any routing changes from their results. The report is non-gating so failures can expose real gaps without weakening the active acceptance suite.",
+      ""
+    ];
+  }
   if (SUITE.role === "fresh-probe-regression") {
     return [
       "## Suite Role",

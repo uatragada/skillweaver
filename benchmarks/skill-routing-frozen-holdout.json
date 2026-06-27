@@ -1,0 +1,292 @@
+[
+  {
+    "id": "node-typescript-mcp-server-holdout",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
+    "query": "Build a Node/TypeScript MCP server for Codex with typed tools, resources, fixture tests, and local client setup; not a ChatGPT App or Cloudflare Worker",
+    "expectedPrimary": [
+      "dev-ai-llm-apps"
+    ],
+    "expectedSupport": [
+      "dev-node-typescript-services",
+      "api-docs-writer"
+    ],
+    "mustNotPrimary": [
+      "chatgpt-apps",
+      "building-mcp-server-on-cloudflare"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "gmail-notion-inbox-holdout",
+    "domain": "communications-knowledge",
+    "concept": "email-triage",
+    "query": "Triage Gmail inbox messages, use linked Notion meeting notes for context, summarize important threads, and draft replies",
+    "expectedPrimary": [
+      "gmail-inbox-triage",
+      "gmail"
+    ],
+    "expectedSupport": [
+      "email-triage",
+      "notion-meeting-intelligence",
+      "notion-knowledge-capture"
+    ],
+    "mustNotPrimary": [
+      "notion-meeting-intelligence",
+      "notion-spec-to-implementation"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "phaser-sprite-hud-holdout",
+    "domain": "games-simulation",
+    "concept": "game-development",
+    "query": "Create the sprite, tilemap, and HUD asset pipeline for a Phaser 2D game, then define playtest checks; do not build a 3D scene",
+    "expectedPrimary": [
+      "sprite-pipeline"
+    ],
+    "expectedSupport": [
+      "phaser-2d-game",
+      "game-ui-frontend",
+      "game-playtest"
+    ],
+    "mustNotPrimary": [
+      "three-webgl-game",
+      "react-three-fiber-game"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "vercel-storage-marketplace-holdout",
+    "domain": "platform-delivery",
+    "concept": "deployment-release",
+    "query": "Add Vercel Blob, Edge Config, or Neon storage to a Next.js app with Marketplace provisioning, environment variables, and deployment notes",
+    "expectedPrimary": [
+      "vercel-storage"
+    ],
+    "expectedSupport": [
+      "marketplace",
+      "env-vars",
+      "nextjs"
+    ],
+    "mustNotPrimary": [
+      "database-schema-design",
+      "supabase-postgres-best-practices"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "analytics-semantic-layer-holdout",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
+    "query": "Create a reusable Data Analytics semantic layer and business context for warehouse tables before dashboards or reports consume it",
+    "expectedPrimary": [
+      "create-data-context"
+    ],
+    "expectedSupport": [
+      "gather-business-context",
+      "validate-data",
+      "build-report"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard",
+      "data-pipeline-spec"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "otel-slo-tracing-holdout",
+    "domain": "observability-reliability",
+    "concept": "observability-reliability",
+    "query": "Set up OpenTelemetry tracing, service SLOs, error budget monitoring, dashboards, and Sentry alerts for a production API",
+    "expectedPrimary": [
+      "dev-observability-sre"
+    ],
+    "expectedSupport": [
+      "monitoring-setup-guide",
+      "slo-error-budget",
+      "sentry"
+    ],
+    "mustNotPrimary": [
+      "incident-postmortem",
+      "debugging-log-analyser"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "huggingface-paper-evals-holdout",
+    "domain": "huggingface-ml",
+    "concept": "huggingface-ml",
+    "query": "Read a Hugging Face paper page, connect models and datasets, run or summarize community evaluations, and publish an evidence summary to the Hub",
+    "expectedPrimary": [
+      "huggingface-paper-publisher"
+    ],
+    "expectedSupport": [
+      "huggingface-papers",
+      "huggingface-community-evals",
+      "huggingface-datasets"
+    ],
+    "mustNotPrimary": [
+      "huggingface-llm-trainer",
+      "huggingface-gradio"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "brand-logo-moodboard-holdout",
+    "domain": "marketing-growth-creative",
+    "concept": "marketing-growth",
+    "query": "Explore logo identity routes and moodboard directions for a new brand before ad asset production or offer testing",
+    "expectedPrimary": [
+      "logo-explorer"
+    ],
+    "expectedSupport": [
+      "moodboard-explorer",
+      "positioning-explorer",
+      "creative-production"
+    ],
+    "mustNotPrimary": [
+      "creative-ads-explorer",
+      "creative-offer",
+      "figma-generate-library"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "in-app-browser-choice-holdout",
+    "domain": "frontend-experience",
+    "concept": "browser-verification",
+    "query": "Use the in-app browser to inspect a live local page, capture screenshots, and compare behavior without switching to desktop Chrome",
+    "expectedPrimary": [
+      "control-in-app-browser"
+    ],
+    "expectedSupport": [
+      "playwright",
+      "screenshot",
+      "playwright-interactive"
+    ],
+    "mustNotPrimary": [
+      "control-chrome",
+      "agent-browser",
+      "agent-browser-verify"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "figma-swiftui-motion-holdout",
+    "domain": "frontend-experience",
+    "concept": "figma-handoff",
+    "query": "Inspect a Figma design and implement the motion handoff as SwiftUI components rather than React code",
+    "expectedPrimary": [
+      "figma-swiftui"
+    ],
+    "expectedSupport": [
+      "figma-use",
+      "figma-use-motion",
+      "figma-implement-motion"
+    ],
+    "mustNotPrimary": [
+      "figma-implement-design",
+      "dev-frontend-react-next"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "skill-install-security-holdout",
+    "domain": "skill-tooling",
+    "concept": "skill-authoring",
+    "query": "Install a reusable Codex skill pack from GitHub, validate it locally, audit it for unsafe instructions, and avoid mutating unrelated repos",
+    "expectedPrimary": [
+      "skill-installer"
+    ],
+    "expectedSupport": [
+      "skill-security-auditor",
+      "skillweaver",
+      "skill-creator"
+    ],
+    "mustNotPrimary": [
+      "plugin-creator",
+      "cli-creator"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "analytics-report-to-slides-holdout",
+    "domain": "documents-publishing",
+    "concept": "presentations",
+    "query": "Convert an existing analytics report into a polished Google Slides or PowerPoint deck with charts, speaker flow, and template guidance",
+    "expectedPrimary": [
+      "reports-pdfs-and-slide-automation"
+    ],
+    "expectedSupport": [
+      "build-report",
+      "Presentations",
+      "template-creator"
+    ],
+    "mustNotPrimary": [
+      "roadmap-presentation",
+      "pdf"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  }
+]
