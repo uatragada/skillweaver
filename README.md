@@ -48,6 +48,8 @@ npm run benchmark:skills:frozen
 npm run benchmark:skills:frozen:check
 npm run benchmark:skills:clean-v2-regression
 npm run benchmark:skills:clean-v2-regression:check
+npm run benchmark:skills:clean-v3
+npm run benchmark:skills:clean-v3:check
 npm run build
 npm start
 ```
@@ -86,6 +88,7 @@ By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Us
 - [Fresh-probe regression benchmark](docs/SKILL-USE-FRESH.md)
 - [Frozen holdout benchmark](docs/SKILL-USE-FROZEN-HOLDOUT.md)
 - [Clean holdout V2 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V2.md)
+- [Clean holdout V3 benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md)
 - [Support quality roadmap](docs/SUPPORT-QUALITY-ROADMAP.md)
 - [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
 - [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
@@ -134,3 +137,11 @@ npm run benchmark:skills:clean-v2-regression
 ```
 
 Use `npm run benchmark:skills:clean-v2-regression:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V2.md](docs/SKILL-USE-CLEAN-HOLDOUT-V2.md). This suite began as the clean V2 holdout; after its misses informed routing fixes, the checked-in report is regression evidence only. A future clean generalization claim needs a new prompt set captured after this tuning commit.
+
+Run the non-gating clean holdout V3 suite with:
+
+```powershell
+npm run benchmark:skills:clean-v3
+```
+
+Use `npm run benchmark:skills:clean-v3:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V3.md](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md). This suite is the current untouched baseline captured after the clean V2 regression tuning commit. It is intentionally allowed to fail quality gates so it can expose real gaps before any V3-driven routing work.

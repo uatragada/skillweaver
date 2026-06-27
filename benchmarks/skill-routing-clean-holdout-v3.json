@@ -1,0 +1,439 @@
+[
+  {
+    "id": "netlify-preview-rollback-v3",
+    "domain": "platform-delivery",
+    "concept": "deployment-release",
+    "query": "Ship a Netlify branch preview for a static app, set redirect rules and environment scopes, run a deployed browser smoke check, and write the rollback note for DNS cutover.",
+    "expectedPrimary": [
+      "netlify-deploy"
+    ],
+    "expectedSupport": [
+      "frontend-testing-debugging",
+      "dev-release-productization",
+      "launch-readiness"
+    ],
+    "mustNotPrimary": [
+      "vercel-deploy",
+      "render-deploy"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "skill-author-reference-pack-v3",
+    "domain": "skill-tooling",
+    "concept": "skill-authoring",
+    "query": "Turn a recurring repo workflow into a Codex skill with frontmatter, reference files, example scripts, validation notes, safe tool-use guidance, and a SkillWeaver route check before sharing it.",
+    "expectedPrimary": [
+      "skill-creator"
+    ],
+    "expectedSupport": [
+      "skillweaver",
+      "skill-security-auditor",
+      "dev-documentation-systems"
+    ],
+    "mustNotPrimary": [
+      "plugin-creator",
+      "cli-creator"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "inapp-responsive-console-v3",
+    "domain": "frontend-experience",
+    "concept": "browser-verification",
+    "query": "Use the app embedded browser against localhost, reproduce a mobile layout break, capture screenshot proof, and inspect console output without launching desktop Chrome.",
+    "expectedPrimary": [
+      "control-in-app-browser"
+    ],
+    "expectedSupport": [
+      "frontend-testing-debugging",
+      "playwright",
+      "screenshot"
+    ],
+    "mustNotPrimary": [
+      "control-chrome",
+      "agent-browser-verify"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "figma-motion-token-handoff-v3",
+    "domain": "frontend-experience",
+    "concept": "figma-handoff",
+    "query": "From a Figma prototype, extract interaction timing and easing into an implementation-ready motion handoff for existing React components; skip SwiftUI and page-build work.",
+    "expectedPrimary": [
+      "figma-implement-motion",
+      "figma-use-motion"
+    ],
+    "expectedSupport": [
+      "motion-implementation-recipes",
+      "motion-qa"
+    ],
+    "mustNotPrimary": [
+      "figma-swiftui",
+      "figma-implement-design"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "roadmap-research-slide-template-v3",
+    "domain": "documents-publishing",
+    "concept": "presentations",
+    "query": "Create a board-ready roadmap deck from Linear milestones and research notes, with a reusable slide template and speaker narrative rather than a PRD or inbox triage.",
+    "expectedPrimary": [
+      "Presentations",
+      "roadmap-presentation"
+    ],
+    "expectedSupport": [
+      "template-creator",
+      "roadmap-narrative",
+      "linear"
+    ],
+    "mustNotPrimary": [
+      "prd-template",
+      "gmail-inbox-triage"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "notebook-cohort-audit-v3",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
+    "query": "Build a reproducible notebook that checks cohort definitions, validates source tables, and leaves an audit trail for a retention readout before anyone makes a dashboard.",
+    "expectedPrimary": [
+      "jupyter-notebooks"
+    ],
+    "expectedSupport": [
+      "validate-data",
+      "data-analysis-standard",
+      "metric-diagnostics"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard",
+      "build-report"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "warehouse-contract-migration-v3",
+    "domain": "database-data-engineering",
+    "concept": "database-data-engineering",
+    "query": "Specify a warehouse ingestion contract and migration plan for event tables, including ownership, quality checks, rollback handling, and downstream pipeline impact.",
+    "expectedPrimary": [
+      "data-pipeline-spec",
+      "database-migration-plan"
+    ],
+    "expectedSupport": [
+      "dev-data-engineering",
+      "data-quality-audit",
+      "dev-database-postgres"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard",
+      "create-data-context"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "terraform-k8s-rollout-risk-v3",
+    "domain": "infrastructure-platforms",
+    "concept": "infrastructure-platforms",
+    "query": "Review Terraform modules and Kubernetes manifests for rollout blast radius, secret exposure, capacity limits, and CI/CD controls before a platform launch.",
+    "expectedPrimary": [
+      "infra-as-code-review",
+      "dev-containers-kubernetes"
+    ],
+    "expectedSupport": [
+      "security-best-practices",
+      "capacity-planning",
+      "cicd-playbook"
+    ],
+    "mustNotPrimary": [
+      "wrangler",
+      "cloudflare"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "otel-before-postmortem-v3",
+    "domain": "observability-reliability",
+    "concept": "observability-reliability",
+    "query": "Instrument a production API with traces, service indicators, SLO alerting, and Sentry noise controls before there is any incident report to write.",
+    "expectedPrimary": [
+      "dev-observability-sre"
+    ],
+    "expectedSupport": [
+      "monitoring-setup-guide",
+      "slo-error-budget",
+      "sentry"
+    ],
+    "mustNotPrimary": [
+      "incident-postmortem",
+      "debugging-log-analyser"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "oauth-session-hardening-v3",
+    "domain": "backend-services",
+    "concept": "backend-services",
+    "query": "Add OAuth sign-in and session-hardening to a Next.js service with callback handling, secret and environment configuration, and security review, without turning it into a WAF rules task.",
+    "expectedPrimary": [
+      "auth"
+    ],
+    "expectedSupport": [
+      "security-best-practices",
+      "dev-backend-api-design",
+      "env-vars"
+    ],
+    "mustNotPrimary": [
+      "security-scan",
+      "vercel-firewall"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "pr-security-finding-triage-v3",
+    "domain": "security-risk",
+    "concept": "security-review",
+    "query": "Classify CodeQL and dependency-alert findings from a pull request, separate false positives from exploitable issues, assign remediation owners, and define validation steps.",
+    "expectedPrimary": [
+      "triage-finding",
+      "validation"
+    ],
+    "expectedSupport": [
+      "security-diff-scan",
+      "track-findings",
+      "security-best-practices"
+    ],
+    "mustNotPrimary": [
+      "security-threat-model",
+      "security-ownership-map"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "gmail-notion-action-owner-v3",
+    "domain": "communications-knowledge",
+    "concept": "email-triage",
+    "query": "Use Gmail as the action surface for partner replies, pulling context from linked Notion decisions and recording follow-up owners after drafting the responses.",
+    "expectedPrimary": [
+      "gmail-inbox-triage",
+      "gmail"
+    ],
+    "expectedSupport": [
+      "email-triage",
+      "notion-meeting-intelligence",
+      "notion-knowledge-capture"
+    ],
+    "mustNotPrimary": [
+      "notion-spec-to-implementation",
+      "roadmap-narrative"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "huggingface-dataset-card-eval-v3",
+    "domain": "huggingface-ml",
+    "concept": "huggingface-ml",
+    "query": "Find the right Hugging Face dataset, inspect card metadata and licensing, compare related papers and evaluations, and prepare Hub notes before any model training starts.",
+    "expectedPrimary": [
+      "huggingface-datasets"
+    ],
+    "expectedSupport": [
+      "hf-cli",
+      "huggingface-community-evals",
+      "huggingface-papers"
+    ],
+    "mustNotPrimary": [
+      "huggingface-gradio",
+      "huggingface-llm-trainer"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "game-accessible-hud-playtest-v3",
+    "domain": "games-simulation",
+    "concept": "game-development",
+    "query": "Design the menu and HUD layer for a Phaser 2D prototype, including controller and keyboard states, sprite handoff, and playtest checks; avoid 3D or WebGL scene work.",
+    "expectedPrimary": [
+      "game-ui-frontend"
+    ],
+    "expectedSupport": [
+      "phaser-2d-game",
+      "sprite-pipeline",
+      "game-playtest"
+    ],
+    "mustNotPrimary": [
+      "three-webgl-game",
+      "react-three-fiber-game"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "creative-seo-conversion-readout-v3",
+    "domain": "marketing-growth-creative",
+    "concept": "marketing-growth",
+    "query": "Plan a search-led growth test for a SaaS page: map technical SEO fixes, content clusters, conversion readout, and KPI tracking before making ad concepts.",
+    "expectedPrimary": [
+      "seo-and-organic-growth"
+    ],
+    "expectedSupport": [
+      "analytics-cro-and-reporting",
+      "marketing-strategy-and-growth",
+      "kpi-reporting"
+    ],
+    "mustNotPrimary": [
+      "creative-ads-explorer",
+      "creative-production"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "market-sizing-source-bank-v3",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
+    "query": "Build a sourced market-sizing memo for a niche B2B segment with assumptions, comparable data, and uncertainty ranges, not a dashboard about existing product metrics.",
+    "expectedPrimary": [
+      "market-sizing"
+    ],
+    "expectedSupport": [
+      "business-strategy-and-research",
+      "external-research-digests",
+      "research-protocol"
+    ],
+    "mustNotPrimary": [
+      "metric-diagnostics",
+      "build-dashboard"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "repo-preserve-dependency-upgrade-v3",
+    "domain": "repo-collaboration",
+    "concept": "repo-operations",
+    "query": "Resolve a pnpm workspace dependency conflict after an upgrade, inspect the lockfile and failed tests, preserve unrelated worktree changes, and prepare concise PR notes.",
+    "expectedPrimary": [
+      "dependency-conflict-resolver"
+    ],
+    "expectedSupport": [
+      "dev-monorepo-build-systems",
+      "dev-dependency-maintenance",
+      "dev-git-github-collaboration"
+    ],
+    "mustNotPrimary": [
+      "gh-fix-ci",
+      "changelog-generator"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "support-critical"
+  },
+  {
+    "id": "openai-agents-approval-flow-v3",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
+    "query": "Implement an OpenAI Agents JS workflow with tool approvals, typed handoffs, test fixtures, and current docs checks; do not make it a ChatGPT App or Copilot SDK task.",
+    "expectedPrimary": [
+      "openai-agents-js"
+    ],
+    "expectedSupport": [
+      "openai-docs",
+      "dev-ai-llm-apps",
+      "dev-node-typescript-services"
+    ],
+    "mustNotPrimary": [
+      "chatgpt-apps",
+      "copilot-sdk"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "frozenBeforeTuningCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  }
+]

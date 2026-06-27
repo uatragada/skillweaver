@@ -15,8 +15,9 @@ const HOLDOUT_MODE = process.argv.includes("--holdout");
 const FRESH_MODE = process.argv.includes("--fresh");
 const FROZEN_HOLDOUT_MODE = process.argv.includes("--frozen-holdout");
 const CLEAN_HOLDOUT_MODE = process.argv.includes("--clean-holdout");
-if ([HOLDOUT_MODE, FRESH_MODE, FROZEN_HOLDOUT_MODE, CLEAN_HOLDOUT_MODE].filter(Boolean).length > 1) {
-  console.error("Use only one benchmark suite flag: --holdout, --fresh, --frozen-holdout, or --clean-holdout.");
+const CLEAN_HOLDOUT_V3_MODE = process.argv.includes("--clean-holdout-v3");
+if ([HOLDOUT_MODE, FRESH_MODE, FROZEN_HOLDOUT_MODE, CLEAN_HOLDOUT_MODE, CLEAN_HOLDOUT_V3_MODE].filter(Boolean).length > 1) {
+  console.error("Use only one benchmark suite flag: --holdout, --fresh, --frozen-holdout, --clean-holdout, or --clean-holdout-v3.");
   process.exit(1);
 }
 const SUITES = {
@@ -74,9 +75,22 @@ const SUITES = {
     command: CHECK_MODE ? "npm run benchmark:skills:clean-v2-regression:check" : "npm run benchmark:skills:clean-v2-regression",
     gatesAcceptance: false,
     role: "clean-regression"
+  },
+  cleanHoldoutV3: {
+    id: "clean-holdout-v3",
+    label: "Clean Holdout V3",
+    reportTitle: "Clean Holdout V3 Benchmark",
+    casesPath: resolve("benchmarks/skill-routing-clean-holdout-v3.json"),
+    casesRelativePath: "benchmarks/skill-routing-clean-holdout-v3.json",
+    reportPath: resolve("docs/SKILL-USE-CLEAN-HOLDOUT-V3.md"),
+    command: CHECK_MODE ? "npm run benchmark:skills:clean-v3:check" : "npm run benchmark:skills:clean-v3",
+    gatesAcceptance: false,
+    role: "untouched-holdout"
   }
 };
-const SUITE = CLEAN_HOLDOUT_MODE
+const SUITE = CLEAN_HOLDOUT_V3_MODE
+  ? SUITES.cleanHoldoutV3
+  : CLEAN_HOLDOUT_MODE
   ? SUITES.cleanHoldout
   : FROZEN_HOLDOUT_MODE
     ? SUITES.frozenHoldout
@@ -426,12 +440,17 @@ function validateCases(cases, index) {
       }
     }
 
-    const hasProvenance = CASE_PROVENANCE_FIELDS.some((field) => testCase[field] !== undefined);
+    const requiresProvenance = SUITE.role === "untouched-holdout";
+    const hasProvenance = requiresProvenance || CASE_PROVENANCE_FIELDS.some((field) => testCase[field] !== undefined);
     if (hasProvenance) {
       for (const field of CASE_PROVENANCE_FIELDS) {
         if (testCase[field] === undefined || testCase[field] === "") {
           issues.push(`${testCase.id}: provenance field ${field} is required when any provenance field is present`);
         }
+      }
+
+      if (requiresProvenance && testCase.suiteState !== "untouched-holdout") {
+        issues.push(`${testCase.id}: untouched holdout suites require suiteState: untouched-holdout`);
       }
 
       for (const [field, allowedValues] of Object.entries(CASE_PROVENANCE_ENUMS)) {

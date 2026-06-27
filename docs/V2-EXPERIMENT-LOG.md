@@ -442,7 +442,9 @@ No runtime infrastructure changed. The new cost is one explicit benchmark comman
 
 ## Next Experiments
 
-- Capture a new clean holdout after the clean V2 regression tuning commit before making any renewed generalization claim.
+- Preserve the clean holdout V3 baseline before tuning from it.
+- Promote the V3 P0 primary/forbidden-primary misses into a regression pass only after the baseline is committed.
+- Capture a new clean holdout after any V3-driven tuning commit before making another renewed generalization claim.
 - Use the frozen regression suite as a guardrail, not as fresh evidence.
 - Work through the remaining coverage backlog from the independent audit, especially broader MCP server creation, deeper game-studio variants, Notion meeting-to-email ambiguity, Vercel Auth/Firewall variants, and visualization QA/accessibility variants.
 - Decide whether support precision@5 should become an acceptance gate after expected-support lists are reviewed for completeness.
@@ -473,3 +475,34 @@ V2 moved from -7.0 quality points versus no SkillWeaver and -17.7 versus the ski
 ### Runtime Impact
 
 No new dependencies, persistence, model calls, graph caps, background jobs, or product-route passes were added. The changes stay inside deterministic concept membership, intent scoring, benchmark provenance, and tests.
+
+## Clean Holdout V3 Baseline
+
+Question: after preserving and tuning the clean V2 regression suite at `e2a47a6`, does V2 remain strong on a new untouched prompt set captured after that tuning point?
+
+### Change
+
+- Added `benchmarks/skill-routing-clean-holdout-v3.json` with 18 provenance-backed prompts collected after commit `e2a47a6`.
+- Added `npm run benchmark:skills:clean-v3` and `npm run benchmark:skills:clean-v3:check`.
+- Added stricter provenance validation for suites marked `role: "untouched-holdout"` so every case must declare the clean-split fields and `suiteState: "untouched-holdout"`.
+- Did not change `server/skill-scanner.js`, product API routing, frontend code, graph caps, dependencies, model calls, or persistence.
+
+### Result
+
+| System | Quality | Hit@1 | Top/workflow 5 | Support coverage@5 | Support precision@5 | Forbidden primary |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| No SkillWeaver | 50.3 | 44.4% | 72.2% | 33.3% | 25.0% | 11.1% |
+| Skill-level baseline | 62.3 | 61.1% | 77.8% | 40.7% | 30.6% | 5.6% |
+| SkillWeaver V2 | 64.9 | 55.6% | 83.3% | 61.1% | 45.8% | 11.1% |
+
+V2 still improves composite output quality over both baselines on the clean V3 split: +14.5 points versus no SkillWeaver and +2.6 points versus the skill-level baseline. It also improves expected top/workflow-five retrieval and support coverage over both baselines.
+
+The same result blocks any "solved" claim. V2 trails the skill-level baseline on primary hit@1 by 5.6 percentage points, has 2/18 forbidden primaries, and has 13/18 support-miss cases. The most important clean misses are Netlify deployment, skill authoring, roadmap deck delivery, proactive observability, security finding triage, Hugging Face dataset research, game UI, and OpenAI Agents JS implementation.
+
+### Interpretation
+
+This is the right kind of uncomfortable evidence: V2 is directionally useful on a truly new split, but not yet undeniable. Preserve this report before tuning. If these cases drive routing changes, the suite must become regression evidence and a later clean split must be captured before renewed generalization claims.
+
+### Runtime Impact
+
+No runtime infrastructure changed. The new cost is one explicit benchmark command that scans the corpus once and evaluates 18 cases.

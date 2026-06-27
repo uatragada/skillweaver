@@ -13,8 +13,9 @@ This roadmap turns V2's remaining workflow-quality gaps into deliberate research
 | Fresh-probe regression | 18 | 94.4% | 88.0% | 50.0% | 5 | Non-gating regression |
 | Frozen holdout regression | 12 | 100.0% | 77.8% | 56.3% | 6 | Non-gating regression |
 | Clean holdout V2 regression | 14 | 100.0% | 52.4% | 39.3% | 14 | Non-gating regression |
+| Clean holdout V3 | 18 | 55.6% | 61.1% | 45.8% | 13 | Untouched baseline |
 
-The active suite proves the current acceptance claim. The challenge, fresh-probe, frozen-holdout-regression, and clean-holdout V2 regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout baseline and clean V2 baseline are preserved in git history. Broad generalization claims should stay off the table until a new clean holdout is captured after this tuning pass.
+The active suite proves the current acceptance claim. The challenge, fresh-probe, frozen-holdout-regression, and clean-holdout V2 regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout baseline and clean V2 baseline are preserved in git history. Clean holdout V3 is the current untouched baseline. It shows V2 still improves composite quality over both baselines on new prompts, but it also shows V2 is not yet broad enough to call solved: primary hit@1 trails the skill-level baseline and forbidden-primary rate is 11.1%.
 
 ## Triage Rules
 
@@ -45,6 +46,22 @@ These cases were captured after commit `3cd6e51`, reported before tuning from th
 | `linear-notion-roadmap-holdout` | `gmail-inbox-triage` | `roadmap-narrative`, `linear` | Knowledge/collaboration words routed to inbox triage despite roadmap ownership wording. | P0 | Fixed; V2 primary hit@1 |
 | `figjam-user-flow-holdout` | `figma-user-flow-planner` | `figma-use-figjam`, `figma-user-flow-planner` | Primary was acceptable, but support missed UX/product context and included creation/implementation noise. | P1 | Backlog; primary still accepted |
 | `security-ownership-map-holdout` | `security-ownership-map` | `security-ownership-map` | Primary was correct, but ownership-map support missed tracking/risk/security helpers. | P1 | Backlog; primary still accepted |
+
+## Clean Holdout V3 Baseline Queue
+
+These cases are still untouched evidence at the baseline commit. Do not tune from them until this report is committed. Once any case drives routing changes, preserve the baseline and relabel or fork the tuned file as regression evidence.
+
+| Case | Baseline V2 primary | Expected primary | Issue | Priority | Current status |
+| --- | --- | --- | --- | --- | --- |
+| `netlify-preview-rollback-v3` | `launch-readiness` | `netlify-deploy` | Provider-specific deployment intent is buried under generic release/readiness and unrelated frontend/game helpers. | P0 | Untouched baseline miss |
+| `skill-author-reference-pack-v3` | `skillweaver` | `skill-creator` | Skill navigation/gateway intent displaces the authoring skill for creating a reusable Codex skill. | P0 | Untouched baseline miss |
+| `roadmap-research-slide-template-v3` | `linear` | `Presentations`, `roadmap-presentation` | Linear/research source material displaces the deck deliverable. | P0 | Untouched baseline miss |
+| `otel-before-postmortem-v3` | `incident-postmortem` | `dev-observability-sre` | Proactive instrumentation routes to a reactive incident artifact and triggers a forbidden primary. | P0 | Untouched baseline miss |
+| `pr-security-finding-triage-v3` | `dependency-audit` | `triage-finding`, `validation` | Dependency wording displaces security finding triage and validation ownership. | P0 | Untouched baseline miss |
+| `huggingface-dataset-card-eval-v3` | `huggingface-llm-trainer` | `huggingface-datasets` | Dataset/card/licensing research is pulled into training and triggers a forbidden primary. | P0 | Untouched baseline miss |
+| `game-accessible-hud-playtest-v3` | `sprite-pipeline` | `game-ui-frontend` | HUD/menu interaction design is routed to asset pipeline support instead of game UI. | P1 | Untouched baseline miss |
+| `openai-agents-approval-flow-v3` | `openai-docs` | `openai-agents-js` | Current-docs support displaces the implementation skill for Agents JS workflows. | P1 | Untouched baseline miss |
+| `market-sizing-source-bank-v3` | `market-sizing` | `market-sizing` | Primary is correct, but external-source and research-protocol support are absent. | P2 | Support backlog |
 
 ## Frozen Failure Atlas
 
@@ -83,7 +100,7 @@ These were clean-split failures from the pre-tuning frozen-holdout report. They 
 
 ## Next Holdout Coverage Needs
 
-The clean holdout V2 prompt set is now regression evidence in `benchmarks/skill-routing-clean-holdout-v2.json`. The next clean holdout should be captured only after this routing-tuning commit and reported before tuning from those prompts. Candidate families, not final prompts:
+The clean holdout V2 prompt set is now regression evidence in `benchmarks/skill-routing-clean-holdout-v2.json`. Clean holdout V3 is now the current baseline in `benchmarks/skill-routing-clean-holdout-v3.json`. If V3 drives tuning, the next clean holdout should be captured only after that routing-tuning commit and reported before tuning from those prompts. Candidate families, not final prompts:
 
 | Coverage gap | Why it matters | Candidate family |
 | --- | --- | --- |

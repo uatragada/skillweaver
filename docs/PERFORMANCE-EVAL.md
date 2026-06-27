@@ -14,6 +14,7 @@ SkillWeaver should keep V2 routing quality gains without becoming a heavy servic
 | Fresh-probe benchmark check | warn over 10s | 7.106s for 18 cases |
 | Frozen holdout benchmark check | warn over 10s | 6.931s for 12 cases |
 | Clean holdout V2 regression benchmark check | warn over 10s | 6.869s for 14 cases |
+| Clean holdout V3 benchmark check | warn over 10s | 8.271s for 18 cases |
 | Production build JS bundle | warn over 250 kB raw JS | 211.33 kB raw JS in latest build |
 | Production build CSS bundle | warn over 20 kB raw CSS | 9.69 kB raw CSS in latest build |
 
@@ -30,6 +31,7 @@ Measured on June 27, 2026 from a clean SkillWeaver worktree with Node `v24.14.1`
 | `npm run --silent benchmark:skills:fresh:check` | 7.106s | 0 | 18 cases, report fresh |
 | `npm run --silent benchmark:skills:frozen:check` | 6.931s | 0 | 12 cases, report fresh |
 | `npm run --silent benchmark:skills:clean-v2-regression:check` | 6.869s | 0 | 14 cases, report fresh; non-gating regression evidence |
+| `npm run --silent benchmark:skills:clean-v3:check` | 8.271s | 0 | 18 cases, report fresh; non-gating untouched baseline |
 | `npm run build` | 2.342s | 0 | production build passed |
 | `Get-ChildItem dist\assets -File` | n/a | 0 | JS 211,334 bytes; CSS 9,690 bytes |
 
@@ -54,12 +56,14 @@ npm run benchmark:skills:holdout:check
 npm run benchmark:skills:fresh:check
 npm run benchmark:skills:frozen:check
 npm run benchmark:skills:clean-v2-regression:check
+npm run benchmark:skills:clean-v3:check
 Measure-Command { node server\skill-scanner.js *> $null }
 Measure-Command { npm run benchmark:skills:check *> $null }
 Measure-Command { npm run benchmark:skills:holdout:check *> $null }
 Measure-Command { npm run benchmark:skills:fresh:check *> $null }
 Measure-Command { npm run benchmark:skills:frozen:check *> $null }
 Measure-Command { npm run benchmark:skills:clean-v2-regression:check *> $null }
+Measure-Command { npm run benchmark:skills:clean-v3:check *> $null }
 Get-ChildItem dist\assets -File | Select-Object Name,Length
 ```
 
@@ -72,11 +76,12 @@ npm run benchmark:skills:holdout
 npm run benchmark:skills:fresh
 npm run benchmark:skills:frozen
 npm run benchmark:skills:clean-v2-regression
+npm run benchmark:skills:clean-v3
 ```
 
 ## Current Assessment
 
-The V2 concept map and the benchmark slice reports add quality evidence, not product runtime infrastructure. Cross-domain, frozen-holdout, and clean-holdout V2 regression reporting is generated only when benchmark commands run, and the API route continues to use the same `rankConceptWorkflowSkills()` helper.
+The V2 concept map and the benchmark slice reports add quality evidence, not product runtime infrastructure. Cross-domain, frozen-holdout, clean-holdout V2 regression, and clean-holdout V3 reporting is generated only when benchmark commands run, and the API route continues to use the same `rankConceptWorkflowSkills()` helper.
 
 The current performance posture is acceptable: quality reports are richer, but no new dependencies, persistence, model calls, larger graph caps, or extra product-route passes were added.
 
