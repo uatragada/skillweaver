@@ -10,7 +10,8 @@
     "build": "vite build",
     "start": "node server/index.js",
     "test": "node --test",
-    "index:skills": "node scripts/index-skills.mjs"
+    "index:skills": "node scripts/index-skills.mjs",
+    "benchmark:skills": "node scripts/benchmark-skill-routing.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.2",

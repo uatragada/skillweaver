@@ -38,6 +38,7 @@ npm run dev
 ```powershell
 npm test
 npm run index:skills
+npm run benchmark:skills
 npm run build
 npm start
 ```
@@ -51,3 +52,13 @@ npm start
 - Duplicate names, shared namespaces, shared domains, shared tools, and skill mentions.
 
 The filesystem stays authoritative. SkillWeaver does not rewrite existing skills.
+
+## Benchmarking
+
+Run the reproducible routing benchmark with:
+
+```powershell
+npm run benchmark:skills
+```
+
+The benchmark compares SkillWeaver against a flat metadata-search baseline and writes [docs/SKILL-USE-GAINS.md](docs/SKILL-USE-GAINS.md).

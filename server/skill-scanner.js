@@ -307,7 +307,7 @@ function inferNamespace(name, folder, root) {
     const skillIndex = parts.lastIndexOf("skills");
     const beforeSkills = parts.slice(0, skillIndex);
     const maybeVersion = beforeSkills.at(-1) ?? "";
-    if (/^\d+\.\d+/.test(maybeVersion) || /^\d{2}\.\d+/.test(maybeVersion)) {
+    if (/^\d+\.\d+/.test(maybeVersion) || /^\d{2}\.\d+/.test(maybeVersion) || /^[a-f0-9]{7,}$/i.test(maybeVersion)) {
       return beforeSkills.at(-2) || null;
     }
     return beforeSkills.at(-1) || null;

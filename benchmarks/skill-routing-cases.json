@@ -1,0 +1,183 @@
+[
+  {
+    "id": "frontend-dashboard",
+    "query": "Build a polished frontend dashboard with browser QA",
+    "expectedPrimary": ["frontend-app-builder"],
+    "expectedSupport": ["frontend-testing-debugging", "playwright"]
+  },
+  {
+    "id": "frontend-regression",
+    "query": "Debug a React UI regression with console errors and responsive layout issues",
+    "expectedPrimary": ["frontend-testing-debugging"],
+    "expectedSupport": ["dev-frontend-react-next", "playwright"]
+  },
+  {
+    "id": "github-ci",
+    "query": "Fix failing GitHub Actions CI and address PR comments",
+    "expectedPrimary": ["gh-fix-ci", "gh-address-comments"],
+    "expectedSupport": ["gh-address-comments", "dev-testing-qa"]
+  },
+  {
+    "id": "github-comments",
+    "query": "Address GitHub PR review comments and update the branch",
+    "expectedPrimary": ["gh-address-comments"],
+    "expectedSupport": ["gh-fix-ci"]
+  },
+  {
+    "id": "figma-use-implement",
+    "query": "Use Figma to inspect a design and implement it",
+    "expectedPrimary": ["figma-use"],
+    "expectedSupport": ["figma-implement-design"]
+  },
+  {
+    "id": "figma-library",
+    "query": "Generate a Figma component library and reusable design system",
+    "expectedPrimary": ["figma-generate-library"],
+    "expectedSupport": ["figma-use", "figma-create-design-system-rules"]
+  },
+  {
+    "id": "data-dashboard",
+    "query": "Create a data analytics dashboard from KPI data",
+    "expectedPrimary": ["build-dashboard"],
+    "expectedSupport": ["data-visualization", "kpi-reporting"]
+  },
+  {
+    "id": "kpi-report",
+    "query": "Build an executive KPI report with charts and methodology notes",
+    "expectedPrimary": ["kpi-reporting", "build-report"],
+    "expectedSupport": ["visualize-data", "data-visualization"]
+  },
+  {
+    "id": "data-quality",
+    "query": "Audit a CSV export for data quality issues and suspicious missing values",
+    "expectedPrimary": ["analyze-data-quality", "data-quality-audit"],
+    "expectedSupport": ["data-analysis-standard"]
+  },
+  {
+    "id": "security-scan",
+    "query": "Audit a repo for security vulnerabilities and attack paths",
+    "expectedPrimary": ["security-scan", "deep-security-scan"],
+    "expectedSupport": ["attack-path-analysis", "dev-security-engineering"]
+  },
+  {
+    "id": "attack-path",
+    "query": "Analyze likely exploit chains and attack paths in a codebase",
+    "expectedPrimary": ["attack-path-analysis"],
+    "expectedSupport": ["security-scan", "threat-model"]
+  },
+  {
+    "id": "vercel-deploy",
+    "query": "Deploy this project to Vercel and inspect build logs",
+    "expectedPrimary": ["deployments-cicd", "vercel-deploy", "vercel-api"],
+    "expectedSupport": ["agent-browser-verify", "env-vars"]
+  },
+  {
+    "id": "cloudflare-worker",
+    "query": "Deploy a Cloudflare Worker and configure Wrangler",
+    "expectedPrimary": ["wrangler", "workers-best-practices"],
+    "expectedSupport": ["cloudflare"]
+  },
+  {
+    "id": "skill-create",
+    "query": "Create or update a Codex skill with scripts and references",
+    "expectedPrimary": ["skill-creator"],
+    "expectedSupport": ["skillweaver", "skill-installer"]
+  },
+  {
+    "id": "skillweaver-self",
+    "query": "Investigate SkillWeaver skill routing and benchmark its recommendations",
+    "expectedPrimary": ["skillweaver"],
+    "expectedSupport": ["skill-creator"]
+  },
+  {
+    "id": "pdf-extract",
+    "query": "Work with PDF extraction, forms, and manipulation",
+    "expectedPrimary": ["pdf"],
+    "expectedSupport": ["documents"]
+  },
+  {
+    "id": "spreadsheet-analysis",
+    "query": "Analyze an Excel workbook and produce tables from spreadsheet data",
+    "expectedPrimary": ["Spreadsheets"],
+    "expectedSupport": ["data-analysis-standard"]
+  },
+  {
+    "id": "presentation-deck",
+    "query": "Make a PowerPoint presentation deck from a roadmap",
+    "expectedPrimary": ["Presentations", "roadmap-presentation"],
+    "expectedSupport": ["template-creator"]
+  },
+  {
+    "id": "hf-train",
+    "query": "Train or inspect Hugging Face models and datasets",
+    "expectedPrimary": ["huggingface-llm-trainer", "huggingface-datasets"],
+    "expectedSupport": ["huggingface-community-evals"]
+  },
+  {
+    "id": "hf-dataset",
+    "query": "Search Hugging Face datasets and inspect dataset metadata",
+    "expectedPrimary": ["huggingface-datasets"],
+    "expectedSupport": ["huggingface-papers"]
+  },
+  {
+    "id": "gmail-triage",
+    "query": "Triage Gmail inbox and draft replies",
+    "expectedPrimary": ["gmail", "gmail-inbox-triage"],
+    "expectedSupport": ["email-triage"]
+  },
+  {
+    "id": "phaser-game",
+    "query": "Build a Phaser browser game with playtesting",
+    "expectedPrimary": ["phaser-2d-game"],
+    "expectedSupport": ["game-playtest", "web-game-foundations"]
+  },
+  {
+    "id": "three-game",
+    "query": "Create a Three.js WebGL game scene and verify canvas rendering",
+    "expectedPrimary": ["three-webgl-game"],
+    "expectedSupport": ["game-playtest", "web-3d-asset-pipeline"]
+  },
+  {
+    "id": "adr",
+    "query": "Write an architecture decision record for a backend design choice",
+    "expectedPrimary": ["architecture-decision-record"],
+    "expectedSupport": ["dev-architecture-review"]
+  },
+  {
+    "id": "cro-reporting",
+    "query": "Analyze conversion tracking and CRO reporting for a marketing funnel",
+    "expectedPrimary": ["analytics-cro-and-reporting"],
+    "expectedSupport": ["kpi-reporting"]
+  },
+  {
+    "id": "linear-planning",
+    "query": "Update Linear issues, plan product work, and move completed tasks",
+    "expectedPrimary": ["linear"],
+    "expectedSupport": ["roadmap-narrative"]
+  },
+  {
+    "id": "openai-docs",
+    "query": "Look up current OpenAI API docs before using a product feature",
+    "expectedPrimary": ["openai-docs"],
+    "expectedSupport": ["dev-ai-llm-apps"]
+  },
+  {
+    "id": "openai-agents",
+    "query": "Build a JavaScript OpenAI agents workflow",
+    "expectedPrimary": ["openai-agents-js"],
+    "expectedSupport": ["openai-docs"]
+  },
+  {
+    "id": "browser-qa",
+    "query": "Run browser QA with Playwright screenshots on a local web app",
+    "expectedPrimary": ["playwright", "frontend-testing-debugging"],
+    "expectedSupport": ["browser:control-in-app-browser", "control-in-app-browser"]
+  },
+  {
+    "id": "chrome-control",
+    "query": "Use Chrome to inspect a live page and control browser interactions",
+    "expectedPrimary": ["control-chrome", "chrome:control-chrome"],
+    "expectedSupport": ["playwright-interactive"]
+  }
+]
+
