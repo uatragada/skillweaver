@@ -18,7 +18,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "primary-critical"
   },
@@ -43,7 +43,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "support-critical"
   },
@@ -67,7 +67,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "support-critical"
   },
@@ -91,7 +91,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "primary-critical"
   },
@@ -115,7 +115,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "support-critical"
   },
@@ -139,7 +139,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "support-critical"
   },
@@ -163,7 +163,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "support-critical"
   },
@@ -188,7 +188,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "support-critical"
   },
@@ -213,7 +213,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "primary-critical"
   },
@@ -237,7 +237,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "primary-critical"
   },
@@ -261,7 +261,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "primary-critical"
   },
@@ -285,7 +285,7 @@
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
     "frozenBeforeTuningCommit": "9be00e70e5cd87a1eddc6cce965163ec7783954a",
-    "suiteState": "untouched-holdout",
+    "suiteState": "regression",
     "promotionStatus": "candidate",
     "supportCriticality": "support-critical"
   }

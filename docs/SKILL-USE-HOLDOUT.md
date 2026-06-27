@@ -1,9 +1,9 @@
 # SkillWeaver V2 Post-Tuning Challenge Benchmark
 
-Generated: 2026-06-27T19:57:17.108Z
+Generated: 2026-06-27T20:12:01.065Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782590237108,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"8465f995afb80a2992ec5739eeecece9f86143f9","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:9fe40c232a8a1d94d8df5f0b53184b708b8c81e54aec7e6f5ce4bb03aa3aa135","benchmarkScript":"sha256:87ba653f6982312617076c98b9b40595fe32addc551f2f595d1de86808b21434","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:883b786d225255d0164caa3644321cf1e5fb82b08504b06b034d48736d2a207f"}
+{"generatedAt":1782591121065,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"8d7fa7e6a8ad281d9b7e629b94f6b5c2ae7753fa","dirty":true,"dirtyPaths":["README.md","benchmarks/skill-routing-frozen-holdout.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","docs/SUPPORT-QUALITY-ROADMAP.md","docs/V2-EXPERIMENT-LOG.md","docs/VERIFICATION.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d","benchmarkScript":"sha256:e18ae157485a61ff61e9f5369349e32758de712b17e7714a76c980871ecd55aa","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:d2b933daa5b12fa7bdb80c7f72404649824c3574ce1a45bceee01f6772b9264e"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:holdout`
 - Suite: Post-Tuning Challenge
 - Acceptance gate: no
-- Git commit at generation: `8465f995afb80a2992ec5739eeecece9f86143f9`
-- Git dirty: no
-- Invalidating dirty paths: none
+- Git commit at generation: `8d7fa7e6a8ad281d9b7e629b94f6b5c2ae7753fa`
+- Git dirty: yes
+- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6`
-- Scanner hash: `sha256:9fe40c232a8a1d94d8df5f0b53184b708b8c81e54aec7e6f5ce4bb03aa3aa135`
-- Benchmark script hash: `sha256:87ba653f6982312617076c98b9b40595fe32addc551f2f595d1de86808b21434`
+- Scanner hash: `sha256:68ae684585fd5f2f9e18fde3fbaa98e253f12d64ebc244d658258445f811fb1d`
+- Benchmark script hash: `sha256:e18ae157485a61ff61e9f5369349e32758de712b17e7714a76c980871ecd55aa`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:883b786d225255d0164caa3644321cf1e5fb82b08504b06b034d48736d2a207f`
+- Snapshot fingerprint: `sha256:d2b933daa5b12fa7bdb80c7f72404649824c3574ce1a45bceee01f6772b9264e`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -45,20 +45,20 @@ This is not pristine untouched holdout evidence for the current V2 route. The fi
 
 | Metric | No SkillWeaver | Skill-Level Baseline | SkillWeaver V2 | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Output quality score (0-100) | 70.1 | 77.0 | 93.6 | +23.5 pts | +16.6 pts |
-| Primary hit@1 | 68.2% | 77.3% | 100.0% | +31.8 pp | +22.7 pp |
+| Output quality score (0-100) | 70.1 | 77.0 | 91.8 | +21.7 pts | +14.8 pts |
+| Primary hit@1 | 68.2% | 77.3% | 95.5% | +27.3 pp | +18.2 pp |
 | Expected skill in top/workflow 5 | 100.0% | 100.0% | 100.0% | 0.0 pp | 0.0 pp |
-| Mean reciprocal rank | 0.801 | 0.850 | 1.000 | +0.199 | +0.150 |
-| Support-skill coverage@5 | 34.1% | 45.5% | 68.2% | +34.1 pp | +22.7 pp |
-| Support precision@5, exploratory | 18.2% | 25.4% | 34.1% | +15.9 pp | +8.7 pp |
+| Mean reciprocal rank | 0.801 | 0.850 | 0.977 | +0.177 | +0.127 |
+| Support-skill coverage@5 | 34.1% | 45.5% | 70.5% | +36.4 pp | +25.0 pp |
+| Support precision@5, exploratory | 18.2% | 25.4% | 35.2% | +17.0 pp | +9.8 pp |
 | Forbidden primary rate, lower is better | 0.0% | 0.0% | 0.0% | 0.0 pp | 0.0 pp |
 | Mean candidates to expected skill, lower is better | 1.6 | 1.5 | 1.0 | -0.6 candidates better | -0.5 candidates better |
 
 ## Claim Scope
 
-This report supports the claim that V2 remains strong on a 22-case post-tuning challenge suite: 22/22 primary hit@1, 22/22 expected primary in top/workflow five, and 0/22 forbidden primaries. Workflow support quality is weaker than primary routing: support coverage@5 is 68.2%, support precision@5 is 34.1%, and 12/22 cases miss at least one expected support skill.
+This report supports the claim that V2 remains strong on a 22-case post-tuning challenge suite: 21/22 primary hit@1, 22/22 expected primary in top/workflow five, and 0/22 forbidden primaries. Workflow support quality is weaker than primary routing: support coverage@5 is 70.5%, support precision@5 is 35.2%, and 11/22 cases miss at least one expected support skill.
 
-V2 raw counts: primary hit@1 22/22; expected primary top/workflow-five 22/22; forbidden primary 0/22; support-miss cases 12/22.
+V2 raw counts: primary hit@1 21/22; expected primary top/workflow-five 22/22; forbidden primary 0/22; support-miss cases 11/22.
 
 Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from 442 skills to 5 candidates, a 98.9% candidate reduction per task.
 Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.
@@ -74,7 +74,7 @@ Post-Tuning Challenge quality is intentionally reported rather than accepted or 
 | AI agent apps | 2 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 2/2 | +5.0 pts | 0.0 pts |
 | Data analytics | 2 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +41.7 pts | +10.0 pts |
 | Frontend experience | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +35.0 pts | +26.7 pts |
-| Games and simulation | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +37.5 pts | +41.7 pts |
+| Games and simulation | 2 | 75.0 | 50.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +17.5 pts | +21.7 pts |
 | Communications and knowledge | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +10.0 pts | +10.0 pts |
 | Documents and publishing | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | 0.0 pts | 0.0 pts |
 | Repo collaboration | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 25.0% | 0.0% | 0/1 | +20.0 pts | +20.0 pts |
@@ -89,7 +89,7 @@ Post-Tuning Challenge quality is intentionally reported rather than accepted or 
 | Deployment and release | 3 | 90.0 | 100.0% | 100.0% | 50.0% | 33.3% | 0.0% | 2/3 | +47.8 pts | +36.4 pts |
 | Agent and LLM apps | 2 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 2/2 | +5.0 pts | 0.0 pts |
 | Data dashboards and reports | 2 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +41.7 pts | +10.0 pts |
-| Game development | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +37.5 pts | +41.7 pts |
+| Game development | 2 | 75.0 | 50.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +17.5 pts | +21.7 pts |
 | Documents and PDFs | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | 0.0 pts | 0.0 pts |
 | Figma design handoff | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +70.0 pts | +63.3 pts |
 | Frontend implementation | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 1/1 | 0.0 pts | -10.0 pts |
@@ -100,14 +100,14 @@ Post-Tuning Challenge quality is intentionally reported rather than accepted or 
 
 | Case | Domain | Expected concept | Expected primary | No primary / rank | Skill-level primary / rank | V2 primary / rank | V2 top concept | V2 top/workflow 5 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| chatgpt-app-mcp-widget | AI agent apps | Agent and LLM apps | chatgpt-apps | chatgpt-apps / 1 | chatgpt-apps / 1 | chatgpt-apps / 1 | Cloudflare workers | chatgpt-apps -> building-mcp-server-on-cloudflare -> copilot-sdk -> openai-agents-js -> agents-sdk |
+| chatgpt-app-mcp-widget | AI agent apps | Agent and LLM apps | chatgpt-apps | chatgpt-apps / 1 | chatgpt-apps / 1 | chatgpt-apps / 1 | Agent and LLM apps | chatgpt-apps -> building-mcp-server-on-cloudflare -> copilot-sdk -> openai-agents-js -> dev-ai-llm-apps |
 | aspnet-minimal-api-review | Backend services | Backend APIs and services | aspnet-core | aspnet-core / 1 | aspnet-core / 1 | aspnet-core / 1 | Backend APIs and services | aspnet-core -> auth -> dev-backend-api-design -> dev-java-dotnet-services -> api-docs-writer |
 | java-dotnet-service-boundary | Backend services | Backend APIs and services | dev-java-dotnet-services | dev-java-dotnet-services / 1 | dev-java-dotnet-services / 1 | dev-java-dotnet-services / 1 | Backend APIs and services | dev-java-dotnet-services -> dev-backend-api-design -> api-docs-writer -> aspnet-core -> dev-testing-qa |
 | netlify-frontend-deploy | Platform delivery | Deployment and release | netlify-deploy | frontend-app-builder / 2 | netlify-deploy / 1 | netlify-deploy / 1 | Deployment and release | netlify-deploy -> env-vars -> agent-browser-verify -> cicd-playbook -> deployments-cicd |
 | render-python-api-deploy | Platform delivery | Deployment and release | render-deploy | dev-python-services / 2 | dev-python-services / 5 | render-deploy / 1 | Deployment and release | render-deploy -> dev-python-services -> api-docs-writer -> aspnet-core -> api-versioning-strategy |
 | screenshot-to-code-qa | Frontend experience | Figma design handoff | design-image-to-code, image-to-code | control-in-app-browser / 2 | agent-browser / 3 | design-image-to-code / 1 | Browser verification | design-image-to-code -> playwright -> frontend-testing-debugging -> playwright-interactive -> screenshot |
 | react-three-fiber-scene | Games and simulation | Game development | react-three-fiber-game | react-three-fiber-game / 1 | react-three-fiber-game / 1 | react-three-fiber-game / 1 | Game development | react-three-fiber-game -> three-webgl-game -> web-3d-asset-pipeline -> game-playtest -> phaser-2d-game |
-| game-studio-prototype-plan | Games and simulation | Game development | game-studio | web-3d-asset-pipeline / 4 | three-webgl-game / 3 | game-studio / 1 | Game development | game-studio -> game-playtest -> web-3d-asset-pipeline -> web-game-foundations -> three-webgl-game |
+| game-studio-prototype-plan | Games and simulation | Game development | game-studio | web-3d-asset-pipeline / 4 | three-webgl-game / 3 | sprite-pipeline / 2 | Game development | sprite-pipeline -> game-studio -> game-playtest -> game-ui-frontend -> web-game-foundations |
 | notion-meeting-followups | Communications and knowledge | Product planning | notion-meeting-intelligence | notion-meeting-intelligence / 1 | notion-meeting-intelligence / 1 | notion-meeting-intelligence / 1 | Product planning | notion-meeting-intelligence -> notion-spec-to-implementation -> notion-knowledge-capture -> gmail -> notion-research-documentation |
 | vercel-ai-gateway-routing | AI agent apps | Agent and LLM apps | ai-gateway | ai-gateway / 1 | ai-gateway / 1 | ai-gateway / 1 | Skill ranking anchor | ai-gateway -> ai-sdk -> copilot-sdk -> agents-sdk -> openai-agents-js |
 | vercel-cron-workflow | Platform delivery | Deployment and release | cron-jobs | vercel-functions / 3 | vercel-functions / 3 | cron-jobs / 1 | Deployment and release | cron-jobs -> vercel-functions -> vercel-queues -> workflow -> agent-browser-verify |
@@ -129,10 +129,9 @@ This table is a support-quality backlog source, not an acceptance failure list. 
 
 | Case | Missing expected support | V2 top/workflow 5 |
 | --- | --- | --- |
-| chatgpt-app-mcp-widget | openai-docs | chatgpt-apps -> building-mcp-server-on-cloudflare -> copilot-sdk -> openai-agents-js -> agents-sdk |
+| chatgpt-app-mcp-widget | openai-docs | chatgpt-apps -> building-mcp-server-on-cloudflare -> copilot-sdk -> openai-agents-js -> dev-ai-llm-apps |
 | netlify-frontend-deploy | dev-release-productization, frontend-testing-debugging | netlify-deploy -> env-vars -> agent-browser-verify -> cicd-playbook -> deployments-cicd |
 | render-python-api-deploy | monitoring-setup-guide | render-deploy -> dev-python-services -> api-docs-writer -> aspnet-core -> api-versioning-strategy |
-| game-studio-prototype-plan | game-ui-frontend | game-studio -> game-playtest -> web-3d-asset-pipeline -> web-game-foundations -> three-webgl-game |
 | vercel-ai-gateway-routing | openai-docs | ai-gateway -> ai-sdk -> copilot-sdk -> agents-sdk -> openai-agents-js |
 | nextjs-auth-implementation | security-best-practices | auth -> dev-backend-api-design -> aspnet-core -> payments -> dev-java-dotnet-services |
 | vercel-firewall-rules | security-best-practices | vercel-firewall -> vercel-deploy -> frontend-app-builder -> figma-implement-design -> env-vars |
@@ -144,7 +143,7 @@ This table is a support-quality backlog source, not an acceptance failure list. 
 
 ## Interpretation
 
-On the post-tuning challenge suite, SkillWeaver V2 changes the composite output-quality score by +23.5 points versus no SkillWeaver and +16.6 points versus the skill-level baseline.
-V2 changes primary selection by +31.8 percentage points versus no SkillWeaver and +22.7 percentage points versus the skill-level baseline.
+On the post-tuning challenge suite, SkillWeaver V2 changes the composite output-quality score by +21.7 points versus no SkillWeaver and +14.8 points versus the skill-level baseline.
+V2 changes primary selection by +27.3 percentage points versus no SkillWeaver and +18.2 percentage points versus the skill-level baseline.
 V2 changes expected-skill top/workflow-5 retrieval by 0.0 percentage points versus no SkillWeaver and 0.0 percentage points versus the skill-level baseline.
 The V2 score reflects a concept-aided skill-loading experience, not an LLM reranker; it is fully deterministic and derived from the local skill corpus.

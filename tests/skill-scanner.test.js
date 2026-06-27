@@ -727,6 +727,22 @@ test("concept workflow anchors directly named specialist skills", () => {
       triggers: ["ai sdk"]
     }),
     makeSkill({
+      id: "openai-docs",
+      name: "openai-docs",
+      description: "Look up OpenAI docs, API reference, and product guidance.",
+      domains: ["ai", "documents"],
+      tools: ["OpenAI"],
+      triggers: ["openai docs api reference"]
+    }),
+    makeSkill({
+      id: "api-docs-writer",
+      name: "api-docs-writer",
+      description: "Write API documentation from endpoint behavior, examples, errors, and version notes.",
+      domains: ["documents", "backend"],
+      tools: [],
+      triggers: ["api documentation endpoint behavior examples"]
+    }),
+    makeSkill({
       id: "metric-diagnostics",
       name: "metric-diagnostics",
       description: "Diagnose metric changes, cohorts, and product behavior shifts.",
@@ -779,6 +795,14 @@ test("concept workflow anchors directly named specialist skills", () => {
   assert.equal(
     recommendConceptWorkflow(index, "Route model calls through Vercel AI Gateway with fallback providers").primary.name,
     "ai-gateway"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Look up the OpenAI API docs and reference for tool calls").primary.name,
+    "openai-docs"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Write API documentation from endpoint behavior, examples, and error cases").primary.name,
+    "api-docs-writer"
   );
   assert.equal(
     recommendConceptWorkflow(index, "Diagnose why a product metric changed across cohorts").primary.name,
@@ -986,4 +1010,246 @@ test("concept workflow handles fresh generalization intent aliases", () => {
     recommendConceptWorkflow(index, "Create a risk register for a launch readiness review").primary.name,
     "risk-register"
   );
+});
+
+test("concept workflow handles frozen holdout specialist routing aliases", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "dev-ai-llm-apps",
+      name: "dev-ai-llm-apps",
+      description: "Build LLM applications, MCP servers, agent workflows, typed tools, and provider integrations.",
+      domains: ["ai", "backend"],
+      tools: ["OpenAI", "Node"],
+      triggers: ["node typescript mcp server typed tools resources fixtures"]
+    }),
+    makeSkill({
+      id: "dev-node-typescript-services",
+      name: "dev-node-typescript-services",
+      description: "Build Node and TypeScript services with tests and local setup.",
+      domains: ["backend"],
+      tools: ["Node"],
+      triggers: ["node typescript service fixture tests"]
+    }),
+    makeSkill({
+      id: "api-docs-writer",
+      name: "api-docs-writer",
+      description: "Document typed tools, resources, endpoint behavior, examples, and local clients.",
+      domains: ["documents", "backend"],
+      tools: [],
+      triggers: ["api documentation typed tools resources local client"]
+    }),
+    makeSkill({
+      id: "chatgpt-apps",
+      name: "chatgpt-apps",
+      description: "Build ChatGPT Apps and widgets.",
+      domains: ["ai", "frontend"],
+      tools: ["OpenAI"],
+      triggers: ["chatgpt app widget"]
+    }),
+    makeSkill({
+      id: "building-mcp-server-on-cloudflare",
+      name: "building-mcp-server-on-cloudflare",
+      description: "Build MCP servers on Cloudflare Workers.",
+      domains: ["backend", "operations", "ai"],
+      tools: ["Cloudflare", "Node"],
+      triggers: ["cloudflare workers mcp server"]
+    }),
+    makeSkill({
+      id: "gmail-inbox-triage",
+      name: "gmail-inbox-triage",
+      description: "Triage Gmail inboxes, summarize threads, labels, and draft replies.",
+      domains: ["operations"],
+      tools: ["Gmail"],
+      triggers: ["gmail inbox triage draft replies"]
+    }),
+    makeSkill({
+      id: "gmail",
+      name: "gmail",
+      description: "Search and read Gmail messages and threads.",
+      domains: ["operations"],
+      tools: ["Gmail"],
+      triggers: ["gmail email inbox"]
+    }),
+    makeSkill({
+      id: "email-triage",
+      name: "email-triage",
+      description: "Triage email and summarize inbox state.",
+      domains: ["operations"],
+      tools: ["Gmail"],
+      triggers: ["email triage"]
+    }),
+    makeSkill({
+      id: "notion-meeting-intelligence",
+      name: "notion-meeting-intelligence",
+      description: "Turn Notion meeting notes into decisions and follow-ups.",
+      domains: ["product", "documents"],
+      tools: [],
+      triggers: ["notion meeting notes"]
+    }),
+    makeSkill({
+      id: "notion-knowledge-capture",
+      name: "notion-knowledge-capture",
+      description: "Capture linked Notion knowledge and decision context.",
+      domains: ["product", "documents"],
+      tools: [],
+      triggers: ["notion knowledge capture company context"]
+    }),
+    makeSkill({
+      id: "control-in-app-browser",
+      name: "control-in-app-browser",
+      description: "Control the in-app browser for page inspection and screenshots.",
+      domains: ["frontend"],
+      tools: ["Playwright"],
+      triggers: ["in app browser inspect screenshot"]
+    }),
+    makeSkill({
+      id: "control-chrome",
+      name: "control-chrome",
+      description: "Control desktop Chrome for browser interactions.",
+      domains: ["frontend"],
+      tools: ["Playwright"],
+      triggers: ["control chrome desktop chrome"]
+    }),
+    makeSkill({
+      id: "playwright-interactive",
+      name: "playwright-interactive",
+      description: "Inspect live pages, browser interactions, and screenshots with Playwright.",
+      domains: ["frontend"],
+      tools: ["Playwright"],
+      triggers: ["browser inspect interactions screenshots"]
+    }),
+    makeSkill({
+      id: "sprite-pipeline",
+      name: "sprite-pipeline",
+      description: "Build sprite sheets, tilemaps, HUD assets, and 2D game asset pipelines.",
+      domains: ["frontend", "creative"],
+      tools: ["Node"],
+      triggers: ["sprite sheet tilemap hud asset pipeline phaser"]
+    }),
+    makeSkill({
+      id: "game-ui-frontend",
+      name: "game-ui-frontend",
+      description: "Build game UI overlays, HUDs, menus, and responsive play surfaces.",
+      domains: ["frontend"],
+      tools: ["Node"],
+      triggers: ["game ui hud overlay"]
+    }),
+    makeSkill({
+      id: "phaser-2d-game",
+      name: "phaser-2d-game",
+      description: "Build Phaser 2D browser games.",
+      domains: ["frontend"],
+      tools: ["Node"],
+      triggers: ["phaser 2d game"]
+    }),
+    makeSkill({
+      id: "web-3d-asset-pipeline",
+      name: "web-3d-asset-pipeline",
+      description: "Prepare 3D and WebGL game assets.",
+      domains: ["frontend", "creative"],
+      tools: ["Node"],
+      triggers: ["webgl 3d asset pipeline"]
+    }),
+    makeSkill({
+      id: "dev-observability-sre",
+      name: "dev-observability-sre",
+      description: "Set up OpenTelemetry tracing, monitoring dashboards, SLOs, alerts, and reliability practices.",
+      domains: ["operations", "backend"],
+      tools: ["Node"],
+      triggers: ["opentelemetry tracing slo monitoring alerts"]
+    }),
+    makeSkill({
+      id: "monitoring-setup-guide",
+      name: "monitoring-setup-guide",
+      description: "Plan monitoring setup, dashboards, alert rules, and operational checks.",
+      domains: ["operations"],
+      tools: ["Node"],
+      triggers: ["monitoring dashboards alert rules"]
+    }),
+    makeSkill({
+      id: "slo-error-budget",
+      name: "slo-error-budget",
+      description: "Define SLOs, error budgets, and reliability guardrails.",
+      domains: ["operations"],
+      tools: [],
+      triggers: ["slo error budget"]
+    }),
+    makeSkill({
+      id: "sentry",
+      name: "sentry",
+      description: "Use Sentry for error evidence, issue triage, and alerts.",
+      domains: ["operations"],
+      tools: [],
+      triggers: ["sentry errors alerts"]
+    }),
+    makeSkill({
+      id: "figma-swiftui",
+      name: "figma-swiftui",
+      description: "Translate Figma designs into SwiftUI and iOS implementation handoff.",
+      domains: ["frontend", "product"],
+      tools: ["Figma"],
+      triggers: ["figma swiftui ios"]
+    }),
+    makeSkill({
+      id: "figma-implement-motion",
+      name: "figma-implement-motion",
+      description: "Implement motion and animation details from Figma.",
+      domains: ["frontend"],
+      tools: ["Figma"],
+      triggers: ["figma motion animation"]
+    }),
+    makeSkill({
+      id: "figma-use-motion",
+      name: "figma-use-motion",
+      description: "Inspect Figma motion and prototype details.",
+      domains: ["frontend", "product"],
+      tools: ["Figma"],
+      triggers: ["figma motion prototype"]
+    }),
+    makeSkill({
+      id: "figma-implement-design",
+      name: "figma-implement-design",
+      description: "Implement Figma designs in frontend code.",
+      domains: ["frontend"],
+      tools: ["Figma", "Node"],
+      triggers: ["figma react implementation"]
+    }),
+    makeSkill({
+      id: "dev-frontend-react-next",
+      name: "dev-frontend-react-next",
+      description: "Build React and Next.js implementation code.",
+      domains: ["frontend"],
+      tools: ["Node"],
+      triggers: ["react code"]
+    })
+  ]);
+  const topFive = (query) => rankConceptWorkflowSkills(index, query).slice(0, 5).map((skill) => skill.name);
+
+  let names = topFive("Build a generic Node TypeScript MCP server with typed tool handlers, resources, fixture tests, and local client setup; not a ChatGPT App or Cloudflare Worker");
+  assert.equal(names[0], "dev-ai-llm-apps");
+  assert.ok(names.includes("dev-node-typescript-services"));
+  assert.ok(names.includes("api-docs-writer"));
+  assert.notEqual(names[0], "chatgpt-apps");
+  assert.notEqual(names[0], "building-mcp-server-on-cloudflare");
+
+  names = topFive("Triage my Gmail inbox, draft replies, and use linked Notion company context when it helps");
+  assert.equal(names[0], "gmail-inbox-triage");
+  assert.ok(names.includes("notion-knowledge-capture"));
+  assert.notEqual(names[0], "notion-meeting-intelligence");
+
+  names = topFive("Use the in-app browser to inspect this page and take screenshots without switching to desktop Chrome");
+  assert.equal(names[0], "control-in-app-browser");
+  assert.notEqual(names[0], "control-chrome");
+
+  names = topFive("Build a Phaser sprite sheet, tilemap, HUD, and asset pipeline with playtest checks, not a 3D scene");
+  assert.equal(names[0], "sprite-pipeline");
+  assert.ok(names.includes("game-ui-frontend"));
+
+  names = topFive("Set up OpenTelemetry tracing, SLO monitoring dashboards, error budgets, and Sentry alert rules");
+  assert.equal(names[0], "dev-observability-sre");
+  assert.notEqual(names[0], "sentry");
+
+  names = topFive("Use Figma handoff to turn a mobile design into SwiftUI with motion details rather than React code");
+  assert.equal(names[0], "figma-swiftui");
+  assert.ok(names.includes("figma-implement-motion"));
 });

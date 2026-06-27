@@ -22,7 +22,7 @@ Expected index result on this machine after the V2 concept-map work:
 - domains include `ai`, `backend`, `frontend`, `github`, `operations`, `security`, and `data`.
 - namespaces include plugin names such as `vercel`, `cloudflare`, `figma`, `github`, `gmail`, and `data-analytics`.
 
-The current detailed snapshot lives in [CORPUS-SNAPSHOT.md](CORPUS-SNAPSHOT.md). The active routing-quality benchmark lives in [SKILL-USE-GAINS.md](SKILL-USE-GAINS.md). The non-gating post-tuning challenge benchmark lives in [SKILL-USE-HOLDOUT.md](SKILL-USE-HOLDOUT.md). The non-gating fresh-probe regression benchmark lives in [SKILL-USE-FRESH.md](SKILL-USE-FRESH.md). The clean-split frozen holdout benchmark lives in [SKILL-USE-FROZEN-HOLDOUT.md](SKILL-USE-FROZEN-HOLDOUT.md). Remaining support-quality work is triaged in [SUPPORT-QUALITY-ROADMAP.md](SUPPORT-QUALITY-ROADMAP.md).
+The current detailed snapshot lives in [CORPUS-SNAPSHOT.md](CORPUS-SNAPSHOT.md). The active routing-quality benchmark lives in [SKILL-USE-GAINS.md](SKILL-USE-GAINS.md). The non-gating post-tuning challenge benchmark lives in [SKILL-USE-HOLDOUT.md](SKILL-USE-HOLDOUT.md). The non-gating fresh-probe regression benchmark lives in [SKILL-USE-FRESH.md](SKILL-USE-FRESH.md). The frozen holdout regression benchmark lives in [SKILL-USE-FROZEN-HOLDOUT.md](SKILL-USE-FROZEN-HOLDOUT.md); its pre-tuning clean-split baseline is preserved in git history. Remaining support-quality work is triaged in [SUPPORT-QUALITY-ROADMAP.md](SUPPORT-QUALITY-ROADMAP.md).
 
 Before marking a release ready:
 

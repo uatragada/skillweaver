@@ -63,7 +63,7 @@ const CONCEPT_RULES = [
     id: "browser-verification",
     label: "Browser verification",
     description: "Exercise live browser behavior, inspect screenshots, and verify UI changes against the running app.",
-    triggers: ["browser qa", "playwright screenshot", "verify live app", "control chrome", "inspect page", "motion qa"],
+    triggers: ["browser qa", "playwright screenshot", "verify live app", "control chrome", "in-app browser", "inspect page", "motion qa"],
     domains: ["frontend"],
     tools: ["Playwright", "Node"],
     gatewaySkillNames: ["browser:control-in-app-browser", "control-in-app-browser", "chrome:control-chrome", "control-chrome"],
@@ -76,12 +76,12 @@ const CONCEPT_RULES = [
     id: "figma-handoff",
     label: "Figma design handoff",
     description: "Navigate Figma context, audit component intent, and translate designs into implementation work.",
-    triggers: ["figma design", "design to code", "implement figma", "design handoff", "component audit"],
+    triggers: ["figma design", "design to code", "implement figma", "design handoff", "component audit", "swiftui", "figma swiftui motion"],
     domains: ["frontend", "product", "creative"],
     tools: ["Figma", "Node"],
     gatewaySkillNames: ["figma-use", "figma:figma-use"],
-    primarySkillNames: ["figma-implement-design", "figma-generate-library", "figma:figma-code-connect", "product-design:image-to-code", "design-image-to-code", "design-url-to-code"],
-    supportingSkillNames: ["figma-design-qa", "figma-component-audit", "figma-create-design-system-rules", "product-design:get-context", "figma:figma-generate-design", "figma-generate-design"],
+    primarySkillNames: ["figma-implement-design", "figma-generate-library", "figma:figma-code-connect", "product-design:image-to-code", "design-image-to-code", "design-url-to-code", "figma:figma-swiftui", "figma-swiftui"],
+    supportingSkillNames: ["figma-design-qa", "figma-component-audit", "figma-create-design-system-rules", "product-design:get-context", "figma:figma-generate-design", "figma-generate-design", "figma:figma-implement-motion", "figma-implement-motion", "figma:figma-use-motion", "figma-use-motion"],
     verificationSkillNames: ["design-qa", "figma-design-review"],
     relatedConceptIds: ["frontend-implementation", "browser-verification"]
   },
@@ -177,7 +177,7 @@ const CONCEPT_RULES = [
     triggers: ["gmail", "inbox triage", "email", "draft reply"],
     domains: ["operations"],
     tools: ["Gmail"],
-    primarySkillNames: ["gmail:gmail", "gmail", "gmail:gmail-inbox-triage", "gmail-inbox-triage", "email-triage"],
+    primarySkillNames: ["gmail:gmail-inbox-triage", "gmail-inbox-triage", "gmail:gmail", "gmail", "email-triage"],
     relatedConceptIds: ["product-planning", "repo-operations"]
   },
   {
@@ -187,8 +187,8 @@ const CONCEPT_RULES = [
     triggers: ["game", "phaser", "three.js", "webgl", "playtest", "sprite", "racingsim", "ppo", "stable-baselines3", "godot json bridge", "lap progress", "nurburgring", "checkpoint progress"],
     domains: ["frontend", "creative"],
     tools: ["Node", "Playwright"],
-    primarySkillNames: ["game-studio:game-studio", "game-studio", "game-studio:phaser-2d-game", "phaser-2d-game", "game-studio:three-webgl-game", "three-webgl-game", "game-studio:web-game-foundations", "web-game-foundations", "game-studio:react-three-fiber-game", "react-three-fiber-game", "racingsim-ai-ml"],
-    supportingSkillNames: ["game-studio:sprite-pipeline", "sprite-pipeline", "game-studio:web-3d-asset-pipeline", "web-3d-asset-pipeline", "racingsim-game-dev", "project-derived-skills"],
+    primarySkillNames: ["game-studio:game-studio", "game-studio", "game-studio:phaser-2d-game", "phaser-2d-game", "game-studio:sprite-pipeline", "sprite-pipeline", "game-studio:three-webgl-game", "three-webgl-game", "game-studio:web-game-foundations", "web-game-foundations", "game-studio:react-three-fiber-game", "react-three-fiber-game", "racingsim-ai-ml"],
+    supportingSkillNames: ["game-studio:web-3d-asset-pipeline", "web-3d-asset-pipeline", "game-studio:game-ui-frontend", "game-ui-frontend", "racingsim-game-dev", "project-derived-skills"],
     verificationSkillNames: ["game-studio:game-playtest", "game-playtest"],
     relatedConceptIds: ["frontend-implementation", "browser-verification"]
   },
@@ -196,11 +196,11 @@ const CONCEPT_RULES = [
     id: "agent-llm-apps",
     label: "Agent and LLM apps",
     description: "Build OpenAI, agent SDK, RAG, ChatGPT app, and model-backed application workflows.",
-    triggers: ["openai", "agent sdk", "llm app", "rag", "chatgpt app", "copilot", "speech-to-text", "text-to-speech", "transcription", "voiceover", "voice agent", "local speech", "browser microphone", "silence rejection", "whisper"],
+    triggers: ["openai", "agent sdk", "llm app", "rag", "chatgpt app", "copilot", "mcp server", "node typescript mcp", "typed tool handlers", "speech-to-text", "text-to-speech", "transcription", "voiceover", "voice agent", "local speech", "browser microphone", "silence rejection", "whisper"],
     domains: ["ai", "backend", "frontend"],
     tools: ["OpenAI", "Cloudflare", "Vercel", "Node"],
-    primarySkillNames: ["openai-docs", "dev-ai-llm-apps", "openai-agents-js", "chatgpt-apps", "copilot-sdk", "cloudflare:agents-sdk", "vercel:ai-sdk", "transcribe", "speech"],
-    supportingSkillNames: ["hugging-face:transformers-js", "transformers-js", "hugging-face:huggingface-gradio", "local-speech-ai-mvp"],
+    primarySkillNames: ["dev-ai-llm-apps", "openai-docs", "openai-agents-js", "chatgpt-apps", "copilot-sdk", "cloudflare:agents-sdk", "vercel:ai-sdk", "transcribe", "speech"],
+    supportingSkillNames: ["dev-node-typescript-services", "api-docs-writer", "hugging-face:transformers-js", "transformers-js", "hugging-face:huggingface-gradio", "local-speech-ai-mvp"],
     relatedConceptIds: ["skill-authoring", "cloudflare-workers", "huggingface-ml"]
   },
   {
@@ -218,7 +218,7 @@ const CONCEPT_RULES = [
     id: "cloudflare-workers",
     label: "Cloudflare workers",
     description: "Build, configure, and deploy Cloudflare Workers, Durable Objects, MCP servers, and agent runtimes.",
-    triggers: ["cloudflare workers", "wrangler", "durable object", "mcp server", "cloudflare agent"],
+    triggers: ["cloudflare workers", "wrangler", "durable object", "cloudflare mcp server", "mcp server on cloudflare", "cloudflare agent"],
     domains: ["operations", "backend", "ai"],
     tools: ["Cloudflare", "Node"],
     primarySkillNames: ["cloudflare:workers-best-practices", "workers-best-practices", "cloudflare:wrangler", "wrangler", "cloudflare:durable-objects", "durable-objects", "cloudflare:building-mcp-server-on-cloudflare", "building-mcp-server-on-cloudflare", "cloudflare:building-ai-agent-on-cloudflare", "building-ai-agent-on-cloudflare"],
@@ -275,7 +275,7 @@ const CONCEPT_RULES = [
     id: "observability-reliability",
     label: "Observability and reliability",
     description: "Set up monitoring, SLOs, incident response, error budgets, performance checks, and recovery plans.",
-    triggers: ["monitoring", "slo", "incident", "error budget", "sentry", "performance budget", "reliability"],
+    triggers: ["monitoring", "slo", "incident", "error budget", "sentry", "performance budget", "reliability", "opentelemetry", "otel", "tracing", "distributed tracing"],
     domains: ["operations", "backend", "security"],
     tools: ["GitHub", "Python", "Node"],
     primarySkillNames: ["dev-observability-sre", "monitoring-setup-guide", "slo-error-budget", "incident-postmortem", "sentry"],
@@ -1414,6 +1414,16 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   const dataOutputSkill = ["build dashboard", "data visualization", "visualize data", "kpi reporting", "build report"]
     .some((term) => name.includes(term));
   const dataNamedSkill = /\b(data|dashboard|analytics|kpi|chart|report)\b/.test(name);
+  const genericMcpServerIntent = (/\bmcp server\b|\btyped tools?\b|\btyped tool handlers?\b/.test(normalizedQuery))
+    && /\bnode\b|\btypescript\b|\bjavascript\b|\bcodex\b|\bresources?\b|\bfixture tests?\b|\blocal client\b|\btyped tools?\b|\btyped tool handlers?\b/.test(normalizedQuery);
+  const cloudflareRuntimeIntent = /\bcloudflare\b|\bworkers?\b|\bwrangler\b|\bdurable object\b/.test(normalizedQuery);
+  const negatedCloudflareRuntimeIntent = hasNegatedIntent(normalizedQuery, ["cloudflare", "cloudflare worker", "cloudflare workers", "worker", "workers", "wrangler", "durable object"]);
+  const chatgptAppIntent = /\bchatgpt app\b/.test(normalizedQuery);
+  const negatedChatgptAppIntent = hasNegatedIntent(normalizedQuery, ["chatgpt app", "chatgpt"]);
+  const inAppBrowserIntent = /\bin app browser\b|\bcontrol in app browser\b|\bbrowser plugin\b/.test(normalizedQuery);
+  const negatedChromeIntent = hasNegatedIntent(normalizedQuery, ["chrome", "desktop chrome"]);
+  const incidentReviewIntent = /\bpostmortem\b|\bincident\b/.test(normalizedQuery);
+  const broadObservabilitySetupIntent = /\bopentelemetry\b|\botel\b|\bdistributed tracing\b|\btracing\b|\bslo\b|\berror budget\b|\bmonitoring dashboard\b|\balert rules?\b/.test(normalizedQuery);
 
   if (/\bdashboard\b/.test(normalizedQuery) && dataOutputIntent) {
     if (name.includes("build dashboard")) boost += 520;
@@ -1434,7 +1444,21 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (["build report", "kpi reporting", "visualize data", "data visualization"].some((term) => name.includes(term))) boost += 220;
   }
 
-  if (/\bchrome\b/.test(normalizedQuery)) {
+  if (genericMcpServerIntent
+    && (!cloudflareRuntimeIntent || negatedCloudflareRuntimeIntent)
+    && (!chatgptAppIntent || negatedChatgptAppIntent)) {
+    if (name.includes("dev ai llm apps")) boost += 1800;
+    if (["dev node typescript services", "api docs writer"].some((term) => name.includes(term))) boost += 620;
+    if (["building mcp server on cloudflare", "workers best practices", "wrangler", "chatgpt apps"].some((term) => name.includes(term))) boost -= 1400;
+  }
+
+  if (inAppBrowserIntent || negatedChromeIntent) {
+    if (name.includes("control in app browser")) boost += 980;
+    if (/\binspect\b|\binteractions?\b|\bcontrol\b|\bscreenshot\b/.test(normalizedQuery) && name.includes("playwright interactive")) boost += 220;
+    if (["control chrome", "agent browser verify", "design url to code"].some((term) => name.includes(term))) boost -= negatedChromeIntent ? 760 : 240;
+  }
+
+  if (/\bchrome\b/.test(normalizedQuery) && !negatedChromeIntent) {
     if (name.includes("control chrome")) boost += 420;
     if (name.includes("control in app browser")) boost -= 160;
     if (/\binspect\b|\binteractions?\b|\bcontrol\b/.test(normalizedQuery) && name.includes("playwright interactive")) boost += 260;
@@ -1477,7 +1501,14 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("dev frontend accessibility css")) boost += 160;
   }
 
-  if (/\bmonitoring\b|\boperational\b|\breadiness\b|\bslo\b/.test(normalizedQuery)) {
+  if (broadObservabilitySetupIntent) {
+    if (name.includes("dev observability sre")) boost += incidentReviewIntent ? 260 : 1560;
+    if (["monitoring setup guide", "slo error budget"].some((term) => name.includes(term))) boost += incidentReviewIntent ? 120 : 520;
+    if (name === "sentry" && !incidentReviewIntent) boost -= /\bsentry\b/.test(normalizedQuery) ? 480 : 720;
+    if (name.includes("incident postmortem") && !incidentReviewIntent) boost -= 280;
+  }
+
+  if (/\bmonitoring\b|\boperational\b|\breadiness\b|\bslo\b|\botel\b|\bopentelemetry\b|\btracing\b/.test(normalizedQuery)) {
     if (["monitoring setup guide", "dev observability sre", "slo error budget"].some((term) => name.includes(term))) boost += 180;
   }
 
@@ -1487,6 +1518,19 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (["monitoring setup guide", "dev observability sre"].some((term) => name.includes(term))) boost += 260;
     if (name.includes("slo error budget") && !/\bslo\b|\berror budget\b/.test(normalizedQuery)) boost -= 180;
     if (name.includes("huggingface")) boost -= 520;
+  }
+
+  const spritePipelineIntent = /\bsprites?\b|\bsprite sheet\b|\bhud\b|\btilemap\b|\basset pipeline\b/.test(normalizedQuery)
+    && /\bgame\b|\bphaser\b|\bhud\b|\btilemap\b|\bplaytest\b|\bsprites?\b/.test(normalizedQuery);
+  if (spritePipelineIntent) {
+    if (name.includes("sprite pipeline")) boost += 1540;
+    if (/\bphaser\b/.test(normalizedQuery) && name.includes("phaser 2d game")) boost += 620;
+    if (/\bhud\b|\bui\b/.test(normalizedQuery) && name.includes("game ui frontend")) boost += 720;
+    if (/\bplaytest\b|\bchecks?\b|\bverify\b/.test(normalizedQuery) && name.includes("game playtest")) boost += 260;
+    if (name.includes("web game foundations")) boost += 180;
+    if (!/\b3d\b|\bwebgl\b|\bthree\b|\breact three fiber\b|\br3f\b/.test(normalizedQuery)) {
+      if (["web 3d asset pipeline", "three webgl game", "react three fiber game"].some((term) => name.includes(term))) boost -= 780;
+    }
   }
 
   if (/\bcanvas\b|\bwebgl\b|\basset\b|\brender/.test(normalizedQuery)) {
@@ -1515,6 +1559,18 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("capacity planning")) boost += 620;
     if (["dev performance engineering", "dev containers kubernetes"].some((term) => name.includes(term))) boost += 420;
     if (name.includes("gantt chart")) boost -= 260;
+  }
+
+  const emailInboxIntent = /\bgmail\b|\binbox\b|\bemail\b|\bdraft repl|\bthread\b/.test(normalizedQuery);
+  if (emailInboxIntent) {
+    if (name.includes("gmail inbox triage")) boost += 1500;
+    if (name === "gmail" || name.includes("gmail:gmail")) boost += 920;
+    if (name.includes("email triage")) boost += 700;
+    if (/\bnotion\b|\blinked notes?\b|\bcompany context\b/.test(normalizedQuery)) {
+      if (name.includes("notion knowledge capture")) boost += 420;
+      if (name.includes("notion research documentation")) boost += 180;
+      if (name.includes("notion meeting intelligence")) boost -= 120;
+    }
   }
 
   if (/\bnotion\b|\bworkspace knowledge\b|\bknowledge base\b|\bdecision log\b/.test(normalizedQuery)) {
@@ -1590,7 +1646,16 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
 
   if (/\bfigma\b/.test(normalizedQuery)) {
     const figmaGatewayIntent = /\buse figma\b|\binspect\b|\bfigma context\b|\bhandoff\b/.test(normalizedQuery);
+    const figmaSwiftUiIntent = /\bswiftui\b|\bswift ui\b|\bios\b/.test(normalizedQuery);
+    const figmaMotionIntent = /\bmotion\b|\banimation\b|\bprototype\b/.test(normalizedQuery);
+    const negatedReactIntent = hasNegatedIntent(normalizedQuery, ["react", "react code"]);
     const figmaImplementationIntent = /\bimplement\b|\breact\b|\bcode\b/.test(normalizedQuery);
+    if (figmaSwiftUiIntent) {
+      if (name.includes("figma swiftui")) boost += 1800;
+      if (figmaMotionIntent && ["figma implement motion", "figma use motion"].some((term) => name.includes(term))) boost += 720;
+      if (name.includes("figma use")) boost += figmaGatewayIntent ? 260 : 80;
+      if (["dev frontend react next", "figma implement design", "figma code connect"].some((term) => name.includes(term))) boost -= negatedReactIntent ? 820 : 220;
+    }
     if (name.includes("figma use")) boost += figmaGatewayIntent ? 860 : 180;
     if (figmaImplementationIntent) {
       if (name.includes("figma implement design")) boost += figmaGatewayIntent ? 120 : 900;
@@ -1733,6 +1798,13 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   }
 
   if (/\bopenai\b|\bapi docs?\b|\bproduct feature\b/.test(normalizedQuery)) {
+    const openAiDocsLookupIntent = /\bopenai\b/.test(normalizedQuery)
+      && /\bdocs?\b|\bdocumentation\b|\bapi reference\b|\breference\b/.test(normalizedQuery)
+      && !/\bwrite\b|\bdocument endpoints?\b|\bgenerate\b|\bendpoint behavior\b/.test(normalizedQuery);
+    if (openAiDocsLookupIntent) {
+      if (name === "openai docs") boost += 1420;
+      if (name.includes("api docs writer")) boost -= 520;
+    }
     if (name.includes("dev ai llm apps")) boost += 180;
   }
 

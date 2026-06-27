@@ -122,4 +122,4 @@ Run the non-gating frozen holdout suite with:
 npm run benchmark:skills:frozen
 ```
 
-Use `npm run benchmark:skills:frozen:check` before citing [docs/SKILL-USE-FROZEN-HOLDOUT.md](docs/SKILL-USE-FROZEN-HOLDOUT.md). This suite is intentionally clean-split evidence until any miss from it informs routing changes; if that happens, relabel it as challenge or regression evidence before using it again.
+Use `npm run benchmark:skills:frozen:check` before citing [docs/SKILL-USE-FROZEN-HOLDOUT.md](docs/SKILL-USE-FROZEN-HOLDOUT.md). This prompt set began as clean-split holdout evidence; after its misses informed V2 fixes, the checked-in report is regression evidence for that frozen slice. Use the earlier committed report for the pre-tuning baseline.

@@ -54,14 +54,14 @@ const SUITES = {
   },
   frozenHoldout: {
     id: "frozen-holdout",
-    label: "Frozen Holdout",
-    reportTitle: "Frozen Holdout Benchmark",
+    label: "Frozen Holdout Regression",
+    reportTitle: "Frozen Holdout Regression Benchmark",
     casesPath: resolve("benchmarks/skill-routing-frozen-holdout.json"),
     casesRelativePath: "benchmarks/skill-routing-frozen-holdout.json",
     reportPath: resolve("docs/SKILL-USE-FROZEN-HOLDOUT.md"),
     command: CHECK_MODE ? "npm run benchmark:skills:frozen:check" : "npm run benchmark:skills:frozen",
     gatesAcceptance: false,
-    role: "untouched-holdout"
+    role: "frozen-regression"
   }
 };
 const SUITE = FROZEN_HOLDOUT_MODE ? SUITES.frozenHoldout : FRESH_MODE ? SUITES.fresh : HOLDOUT_MODE ? SUITES.holdout : SUITES.acceptance;
@@ -261,6 +261,31 @@ function matchesExpected(name, expectedNames) {
   });
 }
 
+function skillNameVariants(value) {
+  const key = skillKey(value);
+  const suffix = key.slice(key.lastIndexOf(":") + 1).trim();
+  return [...new Set([key, suffix].filter(Boolean))];
+}
+
+function containsTokenPhrase(haystack, needle) {
+  const haystackTokens = haystack.split(/[:\s]+/).filter(Boolean);
+  const needleTokens = needle.split(/[:\s]+/).filter(Boolean);
+  return needleTokens.length > 0 && haystackTokens.some((_, index) =>
+    needleTokens.every((token, offset) => haystackTokens[index + offset] === token)
+  );
+}
+
+function matchesForbiddenPrimary(name, forbiddenNames) {
+  const candidates = skillNameVariants(name);
+  return forbiddenNames.some((expected) =>
+    candidates.some((candidate) =>
+      skillNameVariants(expected).some((value) =>
+        candidate === value || containsTokenPhrase(candidate, value)
+      )
+    )
+  );
+}
+
 function dedupeByName(skills) {
   const byName = new Map();
   for (const skill of skills) {
@@ -372,7 +397,10 @@ function validateCases(cases, index) {
 
     for (const field of ["expectedPrimary", "expectedSupport", "mustNotPrimary"]) {
       for (const expected of testCase[field] ?? []) {
-        if (!skillNames.some((name) => matchesExpected(name, [expected]))) {
+        const matchesSkill = field === "mustNotPrimary"
+          ? skillNames.some((name) => matchesForbiddenPrimary(name, [expected]))
+          : skillNames.some((name) => matchesExpected(name, [expected]));
+        if (!matchesSkill) {
           issues.push(`${testCase.id}: ${field} fragment does not match an indexed skill: ${expected}`);
         }
       }
@@ -423,7 +451,7 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
   const primary = primaryName ?? visibleNames[0] ?? null;
   const rank = firstExpectedRank(ranked, testCase.expectedPrimary);
   const forbiddenPrimary = primary && testCase.mustNotPrimary?.length
-    ? testCase.mustNotPrimary.find((expected) => matchesExpected(primary, [expected])) ?? null
+    ? testCase.mustNotPrimary.find((expected) => matchesForbiddenPrimary(primary, [expected])) ?? null
     : null;
   const primaryHit = Boolean(primary && !forbiddenPrimary && matchesExpected(primary, testCase.expectedPrimary));
   const hitAt5 = visibleNames.some((name) => matchesExpected(name, testCase.expectedPrimary));
@@ -719,6 +747,14 @@ function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2Suppo
     ];
   }
 
+  if (SUITE.role === "frozen-regression") {
+    return [
+      "## Claim Scope",
+      "",
+      `This report measures the current route against the previously frozen holdout prompt set after its misses informed routing fixes. Current results are regression evidence for those prompts, not clean-split generalization proof: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, support coverage@5 ${formatPercent(v2Summary.supportCoverage)}, support precision@5 ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} support-miss cases. Use the earlier frozen-holdout baseline report in git history for pre-tuning evidence.`
+    ];
+  }
+
   return [
     "## Claim Scope",
     "",
@@ -775,6 +811,8 @@ function buildMarkdown({
     ? freshness.acceptance.ok ? "SkillWeaver V2 changes" : "SkillWeaver V2 currently reports"
     : SUITE.role === "fresh-probe-regression"
       ? "On the fresh-probe regression suite, SkillWeaver V2 changes"
+      : SUITE.role === "frozen-regression"
+        ? "On the frozen holdout regression suite, SkillWeaver V2 changes"
       : SUITE.role === "untouched-holdout"
         ? "On the frozen holdout suite, SkillWeaver V2 changes"
     : "On the post-tuning challenge suite, SkillWeaver V2 changes";
@@ -926,6 +964,14 @@ function buildSuiteRoleSection() {
       "## Suite Role",
       "",
       "This suite began as fresh generalization evidence collected after the previous routing-tuning work. Once misses from these prompts informed fixes, the checked-in report became non-gating regression evidence for the fresh-probe slice. A future untouched generalization claim requires another prompt set collected after the latest routing-tuning commit.",
+      ""
+    ];
+  }
+  if (SUITE.role === "frozen-regression") {
+    return [
+      "## Suite Role",
+      "",
+      "This suite began as untouched frozen-holdout evidence, then its misses informed this routing pass. Treat the current checked-in report as non-gating regression evidence for that frozen prompt set. The pre-tuning baseline remains preserved in git history; a new clean holdout claim requires a fresh prompt set captured after these routing changes and reported before tuning from it.",
       ""
     ];
   }

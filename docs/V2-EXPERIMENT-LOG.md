@@ -384,10 +384,38 @@ The suite is intentionally non-gating. It improves the research system by preven
 
 No new runtime infrastructure was added. The new suite costs an explicit benchmark command only; `benchmark:skills:frozen:check` measured 5.990s for 12 cases, inside the 10s non-gating suite budget.
 
+## 2026-06-27: Frozen Holdout Regression Tuning
+
+### Hypothesis
+
+The frozen holdout failures are narrow routing-boundary problems, not proof that V2 needs heavier infrastructure. A small concept-membership and intent-boost pass should improve the hard cases without adding dependencies, graph passes, or runtime bloat.
+
+### Change
+
+- Relabeled `benchmarks/skill-routing-frozen-holdout.json` from `untouched-holdout` to `regression` after preserving the pre-tuning baseline in git history.
+- Added focused concept memberships and intent guards for generic Node/TypeScript MCP servers, Gmail inbox triage with Notion context, in-app browser selection, Phaser sprite/HUD pipelines, OpenTelemetry/SLO setup, and Figma SwiftUI motion handoff.
+- Tightened only `mustNotPrimary` benchmark matching so short forbidden fragments such as `pdf` do not invalidate longer correct skill names like `reports-pdfs-and-slide-automation`.
+- Added a unit regression test for the frozen failure modes.
+
+### Result
+
+| Suite | Cases | V2 quality | V2 hit@1 | V2 support coverage@5 | V2 forbidden primary | V2 vs No | V2 vs Skill-Level |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Active acceptance | 78 | 100.0 | 100.0% | 100.0% | 0.0% | +24.7 pts | +22.8 pts |
+| Post-tuning challenge | 22 | 91.8 | 95.5% | 70.5% | 0.0% | +21.7 pts | +14.8 pts |
+| Fresh-probe regression | 18 | 94.6 | 94.4% | 88.0% | 0.0% | +24.4 pts | +20.3 pts |
+| Frozen holdout regression | 12 | 95.6 | 100.0% | 77.8% | 0.0% | +24.9 pts | +25.7 pts |
+
+The frozen prompt set moved from V2 trailing both baselines to V2 leading both baselines: output quality rose from 59.1 to 95.6, primary hit@1 from 41.7% to 100.0%, and forbidden primary rate from 33.3% to 0.0%. This is strong regression evidence for those prompts, not clean-split generalization proof.
+
+### Runtime Impact
+
+No new dependencies, persistence, model calls, graph caps, background jobs, or product-route passes were added. The changes stay inside the deterministic concept map, lightweight intent boosts, benchmark matcher, tests, and docs.
+
 ## Next Experiments
 
-- Preserve the frozen-holdout report as pre-tuning evidence before touching any route behavior from those cases.
-- Promote the highest-value frozen failures into the failure atlas before tuning: generic MCP server, Gmail-plus-Notion inbox action, in-app browser choice, and the `pdf` containment benchmark issue.
+- Capture a new clean holdout after this routing commit before making any further broad generalization claim.
+- Use the frozen regression suite as a guardrail, not as fresh evidence.
 - Work through the remaining coverage backlog from the independent audit, especially broader MCP server creation, deeper game-studio variants, Notion meeting-to-email ambiguity, Vercel Auth/Firewall variants, and visualization QA/accessibility variants.
 - Decide whether support precision@5 should become an acceptance gate after expected-support lists are reviewed for completeness.
 - Add an end-to-end graph-cap survival test if the corpus grows or cap behavior changes.

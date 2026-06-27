@@ -12,11 +12,11 @@ The last pre-concept commit was `80d31f1`; the benchmark does not execute code f
 
 ## Permitted Claims
 
-Safe: "V2 improves deterministic skill routing on the active acceptance suite, remains strong on the post-tuning challenge suite, has a separate fresh-probe regression suite, and has a frozen holdout baseline that currently exposes clean-split gaps."
+Safe: "V2 improves deterministic skill routing on the active acceptance suite, remains strong on the post-tuning challenge suite, has a separate fresh-probe regression suite, and now reports a frozen holdout regression suite whose clean-split baseline is preserved in git history."
 
-Safe: "V2 achieved 100.0% primary hit@1 on the current active and challenge suites, with 0.0% forbidden primary rate."
+Safe: "V2 has 0.0% forbidden primary rate across the current active, challenge, fresh-probe regression, and frozen holdout regression suites, while improving output quality versus both compared baselines."
 
-Not safe with the current frozen holdout result: "V2 generalizes across all domains", "V2 has 100% routing accuracy", or "cross-domain routing is solved."
+Not safe with the current evidence: "V2 generalizes across all domains", "V2 has 100% routing accuracy", or "cross-domain routing is solved."
 
 Any cross-domain quality claim must include suite role, case count, domain/case coverage, primary hit@1, expected top/workflow-five retrieval, MRR, support coverage@5, support precision@5, forbidden primary rate, and support-miss count.
 
@@ -27,11 +27,11 @@ SkillWeaver reports four routing suites:
 - Active acceptance suite: `benchmarks/skill-routing-cases.json`, generated into `docs/SKILL-USE-GAINS.md`. This is the regression gate for V2 routing claims.
 - Post-tuning challenge suite: `benchmarks/skill-routing-holdout.json`, generated into `docs/SKILL-USE-HOLDOUT.md`. This reports generalization pressure and is not an acceptance gate.
 - Fresh-probe regression suite: `benchmarks/skill-routing-fresh.json`, generated into `docs/SKILL-USE-FRESH.md`. This began as an untouched prompt set collected after the previous routing-tuning commit; once misses from it informed fixes, it became non-gating regression evidence for that fresh-probe slice.
-- Frozen holdout suite: `benchmarks/skill-routing-frozen-holdout.json`, generated into `docs/SKILL-USE-FROZEN-HOLDOUT.md`. This is the current clean-split baseline. It is non-gating and must remain untouched holdout evidence only until a miss from it informs routing changes.
+- Frozen holdout regression suite: `benchmarks/skill-routing-frozen-holdout.json`, generated into `docs/SKILL-USE-FROZEN-HOLDOUT.md`. This began as the clean-split frozen baseline; after misses from it informed routing changes, the current report is non-gating regression evidence for that frozen prompt set.
 
 The current challenge suite started as a frozen pilot, then its misses were used to improve broad routing anchors and specialist concept membership. From this commit forward it is a fixed post-tuning challenge suite, not pristine untouched holdout evidence. A future clean holdout claim should use new real task prompts collected after the last routing-tuning commit.
 
-Fresh-probe provenance is a process claim, not something the benchmark metadata can prove by itself. The metadata proves report freshness against the current cases, scanner, benchmark script, corpus, and acceptance inputs. It does not prove that prompts were collected before tuning. Preserve the first pre-tuning result in the experiment log before using fresh prompts to tune the router.
+Fresh-probe and frozen-holdout provenance are process claims, not something the benchmark metadata can prove by itself. The metadata proves report freshness against the current cases, scanner, benchmark script, corpus, and acceptance inputs. It does not prove that prompts were collected before tuning. Preserve the first pre-tuning result in the experiment log or git history before using fresh prompts to tune the router.
 
 ## Case Schema
 
