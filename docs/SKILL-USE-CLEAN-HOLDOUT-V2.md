@@ -1,9 +1,9 @@
 # SkillWeaver V2 Clean Holdout V2 Regression Benchmark
 
-Generated: 2026-06-27T21:17:33.982Z
+Generated: 2026-06-27T21:38:49.179Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782595053982,"command":"npm run benchmark:skills:clean-v2-regression","suite":{"id":"clean-holdout-v2","label":"Clean Holdout V2 Regression","gatesAcceptance":false},"git":{"commit":"80574b83ac813eef964d564101daf314c8f9f0dd","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":14,"sha256":"sha256:dbb898ac75a81a7d7ad7dc007d5d85daea32d9e58b28e41fa6763ba4c0803f05"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:dbb898ac75a81a7d7ad7dc007d5d85daea32d9e58b28e41fa6763ba4c0803f05","scanner":"sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0","benchmarkScript":"sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:4b822151f94c29cf0b185710de3880b6d6f4a2a56580653b83679a3f713f138d"}
+{"generatedAt":1782596329179,"command":"npm run benchmark:skills:clean-v2-regression","suite":{"id":"clean-holdout-v2","label":"Clean Holdout V2 Regression","gatesAcceptance":false},"git":{"commit":"77d4c733f3ba2cf937b5f967ffe44a2a28170fa0","dirty":true,"dirtyPaths":[".env.example","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":14,"sha256":"sha256:dbb898ac75a81a7d7ad7dc007d5d85daea32d9e58b28e41fa6763ba4c0803f05"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:dbb898ac75a81a7d7ad7dc007d5d85daea32d9e58b28e41fa6763ba4c0803f05","scanner":"sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a","benchmarkScript":"sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:710e259d617dead82eb8f0b8805c6fd0ca5ed62cbb9102fa16d091ac8ee4d2a7"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:clean-v2-regression`
 - Suite: Clean Holdout V2 Regression
 - Acceptance gate: no
-- Git commit at generation: `80574b83ac813eef964d564101daf314c8f9f0dd`
-- Git dirty: no
-- Invalidating dirty paths: none
+- Git commit at generation: `77d4c733f3ba2cf937b5f967ffe44a2a28170fa0`
+- Git dirty: yes
+- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:dbb898ac75a81a7d7ad7dc007d5d85daea32d9e58b28e41fa6763ba4c0803f05`
-- Scanner hash: `sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0`
-- Benchmark script hash: `sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3`
+- Scanner hash: `sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a`
+- Benchmark script hash: `sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:4b822151f94c29cf0b185710de3880b6d6f4a2a56580653b83679a3f713f138d`
+- Snapshot fingerprint: `sha256:710e259d617dead82eb8f0b8805c6fd0ca5ed62cbb9102fa16d091ac8ee4d2a7`
 - Freshness check: pass
 - Quality gate, reported only: pass
 

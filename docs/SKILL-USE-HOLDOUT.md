@@ -1,9 +1,9 @@
 # SkillWeaver V2 Post-Tuning Challenge Benchmark
 
-Generated: 2026-06-27T21:17:12.643Z
+Generated: 2026-06-27T21:38:49.356Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782595032643,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"d100df4b0d72113c6183971dd148e829b09cae65","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0","benchmarkScript":"sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:2e24a7bd77b6c5883d8f851bc84dbd4c9654e1e5114046eb2919b712e660af72"}
+{"generatedAt":1782596329356,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"77d4c733f3ba2cf937b5f967ffe44a2a28170fa0","dirty":true,"dirtyPaths":[".env.example","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a","benchmarkScript":"sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:11cb36500ccc4a96b62ab072f6adbf46d39b6e8544d88a91285fe31815291fae"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:holdout`
 - Suite: Post-Tuning Challenge
 - Acceptance gate: no
-- Git commit at generation: `d100df4b0d72113c6183971dd148e829b09cae65`
-- Git dirty: no
-- Invalidating dirty paths: none
+- Git commit at generation: `77d4c733f3ba2cf937b5f967ffe44a2a28170fa0`
+- Git dirty: yes
+- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6`
-- Scanner hash: `sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0`
-- Benchmark script hash: `sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3`
+- Scanner hash: `sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a`
+- Benchmark script hash: `sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:2e24a7bd77b6c5883d8f851bc84dbd4c9654e1e5114046eb2919b712e660af72`
+- Snapshot fingerprint: `sha256:11cb36500ccc4a96b62ab072f6adbf46d39b6e8544d88a91285fe31815291fae`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -106,12 +106,12 @@ Post-Tuning Challenge quality is intentionally reported rather than accepted or 
 | netlify-frontend-deploy | Platform delivery | Deployment and release | netlify-deploy | frontend-app-builder / 2 | netlify-deploy / 1 | netlify-deploy / 1 | Deployment and release | netlify-deploy -> dev-release-productization -> env-vars -> launch-readiness -> agent-browser-verify |
 | render-python-api-deploy | Platform delivery | Deployment and release | render-deploy | dev-python-services / 2 | dev-python-services / 5 | render-deploy / 1 | Deployment and release | render-deploy -> dev-python-services -> api-docs-writer -> aspnet-core -> api-versioning-strategy |
 | screenshot-to-code-qa | Frontend experience | Figma design handoff | design-image-to-code, image-to-code | control-in-app-browser / 2 | agent-browser / 3 | design-image-to-code / 1 | Browser verification | design-image-to-code -> playwright -> frontend-testing-debugging -> playwright-interactive -> screenshot |
-| react-three-fiber-scene | Games and simulation | Game development | react-three-fiber-game | react-three-fiber-game / 1 | react-three-fiber-game / 1 | react-three-fiber-game / 1 | Game development | react-three-fiber-game -> three-webgl-game -> web-3d-asset-pipeline -> game-playtest -> phaser-2d-game |
+| react-three-fiber-scene | Games and simulation | Game development | react-three-fiber-game | react-three-fiber-game / 1 | react-three-fiber-game / 1 | react-three-fiber-game / 1 | Game development | react-three-fiber-game -> three-webgl-game -> web-3d-asset-pipeline -> game-playtest -> racingsim-game-dev |
 | game-studio-prototype-plan | Games and simulation | Game development | game-studio | web-3d-asset-pipeline / 4 | three-webgl-game / 3 | sprite-pipeline / 2 | Game development | sprite-pipeline -> game-studio -> game-playtest -> game-ui-frontend -> web-game-foundations |
 | notion-meeting-followups | Communications and knowledge | Product planning | notion-meeting-intelligence | notion-meeting-intelligence / 1 | notion-meeting-intelligence / 1 | notion-meeting-intelligence / 1 | Product planning | notion-meeting-intelligence -> notion-spec-to-implementation -> notion-knowledge-capture -> gmail -> notion-research-documentation |
 | vercel-ai-gateway-routing | AI agent apps | Agent and LLM apps | ai-gateway | ai-gateway / 1 | ai-gateway / 1 | ai-gateway / 1 | Skill ranking anchor | ai-gateway -> ai-sdk -> copilot-sdk -> agents-sdk -> openai-agents-js |
 | vercel-cron-workflow | Platform delivery | Deployment and release | cron-jobs | vercel-functions / 3 | vercel-functions / 3 | cron-jobs / 1 | Deployment and release | cron-jobs -> vercel-functions -> vercel-queues -> workflow -> agent-browser-verify |
-| nextjs-auth-implementation | Backend services | Backend APIs and services | auth | auth / 1 | auth / 1 | auth / 1 | Backend APIs and services | auth -> dev-backend-api-design -> aspnet-core -> payments -> dev-java-dotnet-services |
+| nextjs-auth-implementation | Backend services | Backend APIs and services | auth | auth / 1 | auth / 1 | auth / 1 | Backend APIs and services | auth -> sign-in-with-vercel -> dev-backend-api-design -> aspnet-core -> dev-java-dotnet-services |
 | vercel-firewall-rules | Security and risk | Security review | vercel-firewall | vercel-firewall / 1 | vercel-firewall / 1 | vercel-firewall / 1 | Skill ranking anchor | vercel-firewall -> vercel-deploy -> frontend-app-builder -> figma-implement-design -> env-vars |
 | core-web-vitals-audit | Frontend experience | Frontend implementation | web-perf | web-perf / 1 | web-perf / 1 | web-perf / 1 | Cloudflare workers | web-perf -> frontend-testing-debugging -> frontend-app-builder -> dev-frontend-accessibility-css -> dev-frontend-react-next |
 | market-sizing-research | Product, research, and planning | Product planning | market-sizing | market-sizing / 1 | market-sizing / 1 | market-sizing / 1 | Skill ranking anchor | market-sizing -> product-business-analysis -> build-report -> jupyter-notebooks -> experiment-designer |
@@ -133,7 +133,7 @@ This table is a support-quality backlog source, not an acceptance failure list. 
 | netlify-frontend-deploy | frontend-testing-debugging | netlify-deploy -> dev-release-productization -> env-vars -> launch-readiness -> agent-browser-verify |
 | render-python-api-deploy | monitoring-setup-guide | render-deploy -> dev-python-services -> api-docs-writer -> aspnet-core -> api-versioning-strategy |
 | vercel-ai-gateway-routing | openai-docs | ai-gateway -> ai-sdk -> copilot-sdk -> agents-sdk -> openai-agents-js |
-| nextjs-auth-implementation | security-best-practices | auth -> dev-backend-api-design -> aspnet-core -> payments -> dev-java-dotnet-services |
+| nextjs-auth-implementation | security-best-practices | auth -> sign-in-with-vercel -> dev-backend-api-design -> aspnet-core -> dev-java-dotnet-services |
 | vercel-firewall-rules | security-best-practices | vercel-firewall -> vercel-deploy -> frontend-app-builder -> figma-implement-design -> env-vars |
 | core-web-vitals-audit | performance-budget | web-perf -> frontend-testing-debugging -> frontend-app-builder -> dev-frontend-accessibility-css -> dev-frontend-react-next |
 | market-sizing-research | business-strategy-and-research, external-research-digests | market-sizing -> product-business-analysis -> build-report -> jupyter-notebooks -> experiment-designer |

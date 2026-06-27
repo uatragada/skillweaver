@@ -15,21 +15,20 @@ The API runs on `http://127.0.0.1:3777`.
 
 ## Indexing
 
-By default SkillWeaver scans:
+By default SkillWeaver scans common Codex and agent skill folders under the current user's home directory:
 
-- `C:\Users\Uday\.codex\skills`
-- `C:\Users\Uday\.codex\skills\.system`
-- `C:\Users\Uday\.agents\skills`
-- `G:\Projects\Digital Marketing Super Skills`
-- `C:\Users\Uday\.codex\plugins\cache\openai-bundled`
-- `C:\Users\Uday\.codex\plugins\cache\openai-curated`
-- `C:\Users\Uday\.codex\plugins\cache\openai-curated-remote`
-- `C:\Users\Uday\.codex\plugins\cache\openai-primary-runtime`
+- `$HOME\.codex\skills`
+- `$HOME\.codex\skills\.system`
+- `$HOME\.agents\skills`
+- `$HOME\.codex\plugins\cache\openai-bundled`
+- `$HOME\.codex\plugins\cache\openai-curated`
+- `$HOME\.codex\plugins\cache\openai-curated-remote`
+- `$HOME\.codex\plugins\cache\openai-primary-runtime`
 
-Override roots with a semicolon-separated environment variable:
+Override roots with a semicolon-separated environment variable, or copy `.env.example` to `.env.local` and set `SKILLWEAVER_SKILL_ROOTS` there:
 
 ```powershell
-$env:SKILLWEAVER_SKILL_ROOTS="C:\Users\Uday\.codex\skills;G:\Projects\SomeSkills"
+$env:SKILLWEAVER_SKILL_ROOTS="$HOME\.codex\skills;C:\path\to\your\skills"
 npm run dev
 ```
 
@@ -50,6 +49,8 @@ npm run benchmark:skills:clean-v2-regression
 npm run benchmark:skills:clean-v2-regression:check
 npm run benchmark:skills:clean-v3
 npm run benchmark:skills:clean-v3:check
+npm run benchmark:skills:clean-v4
+npm run benchmark:skills:clean-v4:check
 npm run build
 npm start
 ```
@@ -88,7 +89,8 @@ By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Us
 - [Fresh-probe regression benchmark](docs/SKILL-USE-FRESH.md)
 - [Frozen holdout benchmark](docs/SKILL-USE-FROZEN-HOLDOUT.md)
 - [Clean holdout V2 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V2.md)
-- [Clean holdout V3 benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md)
+- [Clean holdout V3 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md)
+- [Clean holdout V4 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V4.md)
 - [Support quality roadmap](docs/SUPPORT-QUALITY-ROADMAP.md)
 - [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
 - [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
@@ -145,3 +147,11 @@ npm run benchmark:skills:clean-v3
 ```
 
 Use `npm run benchmark:skills:clean-v3:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V3.md](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md). This suite began as the clean V3 holdout; the pre-tuning baseline is preserved at `00ad343`, and the current checked-in report is regression evidence after V3 misses informed routing fixes. A future clean generalization claim needs another untouched prompt set captured after this tuning commit.
+
+Run the non-gating clean holdout V4 regression suite with:
+
+```powershell
+npm run benchmark:skills:clean-v4
+```
+
+Use `npm run benchmark:skills:clean-v4:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V4.md](docs/SKILL-USE-CLEAN-HOLDOUT-V4.md). This suite began as the clean V4 holdout; the pre-tuning baseline is preserved at `77d4c73`, and the current checked-in report is regression evidence after V4 misses informed routing fixes.

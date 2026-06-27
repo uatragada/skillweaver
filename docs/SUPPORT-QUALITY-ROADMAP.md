@@ -14,8 +14,9 @@ This roadmap turns V2's remaining workflow-quality gaps into deliberate research
 | Frozen holdout regression | 12 | 100.0% | 77.8% | 56.3% | 6 | Non-gating regression |
 | Clean holdout V2 regression | 14 | 100.0% | 59.5% | 44.6% | 14 | Non-gating regression |
 | Clean holdout V3 regression | 18 | 100.0% | 72.2% | 54.2% | 9 | Non-gating regression |
+| Clean holdout V4 regression | 21 | 100.0% | 65.1% | 47.6% | 13 | Non-gating regression |
 
-The active suite proves the current acceptance claim. The challenge, fresh-probe, frozen-holdout-regression, clean-holdout V2 regression, and clean-holdout V3 regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout, clean V2, and clean V3 baselines are preserved in git history. Clean holdout V3's pre-tuning baseline at `00ad343` showed useful but incomplete generalization; the current V3 report measures the promoted regression fixes, not a new untouched split.
+The active suite proves the current acceptance claim. The challenge, fresh-probe, frozen-holdout-regression, clean-holdout V2 regression, clean-holdout V3 regression, and clean-holdout V4 regression suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The pre-tuning frozen-holdout, clean V2, clean V3, and clean V4 baselines are preserved in git history. Clean holdout V4's pre-tuning baseline at `77d4c73` contradicted broad generalization claims; the current V4 report measures promoted regression fixes, not a new untouched split.
 
 ## Triage Rules
 
@@ -63,6 +64,22 @@ These cases were captured after commit `e2a47a6`, reported before tuning from th
 | `openai-agents-approval-flow-v3` | `openai-docs` | `openai-agents-js` | Current-docs support displaces the implementation skill for Agents JS workflows. | P1 | Fixed; V2 primary hit@1 |
 | `market-sizing-source-bank-v3` | `market-sizing` | `market-sizing` | Primary is correct, but external-source and research-protocol support are absent. | P2 | Support backlog |
 
+## Clean Holdout V4 Promoted Queue
+
+These cases were captured after commit `764924b`, reported before tuning from the suite, then promoted into regression work after the clean V4 baseline was preserved at `77d4c73`. The current V4 report fixes the P0 primary/forbidden-primary issues, but this suite must now be cited only as regression evidence.
+
+| Case | Baseline V2 primary | Expected primary | Issue | Priority | Current status |
+| --- | --- | --- | --- | --- | --- |
+| `pdf-chart-data-extract-v4` | `Spreadsheets` | `chart-data-extractor` | PDF/chart extraction was treated as spreadsheet cleanup. | P0 | Fixed; V2 primary hit@1 |
+| `notion-spec-to-ticket-plan-v4` | `notion-meeting-intelligence` | `notion-spec-to-implementation` | Product-spec implementation work was displaced by meeting capture. | P0 | Fixed; V2 primary hit@1 |
+| `vercel-queues-worker-v4` | `cron-jobs` | `vercel-queues` | Queue worker intent was displaced by scheduled workflow routing. | P0 | Fixed; V2 primary hit@1 |
+| `sign-in-with-vercel-enterprise-v4` | `auth` | `sign-in-with-vercel` | Provider-specific enterprise auth was displaced by generic auth. | P0 | Fixed; V2 primary hit@1 |
+| `go-rust-cli-packaging-v4` | `cli-creator` | `dev-go-rust-systems` | Go/Rust systems packaging was displaced by generic CLI creation. | P0 | Fixed; V2 primary hit@1 |
+| `framer-code-component-props-v4` | `figma-code-connect-components` | `framer-code-components` | Framer code components were confused with Figma Code Connect. | P0 | Fixed; V2 primary hit@1 |
+| `finding-discovery-before-triage-v4` | `triage-finding` | `finding-discovery` | Discovery-before-triage phase wording was ignored. | P0 | Fixed; V2 primary hit@1 |
+| `hf-paper-publisher-no-training-v4` | `huggingface-datasets` | `huggingface-paper-publisher` | Paper publishing was treated as dataset research. | P0 | Fixed; V2 primary hit@1 |
+| `racingsim-map-runtime-v4` | `racingsim-ai-ml` | `racingsim-game-dev` | RacingSim runtime/map work was displaced by PPO training. | P0 | Fixed; V2 primary hit@1 |
+
 ## Frozen Failure Atlas
 
 These were clean-split failures from the pre-tuning frozen-holdout report. They drove the current V2 routing fixes, so [SKILL-USE-FROZEN-HOLDOUT.md](SKILL-USE-FROZEN-HOLDOUT.md) is now regression evidence for this prompt set.
@@ -100,7 +117,7 @@ These were clean-split failures from the pre-tuning frozen-holdout report. They 
 
 ## Next Holdout Coverage Needs
 
-The clean holdout V2 prompt set is now regression evidence in `benchmarks/skill-routing-clean-holdout-v2.json`. Clean holdout V3 is now the current baseline in `benchmarks/skill-routing-clean-holdout-v3.json`. If V3 drives tuning, the next clean holdout should be captured only after that routing-tuning commit and reported before tuning from those prompts. Candidate families, not final prompts:
+The clean holdout V2, V3, and V4 prompt sets are now regression evidence. The next clean holdout should be captured only after this routing-tuning commit and reported before tuning from those prompts. Candidate families, not final prompts:
 
 | Coverage gap | Why it matters | Candidate family |
 | --- | --- | --- |
@@ -155,7 +172,7 @@ Before a backlog item becomes an active acceptance case:
 5. Add or update the failure atlas entry.
 6. Run the initial report before changing routing.
 7. Tune narrowly.
-8. Re-run active, challenge, fresh, frozen, clean-v2-regression, tests, index, and build.
+8. Re-run active, challenge, fresh, frozen, clean-v2-regression, clean-v3, clean-v4, tests, index, and build.
 9. Confirm support precision@5 does not drop in the affected suite.
 
 ## No-Bloat Boundary

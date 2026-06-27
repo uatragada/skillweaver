@@ -1782,3 +1782,154 @@ test("concept workflow promotes clean holdout V3 regression boundaries", () => {
   assert.notEqual(names[0], "openai-docs");
   assert.notEqual(names[0], "chatgpt-apps");
 });
+
+test("concept workflow promotes clean holdout V4 regression boundaries", () => {
+  const index = makeConceptIndex([
+    makeSkill({ id: "chart-data-extractor", name: "chart-data-extractor", description: "Extract numeric series and data points from charts, graphs, figures, and PDF appendices.", domains: ["data", "documents"], tools: ["Python"], triggers: ["chart data extractor pdf numeric series axis labels"] }),
+    makeSkill({ id: "pdf", name: "pdf", description: "Read and manipulate PDF files.", domains: ["documents"], tools: ["Python"], triggers: ["pdf document extraction"] }),
+    makeSkill({ id: "data-visualization", name: "data-visualization", description: "Create data visualizations and charts.", domains: ["data"], tools: ["Node"], triggers: ["data visualization charts"] }),
+    makeSkill({ id: "build-report", name: "build-report", description: "Build analytical reports with methods and charts.", domains: ["data", "documents"], tools: ["Node"], triggers: ["report methodology"] }),
+    makeSkill({ id: "Spreadsheets", name: "Spreadsheets", description: "Work with Excel workbooks, formulas, pivots, and sheets.", domains: ["data"], tools: ["Python"], triggers: ["spreadsheet excel workbook formulas"] }),
+    makeSkill({ id: "reports-pdfs-and-slide-automation", name: "reports-pdfs-and-slide-automation", description: "Automate PDF reports and slide documents.", domains: ["documents"], tools: ["Python"], triggers: ["pdf report slides"] }),
+
+    makeSkill({ id: "notion-spec-to-implementation", name: "notion-spec-to-implementation", description: "Convert Notion product specs into implementation tasks, acceptance criteria, and repo handoff notes.", domains: ["product", "documents"], tools: ["Linear"], triggers: ["notion product spec implementation tasks acceptance criteria"] }),
+    makeSkill({ id: "notion-meeting-intelligence", name: "notion-meeting-intelligence", description: "Capture Notion meeting notes, agendas, pre-reads, and decisions.", domains: ["product"], tools: ["Linear"], triggers: ["notion meeting notes agenda"] }),
+    makeSkill({ id: "notion-research-documentation", name: "notion-research-documentation", description: "Document Notion research notes and source links.", domains: ["product", "documents"], tools: ["Linear"], triggers: ["notion research documentation"] }),
+    makeSkill({ id: "prd-template", name: "prd-template", description: "Write product requirements and acceptance criteria.", domains: ["product"], tools: ["Linear"], triggers: ["prd acceptance criteria"] }),
+    makeSkill({ id: "linear", name: "linear", description: "Plan and update Linear issues.", domains: ["product"], tools: ["Linear"], triggers: ["linear tickets issues"] }),
+    makeSkill({ id: "gmail-inbox-triage", name: "gmail-inbox-triage", description: "Triage Gmail inbox threads and draft replies.", domains: ["operations"], tools: ["Gmail"], triggers: ["gmail inbox email replies"] }),
+
+    makeSkill({ id: "vercel-queues", name: "vercel-queues", description: "Implement Vercel Queues, background workers, and queue jobs.", domains: ["operations", "backend"], tools: ["Vercel"], triggers: ["vercel queues queue worker background job"] }),
+    makeSkill({ id: "cron-jobs", name: "cron-jobs", description: "Configure cron jobs and scheduled workflows.", domains: ["operations"], tools: ["Vercel"], triggers: ["cron scheduled workflow"] }),
+    makeSkill({ id: "vercel-functions", name: "vercel-functions", description: "Implement Vercel serverless functions.", domains: ["backend", "operations"], tools: ["Vercel"], triggers: ["vercel functions serverless"] }),
+    makeSkill({ id: "workflow", name: "workflow", description: "Build workflow orchestration steps.", domains: ["operations"], tools: ["Vercel"], triggers: ["workflow orchestration"] }),
+    makeSkill({ id: "env-vars", name: "env-vars", description: "Configure deployment environment variables.", domains: ["operations"], tools: ["Vercel"], triggers: ["environment variables"] }),
+
+    makeSkill({ id: "sign-in-with-vercel", name: "sign-in-with-vercel", description: "Configure Sign in with Vercel, enterprise auth, protected routes, and callbacks.", domains: ["backend", "operations"], tools: ["Vercel"], triggers: ["sign in with vercel enterprise auth callbacks"] }),
+    makeSkill({ id: "auth", name: "auth", description: "Implement generic authentication and OAuth.", domains: ["backend"], tools: ["Node"], triggers: ["auth oauth protected routes"] }),
+    makeSkill({ id: "dev-backend-api-design", name: "dev-backend-api-design", description: "Design backend APIs and service boundaries.", domains: ["backend"], tools: ["Node"], triggers: ["backend api design"] }),
+    makeSkill({ id: "security-best-practices", name: "security-best-practices", description: "Apply security hardening and safe defaults.", domains: ["security"], tools: ["GitHub"], triggers: ["security best practices"] }),
+    makeSkill({ id: "vercel-deploy", name: "vercel-deploy", description: "Deploy and verify apps on Vercel.", domains: ["operations"], tools: ["Vercel"], triggers: ["vercel deploy"] }),
+
+    makeSkill({ id: "dev-go-rust-systems", name: "dev-go-rust-systems", description: "Build Go and Rust systems, CLIs, binaries, packaging, and release workflows.", domains: ["backend", "operations"], tools: ["Node"], triggers: ["go rust cli packaging binaries release"] }),
+    makeSkill({ id: "cli-creator", name: "cli-creator", description: "Create generic command line tools.", domains: ["backend"], tools: ["Node"], triggers: ["cli command line"] }),
+    makeSkill({ id: "dev-java-dotnet-services", name: "dev-java-dotnet-services", description: "Build Java and .NET services.", domains: ["backend"], tools: ["Node"], triggers: ["java dotnet service"] }),
+    makeSkill({ id: "dev-node-typescript-services", name: "dev-node-typescript-services", description: "Build Node and TypeScript services.", domains: ["backend"], tools: ["Node"], triggers: ["node typescript service"] }),
+    makeSkill({ id: "dev-release-productization", name: "dev-release-productization", description: "Prepare packaging and release notes.", domains: ["operations"], tools: ["Node"], triggers: ["release productization packaging"] }),
+    makeSkill({ id: "dev-testing-qa", name: "dev-testing-qa", description: "Add tests and QA checks.", domains: ["operations"], tools: ["Node"], triggers: ["tests qa"] }),
+
+    makeSkill({ id: "framer-code-components", name: "framer-code-components", description: "Build Framer code components with property controls and typed props.", domains: ["frontend"], tools: ["Node"], triggers: ["framer code component props controls"] }),
+    makeSkill({ id: "framer", name: "framer", description: "Use Framer for site edits.", domains: ["frontend"], tools: ["Node"], triggers: ["framer"] }),
+    makeSkill({ id: "figma-code-connect", name: "figma-code-connect", description: "Connect Figma components to code.", domains: ["frontend"], tools: ["Figma"], triggers: ["figma code connect"] }),
+    makeSkill({ id: "figma-code-connect-components", name: "figma-code-connect-components", description: "Map Figma variants to existing React components.", domains: ["frontend"], tools: ["Figma"], triggers: ["figma code connect components"] }),
+    makeSkill({ id: "dev-frontend-react-next", name: "dev-frontend-react-next", description: "Build React and Next.js frontends.", domains: ["frontend"], tools: ["Node"], triggers: ["react next frontend"] }),
+    makeSkill({ id: "design-qa", name: "design-qa", description: "Review design implementation quality.", domains: ["frontend"], tools: ["Figma"], triggers: ["design qa"] }),
+
+    makeSkill({ id: "finding-discovery", name: "finding-discovery", description: "Discover security findings before triage and prepare evidence.", domains: ["security"], tools: ["GitHub"], triggers: ["finding discovery discover findings before triage"] }),
+    makeSkill({ id: "triage-finding", name: "triage-finding", description: "Triage security findings and assign severity.", domains: ["security"], tools: ["GitHub"], triggers: ["triage findings severity"] }),
+    makeSkill({ id: "security-scan", name: "security-scan", description: "Run security scans.", domains: ["security"], tools: ["GitHub"], triggers: ["security scan"] }),
+    makeSkill({ id: "validation", name: "validation", description: "Validate security fixes and remediation.", domains: ["security"], tools: ["GitHub"], triggers: ["validation remediation"] }),
+
+    makeSkill({ id: "huggingface-paper-publisher", name: "huggingface-paper-publisher", description: "Publish Hugging Face paper evidence summaries with linked models, datasets, evaluations, and Hub metadata.", domains: ["ai", "data"], tools: ["Python"], triggers: ["hugging face paper publisher paper evidence summary hub metadata"] }),
+    makeSkill({ id: "huggingface-datasets", name: "huggingface-datasets", description: "Inspect Hugging Face datasets and metadata.", domains: ["ai", "data"], tools: ["Python"], triggers: ["hugging face datasets metadata"] }),
+    makeSkill({ id: "huggingface-papers", name: "huggingface-papers", description: "Search Hugging Face papers.", domains: ["ai"], tools: ["Python"], triggers: ["hugging face papers"] }),
+    makeSkill({ id: "huggingface-community-evals", name: "huggingface-community-evals", description: "Review community evaluation results.", domains: ["ai", "data"], tools: ["Python"], triggers: ["evaluation notes evals"] }),
+    makeSkill({ id: "huggingface-llm-trainer", name: "huggingface-llm-trainer", description: "Train Hugging Face language models.", domains: ["ai"], tools: ["Python"], triggers: ["train model"] }),
+    makeSkill({ id: "huggingface-gradio", name: "huggingface-gradio", description: "Launch Gradio demos and Spaces.", domains: ["ai", "frontend"], tools: ["Python"], triggers: ["gradio demo"] }),
+
+    makeSkill({ id: "creative-shot", name: "creative-shot", description: "Create product shot prompts and shot direction.", domains: ["creative"], tools: ["Node"], triggers: ["creative shot product shot shot prompts"] }),
+    makeSkill({ id: "creative-offer", name: "creative-offer", description: "Create offer angles and promotional hooks.", domains: ["creative"], tools: ["Node"], triggers: ["offer angles"] }),
+    makeSkill({ id: "creative-production", name: "creative-production", description: "Produce campaign creative assets.", domains: ["creative"], tools: ["Node"], triggers: ["creative production campaign"] }),
+    makeSkill({ id: "creative-scene", name: "creative-scene", description: "Plan scene direction for creative work.", domains: ["creative"], tools: ["Node"], triggers: ["creative scene"] }),
+    makeSkill({ id: "creative-moodboard", name: "creative-moodboard", description: "Build creative moodboards.", domains: ["creative"], tools: ["Node"], triggers: ["moodboard"] }),
+    makeSkill({ id: "creative-ads-explorer", name: "creative-ads-explorer", description: "Explore competitor ads.", domains: ["creative"], tools: ["Node"], triggers: ["creative ads"] }),
+
+    makeSkill({ id: "docbridge-saas-copywriter", name: "docbridge-saas-copywriter", description: "Write DocBridge SaaS copy for sensitive workflow review and landing pages.", domains: ["creative", "product"], tools: ["Node"], triggers: ["docbridge saas copy workflow review"] }),
+    makeSkill({ id: "premium-saas-landing-pages", name: "premium-saas-landing-pages", description: "Design premium SaaS landing pages.", domains: ["frontend", "creative"], tools: ["Node"], triggers: ["saas landing page"] }),
+    makeSkill({ id: "premium-web-design", name: "premium-web-design", description: "Create premium web design.", domains: ["frontend", "creative"], tools: ["Node"], triggers: ["premium web design"] }),
+    makeSkill({ id: "marketing-strategy-and-growth", name: "marketing-strategy-and-growth", description: "Plan marketing growth strategy.", domains: ["creative", "product"], tools: ["Node"], triggers: ["marketing growth"] }),
+    makeSkill({ id: "seo-and-organic-growth", name: "seo-and-organic-growth", description: "Plan SEO and organic growth.", domains: ["creative"], tools: ["Node"], triggers: ["seo organic growth"] }),
+
+    makeSkill({ id: "racingsim-game-dev", name: "racingsim-game-dev", description: "Fix RacingSim map runtime loading, camera behavior, and playtest checks.", domains: ["frontend", "creative"], tools: ["Node"], triggers: ["racingsim generated map runtime loading camera playtest"] }),
+    makeSkill({ id: "racingsim-ai-ml", name: "racingsim-ai-ml", description: "Continue RacingSim PPO training and reward policies.", domains: ["ai"], tools: ["Python"], triggers: ["racingsim ppo training policy reward"] }),
+    makeSkill({ id: "game-playtest", name: "game-playtest", description: "Run game playtests and checks.", domains: ["frontend"], tools: ["Node"], triggers: ["playtest checks"] }),
+    makeSkill({ id: "dev-performance-engineering", name: "dev-performance-engineering", description: "Tune runtime performance.", domains: ["operations"], tools: ["Node"], triggers: ["runtime performance"] }),
+
+    makeSkill({ id: "capacity-planning", name: "capacity-planning", description: "Plan capacity for traffic spikes, load, SLO boundaries, and scale.", domains: ["operations"], tools: ["Node"], triggers: ["capacity load slo traffic scale"] }),
+    makeSkill({ id: "dev-observability-sre", name: "dev-observability-sre", description: "Instrument observability, tracing, and SRE monitors.", domains: ["operations"], tools: ["Node"], triggers: ["observability tracing sre"] }),
+    makeSkill({ id: "slo-error-budget", name: "slo-error-budget", description: "Define SLOs and error budgets.", domains: ["operations"], tools: ["Node"], triggers: ["slo error budget"] }),
+    makeSkill({ id: "load-testing-plan", name: "load-testing-plan", description: "Design load testing plans.", domains: ["operations"], tools: ["Node"], triggers: ["load testing"] }),
+    makeSkill({ id: "dev-containers-kubernetes", name: "dev-containers-kubernetes", description: "Plan Kubernetes container capacity.", domains: ["operations"], tools: ["Node"], triggers: ["kubernetes containers"] }),
+
+    makeSkill({ id: "database-schema-design", name: "database-schema-design", description: "Design database schemas before choosing an implementation backend.", domains: ["backend", "data"], tools: ["Node"], triggers: ["database schema design"] }),
+    makeSkill({ id: "supabase-postgres-best-practices", name: "supabase-postgres-best-practices", description: "Apply Supabase Postgres patterns.", domains: ["backend", "data"], tools: ["Node"], triggers: ["supabase postgres"] }),
+    makeSkill({ id: "dev-database-postgres", name: "dev-database-postgres", description: "Implement Postgres database work.", domains: ["backend", "data"], tools: ["Node"], triggers: ["postgres database"] }),
+    makeSkill({ id: "database-migration-plan", name: "database-migration-plan", description: "Plan database migrations.", domains: ["backend", "data"], tools: ["Node"], triggers: ["database migration"] }),
+    makeSkill({ id: "data-pipeline-spec", name: "data-pipeline-spec", description: "Specify data pipelines.", domains: ["data"], tools: ["Node"], triggers: ["data pipeline"] }),
+
+    makeSkill({ id: "openai-docs", name: "openai-docs", description: "Verify current OpenAI API docs, migration details, structured output examples, and API references.", domains: ["ai", "documents"], tools: ["OpenAI"], triggers: ["openai docs api migration structured output"] }),
+    makeSkill({ id: "api-docs-writer", name: "api-docs-writer", description: "Write API documentation and endpoint behavior examples.", domains: ["documents", "backend"], tools: ["Node"], triggers: ["api docs writer endpoint behavior examples"] }),
+    makeSkill({ id: "chatgpt-apps", name: "chatgpt-apps", description: "Build ChatGPT Apps.", domains: ["ai", "frontend"], tools: ["OpenAI"], triggers: ["chatgpt app"] }),
+    makeSkill({ id: "copilot-sdk", name: "copilot-sdk", description: "Build Copilot SDK features.", domains: ["ai", "frontend"], tools: ["OpenAI"], triggers: ["copilot sdk"] }),
+    makeSkill({ id: "dev-ai-llm-apps", name: "dev-ai-llm-apps", description: "Build AI and LLM apps.", domains: ["ai", "backend"], tools: ["OpenAI"], triggers: ["llm app"] }),
+    makeSkill({ id: "openai-agents-js", name: "openai-agents-js", description: "Implement OpenAI Agents JS workflows.", domains: ["ai", "backend"], tools: ["OpenAI"], triggers: ["openai agents js"] })
+  ]);
+  const topFive = (query) => rankConceptWorkflowSkills(index, query).slice(0, 5).map((skill) => skill.name);
+
+  let names = topFive("Extract numeric series from charts embedded in a PDF appendix, reconcile axis labels, and produce a small CSV plus methodology notes; do not turn this into PDF form handling or spreadsheet cleanup.");
+  assert.equal(names[0], "chart-data-extractor");
+  assert.notEqual(names[0], "Spreadsheets");
+
+  names = topFive("Convert a Notion product spec into implementation tasks, acceptance criteria, and repo handoff notes; do not only capture the meeting or draft email replies.");
+  assert.equal(names[0], "notion-spec-to-implementation");
+  assert.notEqual(names[0], "notion-meeting-intelligence");
+
+  names = topFive("Add a Vercel Queues worker for background jobs with retry behavior, env var setup, and workflow notes; do not use Cron as the primary path.");
+  assert.equal(names[0], "vercel-queues");
+  assert.notEqual(names[0], "cron-jobs");
+
+  names = topFive("Wire Sign in with Vercel for enterprise protected routes, callback URLs, env vars, and security review; do not run a generic auth build first.");
+  assert.equal(names[0], "sign-in-with-vercel");
+  assert.notEqual(names[0], "auth");
+
+  names = topFive("Package a Go and Rust CLI with release binaries, help text, tests, and cross-platform build notes.");
+  assert.equal(names[0], "dev-go-rust-systems");
+  assert.notEqual(names[0], "cli-creator");
+
+  names = topFive("Create Framer code components with property controls, typed props, responsive behavior, and design QA; do not map Figma Code Connect.");
+  assert.equal(names[0], "framer-code-components");
+  assert.notEqual(names[0], "figma-code-connect");
+
+  names = topFive("Discover security findings from scan output before triage, gather evidence, and prepare validation steps without starting with finding triage.");
+  assert.equal(names[0], "finding-discovery");
+  assert.notEqual(names[0], "triage-finding");
+
+  names = topFive("Publish a Hugging Face paper evidence summary with linked models, datasets, evaluation notes, and Hub metadata; do not train a model or launch a Gradio demo.");
+  assert.equal(names[0], "huggingface-paper-publisher");
+  assert.notEqual(names[0], "huggingface-datasets");
+
+  names = topFive("Generate product-shot prompts and creative shot direction for a campaign, with scene and moodboard support, not offer angle strategy.");
+  assert.equal(names[0], "creative-shot");
+  assert.notEqual(names[0], "creative-offer");
+
+  names = topFive("Rewrite DocBridge SaaS landing copy around workflow review, partner outputs, sensitive workflows, and plain trust language.");
+  assert.equal(names[0], "docbridge-saas-copywriter");
+  assert.notEqual(names[0], "premium-saas-landing-pages");
+
+  names = topFive("Improve RacingSim generated-map runtime loading, camera behavior, and playtest checks for a large road network; do not continue PPO training.");
+  assert.equal(names[0], "racingsim-game-dev");
+  assert.notEqual(names[0], "racingsim-ai-ml");
+
+  names = topFive("Plan capacity, SLO load boundaries, Kubernetes headroom, and load testing for a traffic spike.");
+  assert.equal(names[0], "capacity-planning");
+  assert.notEqual(names[0], "dev-observability-sre");
+
+  names = topFive("Design the database schema and migration path before choosing Supabase implementation details or dashboard work.");
+  assert.equal(names[0], "database-schema-design");
+  assert.notEqual(names[0], "supabase-postgres-best-practices");
+
+  names = topFive("Verify current OpenAI API migration details, structured-output examples, and endpoint behavior before implementation; do not build a ChatGPT App or Copilot SDK feature.");
+  assert.equal(names[0], "openai-docs");
+  assert.notEqual(names[0], "api-docs-writer");
+  assert.notEqual(names[0], "chatgpt-apps");
+});

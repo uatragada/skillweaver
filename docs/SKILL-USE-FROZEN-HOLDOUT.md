@@ -1,9 +1,9 @@
 # SkillWeaver V2 Frozen Holdout Regression Benchmark
 
-Generated: 2026-06-27T21:17:26.692Z
+Generated: 2026-06-27T21:38:48.353Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782595046692,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"c9bfbac6c526455ae63dc3554dcad4d71240e8ab","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0","benchmarkScript":"sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:6deb3e8f8c0c3d3119530d71b7cff43e62349e939b400e6b398732b779ad4156"}
+{"generatedAt":1782596328353,"command":"npm run benchmark:skills:frozen","suite":{"id":"frozen-holdout","label":"Frozen Holdout Regression","gatesAcceptance":false},"git":{"commit":"77d4c733f3ba2cf937b5f967ffe44a2a28170fa0","dirty":true,"dirtyPaths":[".env.example","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":12,"sha256":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948","scanner":"sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a","benchmarkScript":"sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:315b55966af53961860d16216c09c142d9a6354bd0b3c8af64d3db0322dd84f1"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:frozen`
 - Suite: Frozen Holdout Regression
 - Acceptance gate: no
-- Git commit at generation: `c9bfbac6c526455ae63dc3554dcad4d71240e8ab`
-- Git dirty: no
-- Invalidating dirty paths: none
+- Git commit at generation: `77d4c733f3ba2cf937b5f967ffe44a2a28170fa0`
+- Git dirty: yes
+- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:3309a371b272bfdc676377e5738d8924ee43686e5e8c1ac2533a3faedc0a3948`
-- Scanner hash: `sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0`
-- Benchmark script hash: `sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3`
+- Scanner hash: `sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a`
+- Benchmark script hash: `sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:6deb3e8f8c0c3d3119530d71b7cff43e62349e939b400e6b398732b779ad4156`
+- Snapshot fingerprint: `sha256:315b55966af53961860d16216c09c142d9a6354bd0b3c8af64d3db0322dd84f1`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -115,7 +115,7 @@ Frozen Holdout Regression quality is intentionally reported rather than accepted
 | vercel-storage-marketplace-holdout | Platform delivery | Deployment and release | vercel-storage | vercel-storage / 1 | vercel-storage / 1 | vercel-storage / 1 | Skill ranking anchor | vercel-storage -> vercel-api -> env-vars -> bootstrap -> building-mcp-server-on-cloudflare |
 | analytics-semantic-layer-holdout | Data analytics | Data dashboards and reports | create-data-context | create-data-context / 1 | create-data-context / 1 | create-data-context / 1 | Skill ranking anchor | create-data-context -> product-business-analysis -> build-report -> build-dashboard -> design-kpis |
 | otel-slo-tracing-holdout | Observability and reliability | Observability and reliability | dev-observability-sre | slo-error-budget / 7 | slo-error-budget / 3 | dev-observability-sre / 1 | Observability and reliability | dev-observability-sre -> monitoring-setup-guide -> slo-error-budget -> sentry -> performance-budget |
-| huggingface-paper-evals-holdout | Hugging Face ML | Hugging Face ML | huggingface-paper-publisher | huggingface-paper-publisher / 1 | huggingface-papers / 2 | huggingface-paper-publisher / 1 | Hugging Face ML | huggingface-paper-publisher -> huggingface-datasets -> huggingface-community-evals -> huggingface-papers -> huggingface-vision-trainer |
+| huggingface-paper-evals-holdout | Hugging Face ML | Hugging Face ML | huggingface-paper-publisher | huggingface-paper-publisher / 1 | huggingface-papers / 2 | huggingface-paper-publisher / 1 | Hugging Face ML | huggingface-paper-publisher -> huggingface-community-evals -> huggingface-papers -> huggingface-datasets -> hf-cli |
 | brand-logo-moodboard-holdout | Marketing, growth, and creative | Marketing growth | logo-explorer | logo-explorer / 1 | logo-explorer / 1 | logo-explorer / 1 | Skill ranking anchor | logo-explorer -> moodboard-explorer -> offer-explorer -> creative-production -> ads-explorer |
 | in-app-browser-choice-holdout | Frontend experience | Browser verification | control-in-app-browser | control-in-app-browser / 1 | control-in-app-browser / 1 | control-in-app-browser / 1 | Browser verification | control-in-app-browser -> url-to-code -> playwright-interactive -> agent-browser -> design-image-to-code |
 | figma-swiftui-motion-holdout | Frontend experience | Figma design handoff | figma-swiftui | figma-implement-motion / 2 | figma-implement-design !figma-implement-design / 5 | figma-swiftui / 1 | Figma design handoff | figma-swiftui -> figma-use-motion -> figma-use -> figma-implement-motion -> design-image-to-code |

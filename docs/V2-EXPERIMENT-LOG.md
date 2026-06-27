@@ -532,3 +532,36 @@ V2 moved from 64.9 to 94.4 quality on the V3 suite after tuning. Primary hit@1 i
 ### Interpretation
 
 This is strong regression evidence, not a renewed clean-split claim. The lightweight concept map now handles the promoted V3 boundaries across delivery, skill tooling, documents, observability, security, Hugging Face, games, and OpenAI agent work. A new untouched split is still required before saying the route generalizes beyond exercised prompts.
+
+## Clean Holdout V4 Baseline And Regression Tuning
+
+Question: after preserving the clean V3 regression fixes at `764924b`, does V2 stay strong on another untouched prompt set?
+
+Setup:
+
+- Added `npm run benchmark:skills:clean-v4` and `npm run benchmark:skills:clean-v4:check`.
+- Captured 21 provenance-backed V4 prompts after `764924b`.
+- Preserved the pre-tuning V4 baseline at `77d4c73` before using any V4 miss for routing work.
+- Relabeled the current V4 report as regression evidence after tuning from those misses.
+
+Pre-tuning V4 baseline:
+
+| System | Quality | Hit@1 | Top/workflow 5 | Support coverage@5 | Support precision@5 | Forbidden primary |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| No SkillWeaver | 55.8 | 42.9% | 95.2% | 35.7% | 26.2% | 23.8% |
+| Skill-level baseline | 51.5 | 38.1% | 90.5% | 32.1% | 24.6% | 33.3% |
+| SkillWeaver V2 | 49.0 | 33.3% | 81.0% | 43.7% | 32.1% | 38.1% |
+
+Post-tuning V4 regression:
+
+| System | Quality | Hit@1 | Top/workflow 5 | Support coverage@5 | Support precision@5 | Forbidden primary |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| No SkillWeaver | 55.8 | 42.9% | 95.2% | 35.7% | 26.2% | 23.8% |
+| Skill-level baseline | 51.5 | 38.1% | 90.5% | 32.1% | 24.6% | 33.3% |
+| SkillWeaver V2 | 93.0 | 100.0% | 100.0% | 65.1% | 47.6% | 0.0% |
+
+V2 moved from trailing both baselines to leading both baselines on the V4 prompt set: output quality improved from 49.0 to 93.0, primary hit@1 from 33.3% to 100.0%, top/workflow-five retrieval from 81.0% to 100.0%, and forbidden-primary rate from 38.1% to 0.0%.
+
+Implementation stayed lightweight: no new dependencies, no persisted graph, no LLM reranker, no background job, and no graph-cap widening. The fix was limited to home-directory portable root defaults, `.env.local` root configuration, concept role membership for durable specialist skills, and narrow intent guards for provider-specific, project-specific, and phase-specific routing boundaries.
+
+This is strong regression evidence, not renewed clean-split proof. The next clean generalization claim requires a new untouched prompt set captured after this V4 tuning commit.

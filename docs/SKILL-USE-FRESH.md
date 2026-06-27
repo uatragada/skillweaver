@@ -1,9 +1,9 @@
 # SkillWeaver V2 Fresh-Probe Regression Benchmark
 
-Generated: 2026-06-27T21:17:19.859Z
+Generated: 2026-06-27T21:38:49.152Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782595039859,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"0eea47b523797efc96536c7e5ce33502055e3b39","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","scanner":"sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0","benchmarkScript":"sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:144903f241d5bd749a0257fce9746a4a8481d9ac72e2e33a055ab8a554afaba0"}
+{"generatedAt":1782596329152,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"77d4c733f3ba2cf937b5f967ffe44a2a28170fa0","dirty":true,"dirtyPaths":[".env.example","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","scanner":"sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a","benchmarkScript":"sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:d27e7f06845a1a01d2e4cf1f7da3c66dd8357058063ac9336c699d7971e1a7df"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:fresh`
 - Suite: Fresh-Probe Regression
 - Acceptance gate: no
-- Git commit at generation: `0eea47b523797efc96536c7e5ce33502055e3b39`
-- Git dirty: no
-- Invalidating dirty paths: none
+- Git commit at generation: `77d4c733f3ba2cf937b5f967ffe44a2a28170fa0`
+- Git dirty: yes
+- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea`
-- Scanner hash: `sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0`
-- Benchmark script hash: `sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3`
+- Scanner hash: `sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a`
+- Benchmark script hash: `sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:144903f241d5bd749a0257fce9746a4a8481d9ac72e2e33a055ab8a554afaba0`
+- Snapshot fingerprint: `sha256:d27e7f06845a1a01d2e4cf1f7da3c66dd8357058063ac9336c699d7971e1a7df`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
@@ -45,20 +45,20 @@ This suite began as fresh generalization evidence collected after the previous r
 
 | Metric | No SkillWeaver | Skill-Level Baseline | SkillWeaver V2 | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Output quality score (0-100) | 70.2 | 74.3 | 97.6 | +27.4 pts | +23.3 pts |
-| Primary hit@1 | 66.7% | 72.2% | 100.0% | +33.3 pp | +27.8 pp |
+| Output quality score (0-100) | 70.2 | 74.3 | 95.4 | +25.2 pts | +21.0 pts |
+| Primary hit@1 | 66.7% | 72.2% | 94.4% | +27.8 pp | +22.2 pp |
 | Expected skill in top/workflow 5 | 88.9% | 88.9% | 100.0% | +11.1 pp | +11.1 pp |
-| Mean reciprocal rank | 0.760 | 0.791 | 1.000 | +0.240 | +0.209 |
-| Support-skill coverage@5 | 52.8% | 59.3% | 88.0% | +35.2 pp | +28.7 pp |
-| Support precision@5, exploratory | 30.6% | 34.7% | 50.0% | +19.4 pp | +15.3 pp |
+| Mean reciprocal rank | 0.760 | 0.791 | 0.972 | +0.213 | +0.181 |
+| Support-skill coverage@5 | 52.8% | 59.3% | 90.7% | +38.0 pp | +31.5 pp |
+| Support precision@5, exploratory | 30.6% | 34.7% | 51.4% | +20.8 pp | +16.7 pp |
 | Forbidden primary rate, lower is better | 0.0% | 0.0% | 0.0% | 0.0 pp | 0.0 pp |
-| Mean candidates to expected skill, lower is better | 4.2 | 2.1 | 1.0 | -3.2 candidates better | -1.1 candidates better |
+| Mean candidates to expected skill, lower is better | 4.2 | 2.1 | 1.1 | -3.2 candidates better | -1.1 candidates better |
 
 ## Claim Scope
 
-This report measures the current route against an 18-case suite that began as a fresh generalization probe. Current results are regression evidence for those prompts: 18/18 primary hit@1, 18/18 expected primary in top/workflow five, 0/18 forbidden primaries, support coverage@5 88.0%, support precision@5 50.0%, and 5/18 support-miss cases. Use the experiment log for the pre-tuning fresh-probe result; this report is not proof that cross-domain routing is solved.
+This report measures the current route against an 18-case suite that began as a fresh generalization probe. Current results are regression evidence for those prompts: 17/18 primary hit@1, 18/18 expected primary in top/workflow five, 0/18 forbidden primaries, support coverage@5 90.7%, support precision@5 51.4%, and 4/18 support-miss cases. Use the experiment log for the pre-tuning fresh-probe result; this report is not proof that cross-domain routing is solved.
 
-V2 raw counts: primary hit@1 18/18; expected primary top/workflow-five 18/18; forbidden primary 0/18; support-miss cases 5/18.
+V2 raw counts: primary hit@1 17/18; expected primary top/workflow-five 18/18; forbidden primary 0/18; support-miss cases 4/18.
 
 Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from 442 skills to 5 candidates, a 98.9% candidate reduction per task.
 Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.
@@ -71,7 +71,7 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 | AI agent apps | 2 | 100.0 | 100.0% | 100.0% | 100.0% | 62.5% | 0.0% | 0/2 | +48.1 pts | +43.8 pts |
 | Communications and knowledge | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 25.0% | 0.0% | 1/2 | +21.7 pts | +22.5 pts |
 | Security and risk | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 50.0% | 0.0% | 1/2 | +8.3 pts | +6.7 pts |
-| Backend services | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 1/1 | +88.8 pts | +10.0 pts |
+| Backend services | 1 | 50.0 | 0.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +48.8 pts | -30.0 pts |
 | Data analytics | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +10.0 pts | 0.0 pts |
 | Database and data engineering | 1 | 93.3 | 100.0% | 100.0% | 66.7% | 50.0% | 0.0% | 1/1 | 0.0 pts | 0.0 pts |
 | Documents and publishing | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +10.0 pts | +10.0 pts |
@@ -92,7 +92,7 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 | Product planning | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +26.7 pts | +22.5 pts |
 | Security review | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 50.0% | 0.0% | 1/2 | +8.3 pts | +6.7 pts |
 | Agent and LLM apps | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 75.0% | 0.0% | 0/1 | +86.1 pts | +77.5 pts |
-| Backend APIs and services | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 1/1 | +88.8 pts | +10.0 pts |
+| Backend APIs and services | 1 | 50.0 | 0.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +48.8 pts | -30.0 pts |
 | Data dashboards and reports | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +10.0 pts | 0.0 pts |
 | Databases and data engineering | 1 | 93.3 | 100.0% | 100.0% | 66.7% | 50.0% | 0.0% | 1/1 | 0.0 pts | 0.0 pts |
 | Documents and PDFs | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +10.0 pts | +10.0 pts |
@@ -111,7 +111,7 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 | mcp-server-cloudflare-fresh | AI agent apps | Cloudflare workers | building-mcp-server-on-cloudflare | building-mcp-server-on-cloudflare / 1 | building-mcp-server-on-cloudflare / 1 | building-mcp-server-on-cloudflare / 1 | Cloudflare workers | building-mcp-server-on-cloudflare -> wrangler -> workers-best-practices -> agents-sdk -> durable-objects |
 | game-ui-playtest-fresh | Games and simulation | Game development | phaser-2d-game, game-studio | phaser-2d-game / 1 | phaser-2d-game / 1 | phaser-2d-game / 1 | Game development | phaser-2d-game -> game-studio -> game-ui-frontend -> game-playtest -> sprite-pipeline |
 | notion-meeting-email-fresh | Communications and knowledge | Product planning | notion-meeting-intelligence | notion-spec-to-implementation / 3 | gmail / 4 | notion-meeting-intelligence / 1 | Product planning | notion-meeting-intelligence -> gmail -> gmail-inbox-triage -> notion-knowledge-capture -> email-triage |
-| vercel-auth-protection-fresh | Backend services | Backend APIs and services | auth | vercel-api / 16 | auth / 1 | auth / 1 | Backend APIs and services | auth -> dev-backend-api-design -> security-best-practices -> payments -> dev-java-dotnet-services |
+| vercel-auth-protection-fresh | Backend services | Backend APIs and services | auth | vercel-api / 16 | auth / 1 | sign-in-with-vercel / 2 | Backend APIs and services | sign-in-with-vercel -> auth -> dev-backend-api-design -> security-best-practices -> env-vars |
 | vercel-bot-firewall-fresh | Security and risk | Security review | vercel-firewall | vercel-firewall / 1 | vercel-firewall / 1 | vercel-firewall / 1 | Skill ranking anchor | vercel-firewall -> vercel-deploy -> building-mcp-server-on-cloudflare -> env-vars -> agent-browser-verify |
 | visualization-accessibility-review-fresh | Data analytics | Data dashboards and reports | accessibility-and-inclusive-visualization | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | accessibility-and-inclusive-visualization / 1 | Data dashboards and reports | accessibility-and-inclusive-visualization -> testing-data-visualizations -> data-visualization -> visualize-data -> visualization-strategy-and-critique |
 | postgres-migration-rollback-fresh | Database and data engineering | Databases and data engineering | database-migration-plan | database-migration-plan / 1 | database-migration-plan / 1 | database-migration-plan / 1 | Databases and data engineering | database-migration-plan -> database-schema-design -> dev-database-postgres -> data-quality-audit -> data-analysis-standard |
@@ -123,7 +123,7 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 | launch-risk-flags-fresh | Product, research, and planning | Product planning | launch-readiness | launch-readiness / 1 | launch-readiness / 1 | launch-readiness / 1 | Product planning | launch-readiness -> risk-register -> feature-flag-guide -> product-launch-checklist -> dev-release-productization |
 | gmail-label-draft-fresh | Communications and knowledge | Email triage | gmail-inbox-triage, gmail | gmail-inbox-triage / 1 | gmail / 1 | gmail-inbox-triage / 1 | Email triage | gmail-inbox-triage -> gmail -> email-triage -> triage-finding -> engineering-weekly-report |
 | security-diff-remediation-fresh | Security and risk | Security review | security-diff-scan | security-diff-scan / 1 | security-diff-scan / 1 | security-diff-scan / 1 | Security review | security-diff-scan -> validation -> deep-security-scan -> track-findings -> triage-finding |
-| electron-native-release-fresh | Frontend experience | Frontend implementation | dev-mobile-desktop | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | Frontend implementation | dev-mobile-desktop -> winui-app -> chatgpt-apps -> launch-readiness -> dev-release-productization |
+| electron-native-release-fresh | Frontend experience | Frontend implementation | dev-mobile-desktop | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | Frontend implementation | dev-mobile-desktop -> winui-app -> launch-readiness -> dev-release-productization -> frontend-app-builder |
 | creative-competitor-offer-fresh | Marketing, growth, and creative | Marketing growth | creative-offer | creative-ads-explorer / 2 | creative-ads-explorer / 5 | creative-offer / 1 | Marketing growth | creative-offer -> creative-ads-explorer -> creative-positioning -> competitive-intelligence-monitor -> business-strategy-and-research |
 | voice-browser-loop-fresh | AI agent apps | Agent and LLM apps | transcribe | control-in-app-browser / 37 | speech / 8 | transcribe / 1 | Agent and LLM apps | transcribe -> speech -> transformers-js -> frontend-testing-debugging -> control-in-app-browser |
 
@@ -134,14 +134,13 @@ This table is a support-quality backlog source, not an acceptance failure list. 
 | Case | Missing expected support | V2 top/workflow 5 |
 | --- | --- | --- |
 | notion-meeting-email-fresh | notion-spec-to-implementation | notion-meeting-intelligence -> gmail -> gmail-inbox-triage -> notion-knowledge-capture -> email-triage |
-| vercel-auth-protection-fresh | env-vars | auth -> dev-backend-api-design -> security-best-practices -> payments -> dev-java-dotnet-services |
 | vercel-bot-firewall-fresh | security-best-practices | vercel-firewall -> vercel-deploy -> building-mcp-server-on-cloudflare -> env-vars -> agent-browser-verify |
 | postgres-migration-rollback-fresh | api-versioning-strategy | database-migration-plan -> database-schema-design -> dev-database-postgres -> data-quality-audit -> data-analysis-standard |
 | durable-object-agent-fresh | wrangler | durable-objects -> sandbox-sdk -> workers-best-practices -> agents-sdk -> building-ai-agent-on-cloudflare |
 
 ## Interpretation
 
-On the fresh-probe regression suite, SkillWeaver V2 changes the composite output-quality score by +27.4 points versus no SkillWeaver and +23.3 points versus the skill-level baseline.
-V2 changes primary selection by +33.3 percentage points versus no SkillWeaver and +27.8 percentage points versus the skill-level baseline.
+On the fresh-probe regression suite, SkillWeaver V2 changes the composite output-quality score by +25.2 points versus no SkillWeaver and +21.0 points versus the skill-level baseline.
+V2 changes primary selection by +27.8 percentage points versus no SkillWeaver and +22.2 percentage points versus the skill-level baseline.
 V2 changes expected-skill top/workflow-5 retrieval by +11.1 percentage points versus no SkillWeaver and +11.1 percentage points versus the skill-level baseline.
 The V2 score reflects a concept-aided skill-loading experience, not an LLM reranker; it is fully deterministic and derived from the local skill corpus.

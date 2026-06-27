@@ -1,9 +1,9 @@
 # SkillWeaver V2 Clean Holdout V3 Regression Benchmark
 
-Generated: 2026-06-27T21:17:42.213Z
+Generated: 2026-06-27T21:38:10.763Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782595062213,"command":"npm run benchmark:skills:clean-v3","suite":{"id":"clean-holdout-v3","label":"Clean Holdout V3 Regression","gatesAcceptance":false},"git":{"commit":"d27ebafdedd2e5810f9c394e80b0e76d95b9a3f6","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":18,"sha256":"sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732","scanner":"sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0","benchmarkScript":"sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:6dd2fb41af94aa081a4b8ce2c5bc188a0fa5d54a64d3c11d88066a1988fe5115"}
+{"generatedAt":1782596290763,"command":"npm run benchmark:skills:clean-v3","suite":{"id":"clean-holdout-v3","label":"Clean Holdout V3 Regression","gatesAcceptance":false},"git":{"commit":"77d4c733f3ba2cf937b5f967ffe44a2a28170fa0","dirty":true,"dirtyPaths":[".env.example","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":18,"sha256":"sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732","scanner":"sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a","benchmarkScript":"sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:2e47e162c7df374bc1c771037bd1687881b4016596fdb13eb00ca2ce177a3476"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:clean-v3`
 - Suite: Clean Holdout V3 Regression
 - Acceptance gate: no
-- Git commit at generation: `d27ebafdedd2e5810f9c394e80b0e76d95b9a3f6`
-- Git dirty: no
-- Invalidating dirty paths: none
+- Git commit at generation: `77d4c733f3ba2cf937b5f967ffe44a2a28170fa0`
+- Git dirty: yes
+- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
 - Case hash: `sha256:36c81fb6aaaeee3712766db3ab64a341468e9935040933919699c16c9fa57732`
-- Scanner hash: `sha256:852d05e24e5bf263977b235b2cc0bce96e1a506b2c0ff29be50c398f03036be0`
-- Benchmark script hash: `sha256:6039d73bd2fd202b3f7ad3da4598506bb2f4bceb6be718b0b8a6dfedafcb1ca3`
+- Scanner hash: `sha256:3f665e09224c180a9432d3a2afae2e33a59b2b7bc556c908e728086b4ef9a56a`
+- Benchmark script hash: `sha256:24780c509d45d4efa048b65be0202aabb3a0fde2c4d720c5eb9e59e25a17a9b0`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:6dd2fb41af94aa081a4b8ce2c5bc188a0fa5d54a64d3c11d88066a1988fe5115`
+- Snapshot fingerprint: `sha256:2e47e162c7df374bc1c771037bd1687881b4016596fdb13eb00ca2ce177a3476`
 - Freshness check: pass
 - Quality gate, reported only: pass
 

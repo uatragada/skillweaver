@@ -12,19 +12,19 @@ The last pre-concept commit was `80d31f1`; the benchmark does not execute code f
 
 ## Permitted Claims
 
-Safe: "V2 improves deterministic skill routing on the active acceptance suite and remains strong on the post-tuning challenge, fresh-probe regression, frozen-holdout regression, clean-holdout V2 regression, and clean-holdout V3 regression suites."
+Safe: "V2 improves deterministic skill routing on the active acceptance suite and remains strong on the post-tuning challenge, fresh-probe regression, frozen-holdout regression, clean-holdout V2 regression, clean-holdout V3 regression, and clean-holdout V4 regression suites."
 
-Safe: "V2 has 0.0% forbidden primary rate across the current active, challenge, fresh-probe regression, frozen holdout regression, clean V2 regression, and clean V3 regression suites, while improving output quality versus both compared baselines."
+Safe: "V2 has 0.0% forbidden primary rate across the current active, challenge, fresh-probe regression, frozen holdout regression, clean V2 regression, clean V3 regression, and clean V4 regression suites, while improving output quality versus both compared baselines."
 
-Safe: "On the clean V3 regression suite, V2 now reaches 100.0% primary hit@1 and 0.0% forbidden primaries, after the pre-tuning clean V3 baseline was preserved at `00ad343`."
+Safe: "On the clean V4 regression suite, V2 now reaches 100.0% primary hit@1 and 0.0% forbidden primaries, after the pre-tuning clean V4 baseline was preserved at `77d4c73`."
 
-Not safe with the current evidence: "V2 generalizes across all domains", "V2 has 100% routing accuracy", "cross-domain routing is solved", "the current clean V2 report is untouched holdout evidence", "the current clean V3 report is untouched holdout evidence", or "clean V3 proves V2 is solved."
+Not safe with the current evidence: "V2 generalizes across all domains", "V2 has 100% routing accuracy", "cross-domain routing is solved", "the current clean V2 report is untouched holdout evidence", "the current clean V3 report is untouched holdout evidence", "the current clean V4 report is untouched holdout evidence", or "clean V4 proves V2 is solved."
 
 Any cross-domain quality claim must include suite role, case count, domain/case coverage, primary hit@1, expected top/workflow-five retrieval, MRR, support coverage@5, support precision@5, forbidden primary rate, and support-miss count.
 
 ## Evaluation Splits
 
-SkillWeaver reports six routing suites:
+SkillWeaver reports seven routing suites:
 
 - Active acceptance suite: `benchmarks/skill-routing-cases.json`, generated into `docs/SKILL-USE-GAINS.md`. This is the regression gate for V2 routing claims.
 - Post-tuning challenge suite: `benchmarks/skill-routing-holdout.json`, generated into `docs/SKILL-USE-HOLDOUT.md`. This reports generalization pressure and is not an acceptance gate.
@@ -32,14 +32,15 @@ SkillWeaver reports six routing suites:
 - Frozen holdout regression suite: `benchmarks/skill-routing-frozen-holdout.json`, generated into `docs/SKILL-USE-FROZEN-HOLDOUT.md`. This began as the clean-split frozen baseline; after misses from it informed routing changes, the current report is non-gating regression evidence for that frozen prompt set.
 - Clean holdout V2 regression suite: `benchmarks/skill-routing-clean-holdout-v2.json`, generated into `docs/SKILL-USE-CLEAN-HOLDOUT-V2.md`. This began as the clean V2 baseline captured after commit `3cd6e51`; after misses from it informed routing fixes, the current report is non-gating regression evidence for that prompt set.
 - Clean holdout V3 regression suite: `benchmarks/skill-routing-clean-holdout-v3.json`, generated into `docs/SKILL-USE-CLEAN-HOLDOUT-V3.md`. This began as the clean V3 baseline captured after commit `e2a47a6`; after misses from it informed routing fixes, the current report is non-gating regression evidence for that prompt set. The pre-tuning baseline is preserved at `00ad343`.
+- Clean holdout V4 regression suite: `benchmarks/skill-routing-clean-holdout-v4.json`, generated into `docs/SKILL-USE-CLEAN-HOLDOUT-V4.md`. This began as the clean V4 baseline captured after commit `764924b`; after misses from it informed routing fixes, the current report is non-gating regression evidence for that prompt set. The pre-tuning baseline is preserved at `77d4c73`.
 
-The current challenge suite started as a frozen pilot, then its misses were used to improve broad routing anchors and specialist concept membership. From this commit forward it is a fixed post-tuning challenge suite, not pristine untouched holdout evidence. The clean holdout V2 and V3 suites are also no longer pristine because their misses drove later routing passes. A future clean-split claim requires another prompt set captured after the latest tuning commit and reported before tuning from those prompts.
+The current challenge suite started as a frozen pilot, then its misses were used to improve broad routing anchors and specialist concept membership. From this commit forward it is a fixed post-tuning challenge suite, not pristine untouched holdout evidence. The clean holdout V2, V3, and V4 suites are also no longer pristine because their misses drove later routing passes. A future clean-split claim requires another prompt set captured after the latest tuning commit and reported before tuning from those prompts.
 
 Fresh-probe, frozen-holdout, and clean-holdout provenance are process claims, not something the benchmark metadata can prove by itself. The metadata proves report freshness against the current cases, scanner, benchmark script, corpus, and acceptance inputs. It does not prove that prompts were collected before tuning. Preserve the first pre-tuning result in the experiment log or git history before using fresh prompts to tune the router.
 
 ## Case Schema
 
-Cases live in `benchmarks/skill-routing-cases.json`, `benchmarks/skill-routing-holdout.json`, `benchmarks/skill-routing-fresh.json`, `benchmarks/skill-routing-frozen-holdout.json`, `benchmarks/skill-routing-clean-holdout-v2.json`, and `benchmarks/skill-routing-clean-holdout-v3.json`.
+Cases live in `benchmarks/skill-routing-cases.json`, `benchmarks/skill-routing-holdout.json`, `benchmarks/skill-routing-fresh.json`, `benchmarks/skill-routing-frozen-holdout.json`, `benchmarks/skill-routing-clean-holdout-v2.json`, `benchmarks/skill-routing-clean-holdout-v3.json`, and `benchmarks/skill-routing-clean-holdout-v4.json`.
 
 - `id`: stable case identifier.
 - `domain`: one benchmark-intent domain label. It is evaluation metadata, not a skill-derived domain.
@@ -176,14 +177,14 @@ Generated by `npm run benchmark:skills` on June 27, 2026:
 - Skills: 442.
 - Concept nodes: 22.
 - Concept edges: 200.
-- V2 output quality: 100.0.
-- V2 gain over no SkillWeaver: +24.7 points.
-- V2 gain over skill-level baseline: +22.8 points.
+- V2 output quality: 99.9.
+- V2 gain over no SkillWeaver: +24.6 points.
+- V2 gain over skill-level baseline: +22.7 points.
 - V2 primary hit@1: 100.0%.
-- V2 support coverage@5: 100.0%.
-- V2 support precision@5: 40.9%.
-- V2 support precision gain over no SkillWeaver: +22.3 percentage points.
-- V2 support precision gain over skill-level baseline: +19.8 percentage points.
+- V2 support coverage@5: 99.4%.
+- V2 support precision@5: 40.5%.
+- V2 support precision gain over no SkillWeaver: +22.0 percentage points.
+- V2 support precision gain over skill-level baseline: +19.5 percentage points.
 - V2 forbidden primary rate: 0.0%.
 
 Generated by `npm run benchmark:skills:holdout` on June 27, 2026:
@@ -191,12 +192,12 @@ Generated by `npm run benchmark:skills:holdout` on June 27, 2026:
 - Cases: 22.
 - Domains covered: 11.
 - Expected concepts covered: 11.
-- V2 output quality: 91.4.
-- V2 gain over no SkillWeaver: +21.3 points.
-- V2 gain over skill-level baseline: +14.4 points.
+- V2 output quality: 91.8.
+- V2 gain over no SkillWeaver: +21.7 points.
+- V2 gain over skill-level baseline: +14.8 points.
 - V2 primary hit@1: 95.5%.
 - V2 expected primary top/workflow 5: 100.0%.
-- V2 support coverage@5: 68.2%.
+- V2 support coverage@5: 70.5%.
 - V2 support precision@5: 35.2%.
 - V2 forbidden primary rate: 0.0%.
 
@@ -216,13 +217,13 @@ Initial fresh-probe result on June 27, 2026 before tuning from those prompts:
 
 After narrow tuning from the fresh-probe misses, the same suite becomes regression evidence:
 
-- V2 output quality: 94.6.
-- V2 gain over no SkillWeaver: +24.4 points.
-- V2 gain over skill-level baseline: +20.3 points.
+- V2 output quality: 95.4.
+- V2 gain over no SkillWeaver: +25.2 points.
+- V2 gain over skill-level baseline: +21.0 points.
 - V2 primary hit@1: 94.4%.
 - V2 expected primary top/workflow 5: 100.0%.
-- V2 support coverage@5: 88.0%.
-- V2 support precision@5: 50.0%.
+- V2 support coverage@5: 90.7%.
+- V2 support precision@5: 51.4%.
 - V2 forbidden primary rate: 0.0%.
 
 Frozen holdout baseline generated by `npm run benchmark:skills:frozen` on June 27, 2026:
@@ -272,13 +273,13 @@ Clean holdout V2 baseline generated by `npm run benchmark:skills:clean` on June 
 
 After narrow tuning from the clean-holdout V2 misses, the same suite is regression evidence generated by `npm run benchmark:skills:clean-v2-regression`:
 
-- V2 output quality: 90.5.
-- V2 gain over no SkillWeaver: +22.2 points.
-- V2 gain over skill-level baseline: +11.5 points.
+- V2 output quality: 91.9.
+- V2 gain over no SkillWeaver: +23.7 points.
+- V2 gain over skill-level baseline: +12.9 points.
 - V2 primary hit@1: 100.0%.
 - V2 expected primary top/workflow 5: 100.0%.
-- V2 support coverage@5: 52.4%.
-- V2 support precision@5: 39.3%.
+- V2 support coverage@5: 59.5%.
+- V2 support precision@5: 44.6%.
 - V2 forbidden primary rate: 0.0%.
 - V2 support-miss cases: 14/14.
 
@@ -313,6 +314,31 @@ Clean holdout V3 regression generated by `npm run benchmark:skills:clean-v3` aft
 - V2 forbidden primary rate: 0.0%.
 - V2 support-miss cases: 9/18.
 
-The current V3 report is regression evidence for those prompts. It proves the promoted failures were fixed without runtime bloat, but a new clean generalization claim requires a fresh prompt set captured after this tuning commit.
+The current V3 report is regression evidence for those prompts. It shows the promoted failures were fixed on this regression suite without runtime bloat, but a new clean generalization claim requires a fresh prompt set captured after this tuning commit.
 
-These snapshots are strong evidence for the active, challenge, fresh-probe regression, frozen-holdout regression, clean-holdout V2 regression, and clean-holdout V3 regression suites, not proof of universal routing correctness.
+Clean holdout V4 baseline generated by `npm run benchmark:skills:clean-v4` on June 27, 2026 after commit `764924b` and preserved at `77d4c73`:
+
+- Cases: 21.
+- V2 output quality: 49.0.
+- V2 gain over no SkillWeaver: -6.8 points.
+- V2 gain over skill-level baseline: -2.5 points.
+- V2 primary hit@1: 33.3%.
+- V2 expected primary top/workflow 5: 81.0%.
+- V2 support coverage@5: 43.7%.
+- V2 support precision@5: 32.1%.
+- V2 forbidden primary rate: 38.1%.
+- V2 support-miss cases: 20/21.
+
+After narrow tuning from the clean-holdout V4 misses, the same suite is regression evidence generated by `npm run benchmark:skills:clean-v4`:
+
+- V2 output quality: 93.0.
+- V2 gain over no SkillWeaver: +37.2 points.
+- V2 gain over skill-level baseline: +41.5 points.
+- V2 primary hit@1: 100.0%.
+- V2 expected primary top/workflow 5: 100.0%.
+- V2 support coverage@5: 65.1%.
+- V2 support precision@5: 47.6%.
+- V2 forbidden primary rate: 0.0%.
+- V2 support-miss cases: 13/21.
+
+These snapshots are strong evidence for the active, challenge, fresh-probe regression, frozen-holdout regression, clean-holdout V2 regression, clean-holdout V3 regression, and clean-holdout V4 regression suites, not proof of universal routing correctness.
