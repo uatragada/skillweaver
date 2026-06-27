@@ -63,8 +63,8 @@ const CONCEPT_RULES = [
     triggers: ["browser qa", "playwright screenshot", "verify live app", "control chrome", "inspect page"],
     domains: ["frontend"],
     tools: ["Playwright", "Node"],
-    gatewaySkillNames: ["browser:control-in-app-browser", "chrome:control-chrome"],
-    primarySkillNames: ["playwright", "playwright-interactive", "build-web-apps:frontend-testing-debugging"],
+    gatewaySkillNames: ["browser:control-in-app-browser", "control-in-app-browser", "chrome:control-chrome", "control-chrome"],
+    primarySkillNames: ["playwright", "playwright-interactive", "build-web-apps:frontend-testing-debugging", "frontend-testing-debugging"],
     supportingSkillNames: ["screenshot"],
     verificationSkillNames: ["vercel:agent-browser-verify"],
     relatedConceptIds: ["frontend-implementation", "deployment-release"]
@@ -77,8 +77,8 @@ const CONCEPT_RULES = [
     domains: ["frontend", "product", "creative"],
     tools: ["Figma", "Node"],
     gatewaySkillNames: ["figma-use", "figma:figma-use"],
-    primarySkillNames: ["figma-implement-design", "figma:figma-code-connect", "product-design:image-to-code", "design-image-to-code", "design-url-to-code"],
-    supportingSkillNames: ["figma-design-qa", "figma-component-audit", "figma-create-design-system-rules", "product-design:get-context", "figma:figma-generate-design"],
+    primarySkillNames: ["figma-implement-design", "figma-generate-library", "figma:figma-code-connect", "product-design:image-to-code", "design-image-to-code", "design-url-to-code"],
+    supportingSkillNames: ["figma-design-qa", "figma-component-audit", "figma-create-design-system-rules", "product-design:get-context", "figma:figma-generate-design", "figma-generate-design"],
     verificationSkillNames: ["design-qa", "figma-design-review"],
     relatedConceptIds: ["frontend-implementation", "browser-verification"]
   },
@@ -90,8 +90,8 @@ const CONCEPT_RULES = [
     domains: ["data", "product"],
     tools: ["Python", "Node"],
     gatewaySkillNames: ["data-analytics:index"],
-    primarySkillNames: ["data-analytics:build-dashboard", "data-analytics:build-report", "build-web-data-visualization:data-visualization", "data-analytics:visualize-data"],
-    supportingSkillNames: ["data-analytics:design-kpis", "data-analysis-standard", "chart-data-extractor", "spreadsheets:Spreadsheets"],
+    primarySkillNames: ["data-analytics:build-dashboard", "build-dashboard", "data-analytics:build-report", "build-report", "build-web-data-visualization:data-visualization", "data-analytics:visualize-data", "visualize-data"],
+    supportingSkillNames: ["data-analytics:design-kpis", "design-kpis", "kpi-reporting", "data-analysis-standard", "chart-data-extractor", "spreadsheets:Spreadsheets", "Spreadsheets"],
     verificationSkillNames: ["data-analytics:validate-data", "data-analytics:analyze-data-quality"],
     relatedConceptIds: ["frontend-implementation", "product-planning"]
   },
@@ -111,12 +111,12 @@ const CONCEPT_RULES = [
     id: "security-review",
     label: "Security review",
     description: "Threat-model, scan, triage findings, and validate security-sensitive changes.",
-    triggers: ["security scan", "threat model", "vulnerability", "audit finding", "risk review"],
+    triggers: ["security scan", "threat model", "vulnerability", "audit finding", "risk review", "attack path", "exploit chain"],
     domains: ["security", "operations"],
     tools: ["GitHub"],
-    primarySkillNames: ["codex-security:security-scan", "codex-security:deep-security-scan", "codex-security:threat-model", "security-threat-model", "security-best-practices"],
-    supportingSkillNames: ["codex-security:finding-discovery", "codex-security:triage-finding", "codex-security:track-findings", "skill-security-auditor"],
-    verificationSkillNames: ["codex-security:validation", "codex-security:security-diff-scan"],
+    primarySkillNames: ["codex-security:security-scan", "security-scan", "codex-security:deep-security-scan", "deep-security-scan", "codex-security:threat-model", "threat-model", "security-threat-model", "security-best-practices"],
+    supportingSkillNames: ["codex-security:attack-path-analysis", "attack-path-analysis", "codex-security:finding-discovery", "finding-discovery", "codex-security:triage-finding", "triage-finding", "codex-security:track-findings", "track-findings", "skill-security-auditor"],
+    verificationSkillNames: ["codex-security:validation", "validation", "codex-security:security-diff-scan", "security-diff-scan"],
     relatedConceptIds: ["github-pr-repair", "repo-operations"]
   },
   {
@@ -151,7 +151,7 @@ const CONCEPT_RULES = [
     triggers: ["pdf", "docx", "document pipeline", "latex", "write docs", "api documentation"],
     domains: ["documents", "data"],
     tools: ["Python", "Node"],
-    primarySkillNames: ["pdf", "pdf:pdf", "documents:documents", "api-docs-writer", "dev-documentation-systems"],
+    primarySkillNames: ["pdf", "pdf:pdf", "documents:documents", "documents", "api-docs-writer", "dev-documentation-systems"],
     supportingSkillNames: ["latex:latex-compile", "latex:latex-doctor", "architecture-decision-record", "technical-spec-template"],
     verificationSkillNames: ["docbridge-full-stack-verification"],
     relatedConceptIds: ["presentations", "data-dashboarding"]
@@ -163,7 +163,7 @@ const CONCEPT_RULES = [
     triggers: ["presentation", "slides", "roadmap deck", "pitch deck"],
     domains: ["documents", "product"],
     tools: ["Node"],
-    primarySkillNames: ["presentations:Presentations", "roadmap-presentation"],
+    primarySkillNames: ["presentations:Presentations", "Presentations", "roadmap-presentation"],
     supportingSkillNames: ["template-creator:template-creator", "documents:documents"],
     relatedConceptIds: ["documents-pdf", "product-planning"]
   },
@@ -174,7 +174,7 @@ const CONCEPT_RULES = [
     triggers: ["gmail", "inbox triage", "email", "draft reply"],
     domains: ["operations"],
     tools: ["Gmail"],
-    primarySkillNames: ["gmail:gmail", "gmail:gmail-inbox-triage", "email-triage"],
+    primarySkillNames: ["gmail:gmail", "gmail", "gmail:gmail-inbox-triage", "gmail-inbox-triage", "email-triage"],
     relatedConceptIds: ["product-planning", "repo-operations"]
   },
   {
@@ -184,9 +184,9 @@ const CONCEPT_RULES = [
     triggers: ["game", "phaser", "three.js", "webgl", "playtest", "sprite"],
     domains: ["frontend", "creative"],
     tools: ["Node", "Playwright"],
-    primarySkillNames: ["game-studio:game-studio", "game-studio:phaser-2d-game", "game-studio:three-webgl-game", "game-studio:web-game-foundations", "game-studio:react-three-fiber-game"],
-    supportingSkillNames: ["game-studio:sprite-pipeline", "game-studio:web-3d-asset-pipeline", "racingsim-game-dev"],
-    verificationSkillNames: ["game-studio:game-playtest"],
+    primarySkillNames: ["game-studio:game-studio", "game-studio", "game-studio:phaser-2d-game", "phaser-2d-game", "game-studio:three-webgl-game", "three-webgl-game", "game-studio:web-game-foundations", "web-game-foundations", "game-studio:react-three-fiber-game", "react-three-fiber-game"],
+    supportingSkillNames: ["game-studio:sprite-pipeline", "sprite-pipeline", "game-studio:web-3d-asset-pipeline", "web-3d-asset-pipeline", "racingsim-game-dev"],
+    verificationSkillNames: ["game-studio:game-playtest", "game-playtest"],
     relatedConceptIds: ["frontend-implementation", "browser-verification"]
   },
   {
@@ -218,8 +218,8 @@ const CONCEPT_RULES = [
     triggers: ["cloudflare workers", "wrangler", "durable object", "mcp server", "cloudflare agent"],
     domains: ["operations", "backend", "ai"],
     tools: ["Cloudflare", "Node"],
-    primarySkillNames: ["cloudflare:workers-best-practices", "cloudflare:wrangler", "cloudflare:durable-objects", "cloudflare:building-mcp-server-on-cloudflare", "cloudflare:building-ai-agent-on-cloudflare"],
-    supportingSkillNames: ["cloudflare:cloudflare", "cloudflare:web-perf", "cloudflare:sandbox-sdk"],
+    primarySkillNames: ["cloudflare:workers-best-practices", "workers-best-practices", "cloudflare:wrangler", "wrangler", "cloudflare:durable-objects", "durable-objects", "cloudflare:building-mcp-server-on-cloudflare", "building-mcp-server-on-cloudflare", "cloudflare:building-ai-agent-on-cloudflare", "building-ai-agent-on-cloudflare"],
+    supportingSkillNames: ["cloudflare:cloudflare", "cloudflare", "cloudflare:web-perf", "web-perf", "cloudflare:sandbox-sdk", "sandbox-sdk"],
     relatedConceptIds: ["deployment-release", "agent-llm-apps"]
   },
   {
@@ -229,8 +229,8 @@ const CONCEPT_RULES = [
     triggers: ["hugging face", "dataset", "model training", "gradio", "papers", "spaces"],
     domains: ["ai", "data"],
     tools: ["Python"],
-    primarySkillNames: ["hugging-face:hf-cli", "hugging-face:huggingface-datasets", "hugging-face:huggingface-llm-trainer", "hugging-face:huggingface-vision-trainer", "hugging-face:huggingface-papers"],
-    supportingSkillNames: ["hugging-face:huggingface-gradio", "hugging-face:huggingface-jobs", "hugging-face:transformers-js"],
+    primarySkillNames: ["hugging-face:hf-cli", "hf-cli", "hugging-face:huggingface-datasets", "huggingface-datasets", "hugging-face:huggingface-llm-trainer", "huggingface-llm-trainer", "hugging-face:huggingface-vision-trainer", "huggingface-vision-trainer", "hugging-face:huggingface-papers", "huggingface-papers"],
+    supportingSkillNames: ["hugging-face:huggingface-community-evals", "huggingface-community-evals", "hugging-face:huggingface-gradio", "huggingface-gradio", "hugging-face:huggingface-jobs", "huggingface-jobs", "hugging-face:transformers-js", "transformers-js"],
     relatedConceptIds: ["agent-llm-apps", "data-dashboarding"]
   },
   {
@@ -243,6 +243,54 @@ const CONCEPT_RULES = [
     primarySkillNames: ["marketing-strategy-and-growth", "seo-and-organic-growth", "analytics-cro-and-reporting", "creative-production", "creative-offer", "creative-ads-explorer"],
     supportingSkillNames: ["competitive-intelligence-monitor", "business-strategy-and-research", "industry-playbooks", "creative-positioning"],
     relatedConceptIds: ["data-dashboarding", "product-planning"]
+  },
+  {
+    id: "backend-services",
+    label: "Backend APIs and services",
+    description: "Design, implement, document, and verify backend APIs, service boundaries, and server runtimes.",
+    triggers: ["backend api", "node service", "python service", "dotnet service", "api versioning", "server endpoint"],
+    domains: ["backend", "operations", "documents"],
+    tools: ["Node", "Python", "OpenAI"],
+    primarySkillNames: ["dev-backend-api-design", "dev-node-typescript-services", "dev-python-services", "dev-java-dotnet-services", "aspnet-core"],
+    supportingSkillNames: ["api-versioning-strategy", "api-docs-writer", "technical-spec-template", "system-design-interview"],
+    verificationSkillNames: ["dev-testing-qa", "load-testing-plan", "monitoring-setup-guide"],
+    relatedConceptIds: ["database-data-engineering", "observability-reliability", "repo-operations"]
+  },
+  {
+    id: "database-data-engineering",
+    label: "Databases and data engineering",
+    description: "Design schemas, plan migrations, maintain Postgres, and build reliable data pipelines.",
+    triggers: ["database schema", "postgres", "migration", "data pipeline", "etl", "warehouse"],
+    domains: ["backend", "data", "operations"],
+    tools: ["Python", "Node"],
+    primarySkillNames: ["dev-database-postgres", "database-schema-design", "database-migration-plan", "dev-data-engineering", "data-pipeline-spec"],
+    supportingSkillNames: ["data-quality-audit", "data-analysis-standard", "dev-python-services"],
+    verificationSkillNames: ["data-analytics:validate-data", "validate-data", "dependency-audit"],
+    relatedConceptIds: ["backend-services", "data-dashboarding", "observability-reliability"]
+  },
+  {
+    id: "observability-reliability",
+    label: "Observability and reliability",
+    description: "Set up monitoring, SLOs, incident response, error budgets, performance checks, and recovery plans.",
+    triggers: ["monitoring", "slo", "incident", "error budget", "sentry", "performance budget", "reliability"],
+    domains: ["operations", "backend", "security"],
+    tools: ["GitHub", "Python", "Node"],
+    primarySkillNames: ["dev-observability-sre", "monitoring-setup-guide", "slo-error-budget", "incident-postmortem", "sentry"],
+    supportingSkillNames: ["performance-budget", "performance-review", "disaster-recovery-plan", "dev-performance-engineering"],
+    verificationSkillNames: ["load-testing-plan", "launch-readiness"],
+    relatedConceptIds: ["backend-services", "deployment-release", "infrastructure-platforms"]
+  },
+  {
+    id: "infrastructure-platforms",
+    label: "Infrastructure and platforms",
+    description: "Review and implement infrastructure-as-code, containers, Kubernetes, cloud foundations, and platform operations.",
+    triggers: ["terraform", "infrastructure as code", "kubernetes", "container", "cloud platform", "devops"],
+    domains: ["operations", "backend", "security"],
+    tools: ["Cloudflare", "GitHub", "Node"],
+    primarySkillNames: ["dev-infra-terraform-cloud", "infra-as-code-review", "dev-containers-kubernetes", "dev-devops-ci-cd"],
+    supportingSkillNames: ["cicd-playbook", "cloudflare:cloudflare", "cloudflare", "deployment-release"],
+    verificationSkillNames: ["security-best-practices", "codex-security:security-diff-scan", "security-diff-scan"],
+    relatedConceptIds: ["cloudflare-workers", "deployment-release", "observability-reliability"]
   },
   {
     id: "repo-operations",
@@ -265,6 +313,8 @@ const CONCEPT_ROLE_PRIORITY = {
   supporting: 2,
   reference: 1
 };
+
+const GENERIC_CONCEPT_TOOLS = new Set(["github", "node", "python"]);
 
 const STOP_WORDS = new Set([
   "about",
@@ -931,10 +981,11 @@ function buildConceptEdges(concepts) {
         right.skillRefs.map((ref) => ref.skillId)
       );
       const sharedDomains = overlap(left.domains, right.domains);
-      const sharedTools = overlap(left.tools, right.tools);
-      const weight = Math.min(0.9, (sharedSkillIds.length * 0.22) + (sharedDomains.length * 0.12) + (sharedTools.length * 0.1));
+      const sharedTools = overlap(left.tools, right.tools)
+        .filter((tool) => !GENERIC_CONCEPT_TOOLS.has(normalizeSearchText(tool)));
+      const weight = Math.min(0.9, (sharedSkillIds.length * 0.24) + (sharedDomains.length * 0.08) + (sharedTools.length * 0.08));
 
-      if (weight < 0.28) continue;
+      if (weight < 0.34) continue;
       edges.push({
         sourceId: left.id,
         targetId: right.id,
@@ -1008,24 +1059,29 @@ function rankConcept(concept, query) {
   const labelText = normalizeSearchText(concept.label);
   const descriptionText = normalizeSearchText(concept.description);
   const triggerText = normalizeSearchText((concept.triggers ?? []).join(" "));
-  const skillText = normalizeSearchText((concept.skillRefs ?? []).flatMap((ref) => [ref.name, ref.description]).join(" "));
-  const domainToolText = normalizeSearchText([...(concept.domains ?? []), ...(concept.tools ?? [])].join(" "));
+  const explicitSkillText = normalizeSearchText((concept.skillRefs ?? [])
+    .filter((ref) => ref.role !== "reference")
+    .flatMap((ref) => [ref.name, ref.reason])
+    .join(" "));
+  const curatedTagText = normalizeSearchText([...(concept.domains ?? []), ...(concept.tools ?? [])]
+    .filter((value) => !GENERIC_CONCEPT_TOOLS.has(normalizeSearchText(value)))
+    .join(" "));
 
   let score = 0;
   if (labelText === normalizedQuery) score += 160;
   if (labelText.includes(normalizedQuery)) score += 120;
   if (descriptionText.includes(normalizedQuery)) score += 80;
   if (triggerText.includes(normalizedQuery)) score += 70;
-  if (skillText.includes(normalizedQuery)) score += 34;
-  if (concept.searchText.includes(normalizedQuery)) score += 12;
+  if (explicitSkillText.includes(normalizedQuery)) score += 28;
+  if (concept.searchText.includes(normalizedQuery)) score += 5;
 
   for (const term of terms) {
     if (labelText.includes(term)) score += 22;
     if (descriptionText.includes(term)) score += 14;
     if (triggerText.includes(term)) score += 13;
-    if (domainToolText.includes(term)) score += 10;
-    if (skillText.includes(term)) score += 5;
-    if (concept.searchText.includes(term)) score += 1;
+    if (curatedTagText.includes(term)) score += 6;
+    if (explicitSkillText.includes(term)) score += 4;
+    if (concept.searchText.includes(term)) score += 0.25;
   }
 
   return score;
@@ -1098,6 +1154,177 @@ function serializeConceptDetail(index, conceptId) {
   };
 }
 
+function dedupeSkillsByName(skills) {
+  const byName = new Map();
+  for (const skill of skills) {
+    const key = normalizeSearchText(skill.name);
+    const existing = byName.get(key);
+    if (!existing || compareRankedSkillLike(skill, existing) < 0) {
+      byName.set(key, skill);
+    }
+  }
+  return [...byName.values()];
+}
+
+function compareRankedSkillLike(left, right) {
+  return right.score - left.score
+    || (SOURCE_TYPE_PRIORITY[right.sourceType] ?? 0) - (SOURCE_TYPE_PRIORITY[left.sourceType] ?? 0)
+    || left.name.localeCompare(right.name);
+}
+
+function scoreConceptsForWorkflow(index, query, rankedSkills) {
+  const conceptSearchScores = new Map(searchConcepts(index, query).map((concept) => [concept.id, concept.score ?? 0]));
+
+  return (index.concepts ?? [])
+    .map((concept) => {
+      let score = (conceptSearchScores.get(concept.id) ?? 0) * 2;
+
+      for (const [rankIndex, skill] of rankedSkills.slice(0, 8).entries()) {
+        const ref = concept.skillRefs.find((entry) =>
+          entry.skillId === skill.id || normalizeSearchText(entry.name) === normalizeSearchText(skill.name)
+        );
+        if (!ref) continue;
+        score += (260 / (rankIndex + 1)) + ((CONCEPT_ROLE_PRIORITY[ref.role] ?? 0) * 12);
+      }
+
+      return { ...concept, score };
+    })
+    .filter((concept) => concept.score > 0)
+    .sort((left, right) => right.score - left.score || left.label.localeCompare(right.label));
+}
+
+function rankConceptWorkflowSkills(index, query, filters = {}) {
+  const normalizedQuery = normalizeSearchText(query);
+  const skillById = new Map(index.skills.map((skill) => [skill.id, skill]));
+  const skillRanked = index.skills
+    .filter((skill) => !filters.root || skill.root === filters.root)
+    .filter((skill) => !filters.domain || skill.domains.includes(filters.domain))
+    .filter((skill) => !filters.sourceType || skill.sourceType === filters.sourceType)
+    .filter((skill) => !filters.namespace || skill.namespace === filters.namespace)
+    .map((skill) => ({ ...skill, score: query ? rankSkill(skill, query) : 1 }))
+    .filter((skill) => !query || skill.score > 0)
+    .sort(compareRankedSkillLike);
+  const rankedByName = new Map(skillRanked.map((skill, index) => [normalizeSearchText(skill.name), { skill, index }]));
+  const conceptResults = scoreConceptsForWorkflow(index, query, skillRanked).slice(0, 6);
+  const conceptCandidates = [];
+
+  for (const [conceptIndex, concept] of conceptResults.entries()) {
+    for (const [refIndex, ref] of (concept.skillRefs ?? []).entries()) {
+      if (filters.root && ref.root !== filters.root) continue;
+      if (filters.domain && !ref.domains.includes(filters.domain)) continue;
+      if (filters.sourceType && ref.sourceType !== filters.sourceType) continue;
+      if (filters.namespace && ref.namespace !== filters.namespace) continue;
+
+      const skill = skillById.get(ref.skillId) ?? {
+        id: ref.skillId,
+        name: ref.name,
+        description: ref.description,
+        path: ref.path,
+        folder: ref.folder,
+        root: ref.root,
+        sourceType: ref.sourceType,
+        namespace: ref.namespace,
+        domains: ref.domains ?? [],
+        triggers: [],
+        tools: ref.tools ?? [],
+        resources: {},
+        excerpt: "",
+        bodyLength: 0,
+        warnings: [],
+        searchText: ""
+      };
+      const rankedEntry = rankedByName.get(normalizeSearchText(skill.name));
+      const queryScore = rankedEntry?.skill.score ?? rankSkill(skill, query);
+      const intentBoost = getSkillIntentBoost(skill, ref, normalizedQuery);
+
+      conceptCandidates.push({
+        ...skill,
+        score: (queryScore * 4)
+          + (concept.score ?? 0)
+          + ((CONCEPT_ROLE_PRIORITY[ref.role] ?? 0) * 18)
+          + intentBoost
+          + (rankedEntry ? Math.max(0, 80 - (rankedEntry.index * 8)) : 0)
+          - (conceptIndex * 8)
+          - (refIndex * 0.25),
+        conceptId: concept.id,
+        conceptLabel: concept.label,
+        conceptRole: ref.role,
+        conceptReason: ref.reason
+      });
+    }
+  }
+
+  const conceptRanked = dedupeSkillsByName(conceptCandidates).sort(compareRankedSkillLike);
+  const seen = new Set(conceptRanked.map((skill) => normalizeSearchText(skill.name)));
+  const fallback = skillRanked
+    .filter((skill) => !seen.has(normalizeSearchText(skill.name)))
+    .map((skill, index) => ({
+      ...skill,
+      score: (skill.score * 3) + Math.max(0, 40 - index),
+      conceptId: null,
+      conceptLabel: "Skill ranking fallback",
+      conceptRole: "fallback",
+      conceptReason: "Appended after concept-map candidates."
+    }));
+
+  return [...conceptRanked, ...fallback];
+}
+
+function getSkillIntentBoost(skill, ref, normalizedQuery) {
+  const name = normalizeSearchText(skill.name);
+  const role = ref.role;
+  let boost = 0;
+
+  if (/\bdashboard\b/.test(normalizedQuery)) {
+    if (name.includes("build dashboard")) boost += 520;
+    if (["data visualization", "visualize data", "kpi reporting"].some((term) => name.includes(term))) boost += 260;
+    if (name.includes("analyze data quality") && !/\b(audit|quality|missing|suspicious)\b/.test(normalizedQuery)) boost -= 360;
+  }
+
+  if (/\breport\b|\bcharts?\b|\bmethodology\b/.test(normalizedQuery)) {
+    if (["build report", "kpi reporting", "visualize data", "data visualization"].some((term) => name.includes(term))) boost += 220;
+  }
+
+  if (/\bchrome\b/.test(normalizedQuery)) {
+    if (name.includes("control chrome")) boost += 420;
+    if (name.includes("control in app browser")) boost -= 160;
+  }
+
+  if (/\bsecurity\b|\bvulnerab|\bscan\b/.test(normalizedQuery)) {
+    if (["security scan", "deep security scan"].some((term) => name.includes(term))) boost += 460;
+    if (name.includes("security threat model") && !/\bthreat model\b/.test(normalizedQuery)) boost -= 240;
+  }
+
+  if (/\battack paths?\b|\bexploit chains?\b/.test(normalizedQuery)) {
+    const attackPathPrimaryIntent = /\bexploit chains?\b|\banalyze\b|\banalyse\b/.test(normalizedQuery)
+      && !/\bvulnerab|\bsecurity scan\b|\brepo for security\b/.test(normalizedQuery);
+    if (name.includes("attack path analysis")) boost += attackPathPrimaryIntent ? 520 : 120;
+    if (name.includes("security threat model")) boost -= 240;
+  }
+
+  if (/\btests?\b|\bqa\b|\bverify\b|\bverification\b/.test(normalizedQuery)) {
+    if (["dev testing qa", "game playtest", "playwright", "frontend testing debugging"].some((term) => name.includes(term))) boost += 90;
+  }
+
+  if (/\bmonitoring\b|\boperational\b|\breadiness\b|\bslo\b/.test(normalizedQuery)) {
+    if (["monitoring setup guide", "dev observability sre", "slo error budget"].some((term) => name.includes(term))) boost += 110;
+  }
+
+  if (/\bcanvas\b|\bwebgl\b|\basset\b|\brender/.test(normalizedQuery)) {
+    if (["game playtest", "web 3d asset pipeline", "three webgl game"].some((term) => name.includes(term))) boost += 100;
+  }
+
+  if (/\bkubernetes\b|\bcontainer\b|\bdevops\b/.test(normalizedQuery)) {
+    if (["dev containers kubernetes", "dev devops ci cd", "monitoring setup guide"].some((term) => name.includes(term))) boost += 100;
+  }
+
+  if (role === "primary" && /\b(create|build|implement|deploy|compile|train|debug|audit|review|plan|design)\b/.test(normalizedQuery)) {
+    boost += 12;
+  }
+
+  return boost;
+}
+
 function searchSkills(index, query, filters = {}) {
   const root = String(filters.root ?? "").trim();
   const domain = String(filters.domain ?? "").trim();
@@ -1150,10 +1377,73 @@ function recommendWorkflow(index, query, filters = {}) {
       path: skill.path,
       reason: index === 0
         ? "Primary match for the task wording."
-        : relatedIds.has(skill.id)
-          ? "Supporting skill connected by the local relationship graph."
-          : "Supporting skill from the ranked search results."
+      : relatedIds.has(skill.id)
+        ? "Supporting skill connected by the local relationship graph."
+        : "Supporting skill from the ranked search results."
     }))
+  };
+}
+
+function recommendConceptWorkflow(index, query, filters = {}) {
+  const ranked = rankConceptWorkflowSkills(index, query, filters).slice(0, 8);
+  const primary = ranked[0] ? serializeConceptWorkflowSkill(ranked[0]) : null;
+  if (!primary) return { query, primary: null, supporting: [], steps: [], concept: null };
+
+  const seenNames = new Set([normalizeSearchText(primary.name)]);
+  const supporting = ranked
+    .slice(1)
+    .filter((skill) => {
+      const key = normalizeSearchText(skill.name);
+      if (!key || seenNames.has(key)) return false;
+      seenNames.add(key);
+      return true;
+    })
+    .slice(0, 4)
+    .map(serializeConceptWorkflowSkill);
+
+  const steps = [primary, ...supporting].map((skill, index) => ({
+    order: index + 1,
+    skillId: skill.id,
+    name: skill.name,
+    path: skill.path,
+    conceptId: skill.conceptId,
+    conceptLabel: skill.conceptLabel,
+    role: skill.conceptRole,
+    reason: index === 0
+      ? skill.conceptLabel
+        ? `Primary concept-aided match from ${skill.conceptLabel}.`
+        : "Primary skill-level match."
+      : skill.conceptLabel
+        ? `${skill.conceptRole === "fallback" ? "Fallback" : "Role-tagged"} support from ${skill.conceptLabel}.`
+        : "Supporting skill from ranked skill fallback."
+  }));
+
+  return {
+    query,
+    primary,
+    supporting,
+    steps,
+    concept: primary.conceptId ? {
+      id: primary.conceptId,
+      label: primary.conceptLabel
+    } : null
+  };
+}
+
+function searchConceptWorkflowSkills(index, query, filters = {}) {
+  return rankConceptWorkflowSkills(index, query, filters)
+    .slice(0, 80)
+    .map(serializeConceptWorkflowSkill);
+}
+
+function serializeConceptWorkflowSkill(skill) {
+  return {
+    ...serializeSkillSummary(skill),
+    score: skill.score,
+    conceptId: skill.conceptId,
+    conceptLabel: skill.conceptLabel,
+    conceptRole: skill.conceptRole,
+    conceptReason: skill.conceptReason
   };
 }
 
@@ -1313,6 +1603,9 @@ export {
   searchConcepts,
   getRelatedConcepts,
   serializeConceptDetail,
+  rankConceptWorkflowSkills,
+  recommendConceptWorkflow,
+  searchConceptWorkflowSkills,
   searchSkills,
   recommendWorkflow,
   getRelatedSkills,

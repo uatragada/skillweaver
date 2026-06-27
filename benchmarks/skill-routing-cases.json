@@ -178,6 +178,59 @@
     "query": "Use Chrome to inspect a live page and control browser interactions",
     "expectedPrimary": ["control-chrome", "chrome:control-chrome"],
     "expectedSupport": ["playwright-interactive"]
+  },
+  {
+    "id": "backend-api",
+    "query": "Design a versioned backend API for a Node service and document endpoints",
+    "expectedPrimary": ["dev-backend-api-design"],
+    "expectedSupport": ["api-versioning-strategy", "api-docs-writer"]
+  },
+  {
+    "id": "python-service",
+    "query": "Build a Python backend service with tests and operational readiness",
+    "expectedPrimary": ["dev-python-services"],
+    "expectedSupport": ["dev-testing-qa", "monitoring-setup-guide"]
+  },
+  {
+    "id": "database-migration",
+    "query": "Plan a Postgres database schema migration without breaking production data",
+    "expectedPrimary": ["database-migration-plan", "dev-database-postgres"],
+    "expectedSupport": ["database-schema-design"]
+  },
+  {
+    "id": "data-pipeline-spec",
+    "query": "Specify a reliable data pipeline with quality checks and ownership",
+    "expectedPrimary": ["data-pipeline-spec", "dev-data-engineering"],
+    "expectedSupport": ["data-quality-audit", "data-analysis-standard"]
+  },
+  {
+    "id": "observability-slo",
+    "query": "Define service SLOs, monitoring, and error budget policy",
+    "expectedPrimary": ["slo-error-budget", "dev-observability-sre"],
+    "expectedSupport": ["monitoring-setup-guide"]
+  },
+  {
+    "id": "incident-postmortem",
+    "query": "Write an incident postmortem and identify reliability follow-ups",
+    "expectedPrimary": ["incident-postmortem"],
+    "expectedSupport": ["monitoring-setup-guide", "slo-error-budget"]
+  },
+  {
+    "id": "infra-terraform",
+    "query": "Review Terraform infrastructure as code for cloud deployment risks",
+    "expectedPrimary": ["dev-infra-terraform-cloud", "infra-as-code-review"],
+    "expectedSupport": ["security-best-practices"]
+  },
+  {
+    "id": "containers-kubernetes",
+    "query": "Plan container and Kubernetes operations for a service rollout",
+    "expectedPrimary": ["dev-containers-kubernetes"],
+    "expectedSupport": ["dev-devops-ci-cd", "monitoring-setup-guide"]
+  },
+  {
+    "id": "repo-dependency-audit",
+    "query": "Audit repository dependencies and technical debt while preserving unrelated worktree changes",
+    "expectedPrimary": ["dependency-audit", "technical-debt-register", "conservative-repo-operations"],
+    "expectedSupport": ["code-review-checklist", "dev-dependency-maintenance"]
   }
 ]
-

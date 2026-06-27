@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import {
+  rankConceptWorkflowSkills,
   rankSkill,
   recommendWorkflow,
   scanSkillRoots
@@ -8,6 +9,7 @@ import {
 
 const CASES_PATH = resolve("benchmarks/skill-routing-cases.json");
 const REPORT_PATH = resolve("docs/SKILL-USE-GAINS.md");
+const PRE_CONCEPT_COMMIT = "80d31f1";
 
 const SOURCE_TYPE_PRIORITY = {
   user: 5,
@@ -70,7 +72,7 @@ function dedupeByName(skills) {
   for (const skill of skills) {
     const key = skillKey(skill);
     const existing = byName.get(key);
-    if (!existing || (SOURCE_TYPE_PRIORITY[skill.sourceType] ?? 0) > (SOURCE_TYPE_PRIORITY[existing.sourceType] ?? 0)) {
+    if (!existing || compareRanked(skill, existing) < 0) {
       byName.set(key, skill);
     }
   }
@@ -111,18 +113,22 @@ function flatMetadataScore(skill, query) {
   return score;
 }
 
-function rankFlatMetadata(index, query) {
+function rankNoSkillWeaver(index, query) {
   return dedupeByName(index.skills)
     .map((skill) => ({ ...skill, score: flatMetadataScore(skill, query) }))
     .filter((skill) => skill.score > 0)
     .sort(compareRanked);
 }
 
-function rankSkillWeaver(index, query) {
+function rankSkillWeaverV1(index, query) {
   return dedupeByName(index.skills)
     .map((skill) => ({ ...skill, score: rankSkill(skill, query) }))
     .filter((skill) => skill.score > 0)
     .sort(compareRanked);
+}
+
+function rankSkillWeaverV2(index, query) {
+  return rankConceptWorkflowSkills(index, query);
 }
 
 function firstExpectedRank(ranked, expectedPrimary) {
@@ -149,19 +155,20 @@ function outputQualityScore({ primaryHit, hitAt5, reciprocalRank, supportCoverag
   );
 }
 
-function evaluateSystem({ index, testCase, systemName, ranked, workflowNames = null, primaryName = null }) {
-  const topNames = workflowNames ?? ranked.slice(0, 5).map((skill) => skill.name);
-  const primary = primaryName ?? topNames[0] ?? null;
+function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, primaryName = null, contextLabel = null }) {
+  const visibleNames = topNames ?? ranked.slice(0, 5).map((skill) => skill.name);
+  const primary = primaryName ?? visibleNames[0] ?? null;
   const rank = firstExpectedRank(ranked, testCase.expectedPrimary);
   const primaryHit = Boolean(primary && matchesExpected(primary, testCase.expectedPrimary));
-  const hitAt5 = topNames.some((name) => matchesExpected(name, testCase.expectedPrimary));
-  const coverage = supportCoverage(topNames, testCase.expectedSupport ?? []);
+  const hitAt5 = visibleNames.some((name) => matchesExpected(name, testCase.expectedPrimary));
+  const coverage = supportCoverage(visibleNames, testCase.expectedSupport ?? []);
   const rr = reciprocalRank(rank);
 
   return {
     systemName,
     primary,
-    topNames,
+    topNames: visibleNames,
+    contextLabel,
     rank,
     primaryHit,
     hitAt5,
@@ -220,64 +227,108 @@ function formatRank(rank) {
   return rank ? String(rank) : "> corpus";
 }
 
-function buildMarkdown({ index, cases, rows, flatSummary, skillWeaverSummary, generatedAt }) {
-  const primaryDelta = (skillWeaverSummary.primaryHitAt1 - flatSummary.primaryHitAt1) * 100;
-  const hitDelta = (skillWeaverSummary.hitAt5 - flatSummary.hitAt5) * 100;
-  const mrrDelta = skillWeaverSummary.mrr - flatSummary.mrr;
-  const supportDelta = (skillWeaverSummary.supportCoverage - flatSummary.supportCoverage) * 100;
-  const qualityDelta = skillWeaverSummary.outputQualityScore - flatSummary.outputQualityScore;
+function buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary }) {
+  return [
+    {
+      metric: "Output quality score (0-100)",
+      no: noSkillWeaverSummary.outputQualityScore.toFixed(1),
+      v1: v1Summary.outputQualityScore.toFixed(1),
+      v2: v2Summary.outputQualityScore.toFixed(1),
+      v2VsNo: formatDelta(v2Summary.outputQualityScore - noSkillWeaverSummary.outputQualityScore, " pts"),
+      v2VsV1: formatDelta(v2Summary.outputQualityScore - v1Summary.outputQualityScore, " pts")
+    },
+    {
+      metric: "Primary hit@1",
+      no: formatPercent(noSkillWeaverSummary.primaryHitAt1),
+      v1: formatPercent(v1Summary.primaryHitAt1),
+      v2: formatPercent(v2Summary.primaryHitAt1),
+      v2VsNo: formatDelta((v2Summary.primaryHitAt1 - noSkillWeaverSummary.primaryHitAt1) * 100, " pp"),
+      v2VsV1: formatDelta((v2Summary.primaryHitAt1 - v1Summary.primaryHitAt1) * 100, " pp")
+    },
+    {
+      metric: "Expected skill in top/workflow 5",
+      no: formatPercent(noSkillWeaverSummary.hitAt5),
+      v1: formatPercent(v1Summary.hitAt5),
+      v2: formatPercent(v2Summary.hitAt5),
+      v2VsNo: formatDelta((v2Summary.hitAt5 - noSkillWeaverSummary.hitAt5) * 100, " pp"),
+      v2VsV1: formatDelta((v2Summary.hitAt5 - v1Summary.hitAt5) * 100, " pp")
+    },
+    {
+      metric: "Mean reciprocal rank",
+      no: noSkillWeaverSummary.mrr.toFixed(3),
+      v1: v1Summary.mrr.toFixed(3),
+      v2: v2Summary.mrr.toFixed(3),
+      v2VsNo: formatPreciseDelta(v2Summary.mrr - noSkillWeaverSummary.mrr),
+      v2VsV1: formatPreciseDelta(v2Summary.mrr - v1Summary.mrr)
+    },
+    {
+      metric: "Support-skill coverage@5",
+      no: formatPercent(noSkillWeaverSummary.supportCoverage),
+      v1: formatPercent(v1Summary.supportCoverage),
+      v2: formatPercent(v2Summary.supportCoverage),
+      v2VsNo: formatDelta((v2Summary.supportCoverage - noSkillWeaverSummary.supportCoverage) * 100, " pp"),
+      v2VsV1: formatDelta((v2Summary.supportCoverage - v1Summary.supportCoverage) * 100, " pp")
+    },
+    {
+      metric: "Mean candidates to expected skill, lower is better",
+      no: noSkillWeaverSummary.meanCandidatesToExpected.toFixed(1),
+      v1: v1Summary.meanCandidatesToExpected.toFixed(1),
+      v2: v2Summary.meanCandidatesToExpected.toFixed(1),
+      v2VsNo: formatLowerIsBetterDelta(v2Summary.meanCandidatesToExpected, noSkillWeaverSummary.meanCandidatesToExpected, "candidates"),
+      v2VsV1: formatLowerIsBetterDelta(v2Summary.meanCandidatesToExpected, v1Summary.meanCandidatesToExpected, "candidates")
+    }
+  ];
+}
+
+function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2Summary, generatedAt }) {
+  const summaryRows = buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary });
   const candidateReduction = 1 - (5 / index.skills.length);
-  const candidateDelta = formatLowerIsBetterDelta(
-    skillWeaverSummary.meanCandidatesToExpected,
-    flatSummary.meanCandidatesToExpected,
-    "candidates"
-  );
-  const medianCandidateDelta = formatLowerIsBetterDelta(
-    skillWeaverSummary.medianCandidatesToExpected,
-    flatSummary.medianCandidatesToExpected,
-    "candidates"
-  );
+  const qualityVsNo = v2Summary.outputQualityScore - noSkillWeaverSummary.outputQualityScore;
+  const qualityVsV1 = v2Summary.outputQualityScore - v1Summary.outputQualityScore;
 
   const lines = [
-    "# Skill Use Gains Benchmark",
+    "# SkillWeaver V2 Benchmark",
     "",
     `Generated: ${new Date(generatedAt).toLocaleString()}`,
     "",
     "## Corpus",
     "",
     `- Skills indexed: ${index.skills.length}`,
-    `- Relationship edges: ${index.edges.length}`,
+    `- Skill relationship edges: ${index.edges.length}`,
+    `- Concept nodes: ${index.concepts?.length ?? 0}`,
+    `- Concept edges: ${index.conceptEdges?.length ?? 0}`,
     `- Skill roots: ${index.roots.length}`,
     `- Benchmark cases: ${cases.length}`,
     "",
     "## Compared Systems",
     "",
-    "- `flat-metadata`: ranks the same skill corpus using only name, description, namespace, domains, and tool hints.",
-    "- `skillweaver`: uses SkillWeaver ranking plus workflow recommendations from triggers, body/resource signals, dedupe, gateway boosts, and relationship edges.",
+    "- `no-skillweaver`: flat metadata search over name, description, namespace, domains, and tool hints. It does not use triggers, body text, resources, relationship edges, workflow recommendations, or concept nodes.",
+    "- `skill-level-baseline`: current SkillWeaver skill ranking plus workflow recommendations from triggers, bodies, resources, dedupe, gateway boosts, and skill relationship edges. It excludes concept nodes. The last pre-concept commit was `" + PRE_CONCEPT_COMMIT + "`.",
+    "- `skillweaver-v2-concepts`: the current product route. It uses skill-level ranking as a high-confidence anchor, scores matching concept nodes, reranks role-tagged skill references inside those concepts, then appends skill-level ranking as fallback.",
     "",
     "## Summary",
     "",
-    "| Metric | Flat Metadata | SkillWeaver | Gain |",
-    "| --- | ---: | ---: | ---: |",
-    `| Output quality score (0-100) | ${flatSummary.outputQualityScore.toFixed(1)} | ${skillWeaverSummary.outputQualityScore.toFixed(1)} | ${formatDelta(qualityDelta, " pts")} |`,
-    `| Primary hit@1 | ${formatPercent(flatSummary.primaryHitAt1)} | ${formatPercent(skillWeaverSummary.primaryHitAt1)} | ${formatDelta(primaryDelta, " pp")} |`,
-    `| Expected skill in top/workflow 5 | ${formatPercent(flatSummary.hitAt5)} | ${formatPercent(skillWeaverSummary.hitAt5)} | ${formatDelta(hitDelta, " pp")} |`,
-    `| Mean reciprocal rank | ${flatSummary.mrr.toFixed(3)} | ${skillWeaverSummary.mrr.toFixed(3)} | ${formatPreciseDelta(mrrDelta)} |`,
-    `| Support-skill coverage@5 | ${formatPercent(flatSummary.supportCoverage)} | ${formatPercent(skillWeaverSummary.supportCoverage)} | ${formatDelta(supportDelta, " pp")} |`,
-    `| Mean candidates to expected skill, lower is better | ${flatSummary.meanCandidatesToExpected.toFixed(1)} | ${skillWeaverSummary.meanCandidatesToExpected.toFixed(1)} | ${candidateDelta} |`,
-    `| Median candidates to expected skill, lower is better | ${flatSummary.medianCandidatesToExpected} | ${skillWeaverSummary.medianCandidatesToExpected} | ${medianCandidateDelta} |`,
+    "| Metric | No SkillWeaver | Skill-Level Baseline | SkillWeaver V2 | V2 vs No | V2 vs Skill-Level |",
+    "| --- | ---: | ---: | ---: | ---: | ---: |"
+  ];
+
+  for (const row of summaryRows) {
+    lines.push(`| ${row.metric} | ${row.no} | ${row.v1} | ${row.v2} | ${row.v2VsNo} | ${row.v2VsV1} |`);
+  }
+
+  lines.push(
     "",
-    `SkillWeaver's top-5 workflow narrows the review set from ${index.skills.length} skills to 5 candidates, a ${(candidateReduction * 100).toFixed(1)}% candidate reduction per task.`,
+    `Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from ${index.skills.length} skills to 5 candidates, a ${(candidateReduction * 100).toFixed(1)}% candidate reduction per task.`,
     "",
     "## Per-Case Results",
     "",
-    "| Case | Expected | Flat quality | SkillWeaver quality | Flat primary / rank | SkillWeaver primary / rank | SkillWeaver workflow |",
-    "| --- | --- | ---: | ---: | --- | --- | --- |"
-  ];
+    "| Case | Expected primary | No primary / rank | Skill-level primary / rank | V2 primary / rank | V2 top concept | V2 top/workflow 5 |",
+    "| --- | --- | --- | --- | --- | --- | --- |"
+  );
 
   for (const row of rows) {
     lines.push(
-      `| ${row.id} | ${row.expectedPrimary.join(", ")} | ${row.flat.qualityScore.toFixed(1)} | ${row.skillweaver.qualityScore.toFixed(1)} | ${row.flat.primary ?? "-"} / ${formatRank(row.flat.rank)} | ${row.skillweaver.primary ?? "-"} / ${formatRank(row.skillweaver.rank)} | ${row.skillweaver.topNames.join(" -> ")} |`
+      `| ${row.id} | ${row.expectedPrimary.join(", ")} | ${row.noSkillWeaver.primary ?? "-"} / ${formatRank(row.noSkillWeaver.rank)} | ${row.v1.primary ?? "-"} / ${formatRank(row.v1.rank)} | ${row.v2.primary ?? "-"} / ${formatRank(row.v2.rank)} | ${row.v2.contextLabel ?? "-"} | ${row.v2.topNames.join(" -> ")} |`
     );
   }
 
@@ -285,10 +336,10 @@ function buildMarkdown({ index, cases, rows, flatSummary, skillWeaverSummary, ge
     "",
     "## Interpretation",
     "",
-    `SkillWeaver improves the composite output-quality score by ${formatDelta(qualityDelta, " points")} on a 0-100 rubric over flat metadata search.`,
-    `It improves primary selection by ${formatDelta(primaryDelta, " percentage points")} and expected-skill top/workflow-5 retrieval by ${formatDelta(hitDelta, " percentage points")} over flat metadata search on this benchmark.`,
-    `Flat metadata still has a slight edge on mean expected-skill rank: ${flatSummary.meanCandidatesToExpected.toFixed(1)} candidates versus ${skillWeaverSummary.meanCandidatesToExpected.toFixed(1)} for SkillWeaver. SkillWeaver's quality gain comes from better primary choices and slightly better support-skill coverage, not faster first expected-skill rank on this dataset.`,
-    "Remaining weak spots are cases where a broad foundational skill is a plausible primary but a more concrete plugin task skill should be preferred, especially data dashboard work."
+    `SkillWeaver V2 changes the composite output-quality score by ${formatDelta(qualityVsNo, " points")} versus no SkillWeaver and ${formatDelta(qualityVsV1, " points")} versus the skill-level baseline.`,
+    `V2 changes primary selection by ${formatDelta((v2Summary.primaryHitAt1 - noSkillWeaverSummary.primaryHitAt1) * 100, " percentage points")} versus no SkillWeaver and ${formatDelta((v2Summary.primaryHitAt1 - v1Summary.primaryHitAt1) * 100, " percentage points")} versus the skill-level baseline.`,
+    `V2 changes expected-skill top/workflow-5 retrieval by ${formatDelta((v2Summary.hitAt5 - noSkillWeaverSummary.hitAt5) * 100, " percentage points")} versus no SkillWeaver and ${formatDelta((v2Summary.hitAt5 - v1Summary.hitAt5) * 100, " percentage points")} versus the skill-level baseline.`,
+    "The V2 score reflects a concept-aided skill-loading experience, not an LLM reranker; it is fully deterministic and derived from the local skill corpus."
   );
 
   return `${lines.join("\n")}\n`;
@@ -300,42 +351,55 @@ async function main() {
   const rows = [];
 
   for (const testCase of cases) {
-    const flatRanked = rankFlatMetadata(index, testCase.query);
-    const skillWeaverRanked = rankSkillWeaver(index, testCase.query);
-    const workflow = recommendWorkflow(index, testCase.query);
-    const workflowNames = (workflow.steps ?? []).map((step) => step.name);
+    const noRanked = rankNoSkillWeaver(index, testCase.query);
+    const v1Ranked = rankSkillWeaverV1(index, testCase.query);
+    const v1Workflow = recommendWorkflow(index, testCase.query);
+    const v1WorkflowNames = (v1Workflow.steps ?? []).map((step) => step.name);
+    const v2Ranked = rankSkillWeaverV2(index, testCase.query);
+    const v2WorkflowNames = v2Ranked.slice(0, 5).map((skill) => skill.name);
 
     rows.push({
       id: testCase.id,
       query: testCase.query,
       expectedPrimary: testCase.expectedPrimary,
       expectedSupport: testCase.expectedSupport ?? [],
-      flat: evaluateSystem({
+      noSkillWeaver: evaluateSystem({
         index,
         testCase,
-        systemName: "flat-metadata",
-        ranked: flatRanked
+        systemName: "no-skillweaver",
+        ranked: noRanked
       }),
-      skillweaver: evaluateSystem({
+      v1: evaluateSystem({
         index,
         testCase,
-        systemName: "skillweaver",
-        ranked: skillWeaverRanked,
-        workflowNames,
-        primaryName: workflow.primary?.name ?? null
+        systemName: "skillweaver-v1",
+        ranked: v1Ranked,
+        topNames: v1WorkflowNames,
+        primaryName: v1Workflow.primary?.name ?? null
+      }),
+      v2: evaluateSystem({
+        index,
+        testCase,
+        systemName: "skillweaver-v2-concepts",
+        ranked: v2Ranked,
+        topNames: v2WorkflowNames,
+        primaryName: v2Ranked[0]?.name ?? null,
+        contextLabel: v2Ranked[0]?.conceptLabel ?? null
       })
     });
   }
 
-  const flatSummary = summarize(rows.map((row) => row.flat));
-  const skillWeaverSummary = summarize(rows.map((row) => row.skillweaver));
+  const noSkillWeaverSummary = summarize(rows.map((row) => row.noSkillWeaver));
+  const v1Summary = summarize(rows.map((row) => row.v1));
+  const v2Summary = summarize(rows.map((row) => row.v2));
   const generatedAt = Date.now();
   const report = buildMarkdown({
     index,
     cases,
     rows,
-    flatSummary,
-    skillWeaverSummary,
+    noSkillWeaverSummary,
+    v1Summary,
+    v2Summary,
     generatedAt
   });
 
@@ -346,18 +410,31 @@ async function main() {
     generatedAt,
     corpus: {
       skills: index.skills.length,
-      edges: index.edges.length,
+      skillEdges: index.edges.length,
+      concepts: index.concepts?.length ?? 0,
+      conceptEdges: index.conceptEdges?.length ?? 0,
       roots: index.roots.length
     },
-    flatMetadata: flatSummary,
-    skillweaver: skillWeaverSummary,
+    noSkillWeaver: noSkillWeaverSummary,
+    skillweaverV1: v1Summary,
+    skillweaverV2: v2Summary,
     gains: {
-      primaryHitAt1PercentagePoints: (skillWeaverSummary.primaryHitAt1 - flatSummary.primaryHitAt1) * 100,
-      hitAt5PercentagePoints: (skillWeaverSummary.hitAt5 - flatSummary.hitAt5) * 100,
-      mrr: skillWeaverSummary.mrr - flatSummary.mrr,
-      supportCoveragePercentagePoints: (skillWeaverSummary.supportCoverage - flatSummary.supportCoverage) * 100,
-      outputQualityScore: skillWeaverSummary.outputQualityScore - flatSummary.outputQualityScore,
-      meanExpectedRankDeltaLowerIsBetter: skillWeaverSummary.meanCandidatesToExpected - flatSummary.meanCandidatesToExpected
+      v2VsNoSkillWeaver: {
+        primaryHitAt1PercentagePoints: (v2Summary.primaryHitAt1 - noSkillWeaverSummary.primaryHitAt1) * 100,
+        hitAt5PercentagePoints: (v2Summary.hitAt5 - noSkillWeaverSummary.hitAt5) * 100,
+        mrr: v2Summary.mrr - noSkillWeaverSummary.mrr,
+        supportCoveragePercentagePoints: (v2Summary.supportCoverage - noSkillWeaverSummary.supportCoverage) * 100,
+        outputQualityScore: v2Summary.outputQualityScore - noSkillWeaverSummary.outputQualityScore,
+        meanExpectedRankDeltaLowerIsBetter: v2Summary.meanCandidatesToExpected - noSkillWeaverSummary.meanCandidatesToExpected
+      },
+      v2VsSkillWeaverV1: {
+        primaryHitAt1PercentagePoints: (v2Summary.primaryHitAt1 - v1Summary.primaryHitAt1) * 100,
+        hitAt5PercentagePoints: (v2Summary.hitAt5 - v1Summary.hitAt5) * 100,
+        mrr: v2Summary.mrr - v1Summary.mrr,
+        supportCoveragePercentagePoints: (v2Summary.supportCoverage - v1Summary.supportCoverage) * 100,
+        outputQualityScore: v2Summary.outputQualityScore - v1Summary.outputQualityScore,
+        meanExpectedRankDeltaLowerIsBetter: v2Summary.meanCandidatesToExpected - v1Summary.meanCandidatesToExpected
+      }
     },
     reportPath: REPORT_PATH
   };

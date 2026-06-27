@@ -6,8 +6,10 @@ import { fileURLToPath } from "node:url";
 import {
   getRelatedConcepts,
   getRelatedSkills,
+  recommendConceptWorkflow,
   recommendWorkflow,
   scanSkillRoots,
+  searchConceptWorkflowSkills,
   searchConcepts,
   searchSkills,
   serializeConceptDetail,
@@ -57,7 +59,9 @@ app.get("/api/skills", async (req, res) => {
   };
   res.json({
     summary: summarizeIndex(index),
-    skills: searchSkills(index, String(req.query.q ?? ""), filters)
+    skills: req.query.mode === "skills"
+      ? searchSkills(index, String(req.query.q ?? ""), filters)
+      : searchConceptWorkflowSkills(index, String(req.query.q ?? ""), filters)
   });
 });
 
@@ -108,7 +112,11 @@ app.get("/api/workflow", async (req, res) => {
     sourceType: req.query.sourceType,
     namespace: req.query.namespace
   };
-  res.json(recommendWorkflow(index, String(req.query.q ?? ""), filters));
+  const query = String(req.query.q ?? "");
+  const workflow = req.query.mode === "skills"
+    ? recommendWorkflow(index, query, filters)
+    : recommendConceptWorkflow(index, query, filters);
+  res.json(workflow);
 });
 
 if (existsSync(DIST_DIR)) {

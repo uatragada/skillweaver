@@ -34,6 +34,17 @@ Each concept stores role-tagged references to skills:
 
 Concept edges come from curated adjacency and shared skill/domain/tool evidence. This keeps SkillWeaver closer to MindWeaver's idea of interconnected knowledge while leaving `SKILL.md` files as the source artifacts.
 
+## V2 Routing
+
+The default product route is concept-aided:
+
+1. Rank skills with the skill-level baseline.
+2. Score matching concept nodes.
+3. Rerank role-tagged skill references inside those concepts.
+4. Append skill-level fallback results.
+
+`/api/skills` and `/api/workflow` use this route by default. Passing `?mode=skills` returns the raw skill-level baseline for comparison and debugging.
+
 ## MindWeaver Ideas Kept
 
 - local-first operation,

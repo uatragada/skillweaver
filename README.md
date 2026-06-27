@@ -67,6 +67,17 @@ SkillWeaver now treats high-level work concepts as the primary graph nodes. Each
 
 The concept layer is deterministic and derived from current skill metadata; it does not mutate the source `SKILL.md` files.
 
+By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Use `?mode=skills` on either endpoint to inspect the raw skill-level baseline.
+
+## Research Ledger
+
+- [Routing evaluation methodology](docs/ROUTING-EVAL-METHODOLOGY.md)
+- [Skill use gains benchmark](docs/SKILL-USE-GAINS.md)
+- [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
+- [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
+- [Corpus snapshot](docs/CORPUS-SNAPSHOT.md)
+- [V2 experiment log](docs/V2-EXPERIMENT-LOG.md)
+
 ## Benchmarking
 
 Run the reproducible routing benchmark with:

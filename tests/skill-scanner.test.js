@@ -6,14 +6,50 @@ import { tmpdir } from "node:os";
 import {
   buildConceptMap,
   parseFrontmatter,
+  rankConceptWorkflowSkills,
   rankSkill,
+  recommendConceptWorkflow,
   recommendWorkflow,
   scanSkillRoots,
   searchConcepts,
+  searchConceptWorkflowSkills,
   searchSkills,
   serializeConceptDetail,
   summarizeIndex
 } from "../server/skill-scanner.js";
+
+function makeSkill({ id, name, description, domains = [], tools = [], triggers = [], sourceType = "user" }) {
+  return {
+    id,
+    name,
+    description,
+    path: `C:/skills/${name}/SKILL.md`,
+    folder: `C:/skills/${name}`,
+    root: "C:/skills",
+    sourceType,
+    namespace: name.includes(":") ? name.split(":")[0] : null,
+    domains,
+    triggers,
+    tools,
+    resources: {},
+    excerpt: "",
+    bodyLength: 1,
+    warnings: [],
+    searchText: `${name} ${description} ${triggers.join(" ")} ${domains.join(" ")} ${tools.join(" ")}`.toLowerCase()
+  };
+}
+
+function makeConceptIndex(skills) {
+  const { concepts, conceptEdges } = buildConceptMap(skills);
+  return {
+    scannedAt: 0,
+    roots: ["C:/skills"],
+    skills,
+    edges: [],
+    concepts,
+    conceptEdges
+  };
+}
 
 test("parses nested YAML frontmatter without losing unknown fields", () => {
   const parsed = parseFrontmatter(`---
@@ -190,24 +226,6 @@ test("boosts gateway use skills and avoids generic index primaries", () => {
 });
 
 test("builds concept nodes with role-tagged skill references", () => {
-  const makeSkill = ({ id, name, description, domains = [], tools = [], triggers = [] }) => ({
-    id,
-    name,
-    description,
-    path: `C:/skills/${name}/SKILL.md`,
-    folder: `C:/skills/${name}`,
-    root: "C:/skills",
-    sourceType: "user",
-    namespace: name.includes(":") ? name.split(":")[0] : null,
-    domains,
-    triggers,
-    tools,
-    resources: {},
-    excerpt: "",
-    bodyLength: 1,
-    warnings: [],
-    searchText: `${name} ${description} ${triggers.join(" ")} ${domains.join(" ")} ${tools.join(" ")}`.toLowerCase()
-  });
   const skills = [
     makeSkill({
       id: "figma-use",
@@ -243,15 +261,7 @@ test("builds concept nodes with role-tagged skill references", () => {
     })
   ];
 
-  const { concepts, conceptEdges } = buildConceptMap(skills);
-  const index = {
-    scannedAt: 0,
-    roots: ["C:/skills"],
-    skills,
-    edges: [],
-    concepts,
-    conceptEdges
-  };
+  const index = makeConceptIndex(skills);
 
   const figma = serializeConceptDetail(index, "figma-handoff");
   assert.equal(figma.skillRefs.find((ref) => ref.name === "figma-use").role, "gateway");
@@ -262,6 +272,109 @@ test("builds concept nodes with role-tagged skill references", () => {
   assert.equal(results[0].id, "figma-handoff");
 
   const summary = summarizeIndex(index);
-  assert.equal(summary.conceptCount, 18);
+  assert.equal(summary.conceptCount, 22);
   assert.ok(summary.conceptEdgeCount > 0);
+});
+
+test("concept workflow reranks dashboard intent toward builder skills", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "build-dashboard",
+      name: "build-dashboard",
+      description: "Build data analytics dashboards from KPI data.",
+      domains: ["data"],
+      tools: ["Node"],
+      triggers: ["analytics dashboard"]
+    }),
+    makeSkill({
+      id: "analyze-data-quality",
+      name: "analyze-data-quality",
+      description: "Audit data quality, missing values, and suspicious records.",
+      domains: ["data"],
+      tools: ["Python"],
+      triggers: ["data quality"]
+    }),
+    makeSkill({
+      id: "visualize-data",
+      name: "visualize-data",
+      description: "Visualize data with charts.",
+      domains: ["data"],
+      tools: ["Node"],
+      triggers: ["visualize data"]
+    })
+  ]);
+
+  const ranked = rankConceptWorkflowSkills(index, "Create a data analytics dashboard from KPI data");
+  assert.equal(ranked[0].name, "build-dashboard");
+  assert.equal(searchConceptWorkflowSkills(index, "Create a data analytics dashboard from KPI data")[0].name, "build-dashboard");
+
+  const workflow = recommendConceptWorkflow(index, "Create a data analytics dashboard from KPI data");
+  assert.equal(workflow.primary.name, "build-dashboard");
+  assert.equal(workflow.concept.label, "Data dashboards and reports");
+});
+
+test("concept workflow respects Chrome-specific browser intent", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "control-in-app-browser",
+      name: "control-in-app-browser",
+      description: "Control the in-app browser for UI checks.",
+      domains: ["frontend"],
+      tools: ["Playwright"],
+      triggers: ["browser qa"]
+    }),
+    makeSkill({
+      id: "control-chrome",
+      name: "control-chrome",
+      description: "Use Chrome to inspect a live page and control browser interactions.",
+      domains: ["frontend"],
+      tools: ["Playwright"],
+      triggers: ["control chrome"]
+    }),
+    makeSkill({
+      id: "playwright",
+      name: "playwright",
+      description: "Run browser QA with screenshots.",
+      domains: ["frontend"],
+      tools: ["Playwright"],
+      triggers: ["browser qa"]
+    })
+  ]);
+
+  const workflow = recommendConceptWorkflow(index, "Use Chrome to inspect a live page and control browser interactions");
+  assert.equal(workflow.primary.name, "control-chrome");
+  assert.equal(workflow.concept.label, "Browser verification");
+});
+
+test("concept workflow routes attack-path intent to concrete analysis skill", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "security-threat-model",
+      name: "security-threat-model",
+      description: "Create a threat model for a system.",
+      domains: ["security"],
+      tools: ["GitHub"],
+      triggers: ["threat model"]
+    }),
+    makeSkill({
+      id: "attack-path-analysis",
+      name: "attack-path-analysis",
+      description: "Analyze exploit chains and attack paths in a codebase.",
+      domains: ["security"],
+      tools: ["GitHub"],
+      triggers: ["attack path"]
+    }),
+    makeSkill({
+      id: "deep-security-scan",
+      name: "deep-security-scan",
+      description: "Run a deep security scan.",
+      domains: ["security"],
+      tools: ["GitHub"],
+      triggers: ["security scan"]
+    })
+  ]);
+
+  const workflow = recommendConceptWorkflow(index, "Analyze likely exploit chains and attack paths in a codebase");
+  assert.equal(workflow.primary.name, "attack-path-analysis");
+  assert.equal(workflow.concept.label, "Security review");
 });
