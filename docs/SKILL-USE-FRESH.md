@@ -1,9 +1,9 @@
 # SkillWeaver V2 Fresh-Probe Regression Benchmark
 
-Generated: 2026-06-27T12:47:39.301Z
+Generated: 2026-06-27T19:57:28.647Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782564459301,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"ee7937fed9329b044177c7b62160753add3f7c68","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","scanner":"sha256:9fe40c232a8a1d94d8df5f0b53184b708b8c81e54aec7e6f5ce4bb03aa3aa135","benchmarkScript":"sha256:ccc98013381e60ed63e62939e8ce17921518cce645c85003e454018551736829","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:64120927323202f162ca2b4990f6018b1b910cb2093ca0016bdf3bb56608998b"}
+{"generatedAt":1782590248647,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"79ee64161bb74fca62675d7f48cb3803b4866910","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","scanner":"sha256:9fe40c232a8a1d94d8df5f0b53184b708b8c81e54aec7e6f5ce4bb03aa3aa135","benchmarkScript":"sha256:87ba653f6982312617076c98b9b40595fe32addc551f2f595d1de86808b21434","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:244626d207ef69510834855e6f4117deaa700a5be32620557279c7a8d4d32413"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,14 +11,14 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:fresh`
 - Suite: Fresh-Probe Regression
 - Acceptance gate: no
-- Git commit at generation: `ee7937fed9329b044177c7b62160753add3f7c68`
+- Git commit at generation: `79ee64161bb74fca62675d7f48cb3803b4866910`
 - Git dirty: no
 - Invalidating dirty paths: none
 - Case hash: `sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea`
 - Scanner hash: `sha256:9fe40c232a8a1d94d8df5f0b53184b708b8c81e54aec7e6f5ce4bb03aa3aa135`
-- Benchmark script hash: `sha256:ccc98013381e60ed63e62939e8ce17921518cce645c85003e454018551736829`
+- Benchmark script hash: `sha256:87ba653f6982312617076c98b9b40595fe32addc551f2f595d1de86808b21434`
 - Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:64120927323202f162ca2b4990f6018b1b910cb2093ca0016bdf3bb56608998b`
+- Snapshot fingerprint: `sha256:244626d207ef69510834855e6f4117deaa700a5be32620557279c7a8d4d32413`
 - Freshness check: pass
 - Quality gate, reported only: pass
 
