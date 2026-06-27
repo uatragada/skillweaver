@@ -793,3 +793,197 @@ test("concept workflow anchors directly named specialist skills", () => {
     "accessibility-and-inclusive-visualization"
   );
 });
+
+test("concept workflow handles fresh generalization intent aliases", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "cloudflare-mcp",
+      name: "building-mcp-server-on-cloudflare",
+      description: "Build MCP servers on Cloudflare Workers with typed tools.",
+      domains: ["backend", "ai", "operations"],
+      tools: ["Cloudflare", "Node"],
+      triggers: ["mcp server cloudflare workers"]
+    }),
+    makeSkill({
+      id: "wrangler",
+      name: "wrangler",
+      description: "Deploy Cloudflare Workers with Wrangler.",
+      domains: ["operations"],
+      tools: ["Cloudflare"],
+      triggers: ["wrangler deploy"]
+    }),
+    makeSkill({
+      id: "auth",
+      name: "auth",
+      description: "Implement authentication, OAuth callbacks, protected routes, and session cookies.",
+      domains: ["backend", "security"],
+      tools: ["Vercel"],
+      triggers: ["oauth protected routes session cookies"]
+    }),
+    makeSkill({
+      id: "aspnet-core",
+      name: "aspnet-core",
+      description: "Review ASP.NET Core Minimal APIs, middleware, dependency injection, auth, and endpoint tests.",
+      domains: ["backend"],
+      tools: [".NET"],
+      triggers: ["asp.net core minimal api middleware dependency injection"]
+    }),
+    makeSkill({
+      id: "dev-backend-api-design",
+      name: "dev-backend-api-design",
+      description: "Design backend APIs, service boundaries, endpoint behavior, and documentation plans.",
+      domains: ["backend"],
+      tools: ["Node"],
+      triggers: ["backend api node service endpoint design"]
+    }),
+    makeSkill({
+      id: "api-docs-writer",
+      name: "api-docs-writer",
+      description: "Write API documentation from endpoint behavior, examples, errors, and version notes.",
+      domains: ["documents", "backend"],
+      tools: [],
+      triggers: ["api documentation endpoint behavior examples"]
+    }),
+    makeSkill({
+      id: "api-versioning-strategy",
+      name: "api-versioning-strategy",
+      description: "Plan API versioning strategies for breaking changes and compatibility.",
+      domains: ["backend", "documents"],
+      tools: [],
+      triggers: ["api versioning strategy breaking changes compatibility"]
+    }),
+    makeSkill({
+      id: "security-best-practices",
+      name: "security-best-practices",
+      description: "Review security risks and hardening.",
+      domains: ["security"],
+      tools: ["GitHub"],
+      triggers: ["security review"]
+    }),
+    makeSkill({
+      id: "notion-meeting-intelligence",
+      name: "notion-meeting-intelligence",
+      description: "Turn Notion meeting notes into decisions and follow-ups.",
+      domains: ["product", "documents"],
+      tools: [],
+      triggers: ["notion meeting notes"]
+    }),
+    makeSkill({
+      id: "notion-knowledge-capture",
+      name: "notion-knowledge-capture",
+      description: "Capture Notion workspace knowledge and decision logs.",
+      domains: ["product", "documents"],
+      tools: [],
+      triggers: ["notion knowledge capture"]
+    }),
+    makeSkill({
+      id: "incident-postmortem",
+      name: "incident-postmortem",
+      description: "Write incident postmortems from Sentry evidence and SLO impact.",
+      domains: ["operations"],
+      tools: [],
+      triggers: ["incident postmortem"]
+    }),
+    makeSkill({
+      id: "sentry",
+      name: "sentry",
+      description: "Use Sentry for error evidence and monitoring.",
+      domains: ["operations"],
+      tools: [],
+      triggers: ["sentry"]
+    }),
+    makeSkill({
+      id: "launch-readiness",
+      name: "launch-readiness",
+      description: "Prepare launch readiness checklists, rollback steps, and owner follow-ups.",
+      domains: ["product", "operations"],
+      tools: [],
+      triggers: ["launch readiness rollback checklist"]
+    }),
+    makeSkill({
+      id: "risk-register",
+      name: "risk-register",
+      description: "Create risk registers and risk matrices.",
+      domains: ["product", "security"],
+      tools: [],
+      triggers: ["risk register"]
+    }),
+    makeSkill({
+      id: "creative-offer",
+      name: "creative-offer",
+      description: "Generate creative offer angles and ad concepts.",
+      domains: ["creative", "product"],
+      tools: [],
+      triggers: ["offer angles ad concepts"]
+    }),
+    makeSkill({
+      id: "creative-production",
+      name: "creative-production",
+      description: "Produce campaign creative, ad concepts, product-shot prompts, and asset direction.",
+      domains: ["creative"],
+      tools: [],
+      triggers: ["creative ad concepts product shot prompts campaign"]
+    }),
+    makeSkill({
+      id: "creative-ads-explorer",
+      name: "creative-ads-explorer",
+      description: "Explore competitor ads and ad concepts.",
+      domains: ["creative"],
+      tools: [],
+      triggers: ["creative ads ad concepts competitor ads"]
+    }),
+    makeSkill({
+      id: "creative-positioning",
+      name: "creative-positioning",
+      description: "Develop competitor positioning and message angles.",
+      domains: ["creative", "product"],
+      tools: [],
+      triggers: ["competitor positioning"]
+    })
+  ]);
+
+  assert.equal(
+    recommendConceptWorkflow(index, "Create a standalone MCP server on Cloudflare Workers with typed tool handlers").primary.name,
+    "building-mcp-server-on-cloudflare"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Implement Vercel protected routes with OAuth callbacks and session cookies").primary.name,
+    "auth"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Turn Notion meeting notes into a decision summary and follow-up tasks").primary.name,
+    "notion-meeting-intelligence"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Write an incident postmortem with Sentry evidence and SLO impact").primary.name,
+    "incident-postmortem"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Prepare a launch readiness checklist with feature flags and rollback steps").primary.name,
+    "launch-readiness"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Generate creative offer angles and ad concepts from competitor positioning research").primary.name,
+    "creative-offer"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Review an ASP.NET Core Minimal API with middleware, dependency injection, auth, and endpoint tests").primary.name,
+    "aspnet-core"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Design a versioned backend API for a Node service and document endpoints").primary.name,
+    "dev-backend-api-design"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Write API documentation from endpoint behavior, examples, error cases, and versioning notes").primary.name,
+    "api-docs-writer"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Generate creative ad concepts, offer angles, and product-shot prompts for a new product campaign").primary.name,
+    "creative-production"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Create a risk register for a launch readiness review").primary.name,
+    "risk-register"
+  );
+});

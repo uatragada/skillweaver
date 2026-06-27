@@ -42,6 +42,8 @@ npm run benchmark:skills
 npm run benchmark:skills:check
 npm run benchmark:skills:holdout
 npm run benchmark:skills:holdout:check
+npm run benchmark:skills:fresh
+npm run benchmark:skills:fresh:check
 npm run build
 npm start
 ```
@@ -77,6 +79,7 @@ By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Us
 - [Routing evaluation methodology](docs/ROUTING-EVAL-METHODOLOGY.md)
 - [Skill use gains benchmark](docs/SKILL-USE-GAINS.md)
 - [Post-tuning challenge benchmark](docs/SKILL-USE-HOLDOUT.md)
+- [Fresh-probe regression benchmark](docs/SKILL-USE-FRESH.md)
 - [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
 - [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
 - [Corpus snapshot](docs/CORPUS-SNAPSHOT.md)
@@ -99,4 +102,12 @@ Run the non-gating post-tuning challenge suite with:
 npm run benchmark:skills:holdout
 ```
 
-Use `npm run benchmark:skills:holdout:check` before citing [docs/SKILL-USE-HOLDOUT.md](docs/SKILL-USE-HOLDOUT.md). Both reports include generated quality slices by benchmark domain and expected concept so broad claims show their coverage and thin spots.
+Use `npm run benchmark:skills:holdout:check` before citing [docs/SKILL-USE-HOLDOUT.md](docs/SKILL-USE-HOLDOUT.md). The active, challenge, and fresh reports include generated quality slices by benchmark domain and expected concept so broad claims show their coverage and thin spots.
+
+Run the non-gating fresh-probe regression suite with:
+
+```powershell
+npm run benchmark:skills:fresh
+```
+
+Use `npm run benchmark:skills:fresh:check` before citing [docs/SKILL-USE-FRESH.md](docs/SKILL-USE-FRESH.md). This suite began as fresh generalization evidence; after its misses informed fixes, the checked-in report is regression evidence for that prompt slice.

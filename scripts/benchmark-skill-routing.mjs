@@ -12,27 +12,47 @@ import {
 const PRE_CONCEPT_COMMIT = "80d31f1";
 const CHECK_MODE = process.argv.includes("--check");
 const HOLDOUT_MODE = process.argv.includes("--holdout");
-const SUITE = HOLDOUT_MODE
-  ? {
-      id: "holdout",
-      label: "Post-Tuning Challenge",
-      reportTitle: "Post-Tuning Challenge Benchmark",
-      casesPath: resolve("benchmarks/skill-routing-holdout.json"),
-      casesRelativePath: "benchmarks/skill-routing-holdout.json",
-      reportPath: resolve("docs/SKILL-USE-HOLDOUT.md"),
-      command: CHECK_MODE ? "npm run benchmark:skills:holdout:check" : "npm run benchmark:skills:holdout",
-      gatesAcceptance: false
-    }
-  : {
-      id: "acceptance",
-      label: "Active Acceptance",
-      reportTitle: "Active Acceptance Benchmark",
-      casesPath: resolve("benchmarks/skill-routing-cases.json"),
-      casesRelativePath: "benchmarks/skill-routing-cases.json",
-      reportPath: resolve("docs/SKILL-USE-GAINS.md"),
-      command: CHECK_MODE ? "npm run benchmark:skills:check" : "npm run benchmark:skills",
-      gatesAcceptance: true
-    };
+const FRESH_MODE = process.argv.includes("--fresh");
+if (HOLDOUT_MODE && FRESH_MODE) {
+  console.error("Use only one benchmark suite flag: --holdout or --fresh.");
+  process.exit(1);
+}
+const SUITES = {
+  acceptance: {
+    id: "acceptance",
+    label: "Active Acceptance",
+    reportTitle: "Active Acceptance Benchmark",
+    casesPath: resolve("benchmarks/skill-routing-cases.json"),
+    casesRelativePath: "benchmarks/skill-routing-cases.json",
+    reportPath: resolve("docs/SKILL-USE-GAINS.md"),
+    command: CHECK_MODE ? "npm run benchmark:skills:check" : "npm run benchmark:skills",
+    gatesAcceptance: true,
+    role: "acceptance"
+  },
+  holdout: {
+    id: "holdout",
+    label: "Post-Tuning Challenge",
+    reportTitle: "Post-Tuning Challenge Benchmark",
+    casesPath: resolve("benchmarks/skill-routing-holdout.json"),
+    casesRelativePath: "benchmarks/skill-routing-holdout.json",
+    reportPath: resolve("docs/SKILL-USE-HOLDOUT.md"),
+    command: CHECK_MODE ? "npm run benchmark:skills:holdout:check" : "npm run benchmark:skills:holdout",
+    gatesAcceptance: false,
+    role: "post-tuning-challenge"
+  },
+  fresh: {
+    id: "fresh",
+    label: "Fresh Generalization Probe",
+    reportTitle: "Fresh Generalization Probe Benchmark",
+    casesPath: resolve("benchmarks/skill-routing-fresh.json"),
+    casesRelativePath: "benchmarks/skill-routing-fresh.json",
+    reportPath: resolve("docs/SKILL-USE-FRESH.md"),
+    command: CHECK_MODE ? "npm run benchmark:skills:fresh:check" : "npm run benchmark:skills:fresh",
+    gatesAcceptance: false,
+    role: "fresh-probe"
+  }
+};
+const SUITE = FRESH_MODE ? SUITES.fresh : HOLDOUT_MODE ? SUITES.holdout : SUITES.acceptance;
 const CASES_PATH = SUITE.casesPath;
 const REPORT_PATH = SUITE.reportPath;
 const INVALIDATING_PATHS = [
@@ -633,6 +653,14 @@ function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2Suppo
     ];
   }
 
+  if (SUITE.role === "fresh-probe") {
+    return [
+      "## Claim Scope",
+      "",
+      `This report measures the current route against a ${cases.length}-case suite that began as a fresh generalization probe. Current results are regression evidence for those prompts: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, support coverage@5 ${formatPercent(v2Summary.supportCoverage)}, support precision@5 ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} support-miss cases. Use the experiment log for the pre-tuning fresh-probe result; this report is not proof that cross-domain routing is solved.`
+    ];
+  }
+
   return [
     "## Claim Scope",
     "",
@@ -658,6 +686,8 @@ function buildMarkdown({
   const qualityVsV1 = v2Summary.outputQualityScore - v1Summary.outputQualityScore;
   const strongClaimPrefix = SUITE.gatesAcceptance
     ? freshness.acceptance.ok ? "SkillWeaver V2 changes" : "SkillWeaver V2 currently reports"
+    : SUITE.role === "fresh-probe"
+      ? "On the fresh generalization probe, SkillWeaver V2 changes"
     : "On the post-tuning challenge suite, SkillWeaver V2 changes";
 
   const lines = [
@@ -698,14 +728,7 @@ function buildMarkdown({
     `- Skill roots: ${index.roots.length}`,
     `- Benchmark cases: ${cases.length}`,
     "",
-    ...(SUITE.gatesAcceptance
-      ? []
-      : [
-          "## Suite Role",
-          "",
-          "This is not pristine untouched holdout evidence for the current V2 route. The first 22-case pilot exposed gaps, then those misses informed the current fixes. Treat this report as frozen challenge/regression evidence. A clean cross-domain generalization claim requires a fresh prompt set collected after the last routing-tuning commit and reported before any tuning from those prompts.",
-          ""
-        ]),
+    ...buildSuiteRoleSection(),
     "## Compared Systems",
     "",
     "- `no-skillweaver`: flat metadata search over name, description, namespace, domains, and tool hints. It does not use triggers, body text, resources, relationship edges, workflow recommendations, or concept nodes.",
@@ -744,7 +767,7 @@ function buildMarkdown({
     "Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.",
     ...(SUITE.gatesAcceptance
       ? []
-      : ["Challenge quality is intentionally reported rather than accepted or failed; the freshness check only proves that the report matches the current code, corpus, and challenge cases."]),
+      : [`${SUITE.label} quality is intentionally reported rather than accepted or failed; the freshness check only proves that the report matches the current code, corpus, and ${SUITE.label.toLowerCase()} cases.`]),
     "",
     ...buildSliceTable("Quality by Domain", domainSummaries),
     "",
@@ -796,6 +819,24 @@ function buildMarkdown({
   );
 
   return `${lines.join("\n")}\n`;
+}
+
+function buildSuiteRoleSection() {
+  if (SUITE.gatesAcceptance) return [];
+  if (SUITE.role === "fresh-probe") {
+    return [
+      "## Suite Role",
+      "",
+      "This suite began as fresh generalization evidence collected after the previous routing-tuning work. Once misses from these prompts informed fixes, the checked-in report became non-gating regression evidence for the fresh-probe slice. A future untouched generalization claim requires another prompt set collected after the latest routing-tuning commit.",
+      ""
+    ];
+  }
+  return [
+    "## Suite Role",
+    "",
+    "This is not pristine untouched holdout evidence for the current V2 route. The first 22-case pilot exposed gaps, then those misses informed the current fixes. Treat this report as frozen challenge/regression evidence. A clean cross-domain generalization claim requires a fresh prompt set collected after the last routing-tuning commit and reported before any tuning from those prompts.",
+    ""
+  ];
 }
 
 async function main() {

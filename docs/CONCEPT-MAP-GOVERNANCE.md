@@ -78,9 +78,10 @@ Before committing concept changes:
 - Run `npm test`.
 - Run `npm run benchmark:skills`.
 - Run `npm run benchmark:skills:holdout` when challenge coverage or report shape changes.
+- Run `npm run benchmark:skills:fresh` when fresh-probe coverage, report shape, or routing aliases change.
 - Run `npm run index:skills`.
 - Confirm V2 does not regress expected top/workflow-5 retrieval.
-- Inspect changed per-case rows, `Quality by Domain`, and `Quality by Expected Concept` in `docs/SKILL-USE-GAINS.md` and `docs/SKILL-USE-HOLDOUT.md`.
+- Inspect changed per-case rows, `Quality by Domain`, and `Quality by Expected Concept` in `docs/SKILL-USE-GAINS.md`, `docs/SKILL-USE-HOLDOUT.md`, and `docs/SKILL-USE-FRESH.md` when applicable.
 
 ## Mini Decision Record Template
 

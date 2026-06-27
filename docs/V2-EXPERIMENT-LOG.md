@@ -234,29 +234,29 @@ The first untouched holdout pilot exposed a real gap: V2 output quality was 48.4
 | Holdout stage | Output quality | Primary hit@1 | Expected top/workflow 5 | Support coverage@5 | Support precision@5 | Forbidden primary rate |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | First untouched pilot | 48.4 | 40.9% | 54.5% | not recorded | not recorded | 4.5% |
-| Post-tuning challenge | 92.7 | 100.0% | 100.0% | 63.6% | 31.8% | 0.0% |
+| Post-tuning challenge | 93.6 | 100.0% | 100.0% | 68.2% | 34.1% | 0.0% |
 
 After the general anchor and concept-membership fixes, on the 22-case post-tuning challenge suite:
 
 | Metric | No SkillWeaver | Skill-Level Baseline | V2 |
 | --- | ---: | ---: | ---: |
-| Output quality score | 70.1 | 77.0 | 92.7 |
+| Output quality score | 70.1 | 77.0 | 93.6 |
 | Primary hit@1 | 68.2% | 77.3% | 100.0% |
 | Expected skill top/workflow 5 | 100.0% | 100.0% | 100.0% |
 | Mean reciprocal rank | 0.801 | 0.850 | 1.000 |
-| Support coverage@5 | 34.1% | 45.5% | 63.6% |
-| Support precision@5 | 18.2% | 25.4% | 31.8% |
+| Support coverage@5 | 34.1% | 45.5% | 68.2% |
+| Support precision@5 | 18.2% | 25.4% | 34.1% |
 | Forbidden primary rate | 0.0% | 0.0% | 0.0% |
 | Mean candidates to expected skill | 1.6 | 1.5 | 1.0 |
 
 V2 gain:
 
-- +22.6 output-quality points over no SkillWeaver.
-- +15.7 output-quality points over the skill-level baseline.
+- +23.5 output-quality points over no SkillWeaver.
+- +16.6 output-quality points over the skill-level baseline.
 - +31.8 percentage points primary hit@1 over no SkillWeaver.
 - +22.7 percentage points primary hit@1 over the skill-level baseline.
-- +29.5 percentage points support coverage over no SkillWeaver.
-- +18.2 percentage points support coverage over the skill-level baseline.
+- +34.1 percentage points support coverage over no SkillWeaver.
+- +22.7 percentage points support coverage over the skill-level baseline.
 
 ### What Improved
 
@@ -273,9 +273,76 @@ This 22-case file is no longer pristine untouched holdout evidence because the p
 
 No new dependencies, persistence, model calls, background jobs, or larger graph caps were added. Benchmark runtime increases only when the explicit holdout command is run.
 
+## 2026-06-27: Fresh Probe And Alias Generalization
+
+### Hypothesis
+
+The post-tuning challenge suite is useful regression pressure, but it no longer proves untouched generalization. A fresh prompt set collected after the last routing-tuning commit should expose whether V2 is only passing known cases or whether the concept map handles new high-value paraphrases.
+
+### Change
+
+- Added `benchmarks/skill-routing-fresh.json` with 18 prompts across 15 benchmark domains and 15 expected concepts.
+- Added `npm run benchmark:skills:fresh` and `npm run benchmark:skills:fresh:check`, reusing the existing benchmark evaluator, report metadata, freshness checks, case validation, domain slices, and concept slices.
+- Recorded the first pre-tuning fresh-probe result before using those misses to tune the route.
+- Tuned only narrow deterministic aliases and kept them fenced by rival-workflow checks:
+  - MCP server wording on Cloudflare Workers prefers `building-mcp-server-on-cloudflare`.
+  - OAuth/session/protected-route wording can anchor the `auth` skill.
+  - Notion meeting-note wording prefers `notion-meeting-intelligence`.
+  - Incident postmortem wording prefers `incident-postmortem` over generic Sentry support.
+  - Launch-readiness checklist, rollback, and feature-flag wording prefers `launch-readiness` without displacing explicit risk-register prompts.
+  - Explicit creative-offer wording prefers `creative-offer` without displacing ad-production prompts.
+  - Support aliases improve sprite pipeline, Vercel firewall security support, API versioning, Hugging Face Trackio, and Cloudflare sandbox support.
+- Added a unit test for these fresh-probe intent aliases and the active/challenge rival workflows they could regress.
+
+### Result
+
+The first fresh probe exposed a real gap: V2 improved support coverage but only matched the baselines on primary hit@1.
+
+| Fresh-probe stage | Output quality | Primary hit@1 | Expected top/workflow 5 | Support coverage@5 | Support precision@5 | Forbidden primary rate | Mean candidates |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| First pre-tuning probe | 76.9 | 66.7% | 88.9% | 86.1% | 48.6% | 0.0% | 7.7 |
+| Post-alias regression | 98.1 | 100.0% | 100.0% | 90.7% | 51.4% | 0.0% | 1.0 |
+
+After the narrow alias fixes, on the 18-case fresh-probe regression suite:
+
+| Metric | No SkillWeaver | Skill-Level Baseline | V2 |
+| --- | ---: | ---: | ---: |
+| Output quality score | 70.2 | 74.3 | 98.1 |
+| Primary hit@1 | 66.7% | 72.2% | 100.0% |
+| Expected skill top/workflow 5 | 88.9% | 88.9% | 100.0% |
+| Mean reciprocal rank | 0.760 | 0.791 | 1.000 |
+| Support coverage@5 | 52.8% | 59.3% | 90.7% |
+| Support precision@5 | 30.6% | 34.7% | 51.4% |
+| Forbidden primary rate | 0.0% | 0.0% | 0.0% |
+| Mean candidates to expected skill | 4.2 | 2.1 | 1.0 |
+
+V2 gain:
+
+- +28.0 output-quality points over no SkillWeaver.
+- +23.8 output-quality points over the skill-level baseline.
+- +33.3 percentage points primary hit@1 over no SkillWeaver.
+- +27.8 percentage points primary hit@1 over the skill-level baseline.
+- +38.0 percentage points support coverage over no SkillWeaver.
+- +31.5 percentage points support coverage over the skill-level baseline.
+
+### What Improved
+
+- The fresh suite no longer fails the mean-candidates quality gate.
+- New high-value paraphrases route to the intended primary skill without adding a concept node or product-runtime infrastructure.
+- Support quality improved while support precision also rose, so the support gains are not just extra noise.
+- The active and post-tuning challenge suites can be checked alongside a third non-gating suite.
+
+### What Got Worse
+
+The fresh suite is no longer untouched holdout evidence once these prompts informed route tuning. It is now a fresh-probe regression suite. Future clean generalization claims need another prompt set collected after this alias-tuning commit.
+
+### Runtime Impact
+
+No new dependencies, persistence, model calls, background jobs, graph caps, or product-route passes were added. The extra cost is an explicit benchmark command that scans the corpus once and post-processes 18 cases.
+
 ## Next Experiments
 
-- Add a fresh frozen holdout set from future real task logs before tuning more boosts.
+- Add a new fresh frozen holdout set from future real task logs before tuning more boosts.
 - Work through the remaining coverage backlog from the independent audit, especially broader MCP server creation, deeper game-studio variants, Notion meeting-to-email ambiguity, Vercel Auth/Firewall variants, and visualization QA/accessibility variants.
 - Decide whether support precision@5 should become an acceptance gate after expected-support lists are reviewed for completeness.
 - Add an end-to-end graph-cap survival test if the corpus grows or cap behavior changes.

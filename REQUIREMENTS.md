@@ -151,6 +151,7 @@ Concepts are derived from deterministic rules and current skill metadata. They a
 - Running `npm run build` must build the web app.
 - Running `npm run benchmark:skills:check` must verify that the active acceptance report is fresh and passing.
 - Running `npm run benchmark:skills:holdout:check` must verify that the non-gating post-tuning challenge report is fresh.
+- Running `npm run benchmark:skills:fresh:check` must verify that the non-gating fresh-probe regression report is fresh.
 - Running the dev server must expose a usable UI.
 - The scanner must successfully index the current local Codex skill library.
 - Post-tuning challenge misses should be documented or promoted deliberately; they must not silently weaken the active acceptance result.

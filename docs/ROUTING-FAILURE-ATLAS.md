@@ -95,8 +95,8 @@ The 22-case post-tuning challenge suite now covers 11 benchmark domains and 11 e
 
 - 100.0% V2 primary hit@1.
 - 100.0% V2 expected primary top/workflow-5 retrieval.
-- 63.6% V2 support coverage@5.
-- 31.8% V2 support precision@5 as an exploratory noise metric.
+- 68.2% V2 support coverage@5.
+- 34.1% V2 support precision@5 as an exploratory noise metric.
 - 0.0% V2 forbidden primary rate.
 
 Because the pilot misses informed the current fix, this suite is challenge evidence from this commit forward. The next true holdout should come from future real task logs before additional tuning. Current support-quality backlog is concentrated in challenge slices such as product/research/planning, platform delivery, backend services, AI agent apps, and security/risk.

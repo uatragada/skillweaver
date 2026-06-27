@@ -254,7 +254,7 @@ const CONCEPT_RULES = [
     triggers: ["backend api", "node service", "python service", "dotnet service", "api versioning", "server endpoint", "stripe billing", "webhook"],
     domains: ["backend", "operations", "documents"],
     tools: ["Node", "Python", "OpenAI"],
-    primarySkillNames: ["dev-backend-api-design", "dev-node-typescript-services", "dev-python-services", "dev-java-dotnet-services", "aspnet-core", "stripe-best-practices"],
+    primarySkillNames: ["dev-backend-api-design", "dev-node-typescript-services", "dev-python-services", "dev-java-dotnet-services", "aspnet-core", "stripe-best-practices", "auth"],
     supportingSkillNames: ["api-versioning-strategy", "api-docs-writer", "technical-spec-template", "system-design-interview", "monitoring-setup-guide"],
     verificationSkillNames: ["dev-testing-qa", "load-testing-plan", "monitoring-setup-guide"],
     relatedConceptIds: ["database-data-engineering", "observability-reliability", "repo-operations"]
@@ -865,6 +865,10 @@ function rankSkill(skill, query) {
     if (triggerText.includes(term)) score += 10;
     if (domainText.includes(term)) score += 8;
     if (bodyText.includes(term)) score += 1;
+  }
+
+  if (nameText === "auth" && /\boauth\b|\bsession cookies?\b|\bprotected routes?\b|\bauth callbacks?\b/.test(normalizedQuery)) {
+    score += 180;
   }
 
   const gatewayMatch = /^([a-z0-9]+(?:-[a-z0-9]+)*) use$/.exec(nameText);
@@ -1479,6 +1483,7 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
 
   if (/\bsentry\b/.test(normalizedQuery)) {
     if (name === "sentry") boost += 860;
+    if (/\bpostmortem\b|\bincident\b/.test(normalizedQuery) && name.includes("incident postmortem")) boost += 1080;
     if (["monitoring setup guide", "dev observability sre"].some((term) => name.includes(term))) boost += 260;
     if (name.includes("slo error budget") && !/\bslo\b|\berror budget\b/.test(normalizedQuery)) boost -= 180;
     if (name.includes("huggingface")) boost -= 520;
@@ -1498,7 +1503,7 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
 
   if (/\b(game prototype|prototype a game|full web game|game mechanics|playtest loop)\b/.test(normalizedQuery)) {
     if (name === "game-studio" || name.includes("game studio")) boost += 980;
-    if (["web game foundations", "game ui frontend", "game playtest"].some((term) => name.includes(term))) boost += 420;
+    if (["web game foundations", "game ui frontend", "game playtest", "sprite pipeline"].some((term) => name.includes(term))) boost += 420;
   }
 
   if (/\bkubernetes\b|\bcontainer\b|\bdevops\b/.test(normalizedQuery)) {
@@ -1513,6 +1518,7 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   }
 
   if (/\bnotion\b|\bworkspace knowledge\b|\bknowledge base\b|\bdecision log\b/.test(normalizedQuery)) {
+    if (/\bmeeting\b|\bmeeting notes?\b|\bagenda\b|\bpre reads?\b/.test(normalizedQuery) && name.includes("notion meeting intelligence")) boost += 960;
     if (/\bcapture\b|\bdecision\b|\bknowledge base\b/.test(normalizedQuery) && name.includes("notion knowledge capture")) boost += 420;
     if (/\bspec\b|\bimplementation\b|\bfollow up\b|\btasks?\b/.test(normalizedQuery) && name.includes("notion spec to implementation")) boost += 260;
     if (/\bresearch\b|\bsource links?\b|\bsynthesize\b/.test(normalizedQuery) && name.includes("notion research documentation")) boost += 220;
@@ -1632,6 +1638,11 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("env vars")) boost -= 160;
   }
 
+  if (/\basp\.?net\b|\bminimal api\b/.test(normalizedQuery)) {
+    if (name.includes("aspnet core")) boost += 1640;
+    if (name === "auth") boost -= 420;
+  }
+
   if (/\bauthentication\b|\bauth\b|\boauth\b|\bsession protection\b/.test(normalizedQuery)) {
     if (name === "auth") boost += 1540;
     if (["security best practices", "dev backend api design"].some((term) => name.includes(term))) boost += 380;
@@ -1639,9 +1650,11 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   }
 
   if (/\bcloudflare worker\b|\bdurable object\b|\bwrangler\b/.test(normalizedQuery)) {
+    if (/\bmcp server\b|\btyped tool handlers?\b/.test(normalizedQuery) && name.includes("building mcp server on cloudflare")) boost += 980;
     if (/\bdurable object\b/.test(normalizedQuery) && name.includes("durable objects")) boost += 980;
     if (name.includes("wrangler")) boost += /\bdurable object\b/.test(normalizedQuery) ? 360 : 560;
     if (name.includes("workers best practices")) boost += /\bdurable object\b/.test(normalizedQuery) ? 340 : 420;
+    if (/\bsandbox\b/.test(normalizedQuery) && name.includes("sandbox sdk")) boost += 620;
     if (/\bmcp\b|\bagent\b/.test(name) && !/\bmcp\b|\bagent\b/.test(normalizedQuery)) boost -= 260;
   }
 
@@ -1672,16 +1685,27 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   }
 
   if (/\boffer angles?\b|\bproduct shot\b|\bcampaign\b|\bad concepts?\b/.test(normalizedQuery)) {
+    if (/\bcreative offer angles?\b|\boffer strategy\b|\bpromotional offer\b/.test(normalizedQuery) && name.includes("creative offer")) boost += 980;
+    if (/\boffer angles?\b/.test(normalizedQuery) && name.includes("creative offer")) boost += 260;
+    if (/\bproduct shot\b|\bcampaign\b/.test(normalizedQuery) && name.includes("creative production")) boost += 520;
     if (name.includes("creative positioning")) boost += 220;
+    if (name.includes("creative ads explorer")) boost += /\bad concepts?\b/.test(normalizedQuery) ? 520 : 180;
   }
 
-  if (/\blinear\b|\bplan product\b|\bproduct work\b|\broadmap\b/.test(normalizedQuery)) {
+  if (/\blinear\b|\bplan product\b|\bproduct work\b|\broadmap\b|\blaunch readiness\b|\brollback\b/.test(normalizedQuery)) {
     if (name.includes("roadmap narrative")) boost += 220;
+    if (/\blaunch readiness checklist\b|\bchecklist\b.*\blaunch readiness\b|\brollback\b|\bfeature flags?\b/.test(normalizedQuery) && name.includes("launch readiness")) boost += 920;
+    if (/\bfeature flags?\b/.test(normalizedQuery) && name.includes("feature flag guide")) boost += 620;
+  }
+
+  if (/\bfirewall\b|\bbot protection\b|\brate limits?\b|\bwaf\b/.test(normalizedQuery)) {
+    if (name.includes("security best practices")) boost += 640;
+    if (name.includes("vercel deploy")) boost += 220;
   }
 
   if (/\brisk register\b|\brisk matrix\b/.test(normalizedQuery)) {
     if (name.includes("risk register")) boost += 1180;
-    if (name.includes("launch readiness")) boost += 360;
+    if (name.includes("launch readiness")) boost += /\bchecklist\b|\brollback\b|\bfeature flags?\b/.test(normalizedQuery) ? 360 : 80;
     if (["slo error budget", "dev observability sre", "dev security engineering"].some((term) => name.includes(term))) boost -= 180;
   }
 
@@ -1721,6 +1745,7 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   if (/\bhugging face\b|\bgradio\b|\bspace\b|\bdemo\b|\bvision model\b/.test(normalizedQuery)) {
     if (/\bgradio\b|\bspace\b|\bdemo\b/.test(normalizedQuery) && name.includes("huggingface gradio")) boost += 1260;
     if (/\bvision\b/.test(normalizedQuery) && name.includes("huggingface vision trainer")) boost += 620;
+    if (/\btrack\b|\bevaluation runs?\b/.test(normalizedQuery) && name.includes("huggingface trackio")) boost += 720;
     if (/\btrain\b|\bmodel training\b/.test(normalizedQuery) && name.includes("huggingface llm trainer")) boost += 620;
     if (/\bdatasets?\b|\bdataset metadata\b/.test(normalizedQuery) && name.includes("huggingface datasets")) boost += 680;
     if (name.includes("huggingface community evals")) boost += 240;
@@ -1729,8 +1754,10 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (/\bgradio\b|\bspace\b|\bdemo\b/.test(normalizedQuery) && ["huggingface papers", "huggingface llm trainer", "huggingface vision trainer"].some((term) => name.includes(term))) boost -= 260;
   }
 
-  if (/\bapi\b|\bendpoints?\b|\bdocument\b|\bversioned\b/.test(normalizedQuery)) {
-    if (name.includes("api docs writer")) boost += 240;
+  if (/\bapi\b|\bendpoints?\b|\bdocument\b|\bversioned\b|\bcompatibility\b/.test(normalizedQuery)) {
+    if (/\bdesign\b.*\bbackend api\b|\bbackend api\b.*\bdesign\b|\bnode service\b.*\bdocument endpoints?\b/.test(normalizedQuery) && name.includes("dev backend api design")) boost += 620;
+    if (name.includes("api docs writer")) boost += /\bdocumentation\b|\bapi docs?\b|\bdocument endpoints?\b|\bendpoints? behavior\b|\bexamples?\b/.test(normalizedQuery) ? 520 : 240;
+    if (/\bapi versioning strategy\b|\bversioning strategy\b|\bbreaking changes?\b|\bcompatibility\b/.test(normalizedQuery) && name.includes("api versioning strategy")) boost += 520;
   }
 
   if (/\bpython\b.*\bservice\b|\bservice\b.*\bpython\b/.test(normalizedQuery)) {

@@ -1,0 +1,256 @@
+[
+  {
+    "id": "mcp-server-cloudflare-fresh",
+    "domain": "ai-agent-apps",
+    "concept": "cloudflare-workers",
+    "query": "Create a standalone MCP server on Cloudflare Workers with typed tool handlers, Wrangler deployment, and durable runtime notes",
+    "expectedPrimary": [
+      "building-mcp-server-on-cloudflare"
+    ],
+    "expectedSupport": [
+      "wrangler",
+      "workers-best-practices"
+    ],
+    "mustNotPrimary": [
+      "chatgpt-apps"
+    ]
+  },
+  {
+    "id": "game-ui-playtest-fresh",
+    "domain": "games-simulation",
+    "concept": "game-development",
+    "query": "Plan a Phaser browser game prototype with HUD menus, sprite production, and a repeatable playtest loop",
+    "expectedPrimary": [
+      "phaser-2d-game",
+      "game-studio"
+    ],
+    "expectedSupport": [
+      "game-ui-frontend",
+      "sprite-pipeline",
+      "game-playtest"
+    ]
+  },
+  {
+    "id": "notion-meeting-email-fresh",
+    "domain": "communications-knowledge",
+    "concept": "product-planning",
+    "query": "Turn Notion meeting notes into a decision summary, follow-up implementation tasks, and draft email replies",
+    "expectedPrimary": [
+      "notion-meeting-intelligence"
+    ],
+    "expectedSupport": [
+      "notion-spec-to-implementation",
+      "email-triage"
+    ]
+  },
+  {
+    "id": "vercel-auth-protection-fresh",
+    "domain": "backend-services",
+    "concept": "backend-services",
+    "query": "Implement Vercel protected routes with OAuth callbacks, session cookies, environment variables, and security review",
+    "expectedPrimary": [
+      "auth"
+    ],
+    "expectedSupport": [
+      "security-best-practices",
+      "env-vars"
+    ],
+    "mustNotPrimary": [
+      "vercel-firewall"
+    ]
+  },
+  {
+    "id": "vercel-bot-firewall-fresh",
+    "domain": "security-risk",
+    "concept": "security-review",
+    "query": "Configure Vercel bot protection, rate limits, firewall rules, and production deployment verification",
+    "expectedPrimary": [
+      "vercel-firewall"
+    ],
+    "expectedSupport": [
+      "security-best-practices",
+      "vercel-deploy"
+    ],
+    "mustNotPrimary": [
+      "frontend-app-builder"
+    ]
+  },
+  {
+    "id": "visualization-accessibility-review-fresh",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
+    "query": "Review a data visualization for keyboard access, color contrast, alt text, chart QA, and inclusive presentation",
+    "expectedPrimary": [
+      "accessibility-and-inclusive-visualization"
+    ],
+    "expectedSupport": [
+      "testing-data-visualizations",
+      "visualization-strategy-and-critique"
+    ]
+  },
+  {
+    "id": "postgres-migration-rollback-fresh",
+    "domain": "database-data-engineering",
+    "concept": "database-data-engineering",
+    "query": "Plan a Postgres schema migration with rollback safety, data quality checks, and API compatibility notes",
+    "expectedPrimary": [
+      "database-migration-plan"
+    ],
+    "expectedSupport": [
+      "dev-database-postgres",
+      "data-quality-audit",
+      "api-versioning-strategy"
+    ]
+  },
+  {
+    "id": "sentry-incident-slo-fresh",
+    "domain": "observability-reliability",
+    "concept": "observability-reliability",
+    "query": "Write an incident postmortem with Sentry evidence, SLO error budget impact, monitoring follow-ups, and owners",
+    "expectedPrimary": [
+      "incident-postmortem"
+    ],
+    "expectedSupport": [
+      "slo-error-budget",
+      "sentry",
+      "monitoring-setup-guide"
+    ]
+  },
+  {
+    "id": "dependency-conflict-monorepo-fresh",
+    "domain": "repo-collaboration",
+    "concept": "repo-operations",
+    "query": "Resolve an npm dependency conflict in a monorepo build and keep GitHub Actions tests passing",
+    "expectedPrimary": [
+      "dependency-conflict-resolver"
+    ],
+    "expectedSupport": [
+      "dev-monorepo-build-systems",
+      "gh-fix-ci"
+    ]
+  },
+  {
+    "id": "durable-object-agent-fresh",
+    "domain": "infrastructure-platforms",
+    "concept": "cloudflare-workers",
+    "query": "Build a Cloudflare Durable Object-backed agent with sandbox execution, worker deployment, and stateful routing",
+    "expectedPrimary": [
+      "durable-objects",
+      "building-ai-agent-on-cloudflare"
+    ],
+    "expectedSupport": [
+      "agents-sdk",
+      "sandbox-sdk",
+      "wrangler"
+    ]
+  },
+  {
+    "id": "huggingface-gradio-vision-fresh",
+    "domain": "huggingface-ml",
+    "concept": "huggingface-ml",
+    "query": "Publish a Hugging Face Gradio demo Space for a vision model and track evaluation runs",
+    "expectedPrimary": [
+      "huggingface-gradio"
+    ],
+    "expectedSupport": [
+      "huggingface-vision-trainer",
+      "huggingface-trackio"
+    ]
+  },
+  {
+    "id": "api-versioning-docs-fresh",
+    "domain": "documents-publishing",
+    "concept": "documents-pdf",
+    "query": "Write API docs and a versioning strategy for a breaking endpoint change with migration examples",
+    "expectedPrimary": [
+      "api-versioning-strategy"
+    ],
+    "expectedSupport": [
+      "api-docs-writer",
+      "technical-spec-template"
+    ]
+  },
+  {
+    "id": "launch-risk-flags-fresh",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
+    "query": "Prepare a launch readiness checklist with feature flags, a risk register, rollback steps, and owner follow-ups",
+    "expectedPrimary": [
+      "launch-readiness"
+    ],
+    "expectedSupport": [
+      "feature-flag-guide",
+      "risk-register"
+    ]
+  },
+  {
+    "id": "gmail-label-draft-fresh",
+    "domain": "communications-knowledge",
+    "concept": "email-triage",
+    "query": "Triage Gmail inbox labels, summarize important threads, and draft concise replies",
+    "expectedPrimary": [
+      "gmail-inbox-triage",
+      "gmail"
+    ],
+    "expectedSupport": [
+      "email-triage"
+    ]
+  },
+  {
+    "id": "security-diff-remediation-fresh",
+    "domain": "security-risk",
+    "concept": "security-review",
+    "query": "Run a security diff scan on a pull request and track remediation findings through validation",
+    "expectedPrimary": [
+      "security-diff-scan"
+    ],
+    "expectedSupport": [
+      "triage-finding",
+      "track-findings",
+      "validation"
+    ]
+  },
+  {
+    "id": "electron-native-release-fresh",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
+    "query": "Package an Electron desktop app with a native bridge, updater flow, and app store readiness checklist",
+    "expectedPrimary": [
+      "dev-mobile-desktop"
+    ],
+    "expectedSupport": [
+      "dev-release-productization",
+      "launch-readiness"
+    ]
+  },
+  {
+    "id": "creative-competitor-offer-fresh",
+    "domain": "marketing-growth-creative",
+    "concept": "marketing-growth",
+    "query": "Generate creative offer angles and ad concepts from competitor positioning research",
+    "expectedPrimary": [
+      "creative-offer"
+    ],
+    "expectedSupport": [
+      "competitive-intelligence-monitor",
+      "creative-positioning"
+    ]
+  },
+  {
+    "id": "voice-browser-loop-fresh",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
+    "query": "Build a local browser microphone speech-to-text loop with silence rejection and a TTS voice response",
+    "expectedPrimary": [
+      "transcribe"
+    ],
+    "expectedSupport": [
+      "speech",
+      "transformers-js",
+      "local-speech-ai-mvp"
+    ],
+    "mustNotPrimary": [
+      "huggingface-gradio"
+    ]
+  }
+]

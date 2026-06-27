@@ -11,6 +11,7 @@ SkillWeaver should keep V2 routing quality gains without becoming a heavy servic
 | Scan local skill corpus | warn over 6s, investigate over 8s | 442 skills scanned in 3.739s |
 | Active benchmark check | warn over 15s | 10.909s for 78 cases |
 | Challenge benchmark check | warn over 10s | 6.575s for 22 cases |
+| Fresh-probe benchmark check | warn over 10s | 6.490s for 18 cases |
 | Production build JS bundle | warn over 250 kB raw JS | 211.33 kB raw JS in latest build |
 | Production build CSS bundle | warn over 20 kB raw CSS | 9.69 kB raw CSS in latest build |
 
@@ -29,11 +30,13 @@ SkillWeaver should keep V2 routing quality gains without becoming a heavy servic
 npm test
 npm run benchmark:skills:check
 npm run benchmark:skills:holdout:check
+npm run benchmark:skills:fresh:check
 npm run index:skills
 npm run build
 Measure-Command { node server\skill-scanner.js *> $null }
 Measure-Command { npm run benchmark:skills:check *> $null }
 Measure-Command { npm run benchmark:skills:holdout:check *> $null }
+Measure-Command { npm run benchmark:skills:fresh:check *> $null }
 ```
 
 ## Current Assessment
