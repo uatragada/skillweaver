@@ -1,17 +1,17 @@
 # SkillWeaver V2 Benchmark
 
-Generated: 2026-06-27T11:30:49.253Z
+Generated: 2026-06-27T11:32:05.883Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782559849253,"command":"npm run benchmark:skills","git":{"commit":"e01e4549701c8a7ff0d79240437051d8e8a9f240","dirty":true,"dirtyPaths":["benchmarks/skill-routing-cases.json","docs/CORPUS-SNAPSHOT.md","docs/ROUTING-EVAL-METHODOLOGY.md","docs/ROUTING-FAILURE-ATLAS.md","docs/SKILL-USE-GAINS.md","docs/V2-EXPERIMENT-LOG.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["benchmarks/skill-routing-cases.json","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":78,"sha256":"sha256:a985788631cdb72de1d472d6d02b6849f319f8f02fb1c498850b458612b88d1e"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:a985788631cdb72de1d472d6d02b6849f319f8f02fb1c498850b458612b88d1e","scanner":"sha256:8666350017444209e985daca4aa92c60f149634397bec3d264da83e79548796c","benchmarkScript":"sha256:f8cf58d074ae3576b71fd815e963580eb749e65478fdfada6156ca53cc5cd321","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:6b1a6c4548be1d06ffa2b4f98c1ae2aed101d5afb2171f2ad6f754df03d1f4a4"}
+{"generatedAt":1782559925883,"command":"npm run benchmark:skills","git":{"commit":"38316e9c338391b1ab10b6b68b33ed7da4f839d6","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":78,"sha256":"sha256:a985788631cdb72de1d472d6d02b6849f319f8f02fb1c498850b458612b88d1e"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:a985788631cdb72de1d472d6d02b6849f319f8f02fb1c498850b458612b88d1e","scanner":"sha256:8666350017444209e985daca4aa92c60f149634397bec3d264da83e79548796c","benchmarkScript":"sha256:f8cf58d074ae3576b71fd815e963580eb749e65478fdfada6156ca53cc5cd321","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:6b1a6c4548be1d06ffa2b4f98c1ae2aed101d5afb2171f2ad6f754df03d1f4a4"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
 
 - Command: `npm run benchmark:skills`
-- Git commit at generation: `e01e4549701c8a7ff0d79240437051d8e8a9f240`
-- Git dirty: yes
-- Invalidating dirty paths: `benchmarks/skill-routing-cases.json`, `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
+- Git commit at generation: `38316e9c338391b1ab10b6b68b33ed7da4f839d6`
+- Git dirty: no
+- Invalidating dirty paths: none
 - Case hash: `sha256:a985788631cdb72de1d472d6d02b6849f319f8f02fb1c498850b458612b88d1e`
 - Scanner hash: `sha256:8666350017444209e985daca4aa92c60f149634397bec3d264da83e79548796c`
 - Benchmark script hash: `sha256:f8cf58d074ae3576b71fd815e963580eb749e65478fdfada6156ca53cc5cd321`
