@@ -44,6 +44,15 @@ Cases live in `benchmarks/skill-routing-cases.json`, `benchmarks/skill-routing-h
 - `expectedSupport`: supporting skills expected within the top/workflow five.
 - `mustNotPrimary`: optional forbidden primary skill names or fragments for negative guard cases.
 
+Future clean holdout cases should also record provenance fields before any tuning from those prompts:
+
+- `source`: where the prompt came from, such as `real-task-log`, `subagent-audit`, or `manual-fresh-holdout`.
+- `collectedAfterCommit`: the commit after which the prompt was captured.
+- `frozenBeforeTuningCommit`: the first commit before any tuning from that prompt.
+- `suiteState`: `untouched-holdout`, `post-tuning-challenge`, or `regression`.
+- `promotionStatus`: `candidate`, `active`, `challenge`, `backlog`, or `retired`.
+- `supportCriticality`: `primary-critical`, `support-critical`, `informational`, or `none`.
+
 Expected names are matched by normalized name containment. This makes plugin-prefix variants measurable, but broad expected names should be avoided because they can hide false positives.
 
 The benchmark validates every case before measuring quality. Duplicate case ids, missing required fields, unknown `domain` values, unknown `concept` ids, and expected skill fragments that do not match the live indexed corpus fail the run before a report can be written.
@@ -129,6 +138,8 @@ For V2 to count as a real improvement on the active acceptance suite:
 The post-tuning challenge suite is reported with the same metrics, freshness metadata, and case validation, but it does not gate acceptance. Challenge misses become backlog evidence only. They may be promoted into the active suite when they recur in real task logs, represent a high-impact workflow miss, or protect a confusable rival that has already failed once.
 
 Promotion requires: a failure-atlas entry, a frozen prompt before tuning, narrow `expectedPrimary`, load-bearing `expectedSupport`, a named confusable rival when applicable, and a documented reason why the case belongs in acceptance rather than challenge. A promoted case must not be used both as the tuning prompt and as proof of generalization for the same change.
+
+A future untouched holdout claim also requires all cases in that suite to declare `suiteState: "untouched-holdout"` and matching `collectedAfterCommit` / `frozenBeforeTuningCommit` evidence. Once any miss from that file informs tuning, change the suite state to `post-tuning-challenge` or `regression` before citing it again.
 
 ## Report Freshness Contract
 

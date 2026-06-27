@@ -82,6 +82,7 @@ Before committing concept changes:
 - Run `npm run index:skills`.
 - Confirm V2 does not regress expected top/workflow-5 retrieval.
 - Inspect changed per-case rows, `Quality by Domain`, and `Quality by Expected Concept` in `docs/SKILL-USE-GAINS.md`, `docs/SKILL-USE-HOLDOUT.md`, and `docs/SKILL-USE-FRESH.md` when applicable.
+- Check `docs/SUPPORT-QUALITY-ROADMAP.md` before tuning a support-only miss; do not tune directly from challenge or fresh support misses unless they are promoted under the documented checklist.
 
 ## Mini Decision Record Template
 

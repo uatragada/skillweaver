@@ -42,14 +42,14 @@ const SUITES = {
   },
   fresh: {
     id: "fresh",
-    label: "Fresh Generalization Probe",
-    reportTitle: "Fresh Generalization Probe Benchmark",
+    label: "Fresh-Probe Regression",
+    reportTitle: "Fresh-Probe Regression Benchmark",
     casesPath: resolve("benchmarks/skill-routing-fresh.json"),
     casesRelativePath: "benchmarks/skill-routing-fresh.json",
     reportPath: resolve("docs/SKILL-USE-FRESH.md"),
     command: CHECK_MODE ? "npm run benchmark:skills:fresh:check" : "npm run benchmark:skills:fresh",
     gatesAcceptance: false,
-    role: "fresh-probe"
+    role: "fresh-probe-regression"
   }
 };
 const SUITE = FRESH_MODE ? SUITES.fresh : HOLDOUT_MODE ? SUITES.holdout : SUITES.acceptance;
@@ -89,6 +89,22 @@ const STOP_WORDS = new Set([
   "using",
   "with"
 ]);
+
+const CASE_PROVENANCE_FIELDS = [
+  "source",
+  "collectedAfterCommit",
+  "frozenBeforeTuningCommit",
+  "suiteState",
+  "promotionStatus",
+  "supportCriticality"
+];
+
+const CASE_PROVENANCE_ENUMS = {
+  source: new Set(["real-task-log", "subagent-audit", "manual-fresh-holdout"]),
+  suiteState: new Set(["untouched-holdout", "post-tuning-challenge", "regression"]),
+  promotionStatus: new Set(["candidate", "active", "challenge", "backlog", "retired"]),
+  supportCriticality: new Set(["primary-critical", "support-critical", "informational", "none"])
+};
 
 const DOMAIN_LABELS = new Map([
   ["ai-agent-apps", "AI agent apps"],
@@ -346,6 +362,27 @@ function validateCases(cases, index) {
       for (const expected of testCase[field] ?? []) {
         if (!skillNames.some((name) => matchesExpected(name, [expected]))) {
           issues.push(`${testCase.id}: ${field} fragment does not match an indexed skill: ${expected}`);
+        }
+      }
+    }
+
+    const hasProvenance = CASE_PROVENANCE_FIELDS.some((field) => testCase[field] !== undefined);
+    if (hasProvenance) {
+      for (const field of CASE_PROVENANCE_FIELDS) {
+        if (testCase[field] === undefined || testCase[field] === "") {
+          issues.push(`${testCase.id}: provenance field ${field} is required when any provenance field is present`);
+        }
+      }
+
+      for (const [field, allowedValues] of Object.entries(CASE_PROVENANCE_ENUMS)) {
+        if (testCase[field] !== undefined && !allowedValues.has(testCase[field])) {
+          issues.push(`${testCase.id}: invalid ${field}: ${testCase[field]}`);
+        }
+      }
+
+      for (const field of ["collectedAfterCommit", "frozenBeforeTuningCommit"]) {
+        if (testCase[field] !== undefined && !/^[a-f0-9]{7,40}$/i.test(String(testCase[field]))) {
+          issues.push(`${testCase.id}: ${field} must be a git commit hash`);
         }
       }
     }
@@ -645,6 +682,7 @@ function buildSliceTable(title, summaries) {
 }
 
 function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2SupportMissCases, v2Summary }) {
+  const suiteSizePhrase = cases.length === 18 ? "an 18-case" : `a ${cases.length}-case`;
   if (SUITE.gatesAcceptance) {
     return [
       "## Claim Scope",
@@ -653,11 +691,11 @@ function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2Suppo
     ];
   }
 
-  if (SUITE.role === "fresh-probe") {
+  if (SUITE.role === "fresh-probe-regression") {
     return [
       "## Claim Scope",
       "",
-      `This report measures the current route against a ${cases.length}-case suite that began as a fresh generalization probe. Current results are regression evidence for those prompts: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, support coverage@5 ${formatPercent(v2Summary.supportCoverage)}, support precision@5 ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} support-miss cases. Use the experiment log for the pre-tuning fresh-probe result; this report is not proof that cross-domain routing is solved.`
+      `This report measures the current route against ${suiteSizePhrase} suite that began as a fresh generalization probe. Current results are regression evidence for those prompts: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, ${v2Forbidden}/${cases.length} forbidden primaries, support coverage@5 ${formatPercent(v2Summary.supportCoverage)}, support precision@5 ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} support-miss cases. Use the experiment log for the pre-tuning fresh-probe result; this report is not proof that cross-domain routing is solved.`
     ];
   }
 
@@ -665,6 +703,35 @@ function buildClaimScope({ cases, v2PrimaryHits, v2TopHits, v2Forbidden, v2Suppo
     "## Claim Scope",
     "",
     `This report supports the claim that V2 remains strong on a ${cases.length}-case post-tuning challenge suite: ${v2PrimaryHits}/${cases.length} primary hit@1, ${v2TopHits}/${cases.length} expected primary in top/workflow five, and ${v2Forbidden}/${cases.length} forbidden primaries. Workflow support quality is weaker than primary routing: support coverage@5 is ${formatPercent(v2Summary.supportCoverage)}, support precision@5 is ${formatPercent(v2Summary.supportPrecisionAt5)}, and ${v2SupportMissCases}/${cases.length} cases miss at least one expected support skill.`
+  ];
+}
+
+function buildProvenanceSection(cases) {
+  const withProvenance = cases.filter((testCase) =>
+    CASE_PROVENANCE_FIELDS.some((field) => testCase[field] !== undefined)
+  );
+  if (!withProvenance.length) return [];
+
+  function countsFor(field) {
+    const counts = new Map();
+    for (const testCase of withProvenance) {
+      counts.set(testCase[field], (counts.get(testCase[field]) ?? 0) + 1);
+    }
+    return [...counts]
+      .sort((left, right) => String(left[0]).localeCompare(String(right[0])))
+      .map(([value, count]) => `${value}: ${count}`)
+      .join(", ");
+  }
+
+  return [
+    "## Case Provenance",
+    "",
+    `- Cases with provenance fields: ${withProvenance.length}/${cases.length}.`,
+    `- Source mix: ${countsFor("source")}.`,
+    `- Suite state mix: ${countsFor("suiteState")}.`,
+    `- Promotion status mix: ${countsFor("promotionStatus")}.`,
+    `- Support criticality mix: ${countsFor("supportCriticality")}.`,
+    ""
   ];
 }
 
@@ -686,8 +753,8 @@ function buildMarkdown({
   const qualityVsV1 = v2Summary.outputQualityScore - v1Summary.outputQualityScore;
   const strongClaimPrefix = SUITE.gatesAcceptance
     ? freshness.acceptance.ok ? "SkillWeaver V2 changes" : "SkillWeaver V2 currently reports"
-    : SUITE.role === "fresh-probe"
-      ? "On the fresh generalization probe, SkillWeaver V2 changes"
+    : SUITE.role === "fresh-probe-regression"
+      ? "On the fresh-probe regression suite, SkillWeaver V2 changes"
     : "On the post-tuning challenge suite, SkillWeaver V2 changes";
 
   const lines = [
@@ -729,6 +796,7 @@ function buildMarkdown({
     `- Benchmark cases: ${cases.length}`,
     "",
     ...buildSuiteRoleSection(),
+    ...buildProvenanceSection(cases),
     "## Compared Systems",
     "",
     "- `no-skillweaver`: flat metadata search over name, description, namespace, domains, and tool hints. It does not use triggers, body text, resources, relationship edges, workflow recommendations, or concept nodes.",
@@ -823,7 +891,7 @@ function buildMarkdown({
 
 function buildSuiteRoleSection() {
   if (SUITE.gatesAcceptance) return [];
-  if (SUITE.role === "fresh-probe") {
+  if (SUITE.role === "fresh-probe-regression") {
     return [
       "## Suite Role",
       "",

@@ -80,6 +80,7 @@ By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Us
 - [Skill use gains benchmark](docs/SKILL-USE-GAINS.md)
 - [Post-tuning challenge benchmark](docs/SKILL-USE-HOLDOUT.md)
 - [Fresh-probe regression benchmark](docs/SKILL-USE-FRESH.md)
+- [Support quality roadmap](docs/SUPPORT-QUALITY-ROADMAP.md)
 - [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
 - [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
 - [Corpus snapshot](docs/CORPUS-SNAPSHOT.md)

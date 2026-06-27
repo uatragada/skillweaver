@@ -8,12 +8,27 @@ SkillWeaver should keep V2 routing quality gains without becoming a heavy servic
 
 | Journey | Budget | Current evidence |
 | --- | ---: | --- |
-| Scan local skill corpus | warn over 6s, investigate over 8s | 442 skills scanned in 3.739s |
-| Active benchmark check | warn over 15s | 10.909s for 78 cases |
-| Challenge benchmark check | warn over 10s | 6.575s for 22 cases |
-| Fresh-probe benchmark check | warn over 10s | 6.490s for 18 cases |
+| Scan local skill corpus | warn over 6s, investigate over 8s | 442 skills scanned in 4.010s |
+| Active benchmark check | warn over 15s | 11.072s for 78 cases |
+| Challenge benchmark check | warn over 10s | 6.762s for 22 cases |
+| Fresh-probe benchmark check | warn over 10s | 6.465s for 18 cases |
 | Production build JS bundle | warn over 250 kB raw JS | 211.33 kB raw JS in latest build |
 | Production build CSS bundle | warn over 20 kB raw CSS | 9.69 kB raw CSS in latest build |
+
+## Latest Measurement Snapshot
+
+Measured on commit `945153e` with Node `v24.14.1` and npm `11.11.0`.
+
+| Command | Elapsed | Exit code | Evidence |
+| --- | ---: | ---: | --- |
+| `node server\skill-scanner.js` | 4.010s | 0 | 442 skills, 8 roots |
+| `npm run --silent index:skills` | 4.221s | 0 | 442 skills, 2,000/4,105 skill edges kept, 200/231 concept edges kept |
+| `npm run --silent benchmark:skills:check` | 11.072s | 0 | 78 cases, report fresh |
+| `npm run --silent benchmark:skills:holdout:check` | 6.762s | 0 | 22 cases, report fresh |
+| `npm run --silent benchmark:skills:fresh:check` | 6.465s | 0 | 18 cases, report fresh |
+| `Get-ChildItem dist\assets -File` | n/a | 0 | JS 211,334 bytes; CSS 9,690 bytes |
+
+The API waits for the initial scan before it is ready, and `/api/refresh` runs another scan on demand. Current scan time is inside the scanner budget, so this remains an in-memory scan concern rather than a reason to add persistence or caching infrastructure.
 
 ## No-Bloat Rules
 
@@ -24,19 +39,28 @@ SkillWeaver should keep V2 routing quality gains without becoming a heavy servic
 - Keep graph caps explicit: 2,000 skill relationship edges and 200 concept edges are responsiveness caps, not completeness claims.
 - Treat O(n^2) relationship generation as the main corpus-growth risk. Avoid widening `buildEdges()` unless a measured corpus-growth problem requires it.
 
-## Measurement Commands
+## Read-Only Measurement Commands
 
 ```powershell
 npm test
+npm run index:skills
 npm run benchmark:skills:check
 npm run benchmark:skills:holdout:check
 npm run benchmark:skills:fresh:check
-npm run index:skills
-npm run build
 Measure-Command { node server\skill-scanner.js *> $null }
 Measure-Command { npm run benchmark:skills:check *> $null }
 Measure-Command { npm run benchmark:skills:holdout:check *> $null }
 Measure-Command { npm run benchmark:skills:fresh:check *> $null }
+Get-ChildItem dist\assets -File | Select-Object Name,Length
+```
+
+## Write-Producing Verification Commands
+
+```powershell
+npm run build
+npm run benchmark:skills
+npm run benchmark:skills:holdout
+npm run benchmark:skills:fresh
 ```
 
 ## Current Assessment
