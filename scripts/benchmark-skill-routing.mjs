@@ -1,3 +1,5 @@
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import {
@@ -10,6 +12,12 @@ import {
 const CASES_PATH = resolve("benchmarks/skill-routing-cases.json");
 const REPORT_PATH = resolve("docs/SKILL-USE-GAINS.md");
 const PRE_CONCEPT_COMMIT = "80d31f1";
+const CHECK_MODE = process.argv.includes("--check");
+const INVALIDATING_PATHS = [
+  "benchmarks/skill-routing-cases.json",
+  "server/skill-scanner.js",
+  "scripts/benchmark-skill-routing.mjs"
+];
 
 const SOURCE_TYPE_PRIORITY = {
   user: 5,
@@ -47,6 +55,88 @@ function normalize(value) {
     .replace(/[_-]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function stableJson(value) {
+  if (Array.isArray(value)) return `[${value.map(stableJson).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableJson(value[key])}`).join(",")}}`;
+  }
+  return JSON.stringify(value);
+}
+
+function sha256(value) {
+  return `sha256:${createHash("sha256").update(String(value)).digest("hex")}`;
+}
+
+async function hashFile(path) {
+  return sha256(await readFile(path, "utf8"));
+}
+
+function getGitInfo() {
+  try {
+    const commit = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+    const dirtyPaths = execFileSync("git", ["status", "--short"], { encoding: "utf8" })
+      .split(/\r?\n/)
+      .filter(Boolean)
+      .map((line) => line.slice(3).trim())
+      .sort();
+    return { commit, dirty: dirtyPaths.length > 0, dirtyPaths };
+  } catch {
+    return { commit: null, dirty: null, dirtyPaths: [] };
+  }
+}
+
+function corpusFingerprint(index) {
+  const corpus = index.skills.map((skill) => ({
+    name: skill.name,
+    path: skill.path,
+    sourceType: skill.sourceType,
+    contentHash: skill.contentHash
+  })).sort((left, right) => left.path.localeCompare(right.path));
+  return sha256(stableJson(corpus));
+}
+
+async function buildFreshness({ index, cases, rows, summaries, generatedAt }) {
+  const git = getGitInfo();
+  const inputHashes = {
+    cases: await hashFile(CASES_PATH),
+    scanner: await hashFile(resolve("server/skill-scanner.js")),
+    benchmarkScript: await hashFile(resolve("scripts/benchmark-skill-routing.mjs")),
+    corpus: corpusFingerprint(index)
+  };
+  const invalidatingDirtyPaths = git.dirtyPaths.filter((path) =>
+    INVALIDATING_PATHS.includes(path.replace(/\\/g, "/"))
+  );
+  const acceptance = evaluateAcceptance(summaries);
+  const snapshot = {
+    generatedAt,
+    command: CHECK_MODE ? "npm run benchmark:skills:check" : "npm run benchmark:skills",
+    git,
+    invalidatingDirtyPaths,
+    cases: {
+      count: cases.length,
+      sha256: inputHashes.cases
+    },
+    corpus: {
+      skills: index.skills.length,
+      skillEdges: index.edges.length,
+      concepts: index.concepts?.length ?? 0,
+      conceptEdges: index.conceptEdges?.length ?? 0,
+      roots: index.roots.length,
+      sha256: inputHashes.corpus
+    },
+    inputs: inputHashes,
+    acceptance
+  };
+  snapshot.snapshotFingerprint = sha256(stableJson({
+    cases: snapshot.cases,
+    corpus: snapshot.corpus,
+    inputs: snapshot.inputs,
+    acceptance: snapshot.acceptance,
+    summaries
+  }));
+  return snapshot;
 }
 
 function tokenSet(value) {
@@ -142,6 +232,10 @@ function supportCoverage(names, expectedSupport) {
   return hitCount / expectedSupport.length;
 }
 
+function missingSupport(names, expectedSupport) {
+  return (expectedSupport ?? []).filter((expected) => !names.some((name) => matchesExpected(name, [expected])));
+}
+
 function reciprocalRank(rank) {
   return rank ? 1 / rank : 0;
 }
@@ -165,6 +259,7 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
   const primaryHit = Boolean(primary && !forbiddenPrimary && matchesExpected(primary, testCase.expectedPrimary));
   const hitAt5 = visibleNames.some((name) => matchesExpected(name, testCase.expectedPrimary));
   const coverage = supportCoverage(visibleNames, testCase.expectedSupport ?? []);
+  const supportMisses = missingSupport(visibleNames, testCase.expectedSupport ?? []);
   const rr = reciprocalRank(rank);
 
   return {
@@ -176,6 +271,7 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
     primaryHit,
     hitAt5,
     forbiddenPrimary,
+    supportMisses,
     reciprocalRank: rr,
     supportCoverage: coverage,
     candidatesReviewedToExpected: rank ?? index.skills.length,
@@ -203,6 +299,32 @@ function summarize(evaluations) {
     meanCandidatesToExpected: evaluations.reduce((sum, entry) => sum + entry.candidatesReviewedToExpected, 0) / total,
     medianCandidatesToExpected: reviewed[Math.floor(reviewed.length / 2)] ?? null,
     medianExpectedRank: ranks[Math.floor(ranks.length / 2)] ?? null
+  };
+}
+
+function evaluateAcceptance({ noSkillWeaverSummary, v1Summary, v2Summary }) {
+  const failures = [];
+  if (v2Summary.outputQualityScore <= noSkillWeaverSummary.outputQualityScore) {
+    failures.push("V2 output quality must beat no SkillWeaver.");
+  }
+  if (v2Summary.outputQualityScore <= v1Summary.outputQualityScore) {
+    failures.push("V2 output quality must beat the skill-level baseline.");
+  }
+  if (v2Summary.hitAt5 < noSkillWeaverSummary.hitAt5 || v2Summary.hitAt5 < v1Summary.hitAt5) {
+    failures.push("V2 expected top/workflow-5 retrieval must not regress.");
+  }
+  if (v2Summary.primaryHitAt1 < noSkillWeaverSummary.primaryHitAt1 && v2Summary.supportCoverage <= noSkillWeaverSummary.supportCoverage) {
+    failures.push("V2 primary hit@1 must not drop unless support coverage materially improves.");
+  }
+  if (v2Summary.forbiddenPrimaryRate > 0) {
+    failures.push("V2 forbidden primary rate must stay at 0.");
+  }
+  if (v2Summary.meanCandidatesToExpected > 1.25) {
+    failures.push("V2 mean candidates to expected skill should stay near 1.");
+  }
+  return {
+    ok: failures.length === 0,
+    failures
   };
 }
 
@@ -243,6 +365,16 @@ function formatRank(rank) {
 function formatPrimaryCell(result) {
   const warning = result.forbiddenPrimary ? ` !${result.forbiddenPrimary}` : "";
   return `${result.primary ?? "-"}${warning} / ${formatRank(result.rank)}`;
+}
+
+function extractReportMetadata(report) {
+  const match = /<!-- skillweaver-benchmark-metadata\s*\n([\s\S]*?)\nskillweaver-benchmark-metadata -->/.exec(report);
+  if (!match) return null;
+  try {
+    return JSON.parse(match[1]);
+  } catch {
+    return null;
+  }
 }
 
 function buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary }) {
@@ -306,16 +438,34 @@ function buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary }) {
   ];
 }
 
-function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2Summary, generatedAt }) {
+function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2Summary, generatedAt, freshness }) {
   const summaryRows = buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary });
   const candidateReduction = 1 - (5 / index.skills.length);
   const qualityVsNo = v2Summary.outputQualityScore - noSkillWeaverSummary.outputQualityScore;
   const qualityVsV1 = v2Summary.outputQualityScore - v1Summary.outputQualityScore;
+  const strongClaimPrefix = freshness.acceptance.ok ? "SkillWeaver V2 changes" : "SkillWeaver V2 currently reports";
 
   const lines = [
     "# SkillWeaver V2 Benchmark",
     "",
-    `Generated: ${new Date(generatedAt).toLocaleString()}`,
+    `Generated: ${new Date(generatedAt).toISOString()}`,
+    "",
+    "<!-- skillweaver-benchmark-metadata",
+    JSON.stringify(freshness),
+    "skillweaver-benchmark-metadata -->",
+    "",
+    "## Freshness",
+    "",
+    `- Command: \`${freshness.command}\``,
+    `- Git commit at generation: \`${freshness.git.commit ?? "unknown"}\``,
+    `- Git dirty: ${freshness.git.dirty ? "yes" : "no"}`,
+    `- Invalidating dirty paths: ${freshness.invalidatingDirtyPaths.length ? freshness.invalidatingDirtyPaths.map((path) => `\`${path}\``).join(", ") : "none"}`,
+    `- Case hash: \`${freshness.cases.sha256}\``,
+    `- Scanner hash: \`${freshness.inputs.scanner}\``,
+    `- Benchmark script hash: \`${freshness.inputs.benchmarkScript}\``,
+    `- Corpus hash: \`${freshness.corpus.sha256}\``,
+    `- Snapshot fingerprint: \`${freshness.snapshotFingerprint}\``,
+    `- Acceptance: ${freshness.acceptance.ok ? "pass" : `fail: ${freshness.acceptance.failures.join("; ")}`}`,
     "",
     "## Corpus",
     "",
@@ -358,11 +508,32 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
     );
   }
 
+  const supportMissRows = rows.filter((row) => row.v2.supportMisses.length);
+  lines.push(
+    "",
+    "## V2 Support Misses",
+    "",
+    supportMissRows.length
+      ? "These rows have a correct expected primary somewhere in V2's workflow, but not every expected support skill appears in the top/workflow five."
+      : "No expected support misses in the current V2 workflow.",
+    ""
+  );
+
+  if (supportMissRows.length) {
+    lines.push(
+      "| Case | Missing expected support | V2 top/workflow 5 |",
+      "| --- | --- | --- |"
+    );
+    for (const row of supportMissRows) {
+      lines.push(`| ${row.id} | ${row.v2.supportMisses.join(", ")} | ${row.v2.topNames.join(" -> ")} |`);
+    }
+  }
+
   lines.push(
     "",
     "## Interpretation",
     "",
-    `SkillWeaver V2 changes the composite output-quality score by ${formatDelta(qualityVsNo, " points")} versus no SkillWeaver and ${formatDelta(qualityVsV1, " points")} versus the skill-level baseline.`,
+    `${strongClaimPrefix} the composite output-quality score by ${formatDelta(qualityVsNo, " points")} versus no SkillWeaver and ${formatDelta(qualityVsV1, " points")} versus the skill-level baseline.`,
     `V2 changes primary selection by ${formatDelta((v2Summary.primaryHitAt1 - noSkillWeaverSummary.primaryHitAt1) * 100, " percentage points")} versus no SkillWeaver and ${formatDelta((v2Summary.primaryHitAt1 - v1Summary.primaryHitAt1) * 100, " percentage points")} versus the skill-level baseline.`,
     `V2 changes expected-skill top/workflow-5 retrieval by ${formatDelta((v2Summary.hitAt5 - noSkillWeaverSummary.hitAt5) * 100, " percentage points")} versus no SkillWeaver and ${formatDelta((v2Summary.hitAt5 - v1Summary.hitAt5) * 100, " percentage points")} versus the skill-level baseline.`,
     "The V2 score reflects a concept-aided skill-loading experience, not an LLM reranker; it is fully deterministic and derived from the local skill corpus."
@@ -419,6 +590,14 @@ async function main() {
   const v1Summary = summarize(rows.map((row) => row.v1));
   const v2Summary = summarize(rows.map((row) => row.v2));
   const generatedAt = Date.now();
+  const summaries = { noSkillWeaverSummary, v1Summary, v2Summary };
+  const freshness = await buildFreshness({
+    index,
+    cases,
+    rows,
+    summaries,
+    generatedAt
+  });
   const report = buildMarkdown({
     index,
     cases,
@@ -426,11 +605,40 @@ async function main() {
     noSkillWeaverSummary,
     v1Summary,
     v2Summary,
-    generatedAt
+    generatedAt,
+    freshness
   });
 
-  await mkdir(dirname(REPORT_PATH), { recursive: true });
-  await writeFile(REPORT_PATH, report);
+  let reportFresh = null;
+  const mismatches = [];
+  if (CHECK_MODE) {
+    let currentReport = "";
+    try {
+      currentReport = await readFile(REPORT_PATH, "utf8");
+    } catch {
+      console.error(`Benchmark report is missing: ${REPORT_PATH}`);
+      process.exitCode = 1;
+    }
+
+    if (!process.exitCode) {
+      const metadata = extractReportMetadata(currentReport);
+      if (!metadata) {
+        mismatches.push("missing_metadata");
+      } else {
+        if (metadata.snapshotFingerprint !== freshness.snapshotFingerprint) mismatches.push("snapshot_fingerprint");
+        if (metadata.acceptance?.ok !== true) mismatches.push("acceptance");
+      }
+      if (freshness.invalidatingDirtyPaths.length) mismatches.push("dirty_inputs");
+      reportFresh = mismatches.length === 0;
+      if (!reportFresh) {
+        console.error(`Benchmark report is stale (${mismatches.join(", ")}). Run \`npm run benchmark:skills\` to regenerate docs/SKILL-USE-GAINS.md.`);
+        process.exitCode = 1;
+      }
+    }
+  } else {
+    await mkdir(dirname(REPORT_PATH), { recursive: true });
+    await writeFile(REPORT_PATH, report);
+  }
 
   const output = {
     generatedAt,
@@ -462,7 +670,15 @@ async function main() {
         meanExpectedRankDeltaLowerIsBetter: v2Summary.meanCandidatesToExpected - v1Summary.meanCandidatesToExpected
       }
     },
-    reportPath: REPORT_PATH
+    reportPath: REPORT_PATH,
+    checkMode: CHECK_MODE,
+    status: CHECK_MODE ? reportFresh ? "fresh" : "stale" : "written",
+    ok: CHECK_MODE ? Boolean(reportFresh) : freshness.acceptance.ok,
+    reportFresh,
+    snapshotFingerprint: freshness.snapshotFingerprint,
+    inputsFingerprint: sha256(stableJson(freshness.inputs)),
+    freshness,
+    mismatches
   };
 
   console.log(JSON.stringify(output, null, 2));

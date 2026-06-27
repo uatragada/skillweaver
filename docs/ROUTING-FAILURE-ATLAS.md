@@ -75,15 +75,22 @@ Use this shape for new entries:
 
 ## Current Residual Weak Spots
 
-### Support Quality Is Still Uneven
+### No Open Benchmark Misses
 
-Examples in the current report:
+The current 49-case benchmark has:
 
-- `python-service` keeps backend service skills high, but support skills like `dev-testing-qa` and `monitoring-setup-guide` are not consistently top 5.
-- `three-game` gets `game-playtest` into the workflow, but asset-pipeline support can still be displaced by adjacent visualization skills.
-- `containers-kubernetes` now includes monitoring and DevOps support, but capacity/planning helpers can still rank high.
+- 100.0% V2 primary hit@1.
+- 100.0% V2 expected primary top/workflow-5 retrieval.
+- 100.0% V2 support coverage@5.
+- 0.0% V2 forbidden primary rate.
 
-Likely fix type: sharper concept membership and role assignments, not broad score boosts.
+Current status: fixed for the benchmark, fragile outside the covered query set.
+
+### Benchmark Breadth And Overfit Risk
+
+The benchmark now covers 49 cases across frontend, browser QA, GitHub, Figma, data, security, deployment, documents, Hugging Face, email, games, repo operations, marketing, product, agent apps, backend, database/data engineering, observability, infrastructure, and thin-domain aliases.
+
+Likely next fix type: add holdout cases from future real task logs before tuning more boosts.
 
 ### Recently Covered Thin Domains
 

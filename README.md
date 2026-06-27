@@ -39,6 +39,7 @@ npm run dev
 npm test
 npm run index:skills
 npm run benchmark:skills
+npm run benchmark:skills:check
 npm run build
 npm start
 ```
@@ -86,4 +87,5 @@ Run the reproducible routing benchmark with:
 npm run benchmark:skills
 ```
 
-The benchmark compares SkillWeaver against a flat metadata-search baseline and writes [docs/SKILL-USE-GAINS.md](docs/SKILL-USE-GAINS.md).
+The benchmark compares V2 against a flat no-SkillWeaver metadata-search baseline and the V1 skill-level SkillWeaver route, then writes [docs/SKILL-USE-GAINS.md](docs/SKILL-USE-GAINS.md).
+Use `npm run benchmark:skills:check` to fail fast when the checked-in benchmark report is stale, generated from different scanner/case/corpus inputs, or generated while benchmark-invalidating files are dirty.

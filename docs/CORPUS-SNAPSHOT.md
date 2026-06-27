@@ -13,6 +13,30 @@ Generated from the local SkillWeaver scanner on June 27, 2026.
 - Skill edge cap reached: yes.
 - Concept edge cap reached: yes.
 
+## Relationship Caps
+
+SkillWeaver caps relationship output for responsiveness, but the scanner now reports the candidate pool behind each cap.
+
+| Graph | Kept | Candidates | Dropped | Dropped types |
+| --- | ---: | ---: | ---: | --- |
+| Skill relationships | 2,000 | 4,105 | 2,105 | `mentions`: 2,105 |
+| Concept relationships | 200 | 231 | 31 | `shared_concept_evidence`: 31 |
+
+Kept skill edge types:
+
+- `duplicates_name`: 101.
+- `same_namespace`: 147.
+- `shared_tool`: 142.
+- `shared_domain`: 53.
+- `mentions`: 1,557.
+
+Kept concept edge types:
+
+- `curated_concept_link`: 37.
+- `shared_concept_evidence`: 163.
+
+All 37 curated concept links are preserved before shared-evidence edges are capped.
+
 ## Indexed Roots
 
 - `C:\Users\Uday\.codex\skills`
@@ -74,13 +98,13 @@ Generated from the local SkillWeaver scanner on June 27, 2026.
 | `cloudflare-workers` | 18 | 1 | primary:5, supporting:13 |
 | `data-dashboarding` | 18 | 4 | primary:3, supporting:15 |
 | `database-data-engineering` | 18 | 2 | primary:5, verification:2, supporting:11 |
-| `deployment-release` | 18 | 1 | primary:4, supporting:14 |
+| `deployment-release` | 18 | 1 | primary:6, verification:1, supporting:11 |
 | `documents-pdf` | 18 | 2 | primary:6, supporting:12 |
 | `email-triage` | 18 | 1 | primary:3, supporting:5, reference:10 |
 | `figma-handoff` | 18 | 2 | gateway:1, primary:4, verification:2, supporting:11 |
-| `frontend-implementation` | 18 | 4 | gateway:1, primary:2, verification:2, supporting:13 |
+| `frontend-implementation` | 18 | 4 | gateway:1, primary:2, verification:3, supporting:12 |
 | `game-development` | 18 | 3 | primary:6, verification:1, supporting:11 |
-| `github-pr-repair` | 18 | 2 | primary:2, supporting:16 |
+| `github-pr-repair` | 18 | 2 | primary:2, verification:1, supporting:15 |
 | `huggingface-ml` | 18 | 2 | primary:5, supporting:13 |
 | `infrastructure-platforms` | 18 | 2 | primary:4, verification:2, supporting:12 |
 | `marketing-growth` | 18 | 4 | primary:7, supporting:11 |
@@ -105,3 +129,4 @@ Generated from the local SkillWeaver scanner on June 27, 2026.
 
 Older docs referenced 439 skills and 18 concepts. Current V2 work indexes 442 skills and 22 concepts after adding backend, database/data engineering, observability/reliability, and infrastructure/platform concepts.
 The June 27, 2026 breadth pass kept 22 concepts but expanded coverage from 39 to 49 benchmark cases and added live-name aliases for LaTeX, Notion, mobile/desktop, speech, competitive intelligence, and RacingSim skills.
+The June 27, 2026 support-precision pass kept the same 22 concepts and 49 cases, but raised V2 primary hit@1 and support coverage to 100.0% on the benchmark by tuning concept role membership and narrow intent guards.

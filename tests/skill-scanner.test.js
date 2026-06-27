@@ -504,3 +504,115 @@ test("concept workflow routes thin-domain aliases without new concept bloat", ()
     "racingsim-ai-ml"
   );
 });
+
+test("concept workflow keeps deployment primary ahead of Vercel support skills", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "vercel-api",
+      name: "vercel-api",
+      description: "Deploy Vercel projects and inspect deployment build logs.",
+      domains: ["operations", "frontend"],
+      tools: ["Vercel"],
+      triggers: ["vercel deploy build logs"]
+    }),
+    makeSkill({
+      id: "env-vars",
+      name: "env-vars",
+      description: "Manage Vercel environment variables for deployments.",
+      domains: ["operations"],
+      tools: ["Vercel"],
+      triggers: ["environment variables"]
+    }),
+    makeSkill({
+      id: "agent-browser-verify",
+      name: "agent-browser-verify",
+      description: "Verify deployed Vercel apps in the browser.",
+      domains: ["frontend", "operations"],
+      tools: ["Vercel", "Playwright"],
+      triggers: ["browser verify deployment"]
+    })
+  ]);
+
+  const ranked = rankConceptWorkflowSkills(index, "Deploy this project to Vercel and inspect build logs");
+  assert.equal(ranked[0].name, "vercel-api");
+  assert.ok(ranked.slice(0, 5).some((skill) => skill.name === "env-vars"));
+  assert.ok(ranked.slice(0, 5).some((skill) => skill.name === "agent-browser-verify"));
+});
+
+test("concept workflow keeps Python service primary while surfacing test and ops support", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "dev-python-services",
+      name: "dev-python-services",
+      description: "Build Python backend services with APIs and tests.",
+      domains: ["backend"],
+      tools: ["Python"],
+      triggers: ["python service"]
+    }),
+    makeSkill({
+      id: "dev-node-typescript-services",
+      name: "dev-node-typescript-services",
+      description: "Build Node and TypeScript backend services.",
+      domains: ["backend"],
+      tools: ["Node"],
+      triggers: ["node service"]
+    }),
+    makeSkill({
+      id: "dev-testing-qa",
+      name: "dev-testing-qa",
+      description: "Design backend test plans and verification.",
+      domains: ["backend"],
+      tools: ["Node"],
+      triggers: ["tests verification"]
+    }),
+    makeSkill({
+      id: "monitoring-setup-guide",
+      name: "monitoring-setup-guide",
+      description: "Set up service monitoring and operational readiness.",
+      domains: ["operations"],
+      tools: ["Node"],
+      triggers: ["monitoring operational readiness"]
+    })
+  ]);
+
+  const ranked = rankConceptWorkflowSkills(index, "Build a Python backend service with tests and operational readiness");
+  const topFive = ranked.slice(0, 5).map((skill) => skill.name);
+  assert.equal(topFive[0], "dev-python-services");
+  assert.ok(topFive.includes("dev-testing-qa"));
+  assert.ok(topFive.includes("monitoring-setup-guide"));
+});
+
+test("summarizeIndex exposes graph cap metadata", () => {
+  const edges = [
+    { sourceId: "a", targetId: "b", type: "mentions", label: "a", weight: 0.2, reason: "test" }
+  ];
+  edges.candidateCount = 3;
+  edges.droppedCount = 2;
+  edges.droppedTypeCounts = { mentions: 2 };
+  const conceptEdges = [
+    { sourceId: "frontend", targetId: "deployment", type: "curated_concept_link", label: "related", weight: 0.9, reason: "test" }
+  ];
+  conceptEdges.candidateCount = 2;
+  conceptEdges.droppedCount = 1;
+  conceptEdges.droppedTypeCounts = { shared_concept_evidence: 1 };
+
+  const summary = summarizeIndex({
+    scannedAt: 0,
+    roots: ["C:/skills"],
+    skills: [],
+    edges,
+    concepts: [],
+    conceptEdges
+  });
+
+  assert.equal(summary.edgeLimit, 2000);
+  assert.equal(summary.edgeCandidateCount, 3);
+  assert.equal(summary.edgeDroppedCount, 2);
+  assert.deepEqual(summary.edgeDroppedTypeCounts, { mentions: 2 });
+  assert.equal(summary.edgeTruncated, true);
+  assert.equal(summary.conceptEdgeLimit, 200);
+  assert.equal(summary.conceptEdgeCandidateCount, 2);
+  assert.equal(summary.conceptEdgeDroppedCount, 1);
+  assert.deepEqual(summary.conceptEdgeDroppedTypeCounts, { shared_concept_evidence: 1 });
+  assert.equal(summary.conceptEdgeTruncated, true);
+});

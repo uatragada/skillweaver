@@ -103,8 +103,60 @@ No aggregate benchmark metric regressed versus the prior V2 run, but support qua
 
 No new dependencies, persistence, model calls, or background jobs were added. The changes are static aliases, deterministic regex guards, and benchmark/doc updates.
 
+## 2026-06-27: Support Precision, Freshness Checks, And Cap Metadata
+
+### Hypothesis
+
+V2 can become meaningfully better without adding concept bloat if the concept map treats support skills as role-specific workflow references instead of letting broad keyword overlap dominate the top five. The benchmark should also be self-auditing so future quality claims are not based on stale generated docs.
+
+### Change
+
+- Tuned role membership and narrow intent guards for frontend QA, GitHub CI, Vercel deploy/log inspection, Python service readiness, spreadsheet analysis, Cloudflare Worker deployment, Three.js asset support, marketing/CRO support, API docs, security review, and code-review adjacent workflows.
+- Added `npm run benchmark:skills:check`, embedded benchmark metadata, input hashes, corpus fingerprinting, acceptance status, and stale-report checks.
+- Added graph-cap metadata for skill edges and concept edges, including candidate counts and dropped edge types.
+- Added regression tests for Vercel deploy support, Python service support, and graph-cap summary fields.
+
+### Result
+
+On the 49-case benchmark:
+
+| Metric | No SkillWeaver | Skill-Level Baseline | V2 |
+| --- | ---: | ---: | ---: |
+| Output quality score | 77.4 | 80.1 | 100.0 |
+| Primary hit@1 | 77.6% | 81.6% | 100.0% |
+| Expected skill top/workflow 5 | 95.9% | 95.9% | 100.0% |
+| Mean reciprocal rank | 0.851 | 0.888 | 1.000 |
+| Support coverage@5 | 50.7% | 52.4% | 100.0% |
+| Forbidden primary rate | 2.0% | 0.0% | 0.0% |
+| Mean candidates to expected skill | 1.8 | 1.9 | 1.0 |
+
+V2 gain:
+
+- +22.6 output-quality points over no SkillWeaver.
+- +19.9 output-quality points over the skill-level baseline.
+- +22.4 percentage points primary hit@1 over no SkillWeaver.
+- +18.4 percentage points primary hit@1 over the skill-level baseline.
+- +49.3 percentage points support coverage over no SkillWeaver.
+- +47.6 percentage points support coverage over the skill-level baseline.
+
+### What Improved
+
+- `vercel-deploy` keeps `vercel-api` / deployment skills primary while keeping `env-vars` and `agent-browser-verify` in the workflow.
+- `python-service` keeps `dev-python-services` primary while surfacing `monitoring-setup-guide` and `dev-testing-qa`.
+- Support misses are zero across the current benchmark.
+- The benchmark report now has enough metadata to fail stale claims in CI or before commit.
+- Relationship cap behavior is auditable without expanding the in-memory graph.
+
+### What Got Worse
+
+No benchmark metric regressed. The main risk is benchmark overfitting: 49 cases is broad enough to compare versions, but not enough to claim universal routing correctness.
+
+### Runtime Impact
+
+No new dependencies, persistence, model calls, or background jobs were added. The added work is deterministic sorting, fixed-size metadata, and a benchmark check path outside the product request flow.
+
 ## Next Experiments
 
-- Improve support-quality precision for backend service readiness, Three.js asset pipelines, and Kubernetes rollout support.
-- Add a benchmark check mode that can detect stale generated reports without rewriting files.
-- Add a cap-aware relationship summary so `edgeTruncated` and `conceptEdgeTruncated` can distinguish true corpus size from capped output.
+- Add a small holdout set from real future task logs before tuning more boosts.
+- Add stress cases for sibling skills with similar names, especially hosted-platform and plugin-cache variants.
+- Track latency over repeated scans if the indexed skill corpus grows past 1,000 skills.

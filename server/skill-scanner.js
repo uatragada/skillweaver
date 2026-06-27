@@ -55,8 +55,8 @@ const CONCEPT_RULES = [
     tools: ["Node", "Playwright", "Figma", "Vercel"],
     gatewaySkillNames: ["build-web-apps:frontend-app-builder", "frontend-app-builder"],
     primarySkillNames: ["dev-frontend-react-next", "build-web-apps:react-best-practices", "dev-mobile-desktop"],
-    supportingSkillNames: ["build-web-apps:shadcn", "dev-frontend-accessibility-css", "premium-web-design", "design-qa", "winui-app"],
-    verificationSkillNames: ["build-web-apps:frontend-testing-debugging", "playwright", "screenshot"],
+    supportingSkillNames: ["build-web-apps:shadcn", "dev-frontend-accessibility-css", "premium-web-design", "design-qa", "winui-app", "launch-readiness", "dev-release-productization"],
+    verificationSkillNames: ["build-web-apps:frontend-testing-debugging", "playwright", "playwright-interactive", "screenshot"],
     relatedConceptIds: ["figma-handoff", "browser-verification", "deployment-release"]
   },
   {
@@ -106,8 +106,8 @@ const CONCEPT_RULES = [
     domains: ["github", "operations"],
     tools: ["GitHub", "Node"],
     primarySkillNames: ["gh-fix-ci", "github:gh-fix-ci", "gh-address-comments", "github:gh-address-comments", "github:github"],
-    supportingSkillNames: ["coderabbit:code-review", "code-review-checklist", "changelog-generator", "dev-git-github-collaboration"],
-    verificationSkillNames: ["codex-security:security-diff-scan"],
+    supportingSkillNames: ["coderabbit:code-review", "code-review-checklist", "changelog-generator", "dev-git-github-collaboration", "dev-testing-qa"],
+    verificationSkillNames: ["codex-security:security-diff-scan", "dev-testing-qa"],
     relatedConceptIds: ["repo-operations", "deployment-release", "security-review"]
   },
   {
@@ -129,9 +129,9 @@ const CONCEPT_RULES = [
     triggers: ["deploy app", "release readiness", "vercel", "cloudflare", "netlify", "render"],
     domains: ["operations", "frontend", "backend"],
     tools: ["Vercel", "Cloudflare", "GitHub", "Node"],
-    primarySkillNames: ["vercel-deploy", "vercel:bootstrap", "cloudflare-deploy", "cloudflare:wrangler", "netlify-deploy", "render-deploy"],
-    supportingSkillNames: ["launch-readiness", "dev-release-productization", "cicd-playbook", "monitoring-setup-guide"],
-    verificationSkillNames: ["vercel:agent-browser-verify", "browser-verification"],
+    primarySkillNames: ["vercel-deploy", "vercel:bootstrap", "vercel-api", "deployments-cicd", "cloudflare-deploy", "cloudflare:wrangler", "netlify-deploy", "render-deploy"],
+    supportingSkillNames: ["launch-readiness", "dev-release-productization", "cicd-playbook", "monitoring-setup-guide", "env-vars"],
+    verificationSkillNames: ["vercel:agent-browser-verify", "agent-browser-verify", "browser-verification"],
     relatedConceptIds: ["frontend-implementation", "browser-verification", "github-pr-repair"]
   },
   {
@@ -244,7 +244,7 @@ const CONCEPT_RULES = [
     domains: ["creative", "data", "product"],
     tools: ["Node"],
     primarySkillNames: ["marketing-strategy-and-growth", "seo-and-organic-growth", "analytics-cro-and-reporting", "creative-production", "creative-offer", "creative-ads-explorer", "competitive-intelligence-monitor"],
-    supportingSkillNames: ["competitive-intelligence-monitor", "business-strategy-and-research", "industry-playbooks", "creative-positioning"],
+    supportingSkillNames: ["competitive-intelligence-monitor", "business-strategy-and-research", "industry-playbooks", "creative-positioning", "kpi-reporting", "creative-shot"],
     relatedConceptIds: ["data-dashboarding", "product-planning"]
   },
   {
@@ -255,7 +255,7 @@ const CONCEPT_RULES = [
     domains: ["backend", "operations", "documents"],
     tools: ["Node", "Python", "OpenAI"],
     primarySkillNames: ["dev-backend-api-design", "dev-node-typescript-services", "dev-python-services", "dev-java-dotnet-services", "aspnet-core"],
-    supportingSkillNames: ["api-versioning-strategy", "api-docs-writer", "technical-spec-template", "system-design-interview"],
+    supportingSkillNames: ["api-versioning-strategy", "api-docs-writer", "technical-spec-template", "system-design-interview", "monitoring-setup-guide"],
     verificationSkillNames: ["dev-testing-qa", "load-testing-plan", "monitoring-setup-guide"],
     relatedConceptIds: ["database-data-engineering", "observability-reliability", "repo-operations"]
   },
@@ -372,6 +372,19 @@ const SOURCE_TYPE_PRIORITY = {
   runtime: 2,
   "legacy-plugin-cache": 1,
   external: 0
+};
+
+const EDGE_TYPE_PRIORITY = {
+  duplicates_name: 6,
+  same_namespace: 5,
+  shared_tool: 4,
+  shared_domain: 3,
+  mentions: 2
+};
+
+const CONCEPT_EDGE_TYPE_PRIORITY = {
+  curated_concept_link: 3,
+  shared_concept_evidence: 2
 };
 
 function splitEnvList(value) {
@@ -734,6 +747,22 @@ function createEdge(sourceId, targetId, type, label, weight, reason) {
   return { sourceId, targetId, type, label, weight, reason };
 }
 
+function compareEdges(left, right) {
+  return right.weight - left.weight
+    || (EDGE_TYPE_PRIORITY[right.type] ?? 0) - (EDGE_TYPE_PRIORITY[left.type] ?? 0)
+    || left.sourceId.localeCompare(right.sourceId)
+    || left.targetId.localeCompare(right.targetId)
+    || left.type.localeCompare(right.type)
+    || left.label.localeCompare(right.label);
+}
+
+function attachCapMetadata(items, kept, limit) {
+  kept.candidateCount = items.length;
+  kept.droppedCount = Math.max(0, items.length - kept.length);
+  kept.droppedTypeCounts = countBy(items.slice(limit), (item) => item.type);
+  return kept;
+}
+
 function buildEdges(skills) {
   const edges = [];
   const byNamespace = new Map();
@@ -790,14 +819,15 @@ function buildEdges(skills) {
   }
 
   const seen = new Set();
-  return edges
+  const deduped = edges
     .filter((edge) => {
       const key = [edge.sourceId, edge.targetId].sort().join("|") + `|${edge.type}`;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
     })
-    .slice(0, SKILL_EDGE_LIMIT);
+    .sort(compareEdges);
+  return attachCapMetadata(deduped, deduped.slice(0, SKILL_EDGE_LIMIT), SKILL_EDGE_LIMIT);
 }
 
 function neighborPairs(group, limit) {
@@ -1016,15 +1046,23 @@ function buildConceptEdges(concepts) {
   }
 
   const seen = new Set();
-  return edges
+  const deduped = edges
     .filter((edge) => {
       const key = [edge.sourceId, edge.targetId].sort().join("|");
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
     })
-    .sort((left, right) => right.weight - left.weight || left.sourceId.localeCompare(right.sourceId))
-    .slice(0, CONCEPT_EDGE_LIMIT);
+    .sort(compareConceptEdges);
+  return attachCapMetadata(deduped, deduped.slice(0, CONCEPT_EDGE_LIMIT), CONCEPT_EDGE_LIMIT);
+}
+
+function compareConceptEdges(left, right) {
+  return (CONCEPT_EDGE_TYPE_PRIORITY[right.type] ?? 0) - (CONCEPT_EDGE_TYPE_PRIORITY[left.type] ?? 0)
+    || right.weight - left.weight
+    || left.sourceId.localeCompare(right.sourceId)
+    || left.targetId.localeCompare(right.targetId)
+    || left.type.localeCompare(right.type);
 }
 
 function buildConceptMap(skills) {
@@ -1317,6 +1355,9 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("build dashboard")) boost += 520;
     if (["data visualization", "visualize data", "kpi reporting"].some((term) => name.includes(term))) boost += 260;
     if (name.includes("analyze data quality") && !/\b(audit|quality|missing|suspicious)\b/.test(normalizedQuery)) boost -= 360;
+  } else if (/\bfrontend dashboard\b|\breact dashboard\b|\bpolished frontend dashboard\b/.test(normalizedQuery)) {
+    if (name.includes("frontend app builder")) boost += 560;
+    if (name.includes("frontend testing debugging")) boost += /\bbrowser qa\b|\bverify\b|\btesting\b/.test(normalizedQuery) ? 160 : 80;
   } else if (negatedDataOutputIntent && (dataOutputSkill || dataNamedSkill)) {
     boost -= 520;
   }
@@ -1332,6 +1373,7 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   if (/\bchrome\b/.test(normalizedQuery)) {
     if (name.includes("control chrome")) boost += 420;
     if (name.includes("control in app browser")) boost -= 160;
+    if (/\binspect\b|\binteractions?\b|\bcontrol\b/.test(normalizedQuery) && name.includes("playwright interactive")) boost += 260;
   }
 
   const negatedSecurityScanIntent = hasNegatedIntent(normalizedQuery, ["security scan", "scan", "vulnerability", "vulnerabilities"]);
@@ -1354,19 +1396,22 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   }
 
   if (/\btests?\b|\bqa\b|\bverify\b|\bverification\b/.test(normalizedQuery)) {
-    if (["dev testing qa", "game playtest", "playwright", "frontend testing debugging"].some((term) => name.includes(term))) boost += 90;
+    if (["dev testing qa", "game playtest", "playwright", "frontend testing debugging"].some((term) => name.includes(term))) boost += 150;
   }
 
   if (/\bmonitoring\b|\boperational\b|\breadiness\b|\bslo\b/.test(normalizedQuery)) {
-    if (["monitoring setup guide", "dev observability sre", "slo error budget"].some((term) => name.includes(term))) boost += 110;
+    if (["monitoring setup guide", "dev observability sre", "slo error budget"].some((term) => name.includes(term))) boost += 180;
   }
 
   if (/\bcanvas\b|\bwebgl\b|\basset\b|\brender/.test(normalizedQuery)) {
-    if (["game playtest", "web 3d asset pipeline", "three webgl game"].some((term) => name.includes(term))) boost += 100;
+    if (["game playtest", "web 3d asset pipeline", "three webgl game"].some((term) => name.includes(term))) boost += 220;
+    if (/\bgame\b|\bscene\b/.test(normalizedQuery) && name.includes("web 3d asset pipeline")) boost += 260;
+    if (/\bgame\b|\bscene\b/.test(normalizedQuery) && name.includes("data visualization")) boost -= 220;
   }
 
   if (/\bkubernetes\b|\bcontainer\b|\bdevops\b/.test(normalizedQuery)) {
     if (["dev containers kubernetes", "dev devops ci cd", "monitoring setup guide"].some((term) => name.includes(term))) boost += 100;
+    if (name.includes("capacity planning") && !/\bcapacity\b|\bload\b|\bscale\b|\bforecast\b/.test(normalizedQuery)) boost -= 220;
   }
 
   if (/\bnotion\b|\bworkspace knowledge\b|\bknowledge base\b|\bdecision log\b/.test(normalizedQuery)) {
@@ -1385,7 +1430,7 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("dev mobile desktop")) boost += 460;
     if (name.includes("winui app")) boost += /\bwinui\b/.test(normalizedQuery) ? 220 : 120;
     if (/\bapp store\b|\breadiness\b|\bpackaging\b|\brelease\b/.test(normalizedQuery)
-      && ["launch readiness", "dev release productization"].some((term) => name.includes(term))) boost += 140;
+      && ["launch readiness", "dev release productization"].some((term) => name.includes(term))) boost += 360;
   }
 
   if (/\bspeech\b|\baudio\b|\btranscrib|\btext to speech\b|\bspeech to text\b|\btts\b|\bvoice\b|\bvoiceover\b|\bwhisper\b|\bmicrophone\b|\bsilence\b/.test(normalizedQuery)) {
@@ -1402,6 +1447,83 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
 
   if (/\bcompetitive intelligence\b|\bcompetitor positioning\b|\bcompetitor\b/.test(normalizedQuery)) {
     if (name.includes("competitive intelligence monitor")) boost += 420;
+  }
+
+  if (/\bconsole errors?\b|\bresponsive\b|\bui regression\b|\bdebug\b/.test(normalizedQuery)) {
+    if (["playwright", "playwright interactive", "frontend testing debugging"].some((term) => name.includes(term))) boost += 140;
+  }
+
+  if (/\bgithub actions?\b|\bci\b|\bpull request\b|\bpr\b|\bbranch\b|\breview comments?\b/.test(normalizedQuery)) {
+    if (name.includes("gh address comments")) boost += /\bcomments?\b/.test(normalizedQuery) ? 280 : 120;
+    if (name.includes("gh fix ci")) boost += /\bci\b|\bgithub actions?\b/.test(normalizedQuery) ? 280 : 140;
+    if (/\btests?\b|\bci\b|\bgithub actions?\b/.test(normalizedQuery) && name.includes("dev testing qa")) boost += 180;
+  }
+
+  if (/\bfigma\b/.test(normalizedQuery)) {
+    if (name.includes("figma use")) boost += 180;
+  }
+
+  if (/\bdata quality\b|\bquality checks?\b|\bsuspicious\b|\bmissing\b|\bspreadsheet\b|\bexcel\b|\bworkbook\b|\bdata pipeline\b|\bownership\b/.test(normalizedQuery)) {
+    if (name.includes("data analysis standard")) boost += 280;
+    if (/\bexcel\b|\bworkbook\b|\bspreadsheet\b/.test(normalizedQuery) && name === "spreadsheets") boost += 540;
+  }
+
+  if (/\bsecurity vulnerabilities\b|\bvulnerability\b|\bsecurity\b|\brisks?\b/.test(normalizedQuery)) {
+    if (name.includes("dev security engineering")) boost += 280;
+    if (name.includes("security best practices")) boost += /\brisks?\b|\bterraform\b|\binfrastructure\b/.test(normalizedQuery) ? 260 : 140;
+  }
+
+  if (/\bvercel\b|\bdeploy\b|\bbuild logs?\b|\benv\b|\benvironment\b/.test(normalizedQuery)) {
+    if (["agent browser verify", "env vars"].some((term) => name.includes(term))) boost += 260;
+    if (/\bvercel\b/.test(normalizedQuery) && /\bdeploy\b|\bbuild logs?\b/.test(normalizedQuery)
+      && ["vercel api", "deployments cicd", "vercel deploy"].some((term) => name.includes(term))) boost += 560;
+    if (/\bvercel\b/.test(normalizedQuery) && /\binspect\b|\bbuild logs?\b/.test(normalizedQuery)
+      && ["agent browser verify", "env vars"].some((term) => name.includes(term))) boost += 420;
+    if (/\bvercel\b/.test(normalizedQuery) && /\binspect\b|\bbuild logs?\b/.test(normalizedQuery)
+      && ["vercel cli", "vercel services"].some((term) => name.includes(term))) boost -= 160;
+  }
+
+  if (/\bcloudflare worker\b|\bwrangler\b/.test(normalizedQuery)) {
+    if (name.includes("wrangler")) boost += 560;
+    if (name.includes("workers best practices")) boost += 420;
+    if (/\bmcp\b|\bagent\b/.test(name) && !/\bmcp\b|\bagent\b/.test(normalizedQuery)) boost -= 260;
+  }
+
+  if (/\bplaytest|\bplaytesting\b|\bbrowser game\b|\bphaser\b/.test(normalizedQuery)) {
+    if (name.includes("game playtest")) boost += 260;
+  }
+
+  if (/\bconversion\b|\bcro\b|\bmarketing funnel\b|\breporting\b/.test(normalizedQuery)) {
+    if (name.includes("kpi reporting")) boost += 220;
+  }
+
+  if (/\boffer angles?\b|\bproduct shot\b|\bcampaign\b|\bad concepts?\b/.test(normalizedQuery)) {
+    if (name.includes("creative positioning")) boost += 220;
+  }
+
+  if (/\blinear\b|\bplan product\b|\bproduct work\b|\broadmap\b/.test(normalizedQuery)) {
+    if (name.includes("roadmap narrative")) boost += 220;
+  }
+
+  if (/\bopenai\b|\bapi docs?\b|\bproduct feature\b/.test(normalizedQuery)) {
+    if (name.includes("dev ai llm apps")) boost += 180;
+  }
+
+  if (/\bapi\b|\bendpoints?\b|\bdocument\b|\bversioned\b/.test(normalizedQuery)) {
+    if (name.includes("api docs writer")) boost += 240;
+  }
+
+  if (/\bpython\b.*\bservice\b|\bservice\b.*\bpython\b/.test(normalizedQuery)) {
+    if (name.includes("dev python services")) boost += 760;
+    if (/\btests?\b|\boperational\b|\breadiness\b/.test(normalizedQuery)
+      && ["dev testing qa", "monitoring setup guide"].some((term) => name.includes(term))) boost += 760;
+    if (name.includes("dev backend api design")) boost -= 180;
+    if (["dev node typescript services", "dev java dotnet services"].some((term) => name.includes(term))) boost -= 620;
+    if (name.includes("vercel services")) boost -= 760;
+  }
+
+  if (/\bdependency audit\b|\btechnical debt\b|\brepo audit\b|\bcode review\b/.test(normalizedQuery)) {
+    if (name.includes("code review checklist")) boost += 180;
   }
 
   if (role === "primary" && /\b(create|build|implement|deploy|compile|train|debug|audit|review|plan|design)\b/.test(normalizedQuery)) {
@@ -1586,6 +1708,15 @@ function serializeSkillDetail(index, skillId) {
   };
 }
 
+function countBy(items, getKey) {
+  return items.reduce((counts, item) => {
+    const key = getKey(item);
+    if (!key) return counts;
+    counts[key] = (counts[key] ?? 0) + 1;
+    return counts;
+  }, {});
+}
+
 function summarizeIndex(index) {
   const domains = [...new Set(index.skills.flatMap((skill) => skill.domains))].sort();
   const namespaces = [...new Set(index.skills.map((skill) => skill.namespace).filter(Boolean))].sort();
@@ -1602,10 +1733,20 @@ function summarizeIndex(index) {
     roots: index.roots,
     skillCount: index.skills.length,
     edgeCount: index.edges.length,
-    edgeTruncated: index.edges.length >= SKILL_EDGE_LIMIT,
+    edgeLimit: SKILL_EDGE_LIMIT,
+    edgeCandidateCount: index.edges.candidateCount ?? index.edges.length,
+    edgeDroppedCount: index.edges.droppedCount ?? 0,
+    edgeDroppedTypeCounts: index.edges.droppedTypeCounts ?? {},
+    edgeTruncated: (index.edges.droppedCount ?? 0) > 0,
+    edgeTypeCounts: countBy(index.edges, (edge) => edge.type),
     conceptCount: index.concepts?.length ?? 0,
     conceptEdgeCount: index.conceptEdges?.length ?? 0,
-    conceptEdgeTruncated: (index.conceptEdges?.length ?? 0) >= CONCEPT_EDGE_LIMIT,
+    conceptEdgeLimit: CONCEPT_EDGE_LIMIT,
+    conceptEdgeCandidateCount: index.conceptEdges?.candidateCount ?? index.conceptEdges?.length ?? 0,
+    conceptEdgeDroppedCount: index.conceptEdges?.droppedCount ?? 0,
+    conceptEdgeDroppedTypeCounts: index.conceptEdges?.droppedTypeCounts ?? {},
+    conceptEdgeTruncated: (index.conceptEdges?.droppedCount ?? 0) > 0,
+    conceptEdgeTypeCounts: countBy(index.conceptEdges ?? [], (edge) => edge.type),
     domains,
     namespaces,
     sourceTypes,
