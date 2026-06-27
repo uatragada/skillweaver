@@ -22,7 +22,9 @@
     "benchmark:skills:clean-v2-regression": "node scripts/benchmark-skill-routing.mjs --clean-holdout",
     "benchmark:skills:clean-v2-regression:check": "node scripts/benchmark-skill-routing.mjs --clean-holdout --check",
     "benchmark:skills:clean-v3": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v3",
-    "benchmark:skills:clean-v3:check": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v3 --check"
+    "benchmark:skills:clean-v3:check": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v3 --check",
+    "benchmark:skills:clean-v4": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v4",
+    "benchmark:skills:clean-v4:check": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v4 --check"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.2",

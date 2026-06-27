@@ -1,0 +1,508 @@
+[
+  {
+    "id": "pdf-chart-data-extract-v4",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
+    "query": "Extract numeric series from charts embedded in a PDF appendix, reconcile axis labels, and produce a small CSV plus methodology notes; do not turn this into PDF form handling or spreadsheet cleanup.",
+    "expectedPrimary": [
+      "chart-data-extractor"
+    ],
+    "expectedSupport": [
+      "pdf",
+      "data-visualization",
+      "build-report"
+    ],
+    "mustNotPrimary": [
+      "Spreadsheets",
+      "reports-pdfs-and-slide-automation"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "spreadsheet-model-audit-no-dashboard-v4",
+    "domain": "data-analytics",
+    "concept": "data-dashboarding",
+    "query": "Audit an Excel budget model with formulas, hidden sheets, pivots, and linked assumptions; return cleaned tables and anomalies, not a BI dashboard.",
+    "expectedPrimary": [
+      "Spreadsheets"
+    ],
+    "expectedSupport": [
+      "data-analysis-standard",
+      "analyze-data-quality",
+      "chart-data-extractor"
+    ],
+    "mustNotPrimary": [
+      "build-dashboard",
+      "data-visualization"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "notion-spec-to-ticket-plan-v4",
+    "domain": "product-research-planning",
+    "concept": "product-planning",
+    "query": "Convert a Notion product spec into implementation tasks, acceptance criteria, and repo handoff notes; do not only capture the meeting or draft email replies.",
+    "expectedPrimary": [
+      "notion-spec-to-implementation"
+    ],
+    "expectedSupport": [
+      "notion-research-documentation",
+      "prd-template",
+      "linear"
+    ],
+    "mustNotPrimary": [
+      "notion-meeting-intelligence",
+      "gmail-inbox-triage"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "gmail-draft-review-safety-v4",
+    "domain": "communications-knowledge",
+    "concept": "email-triage",
+    "query": "Review Gmail draft replies for three customer threads, compare thread context, label follow-ups, and leave drafts unsent for approval.",
+    "expectedPrimary": [
+      "gmail",
+      "gmail-inbox-triage"
+    ],
+    "expectedSupport": [
+      "email-triage",
+      "notion-knowledge-capture"
+    ],
+    "mustNotPrimary": [
+      "notion-meeting-intelligence",
+      "roadmap-narrative"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "vercel-queues-worker-v4",
+    "domain": "platform-delivery",
+    "concept": "deployment-release",
+    "query": "Implement Vercel Queues for background email processing with retries and serverless function consumers; not a scheduled cron-only job or sandbox execution.",
+    "expectedPrimary": [
+      "vercel-queues"
+    ],
+    "expectedSupport": [
+      "workflow",
+      "vercel-functions",
+      "env-vars"
+    ],
+    "mustNotPrimary": [
+      "cron-jobs",
+      "vercel-sandbox"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "sign-in-with-vercel-enterprise-v4",
+    "domain": "backend-services",
+    "concept": "backend-services",
+    "query": "Add Sign in with Vercel for an internal dashboard, including provider setup, callback handling, environment variables, and deployment notes; avoid generic OAuth-only guidance.",
+    "expectedPrimary": [
+      "sign-in-with-vercel"
+    ],
+    "expectedSupport": [
+      "auth",
+      "env-vars",
+      "vercel-deploy",
+      "security-best-practices"
+    ],
+    "mustNotPrimary": [
+      "auth",
+      "security-scan"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "go-rust-cli-packaging-v4",
+    "domain": "backend-services",
+    "concept": "backend-services",
+    "query": "Design a Go or Rust command-line service with concurrency, binary packaging, tests, and release notes; do not route it to Node or Java service guidance.",
+    "expectedPrimary": [
+      "dev-go-rust-systems"
+    ],
+    "expectedSupport": [
+      "cli-creator",
+      "dev-testing-qa",
+      "dev-release-productization"
+    ],
+    "mustNotPrimary": [
+      "dev-node-typescript-services",
+      "dev-java-dotnet-services"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "framer-code-component-props-v4",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
+    "query": "Build a Framer code component with typed props, controls, responsive behavior, and handoff notes; do not create Figma Code Connect mappings.",
+    "expectedPrimary": [
+      "framer-code-components"
+    ],
+    "expectedSupport": [
+      "framer",
+      "dev-frontend-react-next",
+      "design-qa"
+    ],
+    "mustNotPrimary": [
+      "figma-code-connect",
+      "figma-implement-design"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "secure-sdlc-controls-v4",
+    "domain": "security-risk",
+    "concept": "security-review",
+    "query": "Design secure SDLC controls for secrets, dependency review, threat modeling, and release gates; do not run a vulnerability scan.",
+    "expectedPrimary": [
+      "dev-security-engineering"
+    ],
+    "expectedSupport": [
+      "security-best-practices",
+      "threat-model",
+      "security-ownership-map"
+    ],
+    "mustNotPrimary": [
+      "security-scan",
+      "deep-security-scan"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "finding-discovery-before-triage-v4",
+    "domain": "security-risk",
+    "concept": "security-review",
+    "query": "Discover likely security findings from a new codebase area before triage, validation, or owner tracking; produce candidate issues and evidence paths.",
+    "expectedPrimary": [
+      "finding-discovery"
+    ],
+    "expectedSupport": [
+      "security-scan",
+      "triage-finding",
+      "validation"
+    ],
+    "mustNotPrimary": [
+      "triage-finding",
+      "track-findings"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "hf-paper-publisher-no-training-v4",
+    "domain": "huggingface-ml",
+    "concept": "huggingface-ml",
+    "query": "Publish a Hugging Face paper evidence summary with linked models, datasets, evaluation notes, and Hub metadata; do not train a model or launch a Gradio demo.",
+    "expectedPrimary": [
+      "huggingface-paper-publisher"
+    ],
+    "expectedSupport": [
+      "huggingface-papers",
+      "huggingface-community-evals",
+      "huggingface-datasets"
+    ],
+    "mustNotPrimary": [
+      "huggingface-llm-trainer",
+      "huggingface-gradio"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "transformers-js-browser-model-v4",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
+    "query": "Run a small Transformers.js model entirely in the browser with model loading, UI state, and browser verification; not speech transcription, Hub training, or a Gradio Space.",
+    "expectedPrimary": [
+      "transformers-js"
+    ],
+    "expectedSupport": [
+      "dev-frontend-react-next",
+      "frontend-testing-debugging",
+      "huggingface-datasets"
+    ],
+    "mustNotPrimary": [
+      "transcribe",
+      "huggingface-llm-trainer",
+      "huggingface-gradio"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "creative-shot-vs-offer-v4",
+    "domain": "marketing-growth-creative",
+    "concept": "marketing-growth",
+    "query": "Create detailed product shot prompts with camera angle, lighting, props, and scene references for a launch asset; do not write offer angles or ad copy.",
+    "expectedPrimary": [
+      "creative-shot"
+    ],
+    "expectedSupport": [
+      "creative-scene",
+      "creative-production",
+      "creative-moodboard"
+    ],
+    "mustNotPrimary": [
+      "creative-offer",
+      "creative-ads-explorer"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "docbridge-saas-copy-v4",
+    "domain": "marketing-growth-creative",
+    "concept": "marketing-growth",
+    "query": "Rewrite DocBridge SaaS landing-page copy in a premium, concrete voice with trust sections and workflow-fit CTAs; do not generate generic ad concepts.",
+    "expectedPrimary": [
+      "docbridge-saas-copywriter"
+    ],
+    "expectedSupport": [
+      "premium-saas-landing-pages",
+      "premium-web-design",
+      "marketing-strategy-and-growth"
+    ],
+    "mustNotPrimary": [
+      "creative-production",
+      "seo-and-organic-growth"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "autovise-mobility-label-v4",
+    "domain": "frontend-experience",
+    "concept": "frontend-implementation",
+    "query": "Update AutoVise public-facing Mobility and Experiences labels while preserving existing transportation routes and premium mobility styling.",
+    "expectedPrimary": [
+      "autovise-premium-mobility-style"
+    ],
+    "expectedSupport": [
+      "premium-web-design",
+      "dev-frontend-react-next",
+      "launch-readiness"
+    ],
+    "mustNotPrimary": [
+      "dev-mobile-desktop",
+      "frontend-app-builder"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "racingsim-map-runtime-v4",
+    "domain": "games-simulation",
+    "concept": "game-development",
+    "query": "Improve RacingSim generated-map runtime loading, camera behavior, and playtest checks for a large road network; do not continue PPO training.",
+    "expectedPrimary": [
+      "racingsim-game-dev"
+    ],
+    "expectedSupport": [
+      "game-playtest",
+      "dev-performance-engineering"
+    ],
+    "mustNotPrimary": [
+      "racingsim-ai-ml",
+      "phaser-2d-game",
+      "three-webgl-game"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "capacity-slo-load-boundary-v4",
+    "domain": "infrastructure-platforms",
+    "concept": "infrastructure-platforms",
+    "query": "Estimate traffic-spike capacity, Kubernetes limits, and load-test shape, then connect SLO alert thresholds; not an incident postmortem.",
+    "expectedPrimary": [
+      "capacity-planning"
+    ],
+    "expectedSupport": [
+      "dev-containers-kubernetes",
+      "slo-error-budget",
+      "load-testing-plan"
+    ],
+    "mustNotPrimary": [
+      "incident-postmortem",
+      "disaster-recovery-plan"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "schema-design-before-supabase-v4",
+    "domain": "database-data-engineering",
+    "concept": "database-data-engineering",
+    "query": "Design a normalized multi-tenant Postgres schema, constraints, and ownership model before choosing Supabase policies or writing a migration.",
+    "expectedPrimary": [
+      "database-schema-design"
+    ],
+    "expectedSupport": [
+      "dev-database-postgres",
+      "database-migration-plan",
+      "data-pipeline-spec"
+    ],
+    "mustNotPrimary": [
+      "supabase-postgres-best-practices",
+      "build-dashboard"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "latex-class-bibliography-v4",
+    "domain": "documents-publishing",
+    "concept": "documents-pdf",
+    "query": "Debug a LaTeX paper that fails on a custom class file, bibliography style, and missing packages; do not make a slide deck or document template.",
+    "expectedPrimary": [
+      "latex-doctor"
+    ],
+    "expectedSupport": [
+      "latex-compile",
+      "documents",
+      "pdf"
+    ],
+    "mustNotPrimary": [
+      "Presentations",
+      "template-creator"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "skill-pack-install-no-author-v4",
+    "domain": "skill-tooling",
+    "concept": "skill-authoring",
+    "query": "Install an existing GitHub Codex skill pack, validate it locally, and record unsafe-instruction risks; do not create a new skill or plugin.",
+    "expectedPrimary": [
+      "skill-installer"
+    ],
+    "expectedSupport": [
+      "skill-security-auditor",
+      "skillweaver",
+      "dev-documentation-systems"
+    ],
+    "mustNotPrimary": [
+      "skill-creator",
+      "plugin-creator"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  },
+  {
+    "id": "openai-docs-api-migration-v4",
+    "domain": "ai-agent-apps",
+    "concept": "agent-llm-apps",
+    "query": "Verify current OpenAI API migration details, structured-output examples, and endpoint behavior before implementation; do not build a ChatGPT App or Copilot SDK feature.",
+    "expectedPrimary": [
+      "openai-docs"
+    ],
+    "expectedSupport": [
+      "dev-ai-llm-apps",
+      "openai-agents-js",
+      "api-docs-writer"
+    ],
+    "mustNotPrimary": [
+      "chatgpt-apps",
+      "copilot-sdk"
+    ],
+    "source": "manual-fresh-holdout",
+    "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "frozenBeforeTuningCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
+    "suiteState": "untouched-holdout",
+    "promotionStatus": "candidate",
+    "supportCriticality": "primary-critical"
+  }
+]

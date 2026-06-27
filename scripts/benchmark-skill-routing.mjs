@@ -16,8 +16,9 @@ const FRESH_MODE = process.argv.includes("--fresh");
 const FROZEN_HOLDOUT_MODE = process.argv.includes("--frozen-holdout");
 const CLEAN_HOLDOUT_MODE = process.argv.includes("--clean-holdout");
 const CLEAN_HOLDOUT_V3_MODE = process.argv.includes("--clean-holdout-v3");
-if ([HOLDOUT_MODE, FRESH_MODE, FROZEN_HOLDOUT_MODE, CLEAN_HOLDOUT_MODE, CLEAN_HOLDOUT_V3_MODE].filter(Boolean).length > 1) {
-  console.error("Use only one benchmark suite flag: --holdout, --fresh, --frozen-holdout, --clean-holdout, or --clean-holdout-v3.");
+const CLEAN_HOLDOUT_V4_MODE = process.argv.includes("--clean-holdout-v4");
+if ([HOLDOUT_MODE, FRESH_MODE, FROZEN_HOLDOUT_MODE, CLEAN_HOLDOUT_MODE, CLEAN_HOLDOUT_V3_MODE, CLEAN_HOLDOUT_V4_MODE].filter(Boolean).length > 1) {
+  console.error("Use only one benchmark suite flag: --holdout, --fresh, --frozen-holdout, --clean-holdout, --clean-holdout-v3, or --clean-holdout-v4.");
   process.exit(1);
 }
 const SUITES = {
@@ -86,9 +87,22 @@ const SUITES = {
     command: CHECK_MODE ? "npm run benchmark:skills:clean-v3:check" : "npm run benchmark:skills:clean-v3",
     gatesAcceptance: false,
     role: "clean-v3-regression"
+  },
+  cleanHoldoutV4: {
+    id: "clean-holdout-v4",
+    label: "Clean Holdout V4",
+    reportTitle: "Clean Holdout V4 Benchmark",
+    casesPath: resolve("benchmarks/skill-routing-clean-holdout-v4.json"),
+    casesRelativePath: "benchmarks/skill-routing-clean-holdout-v4.json",
+    reportPath: resolve("docs/SKILL-USE-CLEAN-HOLDOUT-V4.md"),
+    command: CHECK_MODE ? "npm run benchmark:skills:clean-v4:check" : "npm run benchmark:skills:clean-v4",
+    gatesAcceptance: false,
+    role: "untouched-holdout"
   }
 };
-const SUITE = CLEAN_HOLDOUT_V3_MODE
+const SUITE = CLEAN_HOLDOUT_V4_MODE
+  ? SUITES.cleanHoldoutV4
+  : CLEAN_HOLDOUT_V3_MODE
   ? SUITES.cleanHoldoutV3
   : CLEAN_HOLDOUT_MODE
   ? SUITES.cleanHoldout
