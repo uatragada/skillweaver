@@ -16,6 +16,9 @@ const DEFAULT_SKILL_ROOTS = [
   "C:\\Users\\Uday\\.codex\\plugins\\cache\\openai-primary-runtime"
 ];
 
+const SKILL_EDGE_LIMIT = 2000;
+const CONCEPT_EDGE_LIMIT = 200;
+
 const DOMAIN_RULES = [
   ["frontend", ["frontend", "react", "vite", "css", "ui", "design", "web app", "browser"]],
   ["backend", ["api", "backend", "server", "node", "express", "database", "postgres", "dotnet", "java"]],
@@ -47,12 +50,12 @@ const CONCEPT_RULES = [
     id: "frontend-implementation",
     label: "Frontend implementation",
     description: "Build, adapt, and harden browser-facing React, Vite, CSS, and component work.",
-    triggers: ["build a web app", "frontend app", "react ui", "implement a page", "fix ui"],
+    triggers: ["build a web app", "frontend app", "react ui", "implement a page", "fix ui", "mobile app", "desktop app", "react native", "flutter", "electron", "tauri", "app store", "native bridge", "winui"],
     domains: ["frontend", "product"],
     tools: ["Node", "Playwright", "Figma", "Vercel"],
-    gatewaySkillNames: ["build-web-apps:frontend-app-builder"],
-    primarySkillNames: ["dev-frontend-react-next", "build-web-apps:react-best-practices"],
-    supportingSkillNames: ["build-web-apps:shadcn", "dev-frontend-accessibility-css", "premium-web-design", "design-qa"],
+    gatewaySkillNames: ["build-web-apps:frontend-app-builder", "frontend-app-builder"],
+    primarySkillNames: ["dev-frontend-react-next", "build-web-apps:react-best-practices", "dev-mobile-desktop"],
+    supportingSkillNames: ["build-web-apps:shadcn", "dev-frontend-accessibility-css", "premium-web-design", "design-qa", "winui-app"],
     verificationSkillNames: ["build-web-apps:frontend-testing-debugging", "playwright", "screenshot"],
     relatedConceptIds: ["figma-handoff", "browser-verification", "deployment-release"]
   },
@@ -148,10 +151,10 @@ const CONCEPT_RULES = [
     id: "documents-pdf",
     label: "Documents and PDFs",
     description: "Read, transform, write, or validate PDF, document, LaTeX, and documentation artifacts.",
-    triggers: ["pdf", "docx", "document pipeline", "latex", "write docs", "api documentation"],
+    triggers: ["pdf", "docx", "document pipeline", "latex", "latex compile", "latex bibliography", "bibtex", "tex errors", "technical publishing", "write docs", "api documentation"],
     domains: ["documents", "data"],
     tools: ["Python", "Node"],
-    primarySkillNames: ["pdf", "pdf:pdf", "documents:documents", "documents", "api-docs-writer", "dev-documentation-systems"],
+    primarySkillNames: ["pdf", "pdf:pdf", "documents:documents", "documents", "api-docs-writer", "dev-documentation-systems", "latex-compile", "latex-doctor"],
     supportingSkillNames: ["latex:latex-compile", "latex:latex-doctor", "architecture-decision-record", "technical-spec-template"],
     verificationSkillNames: ["docbridge-full-stack-verification"],
     relatedConceptIds: ["presentations", "data-dashboarding"]
@@ -181,11 +184,11 @@ const CONCEPT_RULES = [
     id: "game-development",
     label: "Game development",
     description: "Build, test, and tune browser games, WebGL scenes, sprites, and playtest loops.",
-    triggers: ["game", "phaser", "three.js", "webgl", "playtest", "sprite"],
+    triggers: ["game", "phaser", "three.js", "webgl", "playtest", "sprite", "racingsim", "ppo", "stable-baselines3", "godot json bridge", "lap progress", "nurburgring", "checkpoint progress"],
     domains: ["frontend", "creative"],
     tools: ["Node", "Playwright"],
-    primarySkillNames: ["game-studio:game-studio", "game-studio", "game-studio:phaser-2d-game", "phaser-2d-game", "game-studio:three-webgl-game", "three-webgl-game", "game-studio:web-game-foundations", "web-game-foundations", "game-studio:react-three-fiber-game", "react-three-fiber-game"],
-    supportingSkillNames: ["game-studio:sprite-pipeline", "sprite-pipeline", "game-studio:web-3d-asset-pipeline", "web-3d-asset-pipeline", "racingsim-game-dev"],
+    primarySkillNames: ["game-studio:game-studio", "game-studio", "game-studio:phaser-2d-game", "phaser-2d-game", "game-studio:three-webgl-game", "three-webgl-game", "game-studio:web-game-foundations", "web-game-foundations", "game-studio:react-three-fiber-game", "react-three-fiber-game", "racingsim-ai-ml"],
+    supportingSkillNames: ["game-studio:sprite-pipeline", "sprite-pipeline", "game-studio:web-3d-asset-pipeline", "web-3d-asset-pipeline", "racingsim-game-dev", "project-derived-skills"],
     verificationSkillNames: ["game-studio:game-playtest", "game-playtest"],
     relatedConceptIds: ["frontend-implementation", "browser-verification"]
   },
@@ -193,21 +196,21 @@ const CONCEPT_RULES = [
     id: "agent-llm-apps",
     label: "Agent and LLM apps",
     description: "Build OpenAI, agent SDK, RAG, ChatGPT app, and model-backed application workflows.",
-    triggers: ["openai", "agent sdk", "llm app", "rag", "chatgpt app", "copilot"],
+    triggers: ["openai", "agent sdk", "llm app", "rag", "chatgpt app", "copilot", "speech-to-text", "text-to-speech", "transcription", "voiceover", "voice agent", "local speech", "browser microphone", "silence rejection", "whisper"],
     domains: ["ai", "backend", "frontend"],
     tools: ["OpenAI", "Cloudflare", "Vercel", "Node"],
-    primarySkillNames: ["openai-docs", "dev-ai-llm-apps", "openai-agents-js", "chatgpt-apps", "copilot-sdk", "cloudflare:agents-sdk", "vercel:ai-sdk"],
-    supportingSkillNames: ["hugging-face:transformers-js", "hugging-face:huggingface-gradio", "local-speech-ai-mvp"],
+    primarySkillNames: ["openai-docs", "dev-ai-llm-apps", "openai-agents-js", "chatgpt-apps", "copilot-sdk", "cloudflare:agents-sdk", "vercel:ai-sdk", "transcribe", "speech"],
+    supportingSkillNames: ["hugging-face:transformers-js", "transformers-js", "hugging-face:huggingface-gradio", "local-speech-ai-mvp"],
     relatedConceptIds: ["skill-authoring", "cloudflare-workers", "huggingface-ml"]
   },
   {
     id: "product-planning",
     label: "Product planning",
     description: "Turn goals, research, roadmaps, and issue trackers into actionable product or implementation plans.",
-    triggers: ["prd", "roadmap", "linear", "user research", "feature priority", "launch checklist"],
+    triggers: ["prd", "roadmap", "linear", "user research", "feature priority", "launch checklist", "notion", "workspace knowledge", "knowledge capture", "decision log", "meeting intelligence", "notion spec"],
     domains: ["product", "documents"],
     tools: ["Linear"],
-    primarySkillNames: ["linear", "linear:linear", "prd-template", "roadmap-narrative", "feature-prioritisation", "ux-research-plan", "user-research-synthesis"],
+    primarySkillNames: ["linear", "linear:linear", "prd-template", "roadmap-narrative", "feature-prioritisation", "ux-research-plan", "user-research-synthesis", "notion-knowledge-capture", "notion-research-documentation", "notion-meeting-intelligence", "notion-spec-to-implementation"],
     supportingSkillNames: ["product-launch-checklist", "product-design:index", "onboarding-plan"],
     relatedConceptIds: ["presentations", "data-dashboarding", "github-pr-repair"]
   },
@@ -237,10 +240,10 @@ const CONCEPT_RULES = [
     id: "marketing-growth",
     label: "Marketing growth",
     description: "Plan, research, produce, and measure marketing, SEO, CRO, creative, and industry growth work.",
-    triggers: ["marketing strategy", "seo", "cro", "creative ads", "growth report", "competitive intelligence"],
+    triggers: ["marketing strategy", "seo", "cro", "creative ads", "growth report", "competitive intelligence", "technical seo", "organic growth", "ai search", "entity content", "ad concepts", "offer angles", "promo creative", "competitor positioning", "competitive intelligence monitor"],
     domains: ["creative", "data", "product"],
     tools: ["Node"],
-    primarySkillNames: ["marketing-strategy-and-growth", "seo-and-organic-growth", "analytics-cro-and-reporting", "creative-production", "creative-offer", "creative-ads-explorer"],
+    primarySkillNames: ["marketing-strategy-and-growth", "seo-and-organic-growth", "analytics-cro-and-reporting", "creative-production", "creative-offer", "creative-ads-explorer", "competitive-intelligence-monitor"],
     supportingSkillNames: ["competitive-intelligence-monitor", "business-strategy-and-research", "industry-playbooks", "creative-positioning"],
     relatedConceptIds: ["data-dashboarding", "product-planning"]
   },
@@ -315,6 +318,20 @@ const CONCEPT_ROLE_PRIORITY = {
 };
 
 const GENERIC_CONCEPT_TOOLS = new Set(["github", "node", "python"]);
+const DATA_OUTPUT_TERMS = [
+  "data",
+  "analytics",
+  "report",
+  "reports",
+  "dashboard",
+  "chart",
+  "charts",
+  "kpi",
+  "metric",
+  "metrics",
+  "visualization",
+  "visualize"
+];
 
 const STOP_WORDS = new Set([
   "about",
@@ -780,7 +797,7 @@ function buildEdges(skills) {
       seen.add(key);
       return true;
     })
-    .slice(0, 2000);
+    .slice(0, SKILL_EDGE_LIMIT);
 }
 
 function neighborPairs(group, limit) {
@@ -866,7 +883,8 @@ function makeConceptSkillRef(rule, skill) {
   const conceptPhraseText = `${rule.label} ${rule.description} ${(rule.triggers ?? []).join(" ")}`;
   const conceptTerms = tokenize(conceptPhraseText);
   const sharedDomains = overlap(skill.domains, rule.domains);
-  const sharedTools = overlap(skill.tools, rule.tools);
+  const sharedTools = overlap(skill.tools, rule.tools)
+    .filter((tool) => !GENERIC_CONCEPT_TOOLS.has(normalizeSearchText(tool)));
   const reasons = [];
 
   let score = 0;
@@ -1006,7 +1024,7 @@ function buildConceptEdges(concepts) {
       return true;
     })
     .sort((left, right) => right.weight - left.weight || left.sourceId.localeCompare(right.sourceId))
-    .slice(0, 200);
+    .slice(0, CONCEPT_EDGE_LIMIT);
 }
 
 function buildConceptMap(skills) {
@@ -1172,6 +1190,17 @@ function compareRankedSkillLike(left, right) {
     || left.name.localeCompare(right.name);
 }
 
+function hasNegatedIntent(normalizedQuery, terms, windowSize = 8) {
+  const words = normalizedQuery.split(/\s+/).filter(Boolean);
+  const normalizedTerms = terms.map((term) => normalizeSearchText(term)).filter(Boolean);
+  for (let index = 0; index < words.length; index += 1) {
+    if (!["no", "not", "without"].includes(words[index])) continue;
+    const window = words.slice(index + 1, index + 1 + windowSize).join(" ");
+    if (normalizedTerms.some((term) => window.includes(term))) return true;
+  }
+  return false;
+}
+
 function scoreConceptsForWorkflow(index, query, rankedSkills) {
   const conceptSearchScores = new Map(searchConcepts(index, query).map((concept) => [concept.id, concept.score ?? 0]));
 
@@ -1206,6 +1235,7 @@ function rankConceptWorkflowSkills(index, query, filters = {}) {
     .sort(compareRankedSkillLike);
   const rankedByName = new Map(skillRanked.map((skill, index) => [normalizeSearchText(skill.name), { skill, index }]));
   const conceptResults = scoreConceptsForWorkflow(index, query, skillRanked).slice(0, 6);
+  const suppressDataDashboardConcept = hasNegatedIntent(normalizedQuery, DATA_OUTPUT_TERMS);
   const conceptCandidates = [];
 
   for (const [conceptIndex, concept] of conceptResults.entries()) {
@@ -1236,6 +1266,7 @@ function rankConceptWorkflowSkills(index, query, filters = {}) {
       const rankedEntry = rankedByName.get(normalizeSearchText(skill.name));
       const queryScore = rankedEntry?.skill.score ?? rankSkill(skill, query);
       const intentBoost = getSkillIntentBoost(skill, ref, normalizedQuery);
+      const conceptIntentPenalty = suppressDataDashboardConcept && concept.id === "data-dashboarding" ? 720 : 0;
 
       conceptCandidates.push({
         ...skill,
@@ -1244,6 +1275,7 @@ function rankConceptWorkflowSkills(index, query, filters = {}) {
           + ((CONCEPT_ROLE_PRIORITY[ref.role] ?? 0) * 18)
           + intentBoost
           + (rankedEntry ? Math.max(0, 80 - (rankedEntry.index * 8)) : 0)
+          - conceptIntentPenalty
           - (conceptIndex * 8)
           - (refIndex * 0.25),
         conceptId: concept.id,
@@ -1274,14 +1306,26 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
   const name = normalizeSearchText(skill.name);
   const role = ref.role;
   let boost = 0;
+  const negatedDataOutputIntent = hasNegatedIntent(normalizedQuery, DATA_OUTPUT_TERMS);
+  const dataOutputIntent = /\b(data|analytics|kpi|metrics?|charts?|visuali[sz]e|visualization|business intelligence|executive)\b/.test(normalizedQuery)
+    && !negatedDataOutputIntent;
+  const dataOutputSkill = ["build dashboard", "data visualization", "visualize data", "kpi reporting", "build report"]
+    .some((term) => name.includes(term));
+  const dataNamedSkill = /\b(data|dashboard|analytics|kpi|chart|report)\b/.test(name);
 
-  if (/\bdashboard\b/.test(normalizedQuery)) {
+  if (/\bdashboard\b/.test(normalizedQuery) && dataOutputIntent) {
     if (name.includes("build dashboard")) boost += 520;
     if (["data visualization", "visualize data", "kpi reporting"].some((term) => name.includes(term))) boost += 260;
     if (name.includes("analyze data quality") && !/\b(audit|quality|missing|suspicious)\b/.test(normalizedQuery)) boost -= 360;
+  } else if (negatedDataOutputIntent && (dataOutputSkill || dataNamedSkill)) {
+    boost -= 520;
   }
 
-  if (/\breport\b|\bcharts?\b|\bmethodology\b/.test(normalizedQuery)) {
+  if (negatedDataOutputIntent && /\breact\b|\bui\b|\bfrontend\b/.test(normalizedQuery)) {
+    if (["frontend app builder", "dev frontend react next"].some((term) => name.includes(term))) boost += 520;
+  }
+
+  if ((/\breport\b|\bcharts?\b|\bmethodology\b/.test(normalizedQuery)) && dataOutputIntent) {
     if (["build report", "kpi reporting", "visualize data", "data visualization"].some((term) => name.includes(term))) boost += 220;
   }
 
@@ -1290,7 +1334,14 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
     if (name.includes("control in app browser")) boost -= 160;
   }
 
-  if (/\bsecurity\b|\bvulnerab|\bscan\b/.test(normalizedQuery)) {
+  const negatedSecurityScanIntent = hasNegatedIntent(normalizedQuery, ["security scan", "scan", "vulnerability", "vulnerabilities"]);
+  const threatModelIntent = /\bthreat model\b/.test(normalizedQuery);
+  if (threatModelIntent) {
+    if (name.includes("threat model")) boost += 420;
+    if (negatedSecurityScanIntent && ["security scan", "deep security scan"].some((term) => name.includes(term))) boost -= 420;
+  }
+
+  if ((/\bsecurity scan\b|\bvulnerab|\bscan\b/.test(normalizedQuery)) && !negatedSecurityScanIntent) {
     if (["security scan", "deep security scan"].some((term) => name.includes(term))) boost += 460;
     if (name.includes("security threat model") && !/\bthreat model\b/.test(normalizedQuery)) boost -= 240;
   }
@@ -1316,6 +1367,41 @@ function getSkillIntentBoost(skill, ref, normalizedQuery) {
 
   if (/\bkubernetes\b|\bcontainer\b|\bdevops\b/.test(normalizedQuery)) {
     if (["dev containers kubernetes", "dev devops ci cd", "monitoring setup guide"].some((term) => name.includes(term))) boost += 100;
+  }
+
+  if (/\bnotion\b|\bworkspace knowledge\b|\bknowledge base\b|\bdecision log\b/.test(normalizedQuery)) {
+    if (/\bcapture\b|\bdecision\b|\bknowledge base\b/.test(normalizedQuery) && name.includes("notion knowledge capture")) boost += 420;
+    if (/\bspec\b|\bimplementation\b|\bfollow up\b|\btasks?\b/.test(normalizedQuery) && name.includes("notion spec to implementation")) boost += 260;
+    if (/\bresearch\b|\bsource links?\b|\bsynthesize\b/.test(normalizedQuery) && name.includes("notion research documentation")) boost += 220;
+    if (/\bmeeting\b|\bagenda\b|\bpre reads?\b/.test(normalizedQuery) && name.includes("notion meeting intelligence")) boost += 220;
+  }
+
+  if (/\blatex\b|\btex\b|\bbibtex\b|\bbibliography\b/.test(normalizedQuery)) {
+    if (/\bcompile\b|\bbuild\b/.test(normalizedQuery) && name.includes("latex compile")) boost += 340;
+    if (/\bdebug\b|\berrors?\b|\bmissing\b|\bpackage\b|\bdoctor\b/.test(normalizedQuery) && name.includes("latex doctor")) boost += 380;
+  }
+
+  if (/\bmobile\b|\bdesktop\b|\breact native\b|\bflutter\b|\belectron\b|\btauri\b|\bwinui\b|\bapp store\b|\bpackaging\b|\bnative bridge\b/.test(normalizedQuery)) {
+    if (name.includes("dev mobile desktop")) boost += 460;
+    if (name.includes("winui app")) boost += /\bwinui\b/.test(normalizedQuery) ? 220 : 120;
+    if (/\bapp store\b|\breadiness\b|\bpackaging\b|\brelease\b/.test(normalizedQuery)
+      && ["launch readiness", "dev release productization"].some((term) => name.includes(term))) boost += 140;
+  }
+
+  if (/\bspeech\b|\baudio\b|\btranscrib|\btext to speech\b|\bspeech to text\b|\btts\b|\bvoice\b|\bvoiceover\b|\bwhisper\b|\bmicrophone\b|\bsilence\b/.test(normalizedQuery)) {
+    if (/\bspeech to text\b|\btranscrib|\bwhisper\b|\baudio\b|\bmicrophone\b/.test(normalizedQuery) && name.includes("transcribe")) boost += 520;
+    if (/\btext to speech\b|\btts\b|\bvoice\b|\bvoiceover\b|\bspeech\b/.test(normalizedQuery) && name === "speech") boost += 260;
+    if (/\blocal\b|\bbrowser\b|\bmicrophone\b|\bsilence\b/.test(normalizedQuery) && name.includes("transformers js")) boost += 260;
+  }
+
+  if (/\bracingsim\b|\bppo\b|\bstable baselines3\b|\bgodot json bridge\b|\blap progress\b|\bnurburgring\b|\bcheckpoint progress\b/.test(normalizedQuery)) {
+    if (name.includes("racingsim ai ml")) boost += 560;
+    if (name.includes("racingsim game dev")) boost += 260;
+    if (name.includes("huggingface")) boost -= 90;
+  }
+
+  if (/\bcompetitive intelligence\b|\bcompetitor positioning\b|\bcompetitor\b/.test(normalizedQuery)) {
+    if (name.includes("competitive intelligence monitor")) boost += 420;
   }
 
   if (role === "primary" && /\b(create|build|implement|deploy|compile|train|debug|audit|review|plan|design)\b/.test(normalizedQuery)) {
@@ -1516,8 +1602,10 @@ function summarizeIndex(index) {
     roots: index.roots,
     skillCount: index.skills.length,
     edgeCount: index.edges.length,
+    edgeTruncated: index.edges.length >= SKILL_EDGE_LIMIT,
     conceptCount: index.concepts?.length ?? 0,
     conceptEdgeCount: index.conceptEdges?.length ?? 0,
+    conceptEdgeTruncated: (index.conceptEdges?.length ?? 0) >= CONCEPT_EDGE_LIMIT,
     domains,
     namespaces,
     sourceTypes,

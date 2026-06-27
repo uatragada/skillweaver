@@ -378,3 +378,129 @@ test("concept workflow routes attack-path intent to concrete analysis skill", ()
   assert.equal(workflow.primary.name, "attack-path-analysis");
   assert.equal(workflow.concept.label, "Security review");
 });
+
+test("concept workflow respects negated dashboard and scan intents", () => {
+  const dashboardIndex = makeConceptIndex([
+    makeSkill({
+      id: "frontend-app-builder",
+      name: "frontend-app-builder",
+      description: "Build polished React frontend apps and dashboard UI shells.",
+      domains: ["frontend"],
+      tools: ["Node"],
+      triggers: ["react dashboard ui"]
+    }),
+    makeSkill({
+      id: "build-dashboard",
+      name: "build-dashboard",
+      description: "Build data analytics dashboards from KPI data.",
+      domains: ["data"],
+      tools: ["Node"],
+      triggers: ["analytics dashboard"]
+    }),
+    makeSkill({
+      id: "visualize-data",
+      name: "visualize-data",
+      description: "Visualize data with charts.",
+      domains: ["data"],
+      tools: ["Node"],
+      triggers: ["visualize data"]
+    })
+  ]);
+
+  const dashboardWorkflow = recommendConceptWorkflow(
+    dashboardIndex,
+    "Build a React dashboard UI shell, not a data analytics report"
+  );
+  assert.equal(dashboardWorkflow.primary.name, "frontend-app-builder");
+
+  const securityIndex = makeConceptIndex([
+    makeSkill({
+      id: "security-threat-model",
+      name: "security-threat-model",
+      description: "Create a threat model for a system.",
+      domains: ["security"],
+      tools: ["GitHub"],
+      triggers: ["threat model"]
+    }),
+    makeSkill({
+      id: "deep-security-scan",
+      name: "deep-security-scan",
+      description: "Run a deep security scan for vulnerabilities.",
+      domains: ["security"],
+      tools: ["GitHub"],
+      triggers: ["security scan"]
+    }),
+    makeSkill({
+      id: "security-scan",
+      name: "security-scan",
+      description: "Run a security scan.",
+      domains: ["security"],
+      tools: ["GitHub"],
+      triggers: ["scan vulnerabilities"]
+    })
+  ]);
+
+  const securityWorkflow = recommendConceptWorkflow(
+    securityIndex,
+    "Create a threat model without running a vulnerability scan"
+  );
+  assert.equal(securityWorkflow.primary.name, "security-threat-model");
+});
+
+test("concept workflow routes thin-domain aliases without new concept bloat", () => {
+  const index = makeConceptIndex([
+    makeSkill({
+      id: "dev-mobile-desktop",
+      name: "dev-mobile-desktop",
+      description: "Mobile and desktop app engineering for React Native, Electron, WinUI, app packaging, and app store readiness.",
+      domains: ["frontend"],
+      tools: ["Node"],
+      triggers: ["react native electron winui packaging"]
+    }),
+    makeSkill({
+      id: "transcribe",
+      name: "transcribe",
+      description: "Transcribe speech from audio with diarization hints.",
+      domains: ["ai"],
+      tools: ["Python"],
+      triggers: ["speech to text"]
+    }),
+    makeSkill({
+      id: "speech",
+      name: "speech",
+      description: "Generate text-to-speech voiceover audio.",
+      domains: ["ai"],
+      tools: ["OpenAI"],
+      triggers: ["text to speech"]
+    }),
+    makeSkill({
+      id: "racingsim-ai-ml",
+      name: "racingsim-ai-ml",
+      description: "RacingSim PPO training, checkpoint inspection, lap progress verification, and reward shaping.",
+      domains: ["ai"],
+      tools: ["Python"],
+      triggers: ["racingsim ppo"]
+    }),
+    makeSkill({
+      id: "racingsim-game-dev",
+      name: "racingsim-game-dev",
+      description: "RacingSim Godot game development, map JSON, and vehicle physics.",
+      domains: ["frontend"],
+      tools: ["Node"],
+      triggers: ["racingsim godot"]
+    })
+  ]);
+
+  assert.equal(
+    recommendConceptWorkflow(index, "Plan a React Native or Electron desktop app packaging review").primary.name,
+    "dev-mobile-desktop"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Build a local speech-to-text and text-to-speech prototype").primary.name,
+    "transcribe"
+  );
+  assert.equal(
+    recommendConceptWorkflow(index, "Continue RacingSim PPO training and verify lap progress").primary.name,
+    "racingsim-ai-ml"
+  );
+});

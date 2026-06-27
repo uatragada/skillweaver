@@ -2,6 +2,19 @@
 
 This atlas tracks routing failures and fragile wins. Treat it as the first stop before tuning concept rules.
 
+## Failure Entry Checklist
+
+Use this shape for new entries:
+
+- Query.
+- Expected primary/support.
+- Observed top/workflow five.
+- Failure class: alias gap, intent collision, concept membership, role weighting, corpus quality, or benchmark expectation issue.
+- Fix attempted.
+- Regression guard case.
+- Current status: open, fixed, fragile, or retired.
+- Last verified date/report.
+
 ## Current High-Value Fixes
 
 ### Data Dashboard
@@ -36,6 +49,30 @@ This atlas tracks routing failures and fragile wins. Treat it as the first stop 
 - Fix type: plural-aware `attack paths` and `exploit chains` intent boost.
 - Regression risk: broad security audits should not overselect attack-path analysis. Guarded by `security-scan`.
 
+### Negated Dashboard Intent
+
+- Query: `Build a React dashboard UI shell, not a data analytics report`
+- Previous V2 behavior: data-dashboarding candidates could still win because `dashboard`, `data`, and `report` appeared in the query.
+- Current V2 behavior: routes to `dev-frontend-react-next` under `Frontend implementation`.
+- Fix type: nearby negation detection plus a concept-level penalty for `data-dashboarding` when data/report intent is explicitly negated.
+- Regression risk: real data dashboard prompts must still route to `build-dashboard`. Guarded by `data-dashboard`.
+
+### Negated Security Scan Intent
+
+- Query: `Create a threat model without running a vulnerability scan`
+- Previous V2 behavior: scan/vulnerability boosts could overrule threat-model intent.
+- Current V2 behavior: routes to `threat-model`, with `security-threat-model` as support.
+- Fix type: nearby negation detection for scan/vulnerability terms plus explicit threat-model boost.
+- Regression risk: real vulnerability scans must still route to `security-scan` or `deep-security-scan`. Guarded by `security-scan`.
+
+### Thin-Domain Alias Coverage
+
+- Queries: `seo-organic-growth`, `creative-ad-offer-production`, `competitive-intelligence-monitor`, `notion-workspace-knowledge`, `latex-technical-publishing`, `mobile-desktop-packaging`, `speech-local-ai-loop`, and `racingsim-ppo-progress`.
+- Previous V2 behavior: these domains were thin or adjacent concepts could displace the intended primary skill.
+- Current V2 behavior: all eight route to an expected primary at rank 1.
+- Fix type: live-name aliases in existing concepts plus narrow intent boosts.
+- Regression risk: concept nodes can become noisy if aliases are added without benchmark evidence. Guarded by the new cases and by the concept-governance rule to prefer existing concepts before adding new ones.
+
 ## Current Residual Weak Spots
 
 ### Support Quality Is Still Uneven
@@ -48,19 +85,20 @@ Examples in the current report:
 
 Likely fix type: sharper concept membership and role assignments, not broad score boosts.
 
-### Underrepresented Domains
+### Recently Covered Thin Domains
 
-The current 39-case benchmark covers all 22 concepts at least once, but some domains are still thin:
+The benchmark now has 49 cases. The June 27, 2026 breadth pass added coverage for:
 
 - SEO and organic growth.
 - Creative ad/offer production.
+- Competitive intelligence monitoring.
 - Notion/workspace knowledge workflows.
 - LaTeX and technical publishing.
 - Mobile/desktop app packaging.
 - Speech/local AI.
 - Project-derived skills such as RacingSim PPO workflows.
 
-Add cases only when they represent real recurring work and can be evaluated by concrete expected skills.
+These are fixed enough for routing evaluation, but still thin enough to revisit when real task logs reveal a miss.
 
 ## Tuning Rules
 
@@ -68,4 +106,3 @@ Add cases only when they represent real recurring work and can be evaluated by c
 - Prefer narrow intent boosts over new concepts when the concept is already correct.
 - Add a benchmark case before tuning a new domain.
 - Keep every fix deterministic and inspectable.
-

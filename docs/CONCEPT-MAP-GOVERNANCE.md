@@ -79,3 +79,14 @@ Before committing concept changes:
 - Confirm V2 does not regress expected top/workflow-5 retrieval.
 - Inspect changed per-case rows in `docs/SKILL-USE-GAINS.md`.
 
+## Mini Decision Record Template
+
+Use this for small concept-map changes in `docs/V2-EXPERIMENT-LOG.md`:
+
+- Date.
+- Decision: add concept, split concept, merge concept, role change, or boost/penalty.
+- Evidence: atlas entry, benchmark case, or corpus gap.
+- Alternatives rejected.
+- Expected benchmark effect.
+- Regression guard.
+- Rollback condition.

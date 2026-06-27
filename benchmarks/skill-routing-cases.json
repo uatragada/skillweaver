@@ -232,5 +232,65 @@
     "query": "Audit repository dependencies and technical debt while preserving unrelated worktree changes",
     "expectedPrimary": ["dependency-audit", "technical-debt-register", "conservative-repo-operations"],
     "expectedSupport": ["code-review-checklist", "dev-dependency-maintenance"]
+  },
+  {
+    "id": "seo-organic-growth",
+    "query": "Plan an SEO and organic growth strategy with technical SEO, entity content, and AI search guidance",
+    "expectedPrimary": ["seo-and-organic-growth"],
+    "expectedSupport": ["marketing-strategy-and-growth", "industry-playbooks"]
+  },
+  {
+    "id": "creative-ad-offer-production",
+    "query": "Generate creative ad concepts, offer angles, and product-shot prompts for a new product campaign",
+    "expectedPrimary": ["creative-ads-explorer", "creative-production"],
+    "expectedSupport": ["creative-offer", "creative-positioning", "creative-shot"]
+  },
+  {
+    "id": "competitive-intelligence-monitor",
+    "query": "Set up a competitive intelligence monitor and summarize competitor positioning changes",
+    "expectedPrimary": ["competitive-intelligence-monitor"],
+    "expectedSupport": ["business-strategy-and-research", "creative-positioning"]
+  },
+  {
+    "id": "notion-workspace-knowledge",
+    "query": "Capture a product decision, source links, and follow-up tasks into a Notion workspace knowledge base",
+    "expectedPrimary": ["notion-knowledge-capture"],
+    "expectedSupport": ["notion-research-documentation", "notion-spec-to-implementation"]
+  },
+  {
+    "id": "latex-technical-publishing",
+    "query": "Compile and debug a LaTeX paper with bibliography and missing package errors",
+    "expectedPrimary": ["latex-doctor", "latex-compile"],
+    "expectedSupport": ["latex-compile", "latex-doctor"]
+  },
+  {
+    "id": "mobile-desktop-packaging",
+    "query": "Plan a React Native, Electron, or WinUI desktop app packaging and app-store readiness review",
+    "expectedPrimary": ["dev-mobile-desktop"],
+    "expectedSupport": ["winui-app", "launch-readiness", "dev-release-productization"]
+  },
+  {
+    "id": "speech-local-ai-loop",
+    "query": "Build a local speech-to-text and text-to-speech prototype with browser microphone capture and silence rejection",
+    "expectedPrimary": ["transformers-js", "transcribe", "speech"],
+    "expectedSupport": ["transcribe", "speech", "transformers-js"]
+  },
+  {
+    "id": "racingsim-ppo-progress",
+    "query": "Continue RacingSim PPO training and verify lap progress on the Nurburgring map",
+    "expectedPrimary": ["racingsim-ai-ml"],
+    "expectedSupport": ["racingsim-game-dev"]
+  },
+  {
+    "id": "frontend-dashboard-not-analytics",
+    "query": "Build a React dashboard UI shell, not a data analytics report",
+    "expectedPrimary": ["frontend-app-builder", "dev-frontend-react-next"],
+    "mustNotPrimary": ["build-dashboard", "visualize-data", "data-visualization", "build-report"]
+  },
+  {
+    "id": "threat-model-no-scan",
+    "query": "Create a threat model without running a vulnerability scan",
+    "expectedPrimary": ["security-threat-model", "threat-model"],
+    "mustNotPrimary": ["security-scan", "deep-security-scan"]
   }
 ]

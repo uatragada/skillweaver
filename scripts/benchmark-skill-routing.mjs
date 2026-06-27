@@ -159,7 +159,10 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
   const visibleNames = topNames ?? ranked.slice(0, 5).map((skill) => skill.name);
   const primary = primaryName ?? visibleNames[0] ?? null;
   const rank = firstExpectedRank(ranked, testCase.expectedPrimary);
-  const primaryHit = Boolean(primary && matchesExpected(primary, testCase.expectedPrimary));
+  const forbiddenPrimary = primary && testCase.mustNotPrimary?.length
+    ? testCase.mustNotPrimary.find((expected) => matchesExpected(primary, [expected])) ?? null
+    : null;
+  const primaryHit = Boolean(primary && !forbiddenPrimary && matchesExpected(primary, testCase.expectedPrimary));
   const hitAt5 = visibleNames.some((name) => matchesExpected(name, testCase.expectedPrimary));
   const coverage = supportCoverage(visibleNames, testCase.expectedSupport ?? []);
   const rr = reciprocalRank(rank);
@@ -172,6 +175,7 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
     rank,
     primaryHit,
     hitAt5,
+    forbiddenPrimary,
     reciprocalRank: rr,
     supportCoverage: coverage,
     candidatesReviewedToExpected: rank ?? index.skills.length,
@@ -194,6 +198,7 @@ function summarize(evaluations) {
     hitAt5: evaluations.filter((entry) => entry.hitAt5).length / total,
     mrr: evaluations.reduce((sum, entry) => sum + entry.reciprocalRank, 0) / total,
     supportCoverage: evaluations.reduce((sum, entry) => sum + entry.supportCoverage, 0) / total,
+    forbiddenPrimaryRate: evaluations.filter((entry) => entry.forbiddenPrimary).length / total,
     outputQualityScore: evaluations.reduce((sum, entry) => sum + entry.qualityScore, 0) / total,
     meanCandidatesToExpected: evaluations.reduce((sum, entry) => sum + entry.candidatesReviewedToExpected, 0) / total,
     medianCandidatesToExpected: reviewed[Math.floor(reviewed.length / 2)] ?? null,
@@ -223,8 +228,21 @@ function formatLowerIsBetterDelta(nextValue, baselineValue, unit) {
     : `${delta.toFixed(1)} ${unit} better`;
 }
 
+function formatLowerIsBetterPercentDelta(nextValue, baselineValue) {
+  const delta = (nextValue - baselineValue) * 100;
+  if (Math.abs(delta) < 0.05) return "0.0 pp";
+  return delta > 0
+    ? `+${delta.toFixed(1)} pp worse`
+    : `${delta.toFixed(1)} pp better`;
+}
+
 function formatRank(rank) {
   return rank ? String(rank) : "> corpus";
+}
+
+function formatPrimaryCell(result) {
+  const warning = result.forbiddenPrimary ? ` !${result.forbiddenPrimary}` : "";
+  return `${result.primary ?? "-"}${warning} / ${formatRank(result.rank)}`;
 }
 
 function buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary }) {
@@ -268,6 +286,14 @@ function buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary }) {
       v2: formatPercent(v2Summary.supportCoverage),
       v2VsNo: formatDelta((v2Summary.supportCoverage - noSkillWeaverSummary.supportCoverage) * 100, " pp"),
       v2VsV1: formatDelta((v2Summary.supportCoverage - v1Summary.supportCoverage) * 100, " pp")
+    },
+    {
+      metric: "Forbidden primary rate, lower is better",
+      no: formatPercent(noSkillWeaverSummary.forbiddenPrimaryRate),
+      v1: formatPercent(v1Summary.forbiddenPrimaryRate),
+      v2: formatPercent(v2Summary.forbiddenPrimaryRate),
+      v2VsNo: formatLowerIsBetterPercentDelta(v2Summary.forbiddenPrimaryRate, noSkillWeaverSummary.forbiddenPrimaryRate),
+      v2VsV1: formatLowerIsBetterPercentDelta(v2Summary.forbiddenPrimaryRate, v1Summary.forbiddenPrimaryRate)
     },
     {
       metric: "Mean candidates to expected skill, lower is better",
@@ -328,7 +354,7 @@ function buildMarkdown({ index, cases, rows, noSkillWeaverSummary, v1Summary, v2
 
   for (const row of rows) {
     lines.push(
-      `| ${row.id} | ${row.expectedPrimary.join(", ")} | ${row.noSkillWeaver.primary ?? "-"} / ${formatRank(row.noSkillWeaver.rank)} | ${row.v1.primary ?? "-"} / ${formatRank(row.v1.rank)} | ${row.v2.primary ?? "-"} / ${formatRank(row.v2.rank)} | ${row.v2.contextLabel ?? "-"} | ${row.v2.topNames.join(" -> ")} |`
+      `| ${row.id} | ${row.expectedPrimary.join(", ")} | ${formatPrimaryCell(row.noSkillWeaver)} | ${formatPrimaryCell(row.v1)} | ${formatPrimaryCell(row.v2)} | ${row.v2.contextLabel ?? "-"} | ${row.v2.topNames.join(" -> ")} |`
     );
   }
 

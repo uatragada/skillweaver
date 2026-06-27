@@ -10,6 +10,8 @@ Generated from the local SkillWeaver scanner on June 27, 2026.
 - Concept edges: 200.
 - Skill roots: 8.
 - Parser warnings: 0.
+- Skill edge cap reached: yes.
+- Concept edge cap reached: yes.
 
 ## Indexed Roots
 
@@ -66,30 +68,40 @@ Generated from the local SkillWeaver scanner on June 27, 2026.
 
 | Concept | Skill refs | Benchmark cases | Roles |
 | --- | ---: | ---: | --- |
-| `agent-llm-apps` | 18 | 1 | primary:5, supporting:13 |
-| `backend-services` | 18 | 4 | primary:5, verification:3, supporting:10 |
+| `agent-llm-apps` | 18 | 3 | primary:7, supporting:11 |
+| `backend-services` | 18 | 2 | primary:5, verification:3, supporting:10 |
 | `browser-verification` | 18 | 2 | gateway:2, primary:3, supporting:13 |
 | `cloudflare-workers` | 18 | 1 | primary:5, supporting:13 |
-| `data-dashboarding` | 18 | 5 | primary:3, supporting:15 |
+| `data-dashboarding` | 18 | 4 | primary:3, supporting:15 |
 | `database-data-engineering` | 18 | 2 | primary:5, verification:2, supporting:11 |
 | `deployment-release` | 18 | 1 | primary:4, supporting:14 |
-| `documents-pdf` | 18 | 1 | primary:3, supporting:15 |
-| `email-triage` | 18 | 1 | primary:1, supporting:7, reference:10 |
+| `documents-pdf` | 18 | 2 | primary:6, supporting:12 |
+| `email-triage` | 18 | 1 | primary:3, supporting:5, reference:10 |
 | `figma-handoff` | 18 | 2 | gateway:1, primary:4, verification:2, supporting:11 |
-| `frontend-implementation` | 18 | 1 | primary:1, verification:2, supporting:15 |
-| `game-development` | 18 | 2 | primary:5, verification:1, supporting:12 |
+| `frontend-implementation` | 18 | 4 | gateway:1, primary:2, verification:2, supporting:13 |
+| `game-development` | 18 | 3 | primary:6, verification:1, supporting:11 |
 | `github-pr-repair` | 18 | 2 | primary:2, supporting:16 |
 | `huggingface-ml` | 18 | 2 | primary:5, supporting:13 |
 | `infrastructure-platforms` | 18 | 2 | primary:4, verification:2, supporting:12 |
-| `marketing-growth` | 18 | 1 | primary:6, supporting:12 |
+| `marketing-growth` | 18 | 4 | primary:7, supporting:11 |
 | `observability-reliability` | 18 | 2 | primary:5, verification:2, supporting:11 |
-| `presentations` | 18 | 1 | primary:1, supporting:9, reference:8 |
-| `product-planning` | 18 | 1 | primary:6, supporting:12 |
-| `repo-operations` | 18 | 1 | primary:4, supporting:14 |
-| `security-review` | 18 | 2 | primary:5, verification:2, supporting:11 |
+| `presentations` | 18 | 1 | primary:2, supporting:5, reference:11 |
+| `product-planning` | 18 | 2 | primary:10, supporting:8 |
+| `repo-operations` | 18 | 2 | primary:4, supporting:14 |
+| `security-review` | 18 | 3 | primary:5, verification:2, supporting:11 |
 | `skill-authoring` | 18 | 2 | gateway:1, primary:3, verification:1, supporting:13 |
+
+## Corpus Quality Checklist
+
+- Parser warnings must be reviewed, not just counted.
+- Root additions or removals require a drift note.
+- Concepts with high `reference` share need review before routing claims rely on them.
+- Concepts with only one benchmark case are thin coverage and should not be overfit.
+- Plugin-prefixed and unprefixed duplicate skills should be intentional.
+- New domains or namespaces need at least one representative benchmark case, or a note explaining why they remain untested.
+- Edge caps at 2,000 skill edges and 200 concept edges should be treated as truncation signals, not as natural corpus size.
 
 ## Drift Notes
 
 Older docs referenced 439 skills and 18 concepts. Current V2 work indexes 442 skills and 22 concepts after adding backend, database/data engineering, observability/reliability, and infrastructure/platform concepts.
-
+The June 27, 2026 breadth pass kept 22 concepts but expanded coverage from 39 to 49 benchmark cases and added live-name aliases for LaTeX, Notion, mobile/desktop, speech, competitive intelligence, and RacingSim skills.
