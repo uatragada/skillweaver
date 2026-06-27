@@ -44,6 +44,8 @@ npm run benchmark:skills:holdout
 npm run benchmark:skills:holdout:check
 npm run benchmark:skills:fresh
 npm run benchmark:skills:fresh:check
+npm run benchmark:skills:frozen
+npm run benchmark:skills:frozen:check
 npm run build
 npm start
 ```
@@ -80,6 +82,7 @@ By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Us
 - [Skill use gains benchmark](docs/SKILL-USE-GAINS.md)
 - [Post-tuning challenge benchmark](docs/SKILL-USE-HOLDOUT.md)
 - [Fresh-probe regression benchmark](docs/SKILL-USE-FRESH.md)
+- [Frozen holdout benchmark](docs/SKILL-USE-FROZEN-HOLDOUT.md)
 - [Support quality roadmap](docs/SUPPORT-QUALITY-ROADMAP.md)
 - [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
 - [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
@@ -112,3 +115,11 @@ npm run benchmark:skills:fresh
 ```
 
 Use `npm run benchmark:skills:fresh:check` before citing [docs/SKILL-USE-FRESH.md](docs/SKILL-USE-FRESH.md). This suite began as fresh generalization evidence; after its misses informed fixes, the checked-in report is regression evidence for that prompt slice.
+
+Run the non-gating frozen holdout suite with:
+
+```powershell
+npm run benchmark:skills:frozen
+```
+
+Use `npm run benchmark:skills:frozen:check` before citing [docs/SKILL-USE-FROZEN-HOLDOUT.md](docs/SKILL-USE-FROZEN-HOLDOUT.md). This suite is intentionally clean-split evidence until any miss from it informs routing changes; if that happens, relabel it as challenge or regression evidence before using it again.

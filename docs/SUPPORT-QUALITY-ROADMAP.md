@@ -11,8 +11,9 @@ This roadmap turns V2's remaining workflow-quality gaps into deliberate research
 | Active acceptance | 78 | 100.0% | 100.0% | 40.9% | 0 | Regression gate |
 | Post-tuning challenge | 22 | 100.0% | 68.2% | 34.1% | 12 | Non-gating pressure |
 | Fresh-probe regression | 18 | 100.0% | 90.7% | 51.4% | 4 | Non-gating regression |
+| Frozen holdout | 12 | 41.7% | 66.7% | 50.0% | 8 | Clean-split baseline |
 
-The active suite proves the current acceptance claim. The challenge and fresh-probe suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work.
+The active suite proves the current acceptance claim. The challenge and fresh-probe suites show where support recommendations can compound, but they are not clean generalization proof because their misses have already informed V2 work. The frozen holdout is clean-split evidence and should stay untouched until the next explicit tuning round.
 
 ## Triage Rules
 
@@ -26,6 +27,22 @@ Classify support misses before changing routing:
 | P3 | Nice-to-have helper or ambiguous support expectation | Do not tune; consider removing expectation if it proves non-load-bearing |
 
 Do not tune from the current challenge or fresh support misses directly. A support fix should have a fresh prompt captured before tuning, a named confusable rival, and a support-precision check after tuning.
+
+Do not tune from the frozen holdout inside the same evidence pass. If one of these cases becomes a routing target, first promote it with a failure-atlas entry, relabel the suite or fork the case into a challenge/regression file, and preserve the current report as the pre-tuning baseline.
+
+## Frozen Holdout Backlog
+
+These are clean-split failures from [SKILL-USE-FROZEN-HOLDOUT.md](SKILL-USE-FROZEN-HOLDOUT.md). They are higher-value than challenge misses, but the clean holdout label is lost as soon as they drive tuning.
+
+| Case | Current V2 primary | Expected primary | Issue | Priority | Next action |
+| --- | --- | --- | --- | --- | --- |
+| `node-typescript-mcp-server-holdout` | `building-mcp-server-on-cloudflare` | `dev-ai-llm-apps` | Confuses generic Codex MCP server work with Cloudflare and ChatGPT-specific routes | P0 | Promote to failure atlas before any MCP tuning |
+| `gmail-notion-inbox-holdout` | `notion-meeting-intelligence` | `gmail-inbox-triage`, `gmail` | Lets Notion context displace the inbox action primary | P0 | Promote with Notion-as-support guard |
+| `in-app-browser-choice-holdout` | `control-chrome` | `control-in-app-browser` | Chooses desktop Chrome despite explicit in-app browser wording | P0 | Promote with browser-tool distinction |
+| `analytics-report-to-slides-holdout` | `reports-pdfs-and-slide-automation` | `reports-pdfs-and-slide-automation` | Expected primary is correct, but broad `pdf` containment marks it forbidden | P0 | Tighten `mustNotPrimary` matching before routing tuning |
+| `figma-swiftui-motion-holdout` | `figma-use` | `figma-swiftui` | SwiftUI/motion handoff support appears, but primary stays generic Figma use | P1 | Promote if SwiftUI handoff recurs |
+| `phaser-sprite-hud-holdout` | `game-playtest` | `sprite-pipeline` | Asset pipeline intent is buried under playtest/game support | P1 | Promote if 2D asset-pipeline work recurs |
+| `otel-slo-tracing-holdout` | `sentry` | `dev-observability-sre` | Observability setup routes to one tool instead of the systems skill | P1 | Promote with OpenTelemetry/SLO wording |
 
 ## Current Support Backlog
 
@@ -64,7 +81,7 @@ The next clean holdout should be captured after the current routing commit and r
 
 ## Candidate Prompt Queue
 
-These prompts came from a read-only domain coverage audit and were not routed through SkillWeaver. Keep them out of the benchmark JSON until the next clean holdout is intentionally frozen.
+These prompts came from a read-only domain coverage audit. Several were promoted into `benchmarks/skill-routing-frozen-holdout.json`; any remaining prompts should stay out of benchmark JSON until the next clean holdout is intentionally frozen.
 
 | Candidate | Expected primary | Expected support | Confusable rivals |
 | --- | --- | --- | --- |

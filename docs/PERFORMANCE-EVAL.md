@@ -12,12 +12,13 @@ SkillWeaver should keep V2 routing quality gains without becoming a heavy servic
 | Active benchmark check | warn over 15s | 11.072s for 78 cases |
 | Challenge benchmark check | warn over 10s | 6.762s for 22 cases |
 | Fresh-probe benchmark check | warn over 10s | 6.465s for 18 cases |
+| Frozen holdout benchmark check | warn over 10s | 5.990s for 12 cases |
 | Production build JS bundle | warn over 250 kB raw JS | 211.33 kB raw JS in latest build |
 | Production build CSS bundle | warn over 20 kB raw CSS | 9.69 kB raw CSS in latest build |
 
 ## Latest Measurement Snapshot
 
-Measured on commit `945153e` with Node `v24.14.1` and npm `11.11.0`.
+Measured on commit `945153e` with Node `v24.14.1` and npm `11.11.0`, with the frozen holdout check added on commit `d7ba4be`.
 
 | Command | Elapsed | Exit code | Evidence |
 | --- | ---: | ---: | --- |
@@ -26,6 +27,7 @@ Measured on commit `945153e` with Node `v24.14.1` and npm `11.11.0`.
 | `npm run --silent benchmark:skills:check` | 11.072s | 0 | 78 cases, report fresh |
 | `npm run --silent benchmark:skills:holdout:check` | 6.762s | 0 | 22 cases, report fresh |
 | `npm run --silent benchmark:skills:fresh:check` | 6.465s | 0 | 18 cases, report fresh |
+| `npm run --silent benchmark:skills:frozen:check` | 5.990s | 0 | 12 cases, report fresh |
 | `Get-ChildItem dist\assets -File` | n/a | 0 | JS 211,334 bytes; CSS 9,690 bytes |
 
 The API waits for the initial scan before it is ready, and `/api/refresh` runs another scan on demand. Current scan time is inside the scanner budget, so this remains an in-memory scan concern rather than a reason to add persistence or caching infrastructure.
@@ -47,10 +49,12 @@ npm run index:skills
 npm run benchmark:skills:check
 npm run benchmark:skills:holdout:check
 npm run benchmark:skills:fresh:check
+npm run benchmark:skills:frozen:check
 Measure-Command { node server\skill-scanner.js *> $null }
 Measure-Command { npm run benchmark:skills:check *> $null }
 Measure-Command { npm run benchmark:skills:holdout:check *> $null }
 Measure-Command { npm run benchmark:skills:fresh:check *> $null }
+Measure-Command { npm run benchmark:skills:frozen:check *> $null }
 Get-ChildItem dist\assets -File | Select-Object Name,Length
 ```
 
@@ -61,11 +65,12 @@ npm run build
 npm run benchmark:skills
 npm run benchmark:skills:holdout
 npm run benchmark:skills:fresh
+npm run benchmark:skills:frozen
 ```
 
 ## Current Assessment
 
-The V2 concept map and the benchmark slice reports add quality evidence, not product runtime infrastructure. Cross-domain reporting is generated only when benchmark commands run, and the API route continues to use the same `rankConceptWorkflowSkills()` helper.
+The V2 concept map and the benchmark slice reports add quality evidence, not product runtime infrastructure. Cross-domain and frozen-holdout reporting is generated only when benchmark commands run, and the API route continues to use the same `rankConceptWorkflowSkills()` helper.
 
 The current performance posture is acceptable: quality reports are richer, but no new dependencies, persistence, model calls, larger graph caps, or extra product-route passes were added.
 

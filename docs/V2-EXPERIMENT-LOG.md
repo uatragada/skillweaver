@@ -340,9 +340,54 @@ The fresh suite is no longer untouched holdout evidence once these prompts infor
 
 No new dependencies, persistence, model calls, background jobs, graph caps, or product-route passes were added. The extra cost is an explicit benchmark command that scans the corpus once and post-processes 18 cases.
 
+## 2026-06-27: Frozen Holdout Baseline
+
+### Hypothesis
+
+The active, challenge, and fresh-probe regression suites show V2 is strong where it has already been exercised. A new clean-split holdout should reveal whether the concept map is genuinely broad or still brittle around untouched high-value workflow boundaries.
+
+### Change
+
+- Added `benchmarks/skill-routing-frozen-holdout.json` with 12 provenance-backed cases captured after commit `9be00e7` and before any tuning from the suite.
+- Added `npm run benchmark:skills:frozen` and `npm run benchmark:skills:frozen:check`, reusing the existing evaluator, metadata, freshness checks, provenance validation, and slice reporting.
+- Generated [SKILL-USE-FROZEN-HOLDOUT.md](SKILL-USE-FROZEN-HOLDOUT.md) from a clean committed boundary at `d7ba4be`.
+- Did not change `server/skill-scanner.js`, app routes, frontend code, graph caps, dependencies, or product runtime behavior.
+
+### Result
+
+The frozen holdout found real clean-split gaps:
+
+| Metric | No SkillWeaver | Skill-Level Baseline | V2 |
+| --- | ---: | ---: | ---: |
+| Output quality score | 67.3 | 66.5 | 59.1 |
+| Primary hit@1 | 58.3% | 50.0% | 41.7% |
+| Expected skill top/workflow 5 | 83.3% | 100.0% | 83.3% |
+| Mean reciprocal rank | 0.754 | 0.714 | 0.620 |
+| Support coverage@5 | 61.1% | 61.1% | 66.7% |
+| Support precision@5 | 45.8% | 45.8% | 50.0% |
+| Forbidden primary rate | 16.7% | 25.0% | 33.3% |
+| Mean candidates to expected skill | 2.8 | 2.1 | 3.9 |
+
+The suite is intentionally non-gating. It improves the research system by preventing a too-broad generalization claim. Current V2 is excellent on known and post-tuning suites, but not yet undeniably broad on untouched prompts.
+
+### What Failed Cleanly
+
+- Generic Node/TypeScript MCP server wording over-routes to Cloudflare and ChatGPT-specific skills.
+- Gmail-plus-Notion wording lets Notion context displace Gmail inbox action.
+- In-app browser wording chooses desktop Chrome.
+- SwiftUI/motion Figma handoff stays too generic.
+- Sprite/HUD pipeline wording routes to playtest/game support before the asset pipeline.
+- Observability setup wording routes to a tool-specific Sentry path instead of the broader observability skill.
+- Report-to-slides exposes a benchmark matching issue: broad `pdf` containment can mark the correct `reports-pdfs-and-slide-automation` primary as forbidden.
+
+### Runtime Impact
+
+No new runtime infrastructure was added. The new suite costs an explicit benchmark command only; `benchmark:skills:frozen:check` measured 5.990s for 12 cases, inside the 10s non-gating suite budget.
+
 ## Next Experiments
 
-- Add a new fresh frozen holdout set from future real task logs before tuning more boosts.
+- Preserve the frozen-holdout report as pre-tuning evidence before touching any route behavior from those cases.
+- Promote the highest-value frozen failures into the failure atlas before tuning: generic MCP server, Gmail-plus-Notion inbox action, in-app browser choice, and the `pdf` containment benchmark issue.
 - Work through the remaining coverage backlog from the independent audit, especially broader MCP server creation, deeper game-studio variants, Notion meeting-to-email ambiguity, Vercel Auth/Firewall variants, and visualization QA/accessibility variants.
 - Decide whether support precision@5 should become an acceptance gate after expected-support lists are reviewed for completeness.
 - Add an end-to-end graph-cap survival test if the corpus grows or cap behavior changes.
