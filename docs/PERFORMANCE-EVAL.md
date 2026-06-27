@@ -8,9 +8,9 @@ SkillWeaver should keep V2 routing quality gains without becoming a heavy servic
 
 | Journey | Budget | Current evidence |
 | --- | ---: | --- |
-| Scan local skill corpus | warn over 6s, investigate over 8s | 442 skills scan in about 4s on this machine |
-| Active benchmark check | warn over 15s | about 11s for 78 cases |
-| Challenge benchmark check | warn over 10s | about 7s for 22 cases |
+| Scan local skill corpus | warn over 6s, investigate over 8s | 442 skills scanned in 3.739s |
+| Active benchmark check | warn over 15s | 10.909s for 78 cases |
+| Challenge benchmark check | warn over 10s | 6.575s for 22 cases |
 | Production build JS bundle | warn over 250 kB raw JS | 211.33 kB raw JS in latest build |
 | Production build CSS bundle | warn over 20 kB raw CSS | 9.69 kB raw CSS in latest build |
 
