@@ -83,14 +83,14 @@ function Stat({ label, value }) {
   );
 }
 
-function SelectFilter({ icon: Icon, label, value, onChange, options }) {
+function SelectFilter({ icon: Icon, label, value, onChange, options, formatOption = (option) => option }) {
   return (
     <label className="filter-control">
       <span><Icon size={14} /> {label}</span>
       <select value={value} onChange={(event) => onChange(event.target.value)}>
         <option value="">All</option>
         {options.map((option) => (
-          <option key={option} value={option}>{option}</option>
+          <option key={option} value={option}>{formatOption(option)}</option>
         ))}
       </select>
     </label>
@@ -108,6 +108,24 @@ function ModeToggle({ value, onChange }) {
         <Search size={15} />
         Skills
       </button>
+    </div>
+  );
+}
+
+function GraphCapNotice({ summary }) {
+  if (!summary?.edgeTruncated && !summary?.conceptEdgeTruncated) return null;
+  const lines = [];
+  if (summary.edgeTruncated) {
+    lines.push(`${summary.edgeDroppedCount} skill links hidden after ${summary.edgeLimit}`);
+  }
+  if (summary.conceptEdgeTruncated) {
+    lines.push(`${summary.conceptEdgeDroppedCount} concept links hidden after ${summary.conceptEdgeLimit}`);
+  }
+
+  return (
+    <div className="cap-notice">
+      <TriangleAlert size={16} />
+      <span>{lines.join("; ")}.</span>
     </div>
   );
 }
@@ -528,9 +546,12 @@ function App() {
           <Stat label="warnings" value={summary?.warningCount ?? "?"} />
         </div>
 
+        <GraphCapNotice summary={summary} />
+
         <div className="filter-stack">
           <SelectFilter icon={Filter} label="Domain" value={filters.domain} onChange={(value) => updateFilter("domain", value)} options={summary?.domains ?? []} />
           <SelectFilter icon={BookOpen} label="Source" value={filters.sourceType} onChange={(value) => updateFilter("sourceType", value)} options={summary?.sourceTypes ?? []} />
+          <SelectFilter icon={FileCode2} label="Root" value={filters.root} onChange={(value) => updateFilter("root", value)} options={summary?.roots ?? []} formatOption={compactPath} />
           <SelectFilter icon={GitBranch} label="Namespace" value={filters.namespace} onChange={(value) => updateFilter("namespace", value)} options={summary?.namespaces ?? []} />
         </div>
 
@@ -580,11 +601,10 @@ function App() {
             )}
           </section>
 
-          {mode === "concepts" ? (
-            <ConceptLinksPanel concept={selectedConcept} onSelect={selectConcept} />
-          ) : (
+          <div className="side-stack">
             <WorkflowPanel workflow={workflow} onSelect={selectSkill} />
-          )}
+            {mode === "concepts" ? <ConceptLinksPanel concept={selectedConcept} onSelect={selectConcept} /> : null}
+          </div>
         </div>
       </section>
 

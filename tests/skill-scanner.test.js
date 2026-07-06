@@ -15,6 +15,7 @@ import {
   searchConceptWorkflowSkills,
   searchSkills,
   serializeConceptDetail,
+  serializeSkillDetail,
   summarizeIndex
 } from "../server/skill-scanner.js";
 
@@ -83,7 +84,36 @@ allowed-tools: ["Read(C:\\Users\\Uday\\AppData\\Local\\Temp\\framer/*)"]
 
   assert.equal(parsed.frontmatter.name, "framer");
   assert.match(parsed.frontmatter.description, /Framer/);
-  assert.equal(parsed.warnings.length, 0);
+  assert.equal(parsed.warnings.length, 1);
+  assert.match(parsed.warnings[0], /frontmatter parsed with loose fallback/i);
+});
+
+test("skill detail omits raw body and frontmatter unless explicitly requested", () => {
+  const skill = {
+    ...makeSkill({
+      id: "privacy-skill",
+      name: "privacy-skill",
+      description: "Use for privacy checks."
+    }),
+    headings: ["Workflow"],
+    references: ["references/privacy.md"],
+    frontmatter: { name: "privacy-skill", secretish: "local metadata" },
+    body: "# Workflow\nFull local instructions stay server-side by default."
+  };
+  const index = { skills: [skill], edges: [] };
+
+  const defaultDetail = serializeSkillDetail(index, "privacy-skill");
+  assert.equal(defaultDetail.body, undefined);
+  assert.equal(defaultDetail.frontmatter, undefined);
+  assert.equal(defaultDetail.bodyLength, skill.bodyLength);
+  assert.deepEqual(defaultDetail.references, ["references/privacy.md"]);
+
+  const fullDetail = serializeSkillDetail(index, "privacy-skill", {
+    includeBody: true,
+    includeFrontmatter: true
+  });
+  assert.equal(fullDetail.body, skill.body);
+  assert.deepEqual(fullDetail.frontmatter, skill.frontmatter);
 });
 
 

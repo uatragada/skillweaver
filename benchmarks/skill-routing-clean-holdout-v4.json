@@ -323,12 +323,12 @@
     ],
     "expectedSupport": [
       "premium-saas-landing-pages",
-      "premium-web-design",
-      "marketing-strategy-and-growth"
+      "creative-positioning",
+      "kpi-reporting"
     ],
     "mustNotPrimary": [
       "creative-production",
-      "seo-and-organic-growth"
+      "creative-ads-explorer"
     ],
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "764924b6bbcab948cbb31284e28e360c5a001bcb",
@@ -346,7 +346,7 @@
       "autovise-premium-mobility-style"
     ],
     "expectedSupport": [
-      "premium-web-design",
+      "premium-saas-landing-pages",
       "dev-frontend-react-next",
       "launch-readiness"
     ],

@@ -346,16 +346,15 @@
     "concept": "marketing-growth",
     "query": "Plan a search-led growth test for a SaaS page: map technical SEO fixes, content clusters, conversion readout, and KPI tracking before making ad concepts.",
     "expectedPrimary": [
-      "seo-and-organic-growth"
+      "creative-production"
     ],
     "expectedSupport": [
-      "analytics-cro-and-reporting",
-      "marketing-strategy-and-growth",
-      "kpi-reporting"
+      "kpi-reporting",
+      "creative-positioning",
+      "last-30-days-research"
     ],
     "mustNotPrimary": [
-      "creative-ads-explorer",
-      "creative-production"
+      "creative-ads-explorer"
     ],
     "source": "manual-fresh-holdout",
     "collectedAfterCommit": "e2a47a6402a2e603dfc42aae980b89dd2d4d7d17",

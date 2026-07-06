@@ -1,9 +1,9 @@
 # SkillWeaver V2 Post-Tuning Challenge Benchmark
 
-Generated: 2026-06-27T22:04:37.233Z
+Generated: 2026-07-06T20:57:11.502Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1782597877233,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"38e4c6df2a46acc4840560ad73a872ee61460c37","dirty":true,"dirtyPaths":["README.md","REQUIREMENTS.md","benchmarks/skill-routing-clean-holdout-v5.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","docs/SUPPORT-QUALITY-ROADMAP.md","docs/V2-EXPERIMENT-LOG.md","docs/VERIFICATION.md","scripts/benchmark-skill-routing.mjs","server/skill-scanner.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/skill-scanner.js"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":442,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":8,"sha256":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","scanner":"sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37","benchmarkScript":"sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8","corpus":"sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:579832e10e7c3b07057655bf37027495f55fa771d1192acd459d038531eb8a6c"}
+{"generatedAt":1783371431502,"command":"npm run benchmark:skills:holdout","suite":{"id":"holdout","label":"Post-Tuning Challenge","gatesAcceptance":false},"git":{"commit":"d044c7c71ab42e5a7405c287576ea03745f37a1d","dirty":true,"dirtyPaths":[".github/","benchmarks/skill-routing-cases.json","benchmarks/skill-routing-clean-holdout-v3.json","benchmarks/skill-routing-clean-holdout-v4.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/concept-routing-config.js","server/index.js","server/skill-scanner.js","src/main.jsx","src/styles.css","tests/api.test.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/concept-routing-config.js","server/skill-scanner.js"],"cases":{"count":22,"sha256":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c"},"inputs":{"cases":"sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":false,"failures":["V2 confusable wrong-primary rate must stay at 0."]}},"snapshotFingerprint":"sha256:a509344cfabdaad4288d1891340976b836dee2667c0187c199130424c86ba548"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,24 +11,25 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:holdout`
 - Suite: Post-Tuning Challenge
 - Acceptance gate: no
-- Git commit at generation: `38e4c6df2a46acc4840560ad73a872ee61460c37`
+- Git commit at generation: `d044c7c71ab42e5a7405c287576ea03745f37a1d`
 - Git dirty: yes
-- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/skill-scanner.js`
+- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/concept-routing-config.js`, `server/skill-scanner.js`
 - Case hash: `sha256:6fec374bdfbc78bfc2a8dc58daff363486365590b754c829afe1db0e676ab3a6`
-- Scanner hash: `sha256:2137087277e3bedff945d1034f09a05c3721d7ff73abda6e3405e4a273e13e37`
-- Benchmark script hash: `sha256:c9a9291425c29aca8466bad261d756d1c1eabd00c4af7761fa04c42a04b448b8`
-- Corpus hash: `sha256:8a1e528112dd20a5ba8115803b1685d75de0a3a9dc4e735213ee183c53d6d1f0`
-- Snapshot fingerprint: `sha256:579832e10e7c3b07057655bf37027495f55fa771d1192acd459d038531eb8a6c`
+- Routing config hash: `sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f`
+- Scanner hash: `sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039`
+- Benchmark script hash: `sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44`
+- Corpus hash: `sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c`
+- Snapshot fingerprint: `sha256:a509344cfabdaad4288d1891340976b836dee2667c0187c199130424c86ba548`
 - Freshness check: pass
-- Quality gate, reported only: pass
+- Quality gate, reported only: fail: V2 confusable wrong-primary rate must stay at 0.
 
 ## Corpus
 
-- Skills indexed: 442
+- Skills indexed: 429
 - Skill relationship edges: 2000
 - Concept nodes: 22
 - Concept edges: 200
-- Skill roots: 8
+- Skill roots: 7
 - Benchmark cases: 22
 
 ## Suite Role
@@ -52,49 +53,50 @@ This is not pristine untouched holdout evidence for the current V2 route. The fi
 | Support-skill coverage@5 | 34.1% | 45.5% | 70.5% | +36.4 pp | +25.0 pp |
 | Support precision@5, exploratory | 18.2% | 25.4% | 35.2% | +17.0 pp | +9.8 pp |
 | Forbidden primary rate, lower is better | 0.0% | 0.0% | 0.0% | 0.0 pp | 0.0 pp |
+| Confusable wrong primary rate, lower is better | 31.8% | 22.7% | 4.5% | -27.3 pp better | -18.2 pp better |
 | Mean candidates to expected skill, lower is better | 1.6 | 1.5 | 1.0 | -0.6 candidates better | -0.5 candidates better |
 
 ## Claim Scope
 
 This report supports the claim that V2 remains strong on a 22-case post-tuning challenge suite: 21/22 primary hit@1, 22/22 expected primary in top/workflow five, and 0/22 forbidden primaries. Workflow support quality is weaker than primary routing: support coverage@5 is 70.5%, support precision@5 is 35.2%, and 12/22 cases miss at least one expected support skill.
 
-V2 raw counts: primary hit@1 21/22; expected primary top/workflow-five 22/22; forbidden primary 0/22; support-miss cases 12/22.
+V2 raw counts: primary hit@1 21/22; expected primary top/workflow-five 22/22; forbidden primary 0/22; confusable wrong primary 1/22; support-miss cases 12/22.
 
-Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from 442 skills to 5 candidates, a 98.9% candidate reduction per task.
+Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from 429 skills to 5 candidates, a 98.8% candidate reduction per task.
 Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.
 Post-Tuning Challenge quality is intentionally reported rather than accepted or failed; the freshness check only proves that the report matches the current code, corpus, and post-tuning challenge cases.
 
 ## Quality by Domain
 
-| Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Backend services | 4 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 2/4 | +7.5 pts | +5.0 pts |
-| Platform delivery | 3 | 93.3 | 100.0% | 100.0% | 66.7% | 41.7% | 0.0% | 2/3 | +51.1 pts | +39.8 pts |
-| Product, research, and planning | 3 | 86.7 | 100.0% | 100.0% | 33.3% | 16.7% | 0.0% | 3/3 | +22.0 pts | +16.7 pts |
-| AI agent apps | 2 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 2/2 | +5.0 pts | 0.0 pts |
-| Data analytics | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +36.7 pts | +5.0 pts |
-| Frontend experience | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +35.0 pts | +26.7 pts |
-| Games and simulation | 2 | 75.0 | 50.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +17.5 pts | +21.7 pts |
-| Communications and knowledge | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +10.0 pts | +10.0 pts |
-| Documents and publishing | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | 0.0 pts | 0.0 pts |
-| Repo collaboration | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 25.0% | 0.0% | 0/1 | +20.0 pts | +20.0 pts |
-| Security and risk | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 1/1 | +10.0 pts | 0.0 pts |
+| Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 confusable wrong primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Backend services | 4 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 0.0% | 2/4 | +7.5 pts | +5.0 pts |
+| Platform delivery | 3 | 93.3 | 100.0% | 100.0% | 66.7% | 41.7% | 0.0% | 0.0% | 2/3 | +51.1 pts | +39.8 pts |
+| Product, research, and planning | 3 | 86.7 | 100.0% | 100.0% | 33.3% | 16.7% | 0.0% | 0.0% | 3/3 | +22.0 pts | +16.7 pts |
+| AI agent apps | 2 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 0.0% | 2/2 | +5.0 pts | 0.0 pts |
+| Data analytics | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 0.0% | 1/2 | +36.7 pts | +5.0 pts |
+| Frontend experience | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 0.0% | 1/2 | +35.0 pts | +26.7 pts |
+| Games and simulation | 2 | 75.0 | 50.0% | 100.0% | 100.0% | 50.0% | 0.0% | 50.0% | 0/2 | +17.5 pts | +21.7 pts |
+| Communications and knowledge | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0.0% | 0/1 | +10.0 pts | +10.0 pts |
+| Documents and publishing | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0.0% | 0/1 | 0.0 pts | 0.0 pts |
+| Repo collaboration | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 25.0% | 0.0% | 0.0% | 0/1 | +20.0 pts | +20.0 pts |
+| Security and risk | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 0.0% | 1/1 | +10.0 pts | 0.0 pts |
 
 ## Quality by Expected Concept
 
-| Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Backend APIs and services | 4 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 2/4 | +7.5 pts | +5.0 pts |
-| Product planning | 4 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 3/4 | +19.0 pts | +15.0 pts |
-| Deployment and release | 3 | 93.3 | 100.0% | 100.0% | 66.7% | 41.7% | 0.0% | 2/3 | +51.1 pts | +39.8 pts |
-| Agent and LLM apps | 2 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 2/2 | +5.0 pts | 0.0 pts |
-| Data dashboards and reports | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 1/2 | +36.7 pts | +5.0 pts |
-| Game development | 2 | 75.0 | 50.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/2 | +17.5 pts | +21.7 pts |
-| Documents and PDFs | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | 0.0 pts | 0.0 pts |
-| Figma design handoff | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0/1 | +70.0 pts | +63.3 pts |
-| Frontend implementation | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 1/1 | 0.0 pts | -10.0 pts |
-| Repository operations | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 25.0% | 0.0% | 0/1 | +20.0 pts | +20.0 pts |
-| Security review | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 1/1 | +10.0 pts | 0.0 pts |
+| Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 confusable wrong primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Backend APIs and services | 4 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 0.0% | 2/4 | +7.5 pts | +5.0 pts |
+| Product planning | 4 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 0.0% | 3/4 | +19.0 pts | +15.0 pts |
+| Deployment and release | 3 | 93.3 | 100.0% | 100.0% | 66.7% | 41.7% | 0.0% | 0.0% | 2/3 | +51.1 pts | +39.8 pts |
+| Agent and LLM apps | 2 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 0.0% | 2/2 | +5.0 pts | 0.0 pts |
+| Data dashboards and reports | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 0.0% | 1/2 | +36.7 pts | +5.0 pts |
+| Game development | 2 | 75.0 | 50.0% | 100.0% | 100.0% | 50.0% | 0.0% | 50.0% | 0/2 | +17.5 pts | +21.7 pts |
+| Documents and PDFs | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0.0% | 0/1 | 0.0 pts | 0.0 pts |
+| Figma design handoff | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0.0% | 0/1 | +70.0 pts | +63.3 pts |
+| Frontend implementation | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 0.0% | 1/1 | 0.0 pts | -10.0 pts |
+| Repository operations | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 25.0% | 0.0% | 0.0% | 0/1 | +20.0 pts | +20.0 pts |
+| Security review | 1 | 90.0 | 100.0% | 100.0% | 50.0% | 25.0% | 0.0% | 0.0% | 1/1 | +10.0 pts | 0.0 pts |
 
 ## Per-Case Results
 

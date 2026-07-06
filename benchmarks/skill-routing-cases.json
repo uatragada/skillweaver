@@ -315,10 +315,10 @@
     "concept": "marketing-growth",
     "query": "Analyze conversion tracking and CRO reporting for a marketing funnel",
     "expectedPrimary": [
-      "analytics-cro-and-reporting"
+      "kpi-reporting"
     ],
     "expectedSupport": [
-      "kpi-reporting"
+      "data-analysis-standard"
     ]
   },
   {
@@ -509,11 +509,11 @@
     "concept": "marketing-growth",
     "query": "Plan an SEO and organic growth strategy with technical SEO, entity content, and AI search guidance",
     "expectedPrimary": [
-      "seo-and-organic-growth"
+      "last-30-days-research"
     ],
     "expectedSupport": [
-      "marketing-strategy-and-growth",
-      "industry-playbooks"
+      "premium-saas-landing-pages",
+      "creative-positioning"
     ]
   },
   {

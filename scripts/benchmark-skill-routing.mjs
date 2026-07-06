@@ -132,6 +132,7 @@ const REPORT_PATH = SUITE.reportPath;
 const INVALIDATING_PATHS = [
   SUITE.casesRelativePath,
   "package.json",
+  "server/concept-routing-config.js",
   "server/skill-scanner.js",
   "scripts/benchmark-skill-routing.mjs"
 ];
@@ -254,6 +255,7 @@ async function buildFreshness({ index, cases, rows, summaries, generatedAt }) {
   const git = getGitInfo();
   const inputHashes = {
     cases: await hashFile(CASES_PATH),
+    routingConfig: await hashFile(resolve("server/concept-routing-config.js")),
     scanner: await hashFile(resolve("server/skill-scanner.js")),
     benchmarkScript: await hashFile(resolve("scripts/benchmark-skill-routing.mjs")),
     corpus: corpusFingerprint(index)
@@ -522,6 +524,7 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
     : null;
   const primaryHit = Boolean(primary && !forbiddenPrimary && matchesExpected(primary, testCase.expectedPrimary));
   const hitAt5 = visibleNames.some((name) => matchesExpected(name, testCase.expectedPrimary));
+  const confusableWrongPrimary = Boolean(primary && !primaryHit && hitAt5);
   const coverage = supportCoverage(visibleNames, testCase.expectedSupport ?? []);
   const precision = supportPrecision(visibleNames, testCase.expectedSupport ?? []);
   const supportMisses = missingSupport(visibleNames, testCase.expectedSupport ?? []);
@@ -535,6 +538,7 @@ function evaluateSystem({ index, testCase, systemName, ranked, topNames = null, 
     rank,
     primaryHit,
     hitAt5,
+    confusableWrongPrimary,
     forbiddenPrimary,
     supportMisses,
     reciprocalRank: rr,
@@ -565,6 +569,7 @@ function summarize(evaluations) {
     supportCoverage: evaluations.reduce((sum, entry) => sum + entry.supportCoverage, 0) / total,
     supportPrecisionAt5: supportEvaluations.reduce((sum, entry) => sum + entry.supportPrecision, 0) / supportTotal,
     forbiddenPrimaryRate: evaluations.filter((entry) => entry.forbiddenPrimary).length / total,
+    confusableWrongPrimaryRate: evaluations.filter((entry) => entry.confusableWrongPrimary).length / total,
     outputQualityScore: evaluations.reduce((sum, entry) => sum + entry.qualityScore, 0) / total,
     meanCandidatesToExpected: evaluations.reduce((sum, entry) => sum + entry.candidatesReviewedToExpected, 0) / total,
     medianCandidatesToExpected: reviewed[Math.floor(reviewed.length / 2)] ?? null,
@@ -583,6 +588,7 @@ function summarizeRows(rows) {
     v2PrimaryHits: rows.filter((row) => row.v2.primaryHit).length,
     v2TopHits: rows.filter((row) => row.v2.hitAt5).length,
     v2ForbiddenPrimaries: rows.filter((row) => row.v2.forbiddenPrimary).length,
+    v2ConfusableWrongPrimaries: rows.filter((row) => row.v2.confusableWrongPrimary).length,
     v2SupportMissCases: rows.filter((row) => row.v2.supportMisses.length).length
   };
 }
@@ -621,6 +627,7 @@ function compactSliceSummaries(summaries) {
     v2SupportCoverage: summary.v2Summary.supportCoverage,
     v2SupportPrecisionAt5: summary.v2Summary.supportPrecisionAt5,
     v2ForbiddenPrimaryRate: summary.v2Summary.forbiddenPrimaryRate,
+    v2ConfusableWrongPrimaryRate: summary.v2Summary.confusableWrongPrimaryRate,
     v2SupportMissCases: summary.v2SupportMissCases,
     v2GainVsNoSkillWeaver: summary.outputQualityGainVsNo,
     v2GainVsSkillLevel: summary.outputQualityGainVsV1
@@ -643,6 +650,9 @@ function evaluateAcceptance({ noSkillWeaverSummary, v1Summary, v2Summary }) {
   }
   if (v2Summary.forbiddenPrimaryRate > 0) {
     failures.push("V2 forbidden primary rate must stay at 0.");
+  }
+  if (v2Summary.confusableWrongPrimaryRate > 0) {
+    failures.push("V2 confusable wrong-primary rate must stay at 0.");
   }
   if (v2Summary.meanCandidatesToExpected > 1.25) {
     failures.push("V2 mean candidates to expected skill should stay near 1.");
@@ -761,6 +771,14 @@ function buildSummaryRows({ noSkillWeaverSummary, v1Summary, v2Summary }) {
       v2VsV1: formatLowerIsBetterPercentDelta(v2Summary.forbiddenPrimaryRate, v1Summary.forbiddenPrimaryRate)
     },
     {
+      metric: "Confusable wrong primary rate, lower is better",
+      no: formatPercent(noSkillWeaverSummary.confusableWrongPrimaryRate),
+      v1: formatPercent(v1Summary.confusableWrongPrimaryRate),
+      v2: formatPercent(v2Summary.confusableWrongPrimaryRate),
+      v2VsNo: formatLowerIsBetterPercentDelta(v2Summary.confusableWrongPrimaryRate, noSkillWeaverSummary.confusableWrongPrimaryRate),
+      v2VsV1: formatLowerIsBetterPercentDelta(v2Summary.confusableWrongPrimaryRate, v1Summary.confusableWrongPrimaryRate)
+    },
+    {
       metric: "Mean candidates to expected skill, lower is better",
       no: noSkillWeaverSummary.meanCandidatesToExpected.toFixed(1),
       v1: v1Summary.meanCandidatesToExpected.toFixed(1),
@@ -775,13 +793,13 @@ function buildSliceTable(title, summaries) {
   const lines = [
     `## ${title}`,
     "",
-    "| Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |",
-    "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"
+    "| Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 confusable wrong primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |",
+    "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"
   ];
 
   for (const summary of summaries) {
     lines.push(
-      `| ${summary.label} | ${summary.cases} | ${summary.v2Summary.outputQualityScore.toFixed(1)} | ${formatPercent(summary.v2Summary.primaryHitAt1)} | ${formatPercent(summary.v2Summary.hitAt5)} | ${formatPercent(summary.v2Summary.supportCoverage)} | ${formatPercent(summary.v2Summary.supportPrecisionAt5)} | ${formatPercent(summary.v2Summary.forbiddenPrimaryRate)} | ${summary.v2SupportMissCases}/${summary.cases} | ${formatDelta(summary.outputQualityGainVsNo, " pts")} | ${formatDelta(summary.outputQualityGainVsV1, " pts")} |`
+      `| ${summary.label} | ${summary.cases} | ${summary.v2Summary.outputQualityScore.toFixed(1)} | ${formatPercent(summary.v2Summary.primaryHitAt1)} | ${formatPercent(summary.v2Summary.hitAt5)} | ${formatPercent(summary.v2Summary.supportCoverage)} | ${formatPercent(summary.v2Summary.supportPrecisionAt5)} | ${formatPercent(summary.v2Summary.forbiddenPrimaryRate)} | ${formatPercent(summary.v2Summary.confusableWrongPrimaryRate)} | ${summary.v2SupportMissCases}/${summary.cases} | ${formatDelta(summary.outputQualityGainVsNo, " pts")} | ${formatDelta(summary.outputQualityGainVsV1, " pts")} |`
     );
   }
 
@@ -940,6 +958,7 @@ function buildMarkdown({
     `- Git dirty: ${freshness.git.dirty ? "yes" : "no"}`,
     `- Invalidating dirty paths: ${freshness.invalidatingDirtyPaths.length ? freshness.invalidatingDirtyPaths.map((path) => `\`${path}\``).join(", ") : "none"}`,
     `- Case hash: \`${freshness.cases.sha256}\``,
+    `- Routing config hash: \`${freshness.inputs.routingConfig}\``,
     `- Scanner hash: \`${freshness.inputs.scanner}\``,
     `- Benchmark script hash: \`${freshness.inputs.benchmarkScript}\``,
     `- Corpus hash: \`${freshness.corpus.sha256}\``,
@@ -981,6 +1000,7 @@ function buildMarkdown({
   const v2PrimaryHits = rows.filter((row) => row.v2.primaryHit).length;
   const v2TopHits = rows.filter((row) => row.v2.hitAt5).length;
   const v2Forbidden = rows.filter((row) => row.v2.forbiddenPrimary).length;
+  const v2ConfusableWrongPrimaries = rows.filter((row) => row.v2.confusableWrongPrimary).length;
   const v2SupportMissCases = rows.filter((row) => row.v2.supportMisses.length).length;
 
   lines.push(
@@ -990,11 +1010,12 @@ function buildMarkdown({
       v2PrimaryHits,
       v2TopHits,
       v2Forbidden,
+      v2ConfusableWrongPrimaries,
       v2SupportMissCases,
       v2Summary
     }),
     "",
-    `V2 raw counts: primary hit@1 ${v2PrimaryHits}/${cases.length}; expected primary top/workflow-five ${v2TopHits}/${cases.length}; forbidden primary ${v2Forbidden}/${cases.length}; support-miss cases ${v2SupportMissCases}/${cases.length}.`,
+    `V2 raw counts: primary hit@1 ${v2PrimaryHits}/${cases.length}; expected primary top/workflow-five ${v2TopHits}/${cases.length}; forbidden primary ${v2Forbidden}/${cases.length}; confusable wrong primary ${v2ConfusableWrongPrimaries}/${cases.length}; support-miss cases ${v2SupportMissCases}/${cases.length}.`,
     "",
     `Both the skill-level baseline and V2 expose a top-5 workflow/recommendation set, narrowing review from ${index.skills.length} skills to 5 candidates, a ${(candidateReduction * 100).toFixed(1)}% candidate reduction per task.`,
     "Support precision is exploratory: it estimates how much of the non-primary top/workflow-five set is expected support, while support coverage measures whether expected helpers are present at all.",
@@ -1259,6 +1280,8 @@ async function main() {
         hitAt5PercentagePoints: (v2Summary.hitAt5 - noSkillWeaverSummary.hitAt5) * 100,
         mrr: v2Summary.mrr - noSkillWeaverSummary.mrr,
         supportCoveragePercentagePoints: (v2Summary.supportCoverage - noSkillWeaverSummary.supportCoverage) * 100,
+        supportPrecisionPercentagePoints: (v2Summary.supportPrecisionAt5 - noSkillWeaverSummary.supportPrecisionAt5) * 100,
+        confusableWrongPrimaryPercentagePoints: (v2Summary.confusableWrongPrimaryRate - noSkillWeaverSummary.confusableWrongPrimaryRate) * 100,
         outputQualityScore: v2Summary.outputQualityScore - noSkillWeaverSummary.outputQualityScore,
         meanExpectedRankDeltaLowerIsBetter: v2Summary.meanCandidatesToExpected - noSkillWeaverSummary.meanCandidatesToExpected
       },
@@ -1267,6 +1290,8 @@ async function main() {
         hitAt5PercentagePoints: (v2Summary.hitAt5 - v1Summary.hitAt5) * 100,
         mrr: v2Summary.mrr - v1Summary.mrr,
         supportCoveragePercentagePoints: (v2Summary.supportCoverage - v1Summary.supportCoverage) * 100,
+        supportPrecisionPercentagePoints: (v2Summary.supportPrecisionAt5 - v1Summary.supportPrecisionAt5) * 100,
+        confusableWrongPrimaryPercentagePoints: (v2Summary.confusableWrongPrimaryRate - v1Summary.confusableWrongPrimaryRate) * 100,
         outputQualityScore: v2Summary.outputQualityScore - v1Summary.outputQualityScore,
         meanExpectedRankDeltaLowerIsBetter: v2Summary.meanCandidatesToExpected - v1Summary.meanCandidatesToExpected
       }

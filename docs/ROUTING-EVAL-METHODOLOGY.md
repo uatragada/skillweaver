@@ -113,6 +113,8 @@ Support precision@5 is tracked as an exploratory metric outside the composite sc
 
 Forbidden primary rate is tracked separately as a lower-is-better guardrail. It is not part of the composite score, but any V2 violation should block a routing-quality claim until fixed or explicitly retired.
 
+Confusable wrong-primary rate is also tracked separately as a lower-is-better guardrail. It counts cases where the expected primary appears in the top/workflow-five set, but the selected primary is still wrong. This catches benchmark false positives where broad expected-name fragments or support-heavy workflows hide a bad first skill.
+
 ## Slice Reporting
 
 Each generated report includes `Quality by Domain` and `Quality by Expected Concept` tables. These tables reuse the already-evaluated benchmark rows; they do not run extra scanner passes, extra route evaluations, or LLM calls.
@@ -140,6 +142,7 @@ For V2 to count as a real improvement on the active acceptance suite:
 - Primary hit@1 must improve or stay flat while support coverage materially improves.
 - Expected top/workflow-5 retrieval must not regress.
 - Forbidden primary rate should stay at 0 for V2.
+- Confusable wrong-primary rate should stay at 0 for V2.
 - Mean candidates to expected skill should stay near 1.
 - The route must be product-real: `/api/workflow` should use the same V2 helper as the benchmark.
 - Any benchmark case validation issue should fail the run before quality metrics are trusted.

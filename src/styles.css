@@ -107,6 +107,24 @@ button {
   text-transform: uppercase;
 }
 
+.cap-notice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  border: 1px solid #e9d7a8;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff8e8;
+  color: #7a4b08;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.cap-notice svg {
+  margin-top: 1px;
+}
+
 .filter-stack {
   display: grid;
   gap: 12px;
@@ -446,6 +464,17 @@ button {
   border-radius: 8px;
   background: #ffffff;
   padding: 14px;
+}
+
+.side-stack {
+  position: sticky;
+  top: 18px;
+  display: grid;
+  gap: 16px;
+}
+
+.side-stack .side-panel {
+  position: static;
 }
 
 .workflow-list {
@@ -789,7 +818,8 @@ button {
     padding: 16px;
   }
 
-  .side-panel {
+  .side-panel,
+  .side-stack {
     position: static;
   }
 
