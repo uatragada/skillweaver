@@ -23,8 +23,5 @@ jobs:
       - name: Test
         run: npm test
 
-      - name: Benchmark freshness
-        run: npm run benchmark:skills:check
-
       - name: Build
         run: npm run build

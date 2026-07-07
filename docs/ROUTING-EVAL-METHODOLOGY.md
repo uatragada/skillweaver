@@ -164,12 +164,16 @@ A benchmark claim is fresh only when it records:
 - Corpus counts.
 - Paths whose changes invalidate the report: the suite case file, `package.json`, `server/skill-scanner.js`, `scripts/benchmark-skill-routing.mjs`, and any indexed skill root.
 
-Run `npm run benchmark:skills:check` before relying on the checked-in report. The check recomputes the current benchmark snapshot without rewriting docs and fails when:
+Run `npm run benchmark:skills:check` before relying on the checked-in report for
+the same configured local corpus. The check recomputes the current benchmark
+snapshot without rewriting docs and fails when:
 
 - Embedded report metadata is missing.
 - The report snapshot fingerprint does not match current case, scanner, benchmark-script, corpus, and acceptance inputs.
 - The report records a failed acceptance result.
 - Benchmark-invalidating files are dirty at check time.
+- The configured skill roots no longer contain the skills referenced by the
+  benchmark cases.
 
 Do not update current-snapshot metrics by hand without regenerating `docs/SKILL-USE-GAINS.md`, or label the numbers as historical.
 

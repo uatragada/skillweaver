@@ -70,8 +70,10 @@ reports the warning instead of stopping the whole scan.
 ```powershell
 npm test
 npm run build
-npm run benchmark:skills:nightmare
 ```
+
+Benchmark commands are optional local evaluations after you have configured a
+skill library. They are not required for a fresh clone to pass repo checks.
 
 For release verification, see [Verification](VERIFICATION.md).
 
@@ -94,5 +96,7 @@ If benchmark checks fail:
 
 - Read the failure text first. The check mode intentionally fails when reports
   are stale or benchmark-invalidating files are dirty.
+- If expected skill fragments are missing, your configured library probably
+  does not contain the same skills used to generate the checked-in report.
 - Regenerate the relevant report only when the code, corpus, and cases are in
   the state you intend to cite.

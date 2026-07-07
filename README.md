@@ -118,11 +118,15 @@ known failure modes to improve.
 | `npm test` | Run parser, API, routing, and nightmare-case unit coverage. |
 | `npm run build` | Build the production UI. |
 | `npm start` | Serve the API and production build. |
-| `npm run benchmark:skills` | Regenerate the active acceptance report. |
-| `npm run benchmark:skills:check` | Verify the active report is fresh. |
-| `npm run benchmark:skills:nightmare` | Run the adversarial nightmare suite. |
+| `npm run benchmark:skills` | Regenerate the active acceptance report for configured local roots. |
+| `npm run benchmark:skills:check` | Verify the active report against the current configured local roots. |
+| `npm run benchmark:skills:nightmare` | Run the adversarial nightmare suite against configured local roots. |
 
-More benchmark commands are documented in [Verification](docs/VERIFICATION.md).
+CI intentionally runs only repo-contained checks: `npm test` and
+`npm run build`. Benchmark commands evaluate whichever skill library is
+configured on the current machine, so they are maintainer evidence rather than
+portable clone setup tests. More benchmark commands are documented in
+[Verification](docs/VERIFICATION.md).
 
 ## API Snapshot
 

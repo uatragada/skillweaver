@@ -4,15 +4,24 @@ Use this page before citing benchmark results or publishing a release.
 
 ## Core Checks
 
+These are the portable repo checks used by CI:
+
 ```powershell
 npm test
-npm run index:skills
 npm run build
 ```
 
+`npm run index:skills` is still useful during local setup, but its counts and
+warnings depend on the user's configured skill roots.
+
 ## Benchmark Checks
 
-The active acceptance report is gating:
+Benchmark checks are local-corpus evaluations. They should gate a benchmark
+claim before publishing or citing it, but they should not be treated as
+portable CI checks for every clone because each user can configure different
+skill roots.
+
+The active acceptance report is the main maintainer benchmark:
 
 ```powershell
 npm run benchmark:skills:check
