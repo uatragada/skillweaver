@@ -1,6 +1,6 @@
 # SkillWeaver Requirements
 
-SkillWeaver is a separate, lightweight sibling app inspired by MindWeaver, but purpose-built for navigating agentic Codex skills. It must not live inside the MindWeaver repository and must not edit MindWeaver source files.
+SkillWeaver is a separate, lightweight sibling app inspired by MindWeaver, but purpose-built for navigating agentic Codex skills. It must not live inside a MindWeaver repository and must not edit MindWeaver source files.
 
 ## Product Goal
 
@@ -17,7 +17,7 @@ The app is built for the agent using it as much as for the human operator. It sh
 
 ## Explicit Scope
 
-- Create a new repo at `G:\Projects\SkillWeaver`.
+- Keep SkillWeaver as its own standalone repository.
 - Keep MindWeaver as read-only reference material only.
 - Build a local-first app with no hosted accounts, auth, extension, quiz loop, or long-term learning features.
 - Index existing Codex user skills under the current user's home-directory Codex skill folders.

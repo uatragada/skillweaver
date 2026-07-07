@@ -1,6 +1,55 @@
 # SkillWeaver
 
-SkillWeaver is a lightweight local-first navigator for Codex skills. It scans local `SKILL.md` files and turns them into a concept-first map with ranked routing, related skills, resources, and source paths.
+![Node 22](https://img.shields.io/badge/node-22.12%2B-2f7d32?style=flat-square)
+![React](https://img.shields.io/badge/react-19-149eca?style=flat-square)
+![Local first](https://img.shields.io/badge/local--first-no%20cloud%20account-0f766e?style=flat-square)
+![Deterministic](https://img.shields.io/badge/routing-deterministic-334155?style=flat-square)
+![Benchmarked](https://img.shields.io/badge/routing-benchmarked-7c3aed?style=flat-square)
+
+SkillWeaver is a local-first navigator for Codex skills. It scans your local
+`SKILL.md` files, builds a concept graph above them, and helps an agent choose
+the right skill before it spends context on the wrong instructions.
+
+![SkillWeaver dashboard showing search, concept routing, suggested workflow, and source paths](docs/assets/skillweaver-dashboard.png)
+
+## Why It Exists
+
+Models have a real skill-navigation problem once a useful skill library gets
+large:
+
+- The full catalog can be too large to keep in context.
+- Skill names overlap across user, system, and plugin libraries.
+- The best skill is often implied by the task, not named by the user.
+- Loading every plausible skill wastes tokens and can mix incompatible guidance.
+- Local skill libraries change faster than generic hosted documentation.
+
+SkillWeaver solves the local routing layer. It does not make a model "OP"; it
+gives the model a smaller, better grounded set of instructions to inspect.
+
+## What You Get
+
+- **Concept-first navigation**: high-level work nodes such as frontend
+  implementation, security review, GitHub collaboration, data dashboards, and
+  deployment.
+- **Role-tagged skills**: each concept points to gateway, primary,
+  verification, supporting, and reference skills.
+- **Ranked task routing**: search by plain task wording and get the likely
+  skill path, not just keyword matches.
+- **Suggested workflows**: primary plus supporting skills in a compact sequence.
+- **Source provenance**: every recommendation keeps the absolute `SKILL.md`
+  path and resource folders.
+- **Local-first setup**: no account, no hosted service, no LLM call required to
+  index or search.
+- **Benchmark ledger**: active, holdout, clean regression, and nightmare
+  routing suites are checked into `docs/`.
+
+## Concept Map
+
+![SkillWeaver concept mapping diagram](docs/assets/skillweaver-concept-map.svg)
+
+SkillWeaver keeps the filesystem authoritative. It does not rewrite existing
+skills. The concept layer is derived from scanner metadata and curated routing
+rules, then exposed through the UI and API.
 
 ## Quick Start
 
@@ -9,13 +58,14 @@ npm install
 npm run dev
 ```
 
-Open `http://127.0.0.1:5177`.
+Open the app at `http://127.0.0.1:5177`.
 
-The API runs on `http://127.0.0.1:3777`.
+The API runs at `http://127.0.0.1:3777`.
 
-## Indexing
+## Configure Your Skill Library
 
-By default SkillWeaver scans common Codex and agent skill folders under the current user's home directory:
+By default, SkillWeaver scans common Codex and agent skill folders under your
+home directory:
 
 - `$HOME\.codex\skills`
 - `$HOME\.codex\skills\.system`
@@ -25,146 +75,100 @@ By default SkillWeaver scans common Codex and agent skill folders under the curr
 - `$HOME\.codex\plugins\cache\openai-curated-remote`
 - `$HOME\.codex\plugins\cache\openai-primary-runtime`
 
-Override roots with a semicolon-separated environment variable, or copy `.env.example` to `.env.local` and set `SKILLWEAVER_SKILL_ROOTS` there:
+For a fresh clone on another machine, copy `.env.example` to `.env.local` and
+set semicolon-separated roots:
 
 ```powershell
 $env:SKILLWEAVER_SKILL_ROOTS="$HOME\.codex\skills;C:\path\to\your\skills"
 npm run dev
 ```
 
-Keep machine-local skill roots in `.env.local`, not in committed code or benchmark cases. A fresh clone works with the default home-directory Codex paths, and users with additional skill libraries can add their own roots without editing the repo.
+Keep machine-local paths in `.env.local`. Do not commit personal skill-library
+roots into benchmark cases or source files.
+
+## Screenshots
+
+| Desktop navigator | Mobile layout |
+| --- | --- |
+| ![Desktop SkillWeaver UI](docs/assets/skillweaver-dashboard.png) | ![Mobile SkillWeaver UI](docs/assets/skillweaver-mobile.png) |
+
+## Benchmarked Results
+
+These are deterministic routing benchmarks over the current local corpus used
+when the reports were generated. Local skill counts can differ by machine and
+configured roots.
+
+| Suite | Cases | No SkillWeaver | Skill-level route | V2 concept route | What it means |
+| --- | ---: | ---: | ---: | ---: | --- |
+| [Active acceptance](docs/SKILL-USE-GAINS.md) | 78 | 74.4 | 76.4 | 99.5 | Main current-quality claim; 78/78 primary hit@1. |
+| [Clean holdout V5 regression](docs/SKILL-USE-CLEAN-HOLDOUT-V5.md) | 17 | 59.3 | 55.1 | 95.3 | Regression evidence after V5 misses informed fixes, not clean generalization proof. |
+| [Nightmare benchmark](docs/SKILL-ROUTING-NIGHTMARE.md) | 70 | 45.7 | 50.5 | 66.6 | Adversarial ambiguity and guardrail stress test; useful backlog signal. |
+
+The active suite shows the concept route improving the composite output-quality
+score by `+25.1` points versus no SkillWeaver and `+23.1` points versus the
+skill-level route. The nightmare suite is intentionally harsh and still leaves
+known failure modes to improve.
 
 ## Commands
 
-```powershell
-npm test
-npm run index:skills
-npm run benchmark:skills
-npm run benchmark:skills:check
-npm run benchmark:skills:holdout
-npm run benchmark:skills:holdout:check
-npm run benchmark:skills:fresh
-npm run benchmark:skills:fresh:check
-npm run benchmark:skills:frozen
-npm run benchmark:skills:frozen:check
-npm run benchmark:skills:clean-v2-regression
-npm run benchmark:skills:clean-v2-regression:check
-npm run benchmark:skills:clean-v3
-npm run benchmark:skills:clean-v3:check
-npm run benchmark:skills:clean-v4
-npm run benchmark:skills:clean-v4:check
-npm run benchmark:skills:clean-v5
-npm run benchmark:skills:clean-v5:check
-npm run build
-npm start
-```
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start API and Vite UI together. |
+| `npm run index:skills` | Scan configured roots and print corpus stats. |
+| `npm test` | Run parser, API, routing, and nightmare-case unit coverage. |
+| `npm run build` | Build the production UI. |
+| `npm start` | Serve the API and production build. |
+| `npm run benchmark:skills` | Regenerate the active acceptance report. |
+| `npm run benchmark:skills:check` | Verify the active report is fresh. |
+| `npm run benchmark:skills:nightmare` | Run the adversarial nightmare suite. |
 
-## What It Indexes
+More benchmark commands are documented in [Verification](docs/VERIFICATION.md).
 
-- `SKILL.md` frontmatter and body headings.
-- `agents/openai.yaml` UI metadata.
-- Resource folders: `references`, `reference`, `scripts`, `assets`, `examples`, and `evaluations`.
-- Heuristic domains and tool hints.
-- Duplicate names, shared namespaces, shared domains, shared tools, and skill mentions.
-- High-level work concepts that reference role-tagged skills.
-- Concept links from curated workflow adjacency and shared concept evidence.
+## API Snapshot
 
-The filesystem stays authoritative. SkillWeaver does not rewrite existing skills.
+SkillWeaver exposes a small local JSON API:
 
-## Concept Mapping
+- `GET /api/health`
+- `POST /api/refresh`
+- `GET /api/skills?q=...`
+- `GET /api/skills/:id`
+- `GET /api/skills/:id/related`
+- `GET /api/concepts?q=...`
+- `GET /api/concepts/:id`
+- `GET /api/concepts/:id/related`
+- `GET /api/workflow?q=...`
 
-SkillWeaver now treats high-level work concepts as the primary graph nodes. Each concept references skills by role:
+Use `?mode=skills` on `/api/skills` or `/api/workflow` to compare against the
+raw skill-level baseline. See [API Reference](docs/API.md).
 
-- `gateway`: load or inspect first.
-- `primary`: main execution skill for that concept.
-- `verification`: skills that prove the work is correct.
-- `supporting`: adjacent helpers.
-- `reference`: weaker but still relevant matches.
+## Repository Map
 
-The concept layer is deterministic and derived from current skill metadata; it does not mutate the source `SKILL.md` files.
+| Path | What lives there |
+| --- | --- |
+| `server/skill-scanner.js` | Scanner, parser, relationship builder, concept search, and routing logic. |
+| `server/concept-routing-config.js` | Curated concept definitions and intent boosts. |
+| `server/index.js` | Express API and production static server. |
+| `src/` | React navigator UI. |
+| `scripts/` | Indexing, dev server, and benchmark runners. |
+| `benchmarks/` | Prompt suites and latest generated results. |
+| `docs/` | Architecture, verification, benchmark reports, roadmap, and methodology. |
+| `tests/` and `test/` | Node test coverage. |
 
-By default, `/api/skills` and `/api/workflow` use the V2 concept-aided route. Use `?mode=skills` on either endpoint to inspect the raw skill-level baseline.
+## Read Next
 
-## Research Ledger
+- [Getting Started](docs/GETTING-STARTED.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [API Reference](docs/API.md)
+- [Verification](docs/VERIFICATION.md)
+- [Routing Evaluation Methodology](docs/ROUTING-EVAL-METHODOLOGY.md)
+- [Concept Map Governance](docs/CONCEPT-MAP-GOVERNANCE.md)
+- [Support Quality Roadmap](docs/SUPPORT-QUALITY-ROADMAP.md)
 
-- [Routing evaluation methodology](docs/ROUTING-EVAL-METHODOLOGY.md)
-- [Skill use gains benchmark](docs/SKILL-USE-GAINS.md)
-- [Post-tuning challenge benchmark](docs/SKILL-USE-HOLDOUT.md)
-- [Fresh-probe regression benchmark](docs/SKILL-USE-FRESH.md)
-- [Frozen holdout benchmark](docs/SKILL-USE-FROZEN-HOLDOUT.md)
-- [Clean holdout V2 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V2.md)
-- [Clean holdout V3 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md)
-- [Clean holdout V4 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V4.md)
-- [Clean holdout V5 regression benchmark](docs/SKILL-USE-CLEAN-HOLDOUT-V5.md)
-- [Support quality roadmap](docs/SUPPORT-QUALITY-ROADMAP.md)
-- [Routing failure atlas](docs/ROUTING-FAILURE-ATLAS.md)
-- [Concept map governance](docs/CONCEPT-MAP-GOVERNANCE.md)
-- [Corpus snapshot](docs/CORPUS-SNAPSHOT.md)
-- [V2 experiment log](docs/V2-EXPERIMENT-LOG.md)
+## Status
 
-## Benchmarking
+SkillWeaver is an experimental local tool. The concept route is already useful
+on the checked-in benchmark suites, but it is not a universal planner and the
+nightmare benchmark still exposes hard ambiguity cases. Treat results as
+evidence, not magic.
 
-Run the reproducible routing benchmark with:
-
-```powershell
-npm run benchmark:skills
-```
-
-The benchmark compares V2 against a flat no-SkillWeaver metadata-search baseline and the V1 skill-level SkillWeaver route, then writes [docs/SKILL-USE-GAINS.md](docs/SKILL-USE-GAINS.md).
-Use `npm run benchmark:skills:check` to fail fast when the checked-in benchmark report is stale, generated from different scanner/case/corpus inputs, or generated while benchmark-invalidating files are dirty.
-
-Run the non-gating post-tuning challenge suite with:
-
-```powershell
-npm run benchmark:skills:holdout
-```
-
-Use `npm run benchmark:skills:holdout:check` before citing [docs/SKILL-USE-HOLDOUT.md](docs/SKILL-USE-HOLDOUT.md). The active, challenge, and fresh reports include generated quality slices by benchmark domain and expected concept so broad claims show their coverage and thin spots.
-
-Run the non-gating fresh-probe regression suite with:
-
-```powershell
-npm run benchmark:skills:fresh
-```
-
-Use `npm run benchmark:skills:fresh:check` before citing [docs/SKILL-USE-FRESH.md](docs/SKILL-USE-FRESH.md). This suite began as fresh generalization evidence; after its misses informed fixes, the checked-in report is regression evidence for that prompt slice.
-
-Run the non-gating frozen holdout suite with:
-
-```powershell
-npm run benchmark:skills:frozen
-```
-
-Use `npm run benchmark:skills:frozen:check` before citing [docs/SKILL-USE-FROZEN-HOLDOUT.md](docs/SKILL-USE-FROZEN-HOLDOUT.md). This prompt set began as clean-split holdout evidence; after its misses informed V2 fixes, the checked-in report is regression evidence for that frozen slice. Use the earlier committed report for the pre-tuning baseline.
-
-Run the non-gating clean holdout V2 regression suite with:
-
-```powershell
-npm run benchmark:skills:clean-v2-regression
-```
-
-Use `npm run benchmark:skills:clean-v2-regression:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V2.md](docs/SKILL-USE-CLEAN-HOLDOUT-V2.md). This suite began as the clean V2 holdout; after its misses informed routing fixes, the checked-in report is regression evidence only. A future clean generalization claim needs a new prompt set captured after this tuning commit.
-
-Run the non-gating clean holdout V3 regression suite with:
-
-```powershell
-npm run benchmark:skills:clean-v3
-```
-
-Use `npm run benchmark:skills:clean-v3:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V3.md](docs/SKILL-USE-CLEAN-HOLDOUT-V3.md). This suite began as the clean V3 holdout; the pre-tuning baseline is preserved at `00ad343`, and the current checked-in report is regression evidence after V3 misses informed routing fixes. A future clean generalization claim needs another untouched prompt set captured after this tuning commit.
-
-Run the non-gating clean holdout V4 regression suite with:
-
-```powershell
-npm run benchmark:skills:clean-v4
-```
-
-Use `npm run benchmark:skills:clean-v4:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V4.md](docs/SKILL-USE-CLEAN-HOLDOUT-V4.md). This suite began as the clean V4 holdout; the pre-tuning baseline is preserved at `77d4c73`, and the current checked-in report is regression evidence after V4 misses informed routing fixes.
-
-Run the non-gating clean holdout V5 regression suite with:
-
-```powershell
-npm run benchmark:skills:clean-v5
-```
-
-Use `npm run benchmark:skills:clean-v5:check` before citing [docs/SKILL-USE-CLEAN-HOLDOUT-V5.md](docs/SKILL-USE-CLEAN-HOLDOUT-V5.md). This suite began as the clean V5 holdout; the pre-tuning baseline is preserved at `38e4c6d`, and the current checked-in report is regression evidence after V5 misses informed routing fixes.
+Before publishing publicly, add the license you want the project to use.

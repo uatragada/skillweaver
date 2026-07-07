@@ -1,0 +1,51 @@
+<svg width="1200" height="560" viewBox="0 0 1200 560" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SkillWeaver concept mapping</title>
+  <desc id="desc">A task phrase is routed into concept nodes, role-tagged skills, source files, and benchmark feedback.</desc>
+  <rect width="1200" height="560" rx="28" fill="#F5FAF8"/>
+  <rect x="34" y="34" width="1132" height="492" rx="24" fill="#FFFFFF" stroke="#D7E5DF"/>
+  <text x="72" y="92" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" fill="#083D35">Concept-first skill routing</text>
+  <text x="72" y="126" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" fill="#53645F">SkillWeaver keeps SKILL.md files as source artifacts and builds a deterministic navigation layer above them.</text>
+
+  <rect x="74" y="188" width="218" height="112" rx="16" fill="#EAF5F1" stroke="#BFD9D0"/>
+  <text x="100" y="230" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#0F3F37">Task phrase</text>
+  <text x="100" y="260" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" fill="#36524B">"build a polished</text>
+  <text x="100" y="282" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" fill="#36524B">frontend dashboard"</text>
+
+  <path d="M310 244H412" stroke="#1D6B5F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M400 230L418 244L400 258" stroke="#1D6B5F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="432" y="158" width="288" height="172" rx="18" fill="#0F3F37"/>
+  <text x="462" y="202" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">High-level concept node</text>
+  <text x="462" y="234" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" fill="#CFE4DD">Frontend implementation</text>
+  <rect x="462" y="258" width="84" height="30" rx="15" fill="#DDF4EA"/>
+  <text x="482" y="278" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#0F3F37">frontend</text>
+  <rect x="556" y="258" width="88" height="30" rx="15" fill="#DDF4EA"/>
+  <text x="575" y="278" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#0F3F37">React</text>
+  <rect x="462" y="298" width="154" height="30" rx="15" fill="#DDF4EA"/>
+  <text x="482" y="318" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#0F3F37">browser testing</text>
+
+  <path d="M740 244H842" stroke="#1D6B5F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M830 230L848 244L830 258" stroke="#1D6B5F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="866" y="118" width="242" height="276" rx="18" fill="#F8FBFA" stroke="#D7E5DF"/>
+  <text x="896" y="158" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#0F3F37">Role-tagged skills</text>
+  <rect x="896" y="188" width="178" height="42" rx="12" fill="#EAF5F1"/>
+  <text x="916" y="214" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#0F3F37">primary: frontend-app-builder</text>
+  <rect x="896" y="242" width="178" height="42" rx="12" fill="#EAF5F1"/>
+  <text x="916" y="268" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#0F3F37">verification: frontend-testing</text>
+  <rect x="896" y="296" width="178" height="42" rx="12" fill="#EAF5F1"/>
+  <text x="916" y="322" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#0F3F37">supporting: accessibility</text>
+  <text x="896" y="368" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#53645F">Every result keeps source paths,</text>
+  <text x="896" y="389" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#53645F">resources, reasons, and warnings.</text>
+
+  <rect x="116" y="386" width="220" height="64" rx="14" fill="#FFF7E8" stroke="#ECD7B3"/>
+  <text x="144" y="424" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#6F4A10">Local skill roots</text>
+  <path d="M346 418H465" stroke="#C38922" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8"/>
+
+  <rect x="488" y="386" width="220" height="64" rx="14" fill="#F0F5FF" stroke="#CCD8F4"/>
+  <text x="516" y="424" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#283D78">Benchmark reports</text>
+  <path d="M718 418H842" stroke="#5C6FA8" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8"/>
+
+  <rect x="866" y="432" width="242" height="52" rx="14" fill="#EAF5F1" stroke="#BFD9D0"/>
+  <text x="896" y="464" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#0F3F37">Smaller, better grounded context</text>
+</svg>

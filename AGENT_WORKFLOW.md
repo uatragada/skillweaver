@@ -26,7 +26,7 @@ Read-only. Inspect MindWeaver only as reference material and report:
 
 ### 3. Implementation Worker
 
-Write-scoped to `G:\Projects\SkillWeaver` only. Build:
+Write-scoped to the SkillWeaver repo only. Build:
 
 - scanner,
 - API,
@@ -48,16 +48,16 @@ Read-only final pass. Confirm:
 
 For the first build:
 
-1. Run Skill Corpus Explorer against `C:\Users\Uday\.codex\skills`.
-2. Run MindWeaver Shape Explorer against `G:\Projects\MindWeaver`.
+1. Run Skill Corpus Explorer against the configured local skill roots.
+2. Run MindWeaver Shape Explorer against a sibling MindWeaver checkout when one
+   exists.
 3. Main agent writes requirements and builds the first vertical slice.
 4. Run a final read-only verification pass after implementation.
 
 ## Guardrails
 
-- Never edit `G:\Projects\MindWeaver`.
+- Never edit a MindWeaver checkout while working on SkillWeaver.
 - Never rewrite existing skills during indexing.
 - Keep the scanner deterministic first; use AI only as a future enhancement.
 - Prefer path citations and direct file evidence over invented relationships.
 - If a relationship is heuristic, label it as heuristic in the reason.
-
