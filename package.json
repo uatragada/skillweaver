@@ -26,7 +26,8 @@
     "benchmark:skills:clean-v4": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v4",
     "benchmark:skills:clean-v4:check": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v4 --check",
     "benchmark:skills:clean-v5": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v5",
-    "benchmark:skills:clean-v5:check": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v5 --check"
+    "benchmark:skills:clean-v5:check": "node scripts/benchmark-skill-routing.mjs --clean-holdout-v5 --check",
+    "benchmark:skills:nightmare": "node scripts/benchmark-skill-routing-nightmare.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.2",
