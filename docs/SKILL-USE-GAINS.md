@@ -1,9 +1,9 @@
 # SkillWeaver V2 Active Acceptance Benchmark
 
-Generated: 2026-07-06T20:56:50.537Z
+Generated: 2026-07-07T06:26:18.599Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1783371410537,"command":"npm run benchmark:skills","suite":{"id":"acceptance","label":"Active Acceptance","gatesAcceptance":true},"git":{"commit":"d044c7c71ab42e5a7405c287576ea03745f37a1d","dirty":true,"dirtyPaths":[".github/","benchmarks/skill-routing-cases.json","benchmarks/skill-routing-clean-holdout-v3.json","benchmarks/skill-routing-clean-holdout-v4.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/concept-routing-config.js","server/index.js","server/skill-scanner.js","src/main.jsx","src/styles.css","tests/api.test.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["benchmarks/skill-routing-cases.json","scripts/benchmark-skill-routing.mjs","server/concept-routing-config.js","server/skill-scanner.js"],"cases":{"count":78,"sha256":"sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c"},"inputs":{"cases":"sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:9454d38e896f7a7286c1175d9e12917553e52dc2e2d2e0421c7ee4853cda0ae5"}
+{"generatedAt":1783405578599,"command":"npm run benchmark:skills","suite":{"id":"acceptance","label":"Active Acceptance","gatesAcceptance":true},"git":{"commit":"e6d5ce506bde2f78b5a23cf33e72b051eef267e4","dirty":true,"dirtyPaths":[".github/workflows/ci.yml","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md"]},"invalidatingDirtyPaths":[],"cases":{"count":78,"sha256":"sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"inputs":{"cases":"sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:c33a8469011f384ab0db90bac54c8b3d68d8b6dda1894c4120bfca5509b47be9"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,15 +11,15 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills`
 - Suite: Active Acceptance
 - Acceptance gate: yes
-- Git commit at generation: `d044c7c71ab42e5a7405c287576ea03745f37a1d`
+- Git commit at generation: `e6d5ce506bde2f78b5a23cf33e72b051eef267e4`
 - Git dirty: yes
-- Invalidating dirty paths: `benchmarks/skill-routing-cases.json`, `scripts/benchmark-skill-routing.mjs`, `server/concept-routing-config.js`, `server/skill-scanner.js`
+- Invalidating dirty paths: none
 - Case hash: `sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54`
 - Routing config hash: `sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f`
 - Scanner hash: `sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039`
 - Benchmark script hash: `sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44`
-- Corpus hash: `sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c`
-- Snapshot fingerprint: `sha256:9454d38e896f7a7286c1175d9e12917553e52dc2e2d2e0421c7ee4853cda0ae5`
+- Corpus hash: `sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f`
+- Snapshot fingerprint: `sha256:c33a8469011f384ab0db90bac54c8b3d68d8b6dda1894c4120bfca5509b47be9`
 - Acceptance: pass
 
 ## Corpus

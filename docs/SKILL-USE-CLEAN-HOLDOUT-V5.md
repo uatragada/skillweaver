@@ -1,9 +1,9 @@
 # SkillWeaver V2 Clean Holdout V5 Regression Benchmark
 
-Generated: 2026-07-06T20:57:28.869Z
+Generated: 2026-07-07T06:27:40.138Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1783371448869,"command":"npm run benchmark:skills:clean-v5","suite":{"id":"clean-holdout-v5","label":"Clean Holdout V5 Regression","gatesAcceptance":false},"git":{"commit":"d044c7c71ab42e5a7405c287576ea03745f37a1d","dirty":true,"dirtyPaths":[".github/","benchmarks/skill-routing-cases.json","benchmarks/skill-routing-clean-holdout-v3.json","benchmarks/skill-routing-clean-holdout-v4.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/concept-routing-config.js","server/index.js","server/skill-scanner.js","src/main.jsx","src/styles.css","tests/api.test.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/concept-routing-config.js","server/skill-scanner.js"],"cases":{"count":17,"sha256":"sha256:ca434c4a537a1702e063a21d4f5ad338f491548ab6cd8e0dffec27cc1346e130"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c"},"inputs":{"cases":"sha256:ca434c4a537a1702e063a21d4f5ad338f491548ab6cd8e0dffec27cc1346e130","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:11369e501acc64896a2a2001aefb7f8fec4ec7d4d6a658dcda916db9338e5dfc"}
+{"generatedAt":1783405660138,"command":"npm run benchmark:skills:clean-v5","suite":{"id":"clean-holdout-v5","label":"Clean Holdout V5 Regression","gatesAcceptance":false},"git":{"commit":"e6d5ce506bde2f78b5a23cf33e72b051eef267e4","dirty":true,"dirtyPaths":[".github/workflows/ci.yml","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V4.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md"]},"invalidatingDirtyPaths":[],"cases":{"count":17,"sha256":"sha256:ca434c4a537a1702e063a21d4f5ad338f491548ab6cd8e0dffec27cc1346e130"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"inputs":{"cases":"sha256:ca434c4a537a1702e063a21d4f5ad338f491548ab6cd8e0dffec27cc1346e130","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:fa962be7f007ed64c40c5ae371bd9ca091f381c574b5caeb98f638e7c1dd1f99"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,15 +11,15 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:clean-v5`
 - Suite: Clean Holdout V5 Regression
 - Acceptance gate: no
-- Git commit at generation: `d044c7c71ab42e5a7405c287576ea03745f37a1d`
+- Git commit at generation: `e6d5ce506bde2f78b5a23cf33e72b051eef267e4`
 - Git dirty: yes
-- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/concept-routing-config.js`, `server/skill-scanner.js`
+- Invalidating dirty paths: none
 - Case hash: `sha256:ca434c4a537a1702e063a21d4f5ad338f491548ab6cd8e0dffec27cc1346e130`
 - Routing config hash: `sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f`
 - Scanner hash: `sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039`
 - Benchmark script hash: `sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44`
-- Corpus hash: `sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c`
-- Snapshot fingerprint: `sha256:11369e501acc64896a2a2001aefb7f8fec4ec7d4d6a658dcda916db9338e5dfc`
+- Corpus hash: `sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f`
+- Snapshot fingerprint: `sha256:fa962be7f007ed64c40c5ae371bd9ca091f381c574b5caeb98f638e7c1dd1f99`
 - Freshness check: pass
 - Quality gate, reported only: pass
 

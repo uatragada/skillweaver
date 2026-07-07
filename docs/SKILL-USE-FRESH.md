@@ -1,9 +1,9 @@
 # SkillWeaver V2 Fresh-Probe Regression Benchmark
 
-Generated: 2026-07-06T20:57:11.209Z
+Generated: 2026-07-07T06:26:47.660Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1783371431209,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"d044c7c71ab42e5a7405c287576ea03745f37a1d","dirty":true,"dirtyPaths":[".github/","benchmarks/skill-routing-cases.json","benchmarks/skill-routing-clean-holdout-v3.json","benchmarks/skill-routing-clean-holdout-v4.json","docs/ROUTING-EVAL-METHODOLOGY.md","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md","scripts/benchmark-skill-routing.mjs","server/concept-routing-config.js","server/index.js","server/skill-scanner.js","src/main.jsx","src/styles.css","tests/api.test.js","tests/skill-scanner.test.js"]},"invalidatingDirtyPaths":["scripts/benchmark-skill-routing.mjs","server/concept-routing-config.js","server/skill-scanner.js"],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":false,"failures":["V2 confusable wrong-primary rate must stay at 0."]}},"snapshotFingerprint":"sha256:1ea597c1ee0e8f4ec5a9d065d466b7571fb0af4f24e237568252afb544d801b1"}
+{"generatedAt":1783405607660,"command":"npm run benchmark:skills:fresh","suite":{"id":"fresh","label":"Fresh-Probe Regression","gatesAcceptance":false},"git":{"commit":"e6d5ce506bde2f78b5a23cf33e72b051eef267e4","dirty":true,"dirtyPaths":[".github/workflows/ci.yml","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md"]},"invalidatingDirtyPaths":[],"cases":{"count":18,"sha256":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"inputs":{"cases":"sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":false,"failures":["V2 confusable wrong-primary rate must stay at 0."]}},"snapshotFingerprint":"sha256:0ae34508972a229d7d6c6680081a85d314ae79c012424cc36fd0a4bad8f80181"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,15 +11,15 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:fresh`
 - Suite: Fresh-Probe Regression
 - Acceptance gate: no
-- Git commit at generation: `d044c7c71ab42e5a7405c287576ea03745f37a1d`
+- Git commit at generation: `e6d5ce506bde2f78b5a23cf33e72b051eef267e4`
 - Git dirty: yes
-- Invalidating dirty paths: `scripts/benchmark-skill-routing.mjs`, `server/concept-routing-config.js`, `server/skill-scanner.js`
+- Invalidating dirty paths: none
 - Case hash: `sha256:32271c1c7467fa4d43192d60151c1ea4acd7eac1cf7b2eb00dc0610d026beaea`
 - Routing config hash: `sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f`
 - Scanner hash: `sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039`
 - Benchmark script hash: `sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44`
-- Corpus hash: `sha256:287db3b7cbe5b96875f99de2fb93c42fa1f20a26b0bd556f7ebee13a49b5060c`
-- Snapshot fingerprint: `sha256:1ea597c1ee0e8f4ec5a9d065d466b7571fb0af4f24e237568252afb544d801b1`
+- Corpus hash: `sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f`
+- Snapshot fingerprint: `sha256:0ae34508972a229d7d6c6680081a85d314ae79c012424cc36fd0a4bad8f80181`
 - Freshness check: pass
 - Quality gate, reported only: fail: V2 confusable wrong-primary rate must stay at 0.
 
@@ -49,12 +49,12 @@ This suite began as fresh generalization evidence collected after the previous r
 | Output quality score (0-100) | 70.2 | 74.4 | 95.4 | +25.2 pts | +21.0 pts |
 | Primary hit@1 | 66.7% | 72.2% | 94.4% | +27.8 pp | +22.2 pp |
 | Expected skill in top/workflow 5 | 88.9% | 88.9% | 100.0% | +11.1 pp | +11.1 pp |
-| Mean reciprocal rank | 0.760 | 0.794 | 0.972 | +0.213 | +0.178 |
+| Mean reciprocal rank | 0.760 | 0.793 | 0.972 | +0.213 | +0.179 |
 | Support-skill coverage@5 | 52.8% | 59.3% | 90.7% | +38.0 pp | +31.5 pp |
 | Support precision@5, exploratory | 30.6% | 34.7% | 51.4% | +20.8 pp | +16.7 pp |
 | Forbidden primary rate, lower is better | 0.0% | 0.0% | 0.0% | 0.0 pp | 0.0 pp |
 | Confusable wrong primary rate, lower is better | 22.2% | 16.7% | 5.6% | -16.7 pp better | -11.1 pp better |
-| Mean candidates to expected skill, lower is better | 4.2 | 2.1 | 1.1 | -3.2 candidates better | -1.0 candidates better |
+| Mean candidates to expected skill, lower is better | 4.2 | 2.1 | 1.1 | -3.2 candidates better | -1.1 candidates better |
 
 ## Claim Scope
 
@@ -70,7 +70,7 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 
 | Slice | Cases | V2 quality | V2 hit@1 | V2 top/workflow 5 | V2 support coverage@5 | V2 support precision@5 | V2 forbidden primary | V2 confusable wrong primary | V2 support-miss cases | V2 vs No | V2 vs Skill-Level |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| AI agent apps | 2 | 100.0 | 100.0% | 100.0% | 100.0% | 62.5% | 0.0% | 0.0% | 0/2 | +48.1 pts | +43.8 pts |
+| AI agent apps | 2 | 100.0 | 100.0% | 100.0% | 100.0% | 62.5% | 0.0% | 0.0% | 0/2 | +48.1 pts | +43.9 pts |
 | Communications and knowledge | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 25.0% | 0.0% | 0.0% | 1/2 | +21.7 pts | +22.5 pts |
 | Security and risk | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 50.0% | 0.0% | 0.0% | 1/2 | +8.3 pts | +6.7 pts |
 | Backend services | 1 | 50.0 | 0.0% | 100.0% | 100.0% | 50.0% | 0.0% | 100.0% | 0/1 | +48.8 pts | -30.0 pts |
@@ -93,7 +93,7 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 | Cloudflare workers | 2 | 96.7 | 100.0% | 100.0% | 83.3% | 50.0% | 0.0% | 0.0% | 1/2 | +5.0 pts | +8.3 pts |
 | Product planning | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 37.5% | 0.0% | 0.0% | 1/2 | +26.7 pts | +22.5 pts |
 | Security review | 2 | 95.0 | 100.0% | 100.0% | 75.0% | 50.0% | 0.0% | 0.0% | 1/2 | +8.3 pts | +6.7 pts |
-| Agent and LLM apps | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 75.0% | 0.0% | 0.0% | 0/1 | +86.1 pts | +77.5 pts |
+| Agent and LLM apps | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 75.0% | 0.0% | 0.0% | 0/1 | +86.1 pts | +77.8 pts |
 | Backend APIs and services | 1 | 50.0 | 0.0% | 100.0% | 100.0% | 50.0% | 0.0% | 100.0% | 0/1 | +48.8 pts | -30.0 pts |
 | Data dashboards and reports | 1 | 100.0 | 100.0% | 100.0% | 100.0% | 50.0% | 0.0% | 0.0% | 0/1 | +10.0 pts | 0.0 pts |
 | Databases and data engineering | 1 | 93.3 | 100.0% | 100.0% | 66.7% | 50.0% | 0.0% | 0.0% | 1/1 | 0.0 pts | 0.0 pts |
@@ -127,7 +127,7 @@ Fresh-Probe Regression quality is intentionally reported rather than accepted or
 | security-diff-remediation-fresh | Security and risk | Security review | security-diff-scan | security-diff-scan / 1 | security-diff-scan / 1 | security-diff-scan / 1 | Security review | security-diff-scan -> validation -> deep-security-scan -> track-findings -> triage-finding |
 | electron-native-release-fresh | Frontend experience | Frontend implementation | dev-mobile-desktop | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | dev-mobile-desktop / 1 | Frontend implementation | dev-mobile-desktop -> winui-app -> launch-readiness -> dev-release-productization -> frontend-app-builder |
 | creative-competitor-offer-fresh | Marketing, growth, and creative | Marketing growth | creative-offer | creative-ads-explorer / 2 | creative-ads-explorer / 4 | creative-offer / 1 | Marketing growth | creative-offer -> creative-ads-explorer -> creative-positioning -> competitive-intelligence-monitor -> creative-production |
-| voice-browser-loop-fresh | AI agent apps | Agent and LLM apps | transcribe | control-in-app-browser / 37 | speech / 8 | transcribe / 1 | Agent and LLM apps | transcribe -> speech -> transformers-js -> frontend-testing-debugging -> openai-agents-js |
+| voice-browser-loop-fresh | AI agent apps | Agent and LLM apps | transcribe | control-in-app-browser / 37 | speech / 9 | transcribe / 1 | Agent and LLM apps | transcribe -> speech -> transformers-js -> frontend-testing-debugging -> openai-agents-js |
 
 ## V2 Support Misses
 
