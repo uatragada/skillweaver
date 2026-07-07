@@ -1,9 +1,9 @@
 # SkillWeaver V2 Clean Holdout V4 Regression Benchmark
 
-Generated: 2026-07-07T06:27:30.375Z
+Generated: 2026-07-07T06:38:06.532Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1783405650375,"command":"npm run benchmark:skills:clean-v4","suite":{"id":"clean-holdout-v4","label":"Clean Holdout V4 Regression","gatesAcceptance":false},"git":{"commit":"e6d5ce506bde2f78b5a23cf33e72b051eef267e4","dirty":true,"dirtyPaths":[".github/workflows/ci.yml","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md"]},"invalidatingDirtyPaths":[],"cases":{"count":21,"sha256":"sha256:9caa171208db06561784dd81829395ea89d2390cb7df3acdc4665815fd3d609c"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"inputs":{"cases":"sha256:9caa171208db06561784dd81829395ea89d2390cb7df3acdc4665815fd3d609c","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:4f230da96cf55cf549a1be11fe4e6d33ca737febf36d9c95b6635b304bec9be0"}
+{"generatedAt":1783406286532,"command":"npm run benchmark:skills:clean-v4","suite":{"id":"clean-holdout-v4","label":"Clean Holdout V4 Regression","gatesAcceptance":false},"git":{"commit":"c9c5caa4ad6a5bcccd10790b8ccdf2265a4f0784","dirty":true,"dirtyPaths":["docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V3.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md"]},"invalidatingDirtyPaths":[],"cases":{"count":21,"sha256":"sha256:9caa171208db06561784dd81829395ea89d2390cb7df3acdc4665815fd3d609c"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"inputs":{"cases":"sha256:9caa171208db06561784dd81829395ea89d2390cb7df3acdc4665815fd3d609c","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":true,"failures":[]}},"snapshotFingerprint":"sha256:4f230da96cf55cf549a1be11fe4e6d33ca737febf36d9c95b6635b304bec9be0"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,7 +11,7 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:clean-v4`
 - Suite: Clean Holdout V4 Regression
 - Acceptance gate: no
-- Git commit at generation: `e6d5ce506bde2f78b5a23cf33e72b051eef267e4`
+- Git commit at generation: `c9c5caa4ad6a5bcccd10790b8ccdf2265a4f0784`
 - Git dirty: yes
 - Invalidating dirty paths: none
 - Case hash: `sha256:9caa171208db06561784dd81829395ea89d2390cb7df3acdc4665815fd3d609c`

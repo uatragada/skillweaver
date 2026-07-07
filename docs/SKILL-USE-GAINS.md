@@ -1,9 +1,9 @@
 # SkillWeaver V2 Active Acceptance Benchmark
 
-Generated: 2026-07-07T06:26:18.599Z
+Generated: 2026-07-07T06:37:30.975Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1783405578599,"command":"npm run benchmark:skills","suite":{"id":"acceptance","label":"Active Acceptance","gatesAcceptance":true},"git":{"commit":"e6d5ce506bde2f78b5a23cf33e72b051eef267e4","dirty":true,"dirtyPaths":[".github/workflows/ci.yml","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md"]},"invalidatingDirtyPaths":[],"cases":{"count":78,"sha256":"sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"inputs":{"cases":"sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:c33a8469011f384ab0db90bac54c8b3d68d8b6dda1894c4120bfca5509b47be9"}
+{"generatedAt":1783406250975,"command":"npm run benchmark:skills","suite":{"id":"acceptance","label":"Active Acceptance","gatesAcceptance":true},"git":{"commit":"c9c5caa4ad6a5bcccd10790b8ccdf2265a4f0784","dirty":false,"dirtyPaths":[]},"invalidatingDirtyPaths":[],"cases":{"count":78,"sha256":"sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"inputs":{"cases":"sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"acceptance":{"ok":true,"failures":[]},"snapshotFingerprint":"sha256:c33a8469011f384ab0db90bac54c8b3d68d8b6dda1894c4120bfca5509b47be9"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,8 +11,8 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills`
 - Suite: Active Acceptance
 - Acceptance gate: yes
-- Git commit at generation: `e6d5ce506bde2f78b5a23cf33e72b051eef267e4`
-- Git dirty: yes
+- Git commit at generation: `c9c5caa4ad6a5bcccd10790b8ccdf2265a4f0784`
+- Git dirty: no
 - Invalidating dirty paths: none
 - Case hash: `sha256:987980761a0867f6609b0d8dd8c144ea25922f5d752a03807274d513099a9a54`
 - Routing config hash: `sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f`

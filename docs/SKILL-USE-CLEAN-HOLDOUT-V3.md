@@ -1,9 +1,9 @@
 # SkillWeaver V2 Clean Holdout V3 Regression Benchmark
 
-Generated: 2026-07-07T06:27:18.982Z
+Generated: 2026-07-07T06:37:59.822Z
 
 <!-- skillweaver-benchmark-metadata
-{"generatedAt":1783405638982,"command":"npm run benchmark:skills:clean-v3","suite":{"id":"clean-holdout-v3","label":"Clean Holdout V3 Regression","gatesAcceptance":false},"git":{"commit":"e6d5ce506bde2f78b5a23cf33e72b051eef267e4","dirty":true,"dirtyPaths":[".github/workflows/ci.yml","docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-CLEAN-HOLDOUT-V5.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md"]},"invalidatingDirtyPaths":[],"cases":{"count":18,"sha256":"sha256:588ebdf6e8dfc35a57e8189b33a10e2f0703c81d1800ca14cab901f3fa18d6d2"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"inputs":{"cases":"sha256:588ebdf6e8dfc35a57e8189b33a10e2f0703c81d1800ca14cab901f3fa18d6d2","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":false,"failures":["V2 forbidden primary rate must stay at 0.","V2 mean candidates to expected skill should stay near 1."]}},"snapshotFingerprint":"sha256:0bb3e58dc5b209ec583f5ff0d418fb75d9b2aeadf7021a441e1a5187cd72a61c"}
+{"generatedAt":1783406279822,"command":"npm run benchmark:skills:clean-v3","suite":{"id":"clean-holdout-v3","label":"Clean Holdout V3 Regression","gatesAcceptance":false},"git":{"commit":"c9c5caa4ad6a5bcccd10790b8ccdf2265a4f0784","dirty":true,"dirtyPaths":["docs/SKILL-USE-CLEAN-HOLDOUT-V2.md","docs/SKILL-USE-FRESH.md","docs/SKILL-USE-FROZEN-HOLDOUT.md","docs/SKILL-USE-GAINS.md","docs/SKILL-USE-HOLDOUT.md"]},"invalidatingDirtyPaths":[],"cases":{"count":18,"sha256":"sha256:588ebdf6e8dfc35a57e8189b33a10e2f0703c81d1800ca14cab901f3fa18d6d2"},"corpus":{"skills":429,"skillEdges":2000,"concepts":22,"conceptEdges":200,"roots":7,"sha256":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"inputs":{"cases":"sha256:588ebdf6e8dfc35a57e8189b33a10e2f0703c81d1800ca14cab901f3fa18d6d2","routingConfig":"sha256:9ec7f5b2de88f53d2ed85cd77e18f60e1cd57db500b0c039f9e2a168b487497f","scanner":"sha256:cae8afc744ec845a54947a72553d780632c76f3bc7f8aaaf1b952e36976c6039","benchmarkScript":"sha256:0910853904f8cf2dfc1fe02ef98f2aeea1dad6f2836d05e53d325f1b012ddb44","corpus":"sha256:a07a6c39034e9ae41c52e3082729eb684b78c8f4fd09d795141b61874770aa4f"},"acceptance":{"ok":true,"nongating":true,"qualityGate":{"ok":false,"failures":["V2 forbidden primary rate must stay at 0.","V2 mean candidates to expected skill should stay near 1."]}},"snapshotFingerprint":"sha256:0bb3e58dc5b209ec583f5ff0d418fb75d9b2aeadf7021a441e1a5187cd72a61c"}
 skillweaver-benchmark-metadata -->
 
 ## Freshness
@@ -11,7 +11,7 @@ skillweaver-benchmark-metadata -->
 - Command: `npm run benchmark:skills:clean-v3`
 - Suite: Clean Holdout V3 Regression
 - Acceptance gate: no
-- Git commit at generation: `e6d5ce506bde2f78b5a23cf33e72b051eef267e4`
+- Git commit at generation: `c9c5caa4ad6a5bcccd10790b8ccdf2265a4f0784`
 - Git dirty: yes
 - Invalidating dirty paths: none
 - Case hash: `sha256:588ebdf6e8dfc35a57e8189b33a10e2f0703c81d1800ca14cab901f3fa18d6d2`
