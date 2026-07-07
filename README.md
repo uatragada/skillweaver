@@ -164,11 +164,13 @@ raw skill-level baseline. See [API Reference](docs/API.md).
 - [Concept Map Governance](docs/CONCEPT-MAP-GOVERNANCE.md)
 - [Support Quality Roadmap](docs/SUPPORT-QUALITY-ROADMAP.md)
 
+## License
+
+SkillWeaver is released under the [MIT License](LICENSE).
+
 ## Status
 
 SkillWeaver is an experimental local tool. The concept route is already useful
 on the checked-in benchmark suites, but it is not a universal planner and the
 nightmare benchmark still exposes hard ambiguity cases. Treat results as
 evidence, not magic.
-
-Before publishing publicly, add the license you want the project to use.

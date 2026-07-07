@@ -97,4 +97,4 @@ Before calling UI work done:
    expected concept where applicable.
 5. For routing changes, confirm any support-miss fix follows the promotion
    checklist in [SUPPORT-QUALITY-ROADMAP.md](SUPPORT-QUALITY-ROADMAP.md).
-6. Pick and commit a license before public distribution.
+6. Confirm [../LICENSE](../LICENSE) is present before public distribution.
